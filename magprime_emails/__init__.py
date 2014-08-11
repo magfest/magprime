@@ -18,29 +18,31 @@ GuestEmail('MAGFest hospitality suite information', 'guest_food_info.txt')
 
 
 
-StopsEmail('MAGFest Tech Ops volunteering', 'techops.txt',
-           lambda a: a.requested(TECH_OPS) and not a.assigned_to(TECH_OPS))
+# Turn these on after some review (they already went out to last year's staffers, whoops!)
+if False:
+    StopsEmail('MAGFest Tech Ops volunteering', 'techops.txt',
+               lambda a: a.requested(TECH_OPS) and not a.assigned_to(TECH_OPS))
 
-StopsEmail('MAGFest Chipspace volunteering', 'chipspace.txt',
-           lambda a: (a.requested(JAMSPACE) or a.assigned_to(JAMSPACE)) and not a.assigned_to(CHIPSPACE))
+    StopsEmail('MAGFest Chipspace volunteering', 'chipspace.txt',
+               lambda a: (a.requested(JAMSPACE) or a.assigned_to(JAMSPACE)) and not a.assigned_to(CHIPSPACE))
 
-StopsEmail('MAGFest Chipspace shifts', 'chipspace_trusted.txt',
-           lambda a: a.assigned_to(CHIPSPACE) and a.trusted)
+    StopsEmail('MAGFest Chipspace shifts', 'chipspace_trusted.txt',
+               lambda a: a.assigned_to(CHIPSPACE) and a.trusted)
 
-StopsEmail('MAGFest Chipspace', 'chipspace_untrusted.txt',
-           lambda a: a.has_shifts_in(CHIPSPACE) and not a.trusted)
+    StopsEmail('MAGFest Chipspace', 'chipspace_untrusted.txt',
+               lambda a: a.has_shifts_in(CHIPSPACE) and not a.trusted)
 
-StopsEmail('MAGFest food prep volunteering', 'food_interest.txt',
-           lambda a: a.requested(FOOD_PREP) and not a.assigned_depts)
+    StopsEmail('MAGFest food prep volunteering', 'food_interest.txt',
+               lambda a: a.requested(FOOD_PREP) and not a.assigned_depts)
 
-StopsEmail('MAGFest food prep rules', 'food_volunteers.txt',
-           lambda a: a.has_shifts_in(FOOD_PREP) and not a.trusted)
+    StopsEmail('MAGFest food prep rules', 'food_volunteers.txt',
+               lambda a: a.has_shifts_in(FOOD_PREP) and not a.trusted)
 
-StopsEmail('MAGFest message from Chef', 'food_trusted_staffers.txt',
-           lambda a: a.has_shifts_in(FOOD_PREP) and a.trusted)
+    StopsEmail('MAGFest message from Chef', 'food_trusted_staffers.txt',
+               lambda a: a.has_shifts_in(FOOD_PREP) and a.trusted)
 
-StopsEmail('MAGFest Volunteer Food', 'volunteer_food_info.txt',
-           lambda a: days_before(7, UBER_TAKEDOWN))
+    StopsEmail('MAGFest Volunteer Food', 'volunteer_food_info.txt',
+               lambda a: days_before(7, UBER_TAKEDOWN))
 
-AutomatedEmail(Attendee, 'Want to help run MAGFest poker tournaments?', 'poker.txt',
-               lambda a: a.has_shifts_in(TABLETOP), sender='tabletop@magfest.org')
+    AutomatedEmail(Attendee, 'Want to help run MAGFest poker tournaments?', 'poker.txt',
+                   lambda a: a.has_shifts_in(TABLETOP), sender='tabletop@magfest.org')
