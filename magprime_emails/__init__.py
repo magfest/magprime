@@ -17,7 +17,7 @@ GuestEmail('MAGFest food for guests', 'guest_food_restrictions.txt')
 GuestEmail('MAGFest hospitality suite information', 'guest_food_info.txt')
 
 
-MarketplaceEmail('Delays with {EVENT_NAME} Dealer applications', 'dealers/dealer_deadline_change.txt',
+MarketplaceEmail('Delays with {EVENT_NAME} Dealer applications', 'dealer_deadline_change.txt',
                  lambda g: g.status == UNAPPROVED, needs_approval=True)
 
 
