@@ -20,7 +20,8 @@ MarketplaceEmail('Delays with {EVENT_NAME} Dealer applications', 'dealer_deadlin
 
 # we can just remove this next year
 StopsEmail('(Corrected) Reminder to meet your {EVENT_NAME} hotel room requirements', 'hotel_hours_correction.txt',
-           lambda a: days_before(1, datetime(2014, 12, 23, tzinfo=UTC)) and a.hotel_shifts_required and a.weighted_hours < 30)
+           lambda a: days_before(1, datetime(2014, 12, 23, tzinfo=UTC)) and a.hotel_shifts_required and a.weighted_hours < 30,
+           needs_approval=True)
 
 
 # Turn these on after some review (they already went out to last year's staffers, whoops!)
