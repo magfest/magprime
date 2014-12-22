@@ -5,9 +5,6 @@ config = parse_config(__file__)
 django.conf.settings.TEMPLATE_DIRS.insert(0, join(config['module_root'], 'templates'))
 
 
-StopsEmail('MAGCon - the convention to plan MAGFest!', 'magcon.txt', lambda a: days_before(14, MAGCON),
-           needs_approval=True)
-
 AutomatedEmail(Attendee, 'MAGFest schedule, maps, and other FAQs', 'precon_faqs.html', lambda a: days_before(7, EPOCH),
                needs_approval=True)
 
@@ -19,6 +16,11 @@ GuestEmail('MAGFest hospitality suite information', 'guest_food_info.txt')
 
 MarketplaceEmail('Delays with {EVENT_NAME} Dealer applications', 'dealer_deadline_change.txt',
                  lambda g: g.status == UNAPPROVED, needs_approval=True)
+
+
+# we can just remove this next year
+StopsEmail('(Corrected) Reminder to meet your {EVENT_NAME} hotel room requirements', 'hotel_hours_correction.txt',
+           lambda a: days_before(1, datetime(2014, 12, 23, tzinfo=UTC)) and a.hotel_shifts_required and a.weighted_hours < 30)
 
 
 # Turn these on after some review (they already went out to last year's staffers, whoops!)
