@@ -1,14 +1,14 @@
 {{ attendee.first_name }},
+Thanks again for coming out to {{ EVENT_NAME }} as a Guest! As we've previously mentioned, we feed our guests three meals per day during {{ EVENT_NAME }}, so you can drop by the Hospitality Suite in Room 6176 for food during any of the following times:
 
-Thanks again for coming out to {{ EVENT_NAME }} as a Guest!  As we've previously mentioned, we feed our guests three meals per day during {{ EVENT_NAME }}, so you can drop by the Hospitality Suite in Room 6135 for food during any of the following times:
+Breakfast: 7:00 am to 11:00 am
+Lunch: 12:00 pm to 4:00 pm
+Dinner: 5:00 pm to 9:00 pm
+Overnight: 9:00 pm to 4:00 am (or until the hot food has run out, whichever occurs first)
 
-Breakfast: 8am to 11am
-Lunch: 1pm to 4pm
-Dinner: 6pm to 10pm
-Overnight: 12am to 5am
+The first meal served will be breakfast on Friday morning, and the suite will remain open through Monday afternoon. Monday will have a breakfast option, but once breakfast is over, leftovers will be served. You will be able to help yourself. Please feel free to bring tupperware or storage bags to carry items home. You will be responsible for their proper storage.
 
-The first meal served will be lunch on Thursday, and the suite will remain open through Sunday afternoon, although Sunday will be leftovers rather than regular meals.
+Meal schedule, menu, and suite rules can all be found at http://magsuite.jennytru.com/.
 
 Please let us know if you have any questions.
-
 {{ PEGLEGS_EMAIL_SIGNATURE }}
