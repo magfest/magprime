@@ -1,6 +1,6 @@
 {{ group.leader.first_name }},
 
-Our records indicate that your group ({{ group.name }}) currently has an outstanding balance of {{ group.amount_unpaid }}). You must pay for the remaining balance on your group to ensure that your group members can pick up their badges at the fest.
+Our records indicate that your group ({{ group.name }}) currently has an outstanding balance of ${{ group.amount_unpaid }}. You must pay for the remaining balance on your group to ensure that your group members can pick up their badges at the fest.
 
 You can pay the remaining balance on your group using this link: {{ URL_BASE }}/preregistration/group_members?id={{ group.id }}
 
