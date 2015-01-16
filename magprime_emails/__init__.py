@@ -18,6 +18,11 @@ MarketplaceEmail('Delays with {EVENT_NAME} Dealer applications', 'dealer_deadlin
                  lambda g: g.status == UNAPPROVED, needs_approval=True)
 
 
+StopsEmail('MAGFest Volunteer Food', 'volunteer_food_info.txt',
+               lambda a: days_before(7, UBER_TAKEDOWN),
+               needs_approval=True)
+
+
 # we can just remove this next year
 StopsEmail('(Corrected) Reminder to meet your {EVENT_NAME} hotel room requirements', 'hotel_hours_correction.txt',
            lambda a: days_before(1, datetime(2014, 12, 23, tzinfo=UTC)) and a.hotel_shifts_required and a.weighted_hours < 30,
@@ -46,9 +51,6 @@ if False:
 
     StopsEmail('MAGFest message from Chef', 'food_trusted_staffers.txt',
                lambda a: a.has_shifts_in(FOOD_PREP) and a.trusted)
-
-    StopsEmail('MAGFest Volunteer Food', 'volunteer_food_info.txt',
-               lambda a: days_before(7, UBER_TAKEDOWN))
 
     AutomatedEmail(Attendee, 'Want to help run MAGFest poker tournaments?', 'poker.txt',
                    lambda a: a.has_shifts_in(TABLETOP), sender='tabletop@magfest.org')

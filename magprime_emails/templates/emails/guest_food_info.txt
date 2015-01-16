@@ -11,4 +11,4 @@ The first meal served will be breakfast on Friday morning, and the suite will re
 Meal schedule, menu, and suite rules can all be found at http://magsuite.jennytru.com/.
 
 Please let us know if you have any questions.
-{{ PEGLEGS_EMAIL_SIGNATURE }}
+{{ GUEST_EMAIL_SIGNATURE }}
