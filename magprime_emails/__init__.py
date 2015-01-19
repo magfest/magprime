@@ -23,6 +23,11 @@ StopsEmail('MAGFest Volunteer Food', 'volunteer_food_info.txt',
                needs_approval=True)
 
 
+StopsEmail('MAGFest Food Prep Volunteering', 'food_interest.txt',
+               lambda a: a.requested(FOOD_PREP) and not a.assigned_depts,
+               needs_approval=True)
+
+
 # we can just remove this next year
 StopsEmail('(Corrected) Reminder to meet your {EVENT_NAME} hotel room requirements', 'hotel_hours_correction.txt',
            lambda a: days_before(1, datetime(2014, 12, 23, tzinfo=UTC)) and a.hotel_shifts_required and a.weighted_hours < 30,
@@ -42,9 +47,6 @@ if False:
 
     StopsEmail('MAGFest Chipspace', 'chipspace_untrusted.txt',
                lambda a: a.has_shifts_in(CHIPSPACE) and not a.trusted)
-
-    StopsEmail('MAGFest food prep volunteering', 'food_interest.txt',
-               lambda a: a.requested(FOOD_PREP) and not a.assigned_depts)
 
     StopsEmail('MAGFest food prep rules', 'food_volunteers.txt',
                lambda a: a.has_shifts_in(FOOD_PREP) and not a.trusted)
