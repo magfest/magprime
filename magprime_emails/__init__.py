@@ -34,6 +34,12 @@ StopsEmail('(Corrected) Reminder to meet your {EVENT_NAME} hotel room requiremen
            needs_approval=True)
 
 
+AutomatedEmail(Attendee, 'Important MAGFest PC Gaming Room Information! *PLEASE READ*', 'lan_room.html',
+               lambda a: LAN in a.interests_ints,
+               needs_approval=True,
+               sender='lan@magfest.org')
+
+
 # Turn these on after some review (they already went out to last year's staffers, whoops!)
 if False:
     StopsEmail('MAGFest Tech Ops volunteering', 'techops.txt',
