@@ -1,16 +1,19 @@
 {{ attendee.first_name }},
 
-You're receiving this email because you expressed an interest in volunteering in the Food Prep department.  The following is a message from Chef:
+<br/><br/>Hello!
 
+<br/><br/>Thanks for not only signing up to volunteer at MAGFest, but to volunteer with the Staff Suite. If you are confused, then allow me to explain. When you signed up to volunteer, you either checked any or specifically checked “Food Prep” as a requested department to work in.
 
-If you don't know me, my name is Chef.  I and my crew run the Staff Suite here at {{ EVENT_NAME }}. We are all veterans with at least 3 {{ EVENT_NAME }}s under our belts. We know what we are doing and what we are looking for, both in terms of what we are making and who we are looking for. Most of us are either trained chefs or experienced cooks. We are incredible at what we do. 
+<br/><br/>If you are not familiar with the Staff Suite, it’s part of the perks of volunteering. We are the ones who cook and provide the 3 meals a day, as well as snacks and drinks. Your job could range from checking badges to make sure people are allowed in there, to serving food, to keeping the suite clean, and maybe even possibly prep and cook food.
 
-My crew and I need people. We need people who are willing to help. People who are willing to come in on time, to do what we need to do and to contribute to making {{ EVENT_NAME }} better. 
+<br/><br/>If you are new to the Staff Suite, please keep in mind that you will not be handed a knife and a spatula and told to cut and cook. We do have a system in place that requires volunteers to work their way up into the staffer ranks and become trusted staff within the Staff Suite. This does require impressing at least 2 senior staffers with your work ethic, teamwork, and customer service.
 
-I have expectations for the people who help in my department. I expect diligence, intelligence, obedience and respect. I need you to respect the people who lead you, and to respect the rules we have in place. I need you to be diligent in the tasks given to you. and in doing them to the best of your ability. I need people who are obedient, in doing tasks that they may not want to do, which may not seem to be glamorous, or popular. But despite that, know that they are necessary. Lastly I need people who are intelligent in their tasks, to see what else needs doing, and to ask how else they can help. 
+<br/><br/>If you are still interested in working us, then GREAT! Just send us a small blurb on why you should work with us why you think you are qualified. If you have worked with us in the past, then let us know and the most memorable time of yourself with us.
 
-If you are willing to have these properties, and to put them to use here, with people dedicated to the same thing you are, then I welcome you. If not then I expect you to have the personal courage to take your name off my lists, and find somewhere else to volunteer. 
+<br/><br/>If you are no longer interested in working with us, please let us know as soon as possible, and we will get that corrected within the system. This will mean that you will not be able to see Food Prep shifts to sign up for.
 
-I look forward to serving with you.
+<br/><br/>Please email jennifer.truss@gmail.com with your reply. Any questions, just let us know!
 
-- Chef
+<br/><br/>Thanks!
+
+<br/><br/>MAGFest Staff Suite
