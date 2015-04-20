@@ -1,0 +1,41 @@
+
+<script type="text/javascript">
+    
+</script>
+
+<div class="form-group">
+    <label class="col-sm-2 control-label">Noise Level</label>
+    <div class="col-sm-6">
+        <select name="noise_level">
+            <option value="">Select your preferred level of nighttime noise</option>
+            {% options c.NOISE_LEVEL_OPTS attendee.noise_level %}
+        </select>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="col-sm-2 control-label">Site Type</label>
+    <div class="col-sm-6">
+        <select name="site_type">
+            <option value="">Select your preferred site type</option>
+            {% options c.SITE_TYPE_OPTS attendee.site_type %}
+        </select>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="col-sm-2 control-label">How are you camping?</label>
+    <div class="col-sm-6">
+        <select name="camping_type">
+            <option value="">Please select a type of enclosure</option>
+            {% options c.CAMPING_TYPE_OPTS attendee.camping_type %}
+        </select>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="col-sm-2 control-label">Who's staying with you?</label>
+    <div class="col-sm-6">
+        <input type="text" name="coming_with" class="form-control" placeholder="Full legal names of who you're camping with">
+    </div>
+</div>
