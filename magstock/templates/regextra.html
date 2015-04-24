@@ -11,11 +11,14 @@
     $(function () {
         showOrHideAllergies();
         $.field('amount_extra').on('change', showOrHideAllergies);
+        $('#extra-fields').insertAfter($.field('zip_code').parents('.form-group'));
     });
 </script>
 
-<div class="form-group">
-    <label class="col-sm-2 control-label">Allergies</label>
+<div id="extra-fields">
+
+<div class="form-group" id="allergies">
+    <label class="col-sm-2 control-label optional-field">Allergies</label>
     <div class="col-sm-6">
         <input type="text" class="form-control" name="allergies" value="{{ attendee.allergies }}" placeholder="Please include all dietary restrictions" />
     </div>
@@ -56,4 +59,6 @@
     <div class="col-sm-6">
         <input type="text" name="coming_with" class="form-control" placeholder="Full legal names of who you're camping with">
     </div>
+</div>
+
 </div>
