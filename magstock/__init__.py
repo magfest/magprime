@@ -14,6 +14,11 @@ class Attendee:
     noise_level  = Column(Choice(c.NOISE_LEVEL_OPTS), nullable=True)
     camping_type = Column(Choice(c.CAMPING_TYPE_OPTS), nullable=True)
 
+    @presave_adjustment
+    def roughing_it(self):
+        if self.site_type == c.PRIMITIVE and self.ribbon == c.NO_RIBBON:
+            self.ribbon = c.ROUGHING_IT
+
 Attendee._unrestricted.update({'allergies', 'coming_with', 'site_type', 'noise_level', 'camping_type'})
 
 @validation.Attendee
