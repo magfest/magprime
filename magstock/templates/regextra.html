@@ -8,8 +8,23 @@
     var showOrHideAllergies = function () {
         setVisible('#allergies', $.val('amount_extra') >= {{ c.FOOD_LEVEL }});
     };
+    var showOrHideComingWith = function () {
+        var showComingWith = !!$.val('coming_as');
+        setVisible('#comingwith', showComingWith);
+        if (showComingWith) {
+            if ($.val('coming_as') === {{ c.TENT_LEADER }}) {
+                $('#comingwith label').text('Who is in your group?');
+                $('#comingwith :text').attr('placeholder', 'Full legal names of everyone in your group');
+            } else {
+                $('#comingwith label').text('Who your Tent Leader?');
+                $('#comingwith :text').attr('placeholder', 'Full legal name of your Tent Leader');
+            }
+        }
+    };
     $(function () {
         showOrHideAllergies();
+        showOrHideComingWith();
+        $.field('coming_as').on('change', showOrHideComingWith);
         $.field('amount_extra').on('change', showOrHideAllergies);
         $('#extra-fields').insertAfter($.field('zip_code').parents('.form-group'));
     });
@@ -55,6 +70,16 @@
 </div>
 
 <div class="form-group">
+    <label class="col-sm-2 control-label">Who is your Tent Leader?</label>
+    <div class="col-sm-6">
+        <select name="coming_as">
+            <option value="">Who is coordinating your tent/cabin?</option>
+            {% options c.COMING_AS_OPTS attendee.coming_as %}
+        </select>
+    </div>
+</div>
+
+<div id="comingwith" class="form-group" style="display:none">
     <label class="col-sm-2 control-label">Who's staying with you?</label>
     <div class="col-sm-6">
         <input type="text" name="coming_with" class="form-control" placeholder="Full legal names of who you're camping with">
