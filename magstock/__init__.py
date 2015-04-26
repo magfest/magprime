@@ -6,21 +6,38 @@ static_overrides(join(config['module_root'], 'static'))
 template_overrides(join(config['module_root'], 'templates'))
 
 
+@Config.mixin
+class ExtraConfig:
+    @property
+    def FOOD_COUNT(self):
+        with Session() as session:
+            return session.query(Attendee).filter_by(purchased_food=True).count()
+
+
 @Session.model_mixin
 class Attendee:
-    allergies    = Column(UnicodeText, default='')
-    coming_with  = Column(UnicodeText, default='')
-    coming_as    = Column(Choice(c.COMING_AS_OPTS), nullable=True)
-    site_type    = Column(Choice(c.SITE_TYPE_OPTS), nullable=True)
-    noise_level  = Column(Choice(c.NOISE_LEVEL_OPTS), nullable=True)
-    camping_type = Column(Choice(c.CAMPING_TYPE_OPTS), nullable=True)
+    allergies      = Column(UnicodeText, default='')
+    coming_with    = Column(UnicodeText, default='')
+    coming_as      = Column(Choice(c.COMING_AS_OPTS), nullable=True)
+    site_type      = Column(Choice(c.SITE_TYPE_OPTS), nullable=True)
+    noise_level    = Column(Choice(c.NOISE_LEVEL_OPTS), nullable=True)
+    camping_type   = Column(Choice(c.CAMPING_TYPE_OPTS), nullable=True)
+    purchased_food = Column(Boolean, default=False)
+
+    @cost_property
+    def food_cost(self):
+        return c.FOOD_PRICE if self.purchased_food else 0
 
     @presave_adjustment
     def roughing_it(self):
         if self.site_type == c.PRIMITIVE and self.ribbon == c.NO_RIBBON:
             self.ribbon = c.ROUGHING_IT
 
-Attendee._unrestricted.update({'allergies', 'coming_with', 'coming_as', 'site_type', 'noise_level', 'camping_type'})
+    @property
+    def addons(self):
+        return ['Food all weekend'] if self.purchased_food else []
+
+Attendee._unrestricted.update({'allergies', 'coming_with', 'coming_as', 'site_type', 'noise_level', 'camping_type', 'purchased_food'})
 
 
 @validation.Attendee

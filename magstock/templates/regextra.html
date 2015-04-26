@@ -1,12 +1,7 @@
 
 <script type="text/javascript">
-    BADGE_TYPES.push({
-        title: 'Food: ${{ c.BADGE_PRICE|add:c.FOOD_LEVEL }}',
-        description: 'Supporter pack plus food all weekend long.',
-        extra: {{ c.FOOD_LEVEL }}
-    });
     var showOrHideAllergies = function () {
-        setVisible('#allergies', $.val('amount_extra') >= {{ c.FOOD_LEVEL }});
+        setVisible('#allergies', $.field('purchased_food').is(':checked'));
     };
     var showOrHideComingWith = function () {
         var showComingWith = !!$.val('coming_as');
@@ -26,10 +21,20 @@
         showOrHideComingWith();
         $.field('coming_as').on('change', showOrHideComingWith);
         $.field('amount_extra').on('change', showOrHideAllergies);
+        $('#food').insertBefore($.field('staffing').parents('.form-group'));
         $('#extra-fields').insertAfter($.field('zip_code').parents('.form-group'));
         $.field('badge_printed_name').parents('.form-group').remove();
     });
 </script>
+
+{% if c.PAGE_PATH == '/registration/form' or c.FOOD_AVAILABLE %}
+    <div class="form-group" id="food">
+        <label class="col-sm-2 control-label">Want to Buy Food?</label>
+        <div class="col-sm-6">
+            {% checkbox attendee.purchased_food %} Pay an extra <b>$35</b> and we'll feed you all weekend.
+        </div>
+    </div>
+{% endif %}
 
 <div id="extra-fields">
 
