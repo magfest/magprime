@@ -13,6 +13,15 @@ class ExtraConfig:
         with Session() as session:
             return session.query(Attendee).filter_by(purchased_food=True).count()
 
+    @property
+    def PREREG_DONATION_OPTS(self):
+        if self.AFTER_SUPPORTER_DEADLINE:
+            return [(amt, desc) for amt, desc in self.DONATION_TIER_OPTS if amt < self.SHIRT_LEVEL]
+        elif not self.SUPPORTER_AVAILABLE:
+            return [(amt, desc) for amt, desc in self.DONATION_TIER_OPTS if amt < self.SUPPORTER_LEVEL]
+        else:
+            return self.DONATION_TIER_OPTS
+
 
 @Session.model_mixin
 class Attendee:
