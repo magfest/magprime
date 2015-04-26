@@ -1,5 +1,12 @@
 
 <script type="text/javascript">
+    {% if c.SHIRT_LEVEL in c.PREREG_DONATION_TIERS %}
+        BADGE_TYPES.splice(1, 0, {
+            title: 'Shirt: ${{ c.BADGE_PRICE|add:c.SHIRT_LEVEL }}',
+            description: 'Get a MAGStock tshirt as thanks for your extra donation.',
+            extra: {{ c.SHIRT_LEVEL }}
+        });
+    {% endif %}
     var showOrHideAllergies = function () {
         setVisible('#allergies', $.field('purchased_food').is(':checked'));
     };
