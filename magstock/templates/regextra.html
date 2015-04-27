@@ -14,13 +14,10 @@
         var showComingWith = !!$.val('coming_as');
         setVisible('#comingwith', showComingWith);
         if (showComingWith) {
-            if ($.val('coming_as') === {{ c.TENT_LEADER }}) {
-                $('#comingwith label').text('Who is in your group?');
-                $('#comingwith :text').attr('placeholder', 'Full legal names of everyone in your group');
-            } else {
-                $('#comingwith label').text('Who your Tent Leader?');
-                $('#comingwith :text').attr('placeholder', 'Full legal name of your Tent Leader');
-            }
+            var isTentLeader = $.val('coming_as') === {{ c.TENT_LEADER }};
+            setVisible($('#comingwith :text').prop('disabled', isTentLeader), !isTentLeader);
+            setVisible($('#comingwith textarea').prop('disabled', !isTentLeader), isTentLeader);
+            $('#comingwith label').text(isTentLeader ? 'Who is in your group?' : 'Who your Tent Leader?');
         }
     };
     $(function () {
@@ -97,7 +94,8 @@
     <div id="comingwith" class="form-group" style="display:none">
         <label class="col-sm-2 control-label">Who's staying with you?</label>
         <div class="col-sm-6">
-            <input type="text" name="coming_with" value="{{ attendee.coming_with }}" class="form-control" placeholder="Full legal names of who you're camping with">
+            <input type="text" name="coming_with" value="{{ attendee.coming_with }}" class="form-control" placeholder="Full legal name of your Tent Leader">
+            <textarea name="coming_with" class="form-control" placeholder="Full legal names of everyone in your group">{{ attendee.coming_with }}</textarea>
         </div>
     </div>
 </div>
