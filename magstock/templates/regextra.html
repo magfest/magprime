@@ -17,7 +17,7 @@
             var isTentLeader = $.val('coming_as') === {{ c.TENT_LEADER }};
             setVisible($('#comingwith :text').prop('disabled', isTentLeader), !isTentLeader);
             setVisible($('#comingwith textarea').prop('disabled', !isTentLeader), isTentLeader);
-            $('#comingwith label').text(isTentLeader ? 'Who is in your group?' : 'Who your Tent Leader?');
+            $('#comingwith label').text(isTentLeader ? 'Who is in your group?' : 'Who is your Tent Leader?');
         }
     };
     $(function () {
