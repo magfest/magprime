@@ -1,14 +1,20 @@
 
 <script type="text/javascript">
-    BADGE_TYPES[0].description = 'Includes three day admission and campground fees';
-    BADGE_TYPES[1].description = 'T-shirt level plus additional swag. (Available until {{ c.SUPPORTER_DEADLINE|datetime:'%b %d' }}. Limited quantities.)';
-    {% if c.SHIRT_LEVEL in c.PREREG_DONATION_TIERS %}
-        BADGE_TYPES.splice(1, 0, {
-            title: 'Plus T-Shirt: ${{ c.BADGE_PRICE|add:c.SHIRT_LEVEL }}',
-            description: 'Attendee level plus a MAGStock themed t-shirt',
-            extra: {{ c.SHIRT_LEVEL }}
+    if (window.BADGE_TYPES) {
+        BADGE_TYPES[0].description = 'Includes three day admission and campground fees';
+        BADGE_TYPES[1].description = 'T-shirt level plus additional swag. (Available until {{ c.SUPPORTER_DEADLINE|datetime:'%b %d' }}. Limited quantities.)';
+        {% if c.SHIRT_LEVEL in c.PREREG_DONATION_TIERS %}
+            BADGE_TYPES.splice(1, 0, {
+                title: 'Plus T-Shirt: ${{ c.BADGE_PRICE|add:c.SHIRT_LEVEL }}',
+                description: 'Attendee level plus a MAGStock themed t-shirt',
+                extra: {{ c.SHIRT_LEVEL }}
+            });
+        {% endif %}
+        $(function () {
+            $.field('amount_extra').parents('.form-group').hide();
+            $.field('badge_printed_name').parents('.form-group').remove();
         });
-    {% endif %}
+    }
     var showOrHideAllergies = function () {
         setVisible('#allergies', $.field('purchased_food').is(':checked'));
     };
@@ -29,8 +35,6 @@
         showOrHideComingWith();
         $.field('coming_as').on('change', showOrHideComingWith);
         $.field('purchased_food').on('click', showOrHideAllergies);
-        $.field('badge_printed_name').parents('.form-group').remove();
-        $.field('amount_extra').parents('.form-group').hide();
     });
 </script>
 
