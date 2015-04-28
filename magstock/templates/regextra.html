@@ -57,7 +57,7 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">Noise Level</label>
         <div class="col-sm-6">
-            <select name="noise_level">
+            <select name="noise_level" class="form-control">
                 <option value="">Select your preferred level of nighttime noise</option>
                 {% options c.NOISE_LEVEL_OPTS attendee.noise_level %}
             </select>
@@ -67,7 +67,7 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">Site Type</label>
         <div class="col-sm-6">
-            <select name="site_type">
+            <select name="site_type" class="form-control">
                 <option value="">Select your preferred site type</option>
                 {% options c.SITE_TYPE_OPTS attendee.site_type %}
             </select>
@@ -77,7 +77,7 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">How are you camping?</label>
         <div class="col-sm-6">
-            <select name="camping_type">
+            <select name="camping_type" class="form-control">
                 <option value="">Please select a type of enclosure</option>
                 {% options c.CAMPING_TYPE_OPTS attendee.camping_type %}
             </select>
@@ -87,7 +87,7 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">Who is your Tent Leader?</label>
         <div class="col-sm-6">
-            <select name="coming_as">
+            <select name="coming_as" class="form-control">
                 <option value="">Who is coordinating your tent/cabin?</option>
                 {% options c.COMING_AS_OPTS attendee.coming_as %}
             </select>
