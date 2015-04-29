@@ -63,7 +63,7 @@ def camping_checks(attendee):
         elif not attendee.coming_with:
             if attendee.coming_as == c.TENT_LEADER:
                 return 'Please tell us who is in your camping group'
-            else:
+            elif attendee.coming_as == c.TENT_FOLLOWER:
                 return 'Please tell us who your camp leader is'
 
 
