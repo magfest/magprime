@@ -12,7 +12,6 @@
         {% endif %}
         $(function () {
             $.field('amount_extra').parents('.form-group').hide();
-            $.field('badge_printed_name').parents('.form-group').remove();
         });
     }
     var showOrHideAllergies = function () {
@@ -35,6 +34,9 @@
         showOrHideComingWith();
         $.field('coming_as').on('change', showOrHideComingWith);
         $.field('purchased_food').on('click', showOrHideAllergies);
+        if ($.field('badge_printed_name')) {
+            $.field('badge_printed_name').parents('.form-group').remove();
+        }
     });
 </script>
 
