@@ -40,12 +40,18 @@
     });
 </script>
 
-{% if c.PAGE_PATH == '/registration/form' or c.FOOD_AVAILABLE %}
-    <div id="food">
+<div id="food">
+    {% if c.PAGE_PATH == '/registration/form' or c.FOOD_AVAILABLE or not attendee.is_new and attendee.purchased_food %}
         <div class="form-group">
             <label class="col-sm-2 control-label">Want to Buy Food?</label>
             <div class="col-sm-6">
-                {% checkbox attendee.purchased_food %} Pay an extra <b>${{ c.FOOD_PRICE }}</b> for food.
+                {% if c.PAGE_PATH != '/registration/form' and attendee.purchased_food and not attendee.is_new and not attendee.amount_unpaid %}
+                    <i>You have already purchased food.</i>
+                    <!-- We still place a checkbox on the page because we've written our Javascript to expect one. -->
+                    <span style="display:none">{% checkbox attendee.purchased_food %}</span>
+                {% else %}
+                    {% checkbox attendee.purchased_food %} Pay an extra <b>${{ c.FOOD_PRICE }}</b> for food.
+                {% endif %}
                 {% popup_link "../static/food_menu.html" "What's on the menu?" %}
             </div>
         </div>
@@ -56,8 +62,8 @@
                 <input type="text" class="form-control" name="allergies" value="{{ attendee.allergies }}" placeholder="Your dietary restrictions, if applicable" />
             </div>
         </div>
-    </div>
-{% endif %}
+    {% endif %}
+</div>
 
 <div id="extra-fields">
     <div class="form-group">

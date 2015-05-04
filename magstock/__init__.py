@@ -15,6 +15,13 @@ class ExtraConfig:
 
     @property
     def PREREG_DONATION_OPTS(self):
+        """
+        We're overriding this so that we can cut off Supporter registrations
+        after we've sold a capped number and so that we can cut off shirt sales
+        after the supporter deadline (MAGStock doesn't assume inventory risk on
+        tshirts so they only sell them to people who preorder and do not sell
+        any on-site).
+        """
         if self.AFTER_SUPPORTER_DEADLINE:
             return [(amt, desc) for amt, desc in self.DONATION_TIER_OPTS if amt < self.SHIRT_LEVEL]
         elif not self.SUPPORTER_AVAILABLE:
@@ -45,8 +52,6 @@ class Attendee:
     @property
     def addons(self):
         return ['Food all weekend'] if self.purchased_food else []
-
-Attendee._unrestricted.update({'allergies', 'coming_with', 'coming_as', 'site_type', 'noise_level', 'camping_type', 'purchased_food'})
 
 
 @validation.Attendee
