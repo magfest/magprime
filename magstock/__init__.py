@@ -12,7 +12,7 @@ class ExtraConfig:
     @property
     def FOOD_COUNT(self):
         with Session() as session:
-            return session.food_purchasers.count()
+            return session.food_purchasers().count()
 
     @property
     def PREREG_DONATION_OPTS(self):
