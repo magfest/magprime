@@ -52,6 +52,10 @@ class Attendee:
     def food_cost(self):
         return c.FOOD_PRICE if self.purchased_food else 0
 
+    @property
+    def auto_food(self):
+        return self.badge_type in [c.STAFF_BADGE, c.GUEST_BADGE]
+
     @presave_adjustment
     def roughing_it(self):
         if self.site_type == c.PRIMITIVE and self.ribbon == c.NO_RIBBON:

@@ -17,7 +17,7 @@
         });
     }
     var showOrHideAllergies = function () {
-        setVisible('#allergies', $.field('purchased_food').is(':checked'));
+        setVisible('#allergies', $.field('purchased_food').is(':checked') || {{ attendee.auto_food|jsonize }});
     };
     var showOrHideComingWith = function () {
         var showComingWith = ($.val('coming_as') === {{ c.TENT_LEADER }} || $.val('coming_as') === {{ c.TENT_FOLLOWER }});
