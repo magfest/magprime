@@ -12,7 +12,7 @@ class ExtraConfig:
     @property
     def FOOD_COUNT(self):
         with Session() as session:
-            return session.query(Attendee).filter_by(purchased_food=True).count()
+            return session.food_purchasers.count()
 
     @property
     def PREREG_DONATION_OPTS(self):
@@ -29,6 +29,13 @@ class ExtraConfig:
             return [(amt, desc) for amt, desc in self.DONATION_TIER_OPTS if amt < self.SUPPORTER_LEVEL]
         else:
             return self.DONATION_TIER_OPTS
+
+
+@Session.model_mixin
+class SessionMixin:
+    def food_purchasers(self):
+        return self.query(Attendee).filter(or_(Attendee.purchased_food == True,
+                                               Attendee.badge_type.in_([c.STAFF_BADGE, c.GUEST_BADGE])))
 
 
 @Session.model_mixin
