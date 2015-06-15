@@ -2,7 +2,9 @@
 <script type="text/javascript">
     if (window.BADGE_TYPES) {
         BADGE_TYPES[0].description = 'Includes three day admission and campground fees';
-        BADGE_TYPES[1].description = 'T-shirt level plus additional swag. (Available until {{ c.SUPPORTER_DEADLINE|datetime:'%b %d' }}. Limited quantities.)';
+        if (BADGE_TYPES[1]) {
+            BADGE_TYPES[1].description = 'T-shirt level plus additional swag. (Available until {{ c.SUPPORTER_DEADLINE|datetime:'%b %d' }}. Limited quantities.)';
+        }
         {% if c.SHIRT_LEVEL in c.PREREG_DONATION_TIERS %}
             BADGE_TYPES.splice(1, 0, {
                 title: 'Plus T-Shirt: ${{ c.BADGE_PRICE|add:c.SHIRT_LEVEL }}',
@@ -15,7 +17,7 @@
         });
     }
     var showOrHideAllergies = function () {
-        setVisible('#allergies', $.field('purchased_food').is(':checked'));
+        setVisible('#allergies', $.field('purchased_food').is(':checked') || {{ attendee.auto_food|jsonize }});
     };
     var showOrHideComingWith = function () {
         var showComingWith = ($.val('coming_as') === {{ c.TENT_LEADER }} || $.val('coming_as') === {{ c.TENT_FOLLOWER }});
@@ -28,7 +30,9 @@
         }
     };
     $(function () {
-        $('#food').insertBefore($.field('staffing').parents('.form-group'));
+        if ($('#food').size() && $.field('staffing')) {
+            $('#food').insertBefore($.field('staffing').parents('.form-group'));
+        }
         $('#extra-fields').insertAfter($.field('zip_code').parents('.form-group'));
         showOrHideAllergies();
         showOrHideComingWith();

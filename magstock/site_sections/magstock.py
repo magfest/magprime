@@ -27,9 +27,4 @@ class Root:
         return {'grouped': sorted({frozenset(group) for group in lookup.values()}, key=len, reverse=True)}
 
     def food_purchases(self, session):
-        return {
-            'attendees': session.query(Attendee)
-                                .filter(or_(Attendee.purchased_food == True,
-                                            Attendee.badge_type.in_([c.STAFF_BADGE, c.GUEST_BADGE])))
-                                .order_by(Attendee.full_name).all()
-        }
+        return {'attendees': session.food_purchasers().order_by(Attendee.full_name).all()}

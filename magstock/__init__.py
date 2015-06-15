@@ -12,7 +12,7 @@ class ExtraConfig:
     @property
     def FOOD_COUNT(self):
         with Session() as session:
-            return session.query(Attendee).filter_by(purchased_food=True).count()
+            return session.food_purchasers().count()
 
     @property
     def PREREG_DONATION_OPTS(self):
@@ -32,6 +32,13 @@ class ExtraConfig:
 
 
 @Session.model_mixin
+class SessionMixin:
+    def food_purchasers(self):
+        return self.query(Attendee).filter(or_(Attendee.purchased_food == True,
+                                               Attendee.badge_type.in_([c.STAFF_BADGE, c.GUEST_BADGE])))
+
+
+@Session.model_mixin
 class Attendee:
     allergies      = Column(UnicodeText, default='')
     coming_with    = Column(UnicodeText, default='')
@@ -44,6 +51,10 @@ class Attendee:
     @cost_property
     def food_cost(self):
         return c.FOOD_PRICE if self.purchased_food else 0
+
+    @property
+    def auto_food(self):
+        return self.badge_type in [c.STAFF_BADGE, c.GUEST_BADGE]
 
     @presave_adjustment
     def roughing_it(self):
