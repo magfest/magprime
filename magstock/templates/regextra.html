@@ -30,7 +30,9 @@
         }
     };
     $(function () {
-        $('#food').insertBefore($.field('staffing').parents('.form-group'));
+        if ($('#food').size() && $.field('staffing')) {
+            $('#food').insertBefore($.field('staffing').parents('.form-group'));
+        }
         $('#extra-fields').insertAfter($.field('zip_code').parents('.form-group'));
         showOrHideAllergies();
         showOrHideComingWith();
