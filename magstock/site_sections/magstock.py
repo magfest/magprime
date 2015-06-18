@@ -41,3 +41,11 @@ class Root:
 
     def food_purchases(self, session):
         return {'attendees': session.food_purchasers().order_by(Attendee.full_name).all()}
+
+    @ajax
+    def set_extra_checkin_fields(self, session, id, site_number, license_plate):
+        attendee = session.attendee(id)
+        attendee.site_number = site_number
+        attendee.license_plate = license_plate
+        session.commit()
+        return {'message': 'success'}

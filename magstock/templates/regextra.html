@@ -117,4 +117,29 @@
             <textarea name="coming_with" class="form-control" placeholder="Full legal names of everyone in your group">{{ attendee.coming_with }}</textarea>
         </div>
     </div>
+
+    {% if c.PAGE_PATH == '/registration/form' %}
+        <div class="form-group" id="allergies">
+            <label class="col-sm-2 control-label optional-field">Site Number</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="site_number" value="{{ attendee.site_number }}" placeholder="Admin-only field" />
+            </div>
+        </div>
+
+        <div class="form-group" id="allergies">
+            <label class="col-sm-2 control-label optional-field">License Plate</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="license_plate" value="{{ attendee.license_plate }}" placeholder="Admin-only field" />
+            </div>
+        </div>
+    {% endif %}
 </div>
+
+{% if c.AT_THE_CON and c.PAGE_PATH == '/preregistration/form' %}
+    <script>
+        $('.panel')
+            .empty()
+            .append('<h2 align="center">Preregistration is Closed</h2>')
+            .append('MAGStock preregistration is closed, but you can register at the door <a href="../registration/register">here</a>.');
+    </script>
+{% endif %}
