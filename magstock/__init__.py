@@ -57,7 +57,7 @@ class Attendee:
     @property
     def auto_food(self):
         return self.badge_type in [c.STAFF_BADGE, c.GUEST_BADGE]
-        
+
     @property
     def gets_food(self):
         return self.auto_food or self.purchased_food
