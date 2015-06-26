@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 import os.path
 from setuptools import setup, find_packages
 
-pkg_name = 'magstock'
+pkg_name = 'magclassic'
 __here__ = os.path.abspath(os.path.dirname(__file__))
 # Sideboard's implementation of http://stackoverflow.com/a/16084844/171094
 # after this, __version__ should exist in the namespace
