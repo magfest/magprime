@@ -1,3 +1,13 @@
+
+{% if c.PAGE_PATH != '/registration/form' %}
+    <style type="text/css">
+        body {
+            background-image: none;
+            background-color: #3e3e3e;
+        }
+    </style>
+{% endif %}
+
 <script>
     if (window.BADGE_TYPES) {
         window.BADGE_TYPES[0].description = 'Allows access to the festival for its duration.';
