@@ -3,4 +3,13 @@
     if (window.BADGE_TYPES) {
         window.BADGE_TYPES[0].description = 'Allows access to the festival for its duration.';
     }
+
+    $(function() {
+        $('#tshirt-size-guide').insertAfter($.field('shirt'));
+    });
 </script>
+
+<div id="tshirt-size-guide">Size guides:
+    <a href="http://www.mygildan.com/Categories/T-Shirts/Short-Sleeve//p/2000" target="_blank">Unisex</a>,
+    <a href="http://www.mygildan.com/Categories/T-Shirts/Short-Sleeve//p/2000L" target="_blank">Female</a>
+</div>
