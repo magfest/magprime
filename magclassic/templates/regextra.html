@@ -1,12 +1,16 @@
 
 <script>
     if (window.BADGE_TYPES) {
-        window.BADGE_TYPES[0].description = 'Allows access to the festival for its duration.';
+        window.BADGE_TYPES.options[0].description = 'Allows access to the festival for its duration (Sept 11-13).';
     }
 
     $(function() {
         $('#tshirt-size-guide').insertAfter($.field('shirt'));
-        $('#group-explanation').insertAfter($.field('badges').parents('.form-group'));
+        if ($.field('badges')) {
+            $('#group-explanation').insertAfter($.field('badges').parents('.form-group'));
+        } else {
+            $('#group-explanation').remove();
+        }
     });
 </script>
 
@@ -17,6 +21,6 @@
 
 <div id="group-explanation" class="form-group">
     <p class="col-sm-8 col-sm-offset-1">
-    Please enter the information for the group leader (additional group member information will be entered after purchase is complete):
+        Please enter the information for the group leader (additional group member information will be entered after purchase is complete):
     </p>
 </div>
