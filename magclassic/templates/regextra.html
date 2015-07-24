@@ -2,6 +2,7 @@
 <script>
     if (window.BADGE_TYPES) {
         window.BADGE_TYPES.options[0].description = 'Allows access to the festival for its duration (Sept 11-13). {% price_notice "Preregistration" c.PREREG_TAKEDOWN %}';
+        $.field('amount_extra').parents('.form-group').hide()
     }
 
     $(function() {
@@ -11,7 +12,6 @@
         } else {
             $('#group-explanation').remove();
         }
-        $.field('amount_extra').parents('.form-group').hide()
     });
 </script>
 
