@@ -1,5 +1,5 @@
 from uber.common import *
-from magprime_emails._version import __version__
+from magprime._version import __version__
 
 config = parse_config(__file__)
 django.conf.settings.TEMPLATE_DIRS.insert(0, join(config['module_root'], 'templates'))

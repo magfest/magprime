@@ -1,2 +1,2 @@
 include requirements.txt
-recursive-include magprime_emails *
+recursive-include magprime *
