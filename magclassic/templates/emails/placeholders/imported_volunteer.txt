@@ -1,0 +1,13 @@
+{{ attendee.first_name }},
+
+{% if attendee.ribbon == c.DEPT_HEAD_RIBBON %}NOTE: This is an automated email, but even though you are a Department Head you should still pay attention to it, since you DO need to fill out the form linked below.
+
+{% endif %}Thanks so much for helping run MAGFest 8.5 last year, we couldn't have pulled it off without so much help from our wonderful volunteers.  We're making it a yearly thing, it's now called {{ c.EVENT_NAME }}, and this year it's happening {{ c.EPOCH|datetime:"%b %e" }} - {{ c.ESCHATON|datetime:"%e" }}!  As thanks for your help last time, you're eligible for a complementary {{ c.EVENT_NAME }} Staff badge, which you can accept by visiting {{ c.URL_BASE }}/preregistration/confirm?id={{ attendee.id }}
+
+After you accept your Staff badge, you'll be emailed when shifts become available.  Also, as a proven staffer, you'll also be eligible for complementary crash space in one of our staffer hotel rooms.  You'll be emailed closer to {{ c.EVENT_NAME }} with details about how to sign up for this.
+
+If you want to come to {{ c.EVENT_NAME }} but don't want to volunteer again, just let us know and we'll swap your Staff badge for a complementary Attendee badge as thanks for the hard work you put in last time.
+
+Please let us know if you have any questions.
+
+{{ c.STOPS_EMAIL_SIGNATURE }}
