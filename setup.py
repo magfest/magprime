@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 import os.path
 from setuptools import setup, find_packages
 
-pkg_name = 'magprime-emails'
+pkg_name = 'magprime'
 __here__ = os.path.abspath(os.path.dirname(__file__))
 # Sideboard's implementation of http://stackoverflow.com/a/16084844/171094
 # after this, __version__ should exist in the namespace
@@ -16,7 +16,7 @@ if __name__ == '__main__':
     setup(
         name=pkg_name,
         version=__version__,
-        description='Emails specific to MAGFest Prime which would not apply to other events',
+        description='Sideboard ' + pkg_name + ' plugin',
         license='GPLv3',
         scripts=[],
         setup_requires=['distribute'],
