@@ -2,7 +2,10 @@ from uber.common import *
 from magprime._version import __version__
 
 config = parse_config(__file__)
-django.conf.settings.TEMPLATE_DIRS.insert(0, join(config['module_root'], 'templates'))
+mount_site_sections(config['module_root'])
+static_overrides(join(config['module_root'], 'static'))
+template_overrides(join(config['module_root'], 'templates'))
+
 
 
 AutomatedEmail(Attendee, 'MAGFest schedule, maps, and other FAQs', 'precon_faqs.html', lambda a: days_before(7, EPOCH),

@@ -3,4 +3,4 @@ python:
     - "3.4"
 install:
     - "pip install pep8"
-script: "pep8 magclassic/"
+script: "pep8 magprime/"
