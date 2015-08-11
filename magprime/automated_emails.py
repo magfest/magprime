@@ -1,6 +1,6 @@
 from magprime import *
 
-AutomatedEmail.extra_models['SeasonPass'] = lambda: session.season_passes()
+AutomatedEmail.extra_models['SeasonPass'] = lambda session: session.season_passes()
 
 
 class SeasonSupporterEmail(AutomatedEmail):
