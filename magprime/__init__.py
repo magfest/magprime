@@ -1,67 +1,41 @@
 from uber.common import *
 from magprime._version import __version__
 
-config = parse_config(__file__)
-mount_site_sections(config['module_root'])
-static_overrides(join(config['module_root'], 'static'))
-template_overrides(join(config['module_root'], 'templates'))
+magprime_config = parse_config(__file__)
+static_overrides(join(magprime_config['module_root'], 'static'))
+template_overrides(join(magprime_config['module_root'], 'templates'))
 
 
+@Config.mixin
+class ExtraConfig:
+    @property
+    def SEASON_BADGE_PRICE(self):
+        return self.BADGE_PRICE + self.SEASON_LEVEL
 
-AutomatedEmail(Attendee, 'MAGFest schedule, maps, and other FAQs', 'precon_faqs.html', lambda a: days_before(7, EPOCH),
-               needs_approval=True)
-
-
-# These definitely need to be reviewed
-GuestEmail('MAGFest food for guests', 'guest_food_restrictions.txt')
-GuestEmail('MAGFest hospitality suite information', 'guest_food_info.txt')
-
-
-MarketplaceEmail('Delays with {EVENT_NAME} Dealer applications', 'dealer_deadline_change.txt',
-                 lambda g: g.status == UNAPPROVED, needs_approval=True)
+    @property
+    def SEASON_EVENTS(self):
+        return magprime_config['season_events']
 
 
-StopsEmail('MAGFest Volunteer Food', 'volunteer_food_info.txt',
-               lambda a: days_before(7, UBER_TAKEDOWN),
-               needs_approval=True)
+@Session.model_mixin
+class SessionMixin:
+    def season_pass(self, id):
+        pss = self.query(PrevSeasonSupporter).filter_by(id=id).all()
+        if pss:
+            return pss[0]
+        else:
+            attendee = self.attendee(id)
+            assert attendee.amount_extra >= c.SEASON_LEVEL
+            return attendee
+
+    def season_passes(self):
+        attendees = {a.email: a for a in self.query(Attendee).filter(Attendee.amount_extra >= c.SEASON_LEVEL).all()}
+        prev = [pss for pss in self.query(PrevSeasonSupporter).all() if pss.email not in attendees]
+        return prev + list(attendees.values())
 
 
-StopsEmail('MAGFest Food Prep Volunteering', 'food_interest.txt',
-               lambda a: a.requested(FOOD_PREP) and not a.assigned_depts,
-               needs_approval=True)
-
-
-# we can just remove this next year
-StopsEmail('(Corrected) Reminder to meet your {EVENT_NAME} hotel room requirements', 'hotel_hours_correction.txt',
-           lambda a: days_before(1, datetime(2014, 12, 23, tzinfo=UTC)) and a.hotel_shifts_required and a.weighted_hours < 30,
-           needs_approval=True)
-
-
-AutomatedEmail(Attendee, 'Important MAGFest PC Gaming Room Information! *PLEASE READ*', 'lan_room.html',
-               lambda a: LAN in a.interests_ints,
-               needs_approval=True,
-               sender='lan@magfest.org')
-
-
-# Turn these on after some review (they already went out to last year's staffers, whoops!)
-if False:
-    StopsEmail('MAGFest Tech Ops volunteering', 'techops.txt',
-               lambda a: a.requested(TECH_OPS) and not a.assigned_to(TECH_OPS))
-
-    StopsEmail('MAGFest Chipspace volunteering', 'chipspace.txt',
-               lambda a: (a.requested(JAMSPACE) or a.assigned_to(JAMSPACE)) and not a.assigned_to(CHIPSPACE))
-
-    StopsEmail('MAGFest Chipspace shifts', 'chipspace_trusted.txt',
-               lambda a: a.assigned_to(CHIPSPACE) and a.trusted)
-
-    StopsEmail('MAGFest Chipspace', 'chipspace_untrusted.txt',
-               lambda a: a.has_shifts_in(CHIPSPACE) and not a.trusted)
-
-    StopsEmail('MAGFest food prep rules', 'food_volunteers.txt',
-               lambda a: a.has_shifts_in(FOOD_PREP) and not a.trusted)
-
-    StopsEmail('MAGFest message from Chef', 'food_trusted_staffers.txt',
-               lambda a: a.has_shifts_in(FOOD_PREP) and a.trusted)
-
-    AutomatedEmail(Attendee, 'Want to help run MAGFest poker tournaments?', 'poker.txt',
-                   lambda a: a.has_shifts_in(TABLETOP), sender='tabletop@magfest.org')
+# these need to come last so they can make use of everything defined above
+from magprime.utils import *
+from magprime.models import *
+from magprime.automated_emails import *
+mount_site_sections(magprime_config['module_root'])
