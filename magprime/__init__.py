@@ -34,6 +34,19 @@ class SessionMixin:
         return prev + list(attendees.values())
 
 
+@Session.model_mixin
+class Attendee:
+    extra_donation = Column(Integer, default=0)
+
+    @cost_property
+    def donation_cost(self):
+        return self.extra_donation
+
+    @property
+    def addons(self):
+        return ['Extra donation of ${}'.format(self.extra_donation)] if self.extra_donation else []
+
+
 # these need to come last so they can make use of everything defined above
 from magprime.utils import *
 from magprime.models import *
