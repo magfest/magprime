@@ -42,6 +42,11 @@ class Attendee:
     def donation_cost(self):
         return self.extra_donation if self.extra_donation else 0
 
+    @presave_adjustment
+    def _set_empty_donation(self):
+        if not self.extra_donation:
+            self.extra_donation = 0
+
     @property
     def addons(self):
         return ['Extra donation of ${}'.format(self.extra_donation)] if self.extra_donation else []
