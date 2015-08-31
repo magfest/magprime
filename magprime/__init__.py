@@ -40,7 +40,7 @@ class Attendee:
 
     @cost_property
     def donation_cost(self):
-        return self.extra_donation
+        return self.extra_donation if self.extra_donation else 0
 
     @property
     def addons(self):
