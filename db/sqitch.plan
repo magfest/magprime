@@ -1,0 +1,5 @@
+%syntax-version=1.0.0
+%project=magprime
+%uri=https://github.com/magfest/magprime--engine
+
+add-extra-donation 2015-08-29T17:45:07Z vagrant <vagrant@localhost> # Add extra donation box to form.
