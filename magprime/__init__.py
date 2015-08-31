@@ -43,7 +43,7 @@ class Attendee:
         return self.extra_donation if self.extra_donation else 0
 
     @presave_adjustment
-    def _set_empty_donation(self):
+    def set_empty_donation(self):
         if not self.extra_donation:
             self.extra_donation = 0
 
