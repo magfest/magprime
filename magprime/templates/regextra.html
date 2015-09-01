@@ -2,7 +2,12 @@
     $(function () {
         $('#extra_donation').insertAfter($.field('amount_extra').parents('.form-group'));
         $.field('amount_extra').parents('.form-group').append($('#tax_exempt'));
-    })
+        if ($.field('shirt')) {
+            $.field('shirt').parents('.form-group').append($('#tshirt_warning'));
+        } else {
+            $('#tshirt_warning').hide();
+        }
+    });
 </script>
 
 <div id="extra_donation">
@@ -25,5 +30,11 @@
 <div id="tax_exempt">
     <div class="help-block col-sm-6 col-sm-offset-2">
         Badge tier upgrades may be partially tax deductible. E-mail contact@magfest.org for details.
+    </div>
+</div>
+
+<div id="tshirt_warning">
+    <div class="help-block col-sm-6 col-sm-offset-2">
+        <em>Slim fit sizes only available during online pre-order.</em>
     </div>
 </div>
