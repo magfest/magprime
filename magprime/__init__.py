@@ -47,6 +47,11 @@ class Attendee:
         if not self.extra_donation:
             self.extra_donation = 0
 
+    @validation.Attendee
+    def only_positive_donation(self):
+        if self.extra_donation and self.extra_donation < 0:
+            return "You cannot donate negative money."
+
     @property
     def addons(self):
         return ['Extra donation of ${}'.format(self.extra_donation)] if self.extra_donation else []
