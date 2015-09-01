@@ -7,6 +7,10 @@
         } else {
             $('#tshirt_warning').hide();
         }
+        $("input:radio[name='amount_extra'][value=40]").parents('.btn').append($('#guitar_keychain'));
+        if ($("input:radio[name='amount_extra'][value=250]")) {
+            $("input:radio[name='amount_extra'][value=250]").parents('.btn').append($('#canvas_print'));
+        }
     });
 </script>
 
@@ -37,4 +41,12 @@
     <div class="help-block col-sm-6 col-sm-offset-2">
         <em>Slim fit sizes only available during online pre-order.</em>
     </div>
+</div>
+
+<div id="guitar_keychain">
+    (<a href="http://magfest.org/sites/default/files/keychainsample.png" target="_blank">art preview</a>)
+</div>
+
+<div id="canvas_print">
+    (<a href="http://magfest.org/sites/default/files/canvassample.png" target="_blank">art preview</a>)
 </div>
