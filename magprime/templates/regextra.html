@@ -1,6 +1,7 @@
 <script type="text/javascript">
     $(function () {
         $('#extra_donation').insertAfter($.field('amount_extra').parents('.form-group'));
+        {% if c.PAGE_PATH != '/registration/form' %}
         $.field('amount_extra').parents('.form-group').append($('#tax_exempt'));
         if ($.field('shirt')) {
             $.field('shirt').parents('.form-group').append($('#tshirt_warning'));
@@ -21,6 +22,7 @@
         if ($(".badge-type-selector")) {
             $(".badge-type-selector").parents('.form-group').hide();
         }
+        {% endif %}
     });
 </script>
 
@@ -34,13 +36,15 @@
                 <span class="input-group-addon">.00</span>
             </div>
         </div>
+        {% if c.PAGE_PATH != '/registration/form' %}
         <p class="help-block col-sm-6 col-sm-offset-2">
             MAGFest inc is a 501(c)(3) charitable organization, and additional donations may be tax deductible.
             Your employer may also have a charitable donation matching program. E-mail contact@magfest.org for details.
         </p>
+        {% endif %}
     </div>
 </div>
-
+{% if c.PAGE_PATH != '/registration/form' %}
 <div id="tax_exempt">
     <div class="help-block col-sm-6 col-sm-offset-2">
         Badge tier upgrades may be partially tax deductible. E-mail contact@magfest.org for details.
@@ -68,3 +72,4 @@
 <div id="season_popup">
     ({% popup_link "../static_views/seasonPasses.html" "What's this?" %})
 </div>
+{% endif %}
