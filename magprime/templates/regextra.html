@@ -9,9 +9,14 @@
         }
         $("input:radio[name='amount_extra'][value=40]").parents('.btn').append($('#guitar_keychain'));
         $('#guitar_keychain').on('click', function(e) { e.stopPropagation(); })
-        if ($("input:radio[name='amount_extra'][value=250]")) {
+        if ($("input:radio[name='amount_extra'][value={{ c.SUPPORTER_LEVEL }}]")) {
             $("input:radio[name='amount_extra'][value=250]").parents('.btn').append($('#canvas_print'));
+            $("input:radio[name='amount_extra'][value=80]").parents('.btn').append($('#supporter_popup'));
+            $("input:radio[name='amount_extra'][value=160]").parents('.btn').append($('#season_popup'));
+
             $('#canvas_print').on('click', function(e) { e.stopPropagation(); })
+            $('#supporter_popup').on('click', function(e) { e.stopPropagation(); })
+            $('#season_popup').on('click', function(e) { e.stopPropagation(); })
         }
         if ($(".badge-type-selector")) {
             $(".badge-type-selector").parents('.form-group').hide();
@@ -54,4 +59,12 @@
 
 <div id="canvas_print">
     (<a href="http://magfest.org/sites/default/files/canvassample.png" target="_blank">art preview</a>)
+</div>
+
+<div id="supporter_popup">
+    ({% popup_link "../static_views/supporters.html" "What's this?" %})
+</div>
+
+<div id="season_popup">
+    ({% popup_link "../static_views/seasonPasses.html" "What's this?" %})
 </div>
