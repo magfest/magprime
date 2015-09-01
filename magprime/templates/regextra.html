@@ -13,6 +13,9 @@
             $("input:radio[name='amount_extra'][value=250]").parents('.btn').append($('#canvas_print'));
             $('#canvas_print').on('click', function(e) { e.stopPropagation(); })
         }
+        if ($(".badge-type-selector")) {
+            $(".badge-type-selector").parents('.form-group').hide();
+        }
     });
 </script>
 
