@@ -8,8 +8,10 @@
             $('#tshirt_warning').hide();
         }
         $("input:radio[name='amount_extra'][value=40]").parents('.btn').append($('#guitar_keychain'));
+        $('#guitar_keychain').on('click', function(e) { e.stopPropagation(); })
         if ($("input:radio[name='amount_extra'][value=250]")) {
             $("input:radio[name='amount_extra'][value=250]").parents('.btn').append($('#canvas_print'));
+            $('#canvas_print').on('click', function(e) { e.stopPropagation(); })
         }
     });
 </script>
