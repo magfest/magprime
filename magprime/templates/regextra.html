@@ -9,15 +9,15 @@
             $('#tshirt_warning').hide();
         }
         $("input:radio[name='amount_extra'][value=40]").parents('.btn').append($('#guitar_keychain'));
-        $('#guitar_keychain').on('click', function(e) { e.stopPropagation(); })
+        $('#guitar_keychain').on('click', function(e) { e.stopPropagation(); });
         if ($("input:radio[name='amount_extra'][value={{ c.SUPPORTER_LEVEL }}]")) {
             $("input:radio[name='amount_extra'][value=250]").parents('.btn').append($('#canvas_print'));
             $("input:radio[name='amount_extra'][value=80]").parents('.btn').append($('#supporter_popup'));
             $("input:radio[name='amount_extra'][value=160]").parents('.btn').append($('#season_popup'));
 
-            $('#canvas_print').on('click', function(e) { e.stopPropagation(); })
-            $('#supporter_popup').on('click', function(e) { e.stopPropagation(); })
-            $('#season_popup').on('click', function(e) { e.stopPropagation(); })
+            $('#canvas_print').on('click', function(e) { e.stopPropagation(); });
+            $('#supporter_popup').on('click', function(e) { e.stopPropagation(); });
+            $('#season_popup').on('click', function(e) { e.stopPropagation(); });
         }
         if ($(".badge-type-selector")) {
             $(".badge-type-selector").parents('.form-group').hide();
@@ -37,39 +37,39 @@
             </div>
         </div>
         {% if c.PAGE_PATH != '/registration/form' %}
-        <p class="help-block col-sm-6 col-sm-offset-2">
-            MAGFest inc is a 501(c)(3) charitable organization, and additional donations may be tax deductible.
-            Your employer may also have a charitable donation matching program. E-mail contact@magfest.org for details.
-        </p>
+            <p class="help-block col-sm-6 col-sm-offset-2">
+                MAGFest inc is a 501(c)(3) charitable organization, and additional donations may be tax deductible.
+                Your employer may also have a charitable donation matching program. E-mail contact@magfest.org for details.
+            </p>
         {% endif %}
     </div>
 </div>
 {% if c.PAGE_PATH != '/registration/form' %}
-<div id="tax_exempt">
-    <div class="help-block col-sm-6 col-sm-offset-2">
-        Badge tier upgrades may be partially tax deductible. E-mail contact@magfest.org for details.
+    <div id="tax_exempt">
+        <div class="help-block col-sm-6 col-sm-offset-2">
+            Badge tier upgrades may be partially tax deductible. E-mail contact@magfest.org for details.
+        </div>
     </div>
-</div>
 
-<div id="tshirt_warning">
-    <div class="help-block col-sm-6 col-sm-offset-2">
-        <em>Slim fit sizes only available during online pre-order.</em>
+    <div id="tshirt_warning">
+        <div class="help-block col-sm-6 col-sm-offset-2">
+            <em>Slim fit sizes only available during online pre-order.</em>
+        </div>
     </div>
-</div>
 
-<div id="guitar_keychain">
-    (<a href="http://magfest.org/sites/default/files/keychainsample.png" target="_blank">art preview</a>)
-</div>
+    <span id="guitar_keychain">
+        ({% popup_link "http://magfest.org/sites/default/files/keychainsample.png" "Art Preview" %})
+    </span>
 
-<div id="canvas_print">
-    (<a href="http://magfest.org/sites/default/files/canvassample.png" target="_blank">art preview</a>)
-</div>
+    <span id="canvas_print">
+        ({% popup_link "http://magfest.org/sites/default/files/canvassample.png" "Art Preview" %})
+    </span>
 
-<div id="supporter_popup">
-    ({% popup_link "../static_views/supporters.html" "What's this?" %})
-</div>
+    <span id="supporter_popup">
+        ({% popup_link "../static_views/supporters.html" "What's included?" %})
+    </span>
 
-<div id="season_popup">
-    ({% popup_link "../static_views/seasonPasses.html" "What's this?" %})
-</div>
+    <span id="season_popup">
+        ({% popup_link "../static_views/seasonPasses.html" "What's included?" %})
+    </span>
 {% endif %}
