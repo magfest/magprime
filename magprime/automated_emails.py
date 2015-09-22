@@ -43,7 +43,7 @@ StopsEmail('MAGFest Chipspace shifts', 'chipspace_trusted.txt',
 StopsEmail('MAGFest Chipspace', 'chipspace_untrusted.txt',
            lambda a: a.has_shifts_in(c.CHIPSPACE) and not a.trusted)
 
-StopsEmail('MAGFest Staff Suite rules', 'food_volunteers.txt',
+StopsEmail('MAGFest Staff Suite rules',  'food_volunteers.txt',
            lambda a: a.has_shifts_in(c.FOOD_PREP) and not a.trusted)
 
 StopsEmail('MAGFest message from Chef', 'food_trusted_staffers.txt',
