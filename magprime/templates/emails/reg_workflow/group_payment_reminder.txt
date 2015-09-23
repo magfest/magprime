@@ -2,8 +2,8 @@
 
 Our records indicate that your group ({{ group.name }}) currently has an outstanding balance of ${{ group.amount_unpaid }}. You must pay for the remaining balance on your group to ensure that your group members can pick up their badges at the fest.
 
-You can pay the remaining balance on your group using this link: {{ URL_BASE }}/preregistration/group_members?id={{ group.id }}
+You can pay the remaining balance on your group using this link: {{ c.URL_BASE }}/preregistration/group_members?id={{ group.id }}
 
-The latest that you can pay for your group is {{ UBER_TAKEDOWN|datetime }}.
+The latest that you can pay for your group is {{ c.UBER_TAKEDOWN|datetime }}.
 
-{{ REGDESK_EMAIL_SIGNATURE }}
+{{ c.REGDESK_EMAIL_SIGNATURE }}

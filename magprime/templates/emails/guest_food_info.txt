@@ -1,5 +1,5 @@
 {{ attendee.first_name }},
-Thanks again for coming out to {{ EVENT_NAME }} as a Guest! As we've previously mentioned, we feed our guests three meals per day during {{ EVENT_NAME }}, so you can drop by the Hospitality Suite in Room 6176 for food during any of the following times:
+Thanks again for coming out to {{ c.EVENT_NAME }} as a Guest! As we've previously mentioned, we feed our guests three meals per day during {{ c.EVENT_NAME }}, so you can drop by the Hospitality Suite in Room 6176 for food during any of the following times:
 
 Breakfast: 7:00 am to 11:00 am
 Lunch: 12:00 pm to 4:00 pm
@@ -11,4 +11,4 @@ The first meal served will be breakfast on Friday morning, and the suite will re
 Meal schedule, menu, and suite rules can all be found at http://magsuite.jennytru.com/.
 
 Please let us know if you have any questions.
-{{ GUEST_EMAIL_SIGNATURE }}
+{{ c.GUEST_EMAIL_SIGNATURE }}
