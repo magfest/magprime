@@ -23,7 +23,7 @@ GuestEmail('MAGFest hospitality suite information', 'guest_food_info.txt')
 StopsEmail('MAGFest Volunteer Food', 'volunteer_food_info.txt',
            lambda a: days_before(7, c.UBER_TAKEDOWN))
 
-StopsEmail('MAGFest Food Prep Volunteering', 'food_interest.txt',
+StopsEmail('MAGFest Staff Suite Volunteering', 'food_interest.txt',
            lambda a: a.requested(c.FOOD_PREP) and not a.assigned_depts)
 
 AutomatedEmail(Attendee, 'Important MAGFest PC Gaming Room Information! *PLEASE READ*', 'lan_room.html',
@@ -43,7 +43,7 @@ StopsEmail('MAGFest Chipspace shifts', 'chipspace_trusted.txt',
 StopsEmail('MAGFest Chipspace', 'chipspace_untrusted.txt',
            lambda a: a.has_shifts_in(c.CHIPSPACE) and not a.trusted)
 
-StopsEmail('MAGFest food prep rules', 'food_volunteers.txt',
+StopsEmail('MAGFest Staff Suite rules', 'food_volunteers.txt',
            lambda a: a.has_shifts_in(c.FOOD_PREP) and not a.trusted)
 
 StopsEmail('MAGFest message from Chef', 'food_trusted_staffers.txt',
