@@ -1,6 +1,6 @@
 {{ attendee.first_name }},
 
-Thanks again for volunteering at {{ EVENT_NAME }} this year. We feed our volunteers three meals per day during {{ EVENT_NAME }}, so you can drop by the Hospitality Suite in Room 6176 for food at anytime during {{ EVENT_NAME }} for a snack or drink. Meals will be served at the following times:
+Thanks again for volunteering at {{ c.EVENT_NAME }} this year. We feed our volunteers three meals per day during {{ c.EVENT_NAME }}, so you can drop by the Hospitality Suite in Room 6176 for food at anytime during {{ c.EVENT_NAME }} for a snack or drink. Meals will be served at the following times:
 
 Breakfast: 7:00 am to 11:00 am
 Lunch: 12:00 pm to 4:00 pm
