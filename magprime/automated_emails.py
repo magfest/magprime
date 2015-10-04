@@ -51,3 +51,6 @@ StopsEmail('MAGFest message from Chef', 'food_trusted_staffers.txt',
 
 AutomatedEmail(Attendee, 'Want to help run MAGFest poker tournaments?', 'poker.txt',
                lambda a: a.has_shifts_in(c.TABLETOP), sender='tabletop@magfest.org')
+
+StopsEmail('MAGFest Staff Support', 'staff_support.txt',
+           lambda a: a.assigned_to(c.STAFF_SUPPORT) and not a.trusted)
