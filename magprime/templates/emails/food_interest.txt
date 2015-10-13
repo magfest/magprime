@@ -1,20 +1,20 @@
 Hello {{ attendee.first_name }}!
 
-<br/><br/>Thank you for not only signing up to volunteer at {{ c.EVENT_NAME }}, but to volunteer with the Staff Suite. If you are confused, then allow me to explain. When you signed up to volunteer, you either checked any or specifically checked “Staff Suite” as a requested department to work in.
+Thank you for not only signing up to volunteer at {{ c.EVENT_NAME }}, but to volunteer with the Staff Suite. If you are confused, then allow me to explain. When you signed up to volunteer, you either checked any or specifically checked “Staff Suite” as a requested department to work in.
 
-<br/><br/>If you are not familiar with the Staff Suite, it’s part of the perks of volunteering. We are the ones who cook and provide the 3 meals a day, as well as snacks and drinks. Tasks could include badge checking, serving food, preparing and cooking food, cleaning and washing dishes, maintaining supplies, and other miscellaneous jobs as needed. We are always on the lookout for volunteers who are willing to put in the time and effort and make a significant contribution to this department and MAGFest as a whole.
+If you are not familiar with the Staff Suite, it’s part of the perks of volunteering. We are the ones who cook and provide the 3 meals a day, as well as snacks and drinks. Tasks could include badge checking, serving food, preparing and cooking food, cleaning and washing dishes, maintaining supplies, and other miscellaneous jobs as needed. We are always on the lookout for volunteers who are willing to put in the time and effort and make a significant contribution to this department and MAGFest as a whole.
 
-<br/><br/>If you are still interested in working with us, then GREAT! Please fill out the form here http://goo.gl/forms/SkRL9depRC. Please note that lack of experience will not exclude you from joining us. Your answers are only for informational purposes.
+If you are still interested in working with us, then GREAT! Please fill out the form here http://goo.gl/forms/SkRL9depRC. Please note that lack of experience will not exclude you from joining us. Your answers are only for informational purposes.
 
-<br/><br/>If you are no longer interested in working with us, please let us know as soon as possible, and we will get that corrected within the system. This will mean that you will not be able to see Staff Suite shifts to sign up for.
+If you are no longer interested in working with us, please let us know as soon as possible, and we will get that corrected within the system. This will mean that you will not be able to see Staff Suite shifts to sign up for.
 
-<br/><br/>Otherwise, we look forward to working with you, if you have any questions please let us know!
+Otherwise, we look forward to working with you, if you have any questions please let us know!
 
-<br/><br/>Please email jennifer.truss@gmail.com with your reply. Any questions, just let us know!
+Please email jennifer.truss@gmail.com with your reply. Any questions, just let us know!
 
-<br/><br/>Thanks!
+Thanks!
 
-<br/><br/>MAGFest Staff Suite
+MAGFest Staff Suite
 chefs@magfest.org
 
-<br/><br/>http://magfest.org
+http://magfest.org
