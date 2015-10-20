@@ -38,19 +38,19 @@ StopsEmail('MAGFest Chipspace volunteering', 'chipspace.txt',
            lambda a: (a.requested(c.JAMSPACE) or a.assigned_to(c.JAMSPACE)) and not a.assigned_to(c.CHIPSPACE))
 
 StopsEmail('MAGFest Chipspace shifts', 'chipspace_trusted.txt',
-           lambda a: a.assigned_to(c.CHIPSPACE) and a.trusted)
+           lambda a: a.assigned_and_trusted_in(c.CHIPSPACE))
 
 StopsEmail('MAGFest Chipspace', 'chipspace_untrusted.txt',
-           lambda a: a.has_shifts_in(c.CHIPSPACE) and not a.trusted)
+           lambda a: a.has_shifts_in(c.CHIPSPACE) and not a.trusted_in(c.CHIPSPACE))
 
 StopsEmail('MAGFest Staff Suite rules', 'food_volunteers.txt',
-           lambda a: a.has_shifts_in(c.FOOD_PREP) and not a.trusted)
+           lambda a: a.has_shifts_in(c.FOOD_PREP) and not a.trusted_in(c.FOOD_PREP))
 
 StopsEmail('MAGFest message from Chef', 'food_trusted_staffers.txt',
-           lambda a: a.has_shifts_in(c.FOOD_PREP) and a.trusted)
+           lambda a: a.has_shifts_in(c.FOOD_PREP) and a.trusted_in(c.FOOD_PREP))
 
 AutomatedEmail(Attendee, 'Want to help run MAGFest poker tournaments?', 'poker.txt',
                lambda a: a.has_shifts_in(c.TABLETOP), sender='tabletop@magfest.org')
 
 StopsEmail('MAGFest Staff Support', 'staff_support.txt',
-           lambda a: a.assigned_to(c.STAFF_SUPPORT) and not a.trusted)
+           lambda a: a.assigned_to(c.STAFF_SUPPORT) and not a.trusted_in(c.STAFF_SUPPORT))
