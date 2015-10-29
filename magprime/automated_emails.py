@@ -56,3 +56,6 @@ AutomatedEmail(Attendee, 'Want to help run MAGFest poker tournaments?', 'poker.t
 
 StopsEmail('MAGFest Staff Support', 'staff_support.txt',
            lambda a: a.assigned_to(c.STAFF_SUPPORT) and not a.trusted)
+
+MarketplaceEmail('Your MAGFest Marketplace Application', 'marketplace_delay.txt',
+                 lambda g: g.status == c.UNAPPROVED and g.registered < datetime(2015, 10, 29, tzinfo=c.EVENT_TIMEZONE))
