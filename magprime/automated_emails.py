@@ -17,40 +17,42 @@ for _event in SeasonEvent.instances.values():
 
 AutomatedEmail(Attendee, 'MAGFest schedule, maps, and other FAQs', 'precon_faqs.html', lambda a: days_before(7, c.EPOCH))
 
-GuestEmail('MAGFest food for guests', 'guest_food_restrictions.txt')
-GuestEmail('MAGFest hospitality suite information', 'guest_food_info.txt')
+AutomatedEmail(Attendee, 'MAGFest food for guests', 'guest_food_restrictions.txt',
+               lambda a: a.badge_type == c.GUEST_BADGE, sender='MAGFest Staff Suite <chefs@magfest.org>')
+AutomatedEmail(Attendee, 'MAGFest hospitality suite information', 'guest_food_info.txt',
+               lambda a: a.badge_type == c.GUEST_BADGE, sender='MAGFest Staff Suite <chefs@magfest.org>')
 
-StopsEmail('MAGFest Volunteer Food', 'volunteer_food_info.txt',
-           lambda a: days_before(7, c.UBER_TAKEDOWN))
+AutomatedEmail(Attendee, 'MAGFest Volunteer Food', 'volunteer_food_info.txt',
+           lambda a: a.staffing and days_before(7, c.UBER_TAKEDOWN), sender='MAGFest Staff Suite <chefs@magfest.org>')
 
-StopsEmail('MAGFest Staff Suite Volunteering', 'food_interest.txt',
-           lambda a: a.requested(c.FOOD_PREP) and not a.assigned_depts)
+AutomatedEmail(Attendee, 'MAGFest Staff Suite Volunteering', 'food_interest.txt',
+           lambda a: a.requested(c.FOOD_PREP) and not a.assigned_depts, sender='MAGFest Staff Suite <chefs@magfest.org>')
 
 AutomatedEmail(Attendee, 'Important MAGFest PC Gaming Room Information! *PLEASE READ*', 'lan_room.html',
-               lambda a: LAN in a.interests_ints,
+               lambda a: c.LAN in a.interests_ints,
                needs_approval=True,
-               sender='lan@magfest.org')
+               sender='MAGFest LAN <lan@magfest.org>')
 
-StopsEmail('MAGFest Tech Ops volunteering', 'techops.txt',
-           lambda a: a.requested(c.TECH_OPS) and not a.assigned_to(c.TECH_OPS))
+AutomatedEmail(Attendee, 'MAGFest Tech Ops volunteering', 'techops.txt',
+           lambda a: a.staffing and a.requested(c.TECH_OPS) and not a.assigned_to(c.TECH_OPS), sender='MAGFest TechOps <techops-heads@magfest.org>')
 
-StopsEmail('MAGFest Chipspace volunteering', 'chipspace.txt',
-           lambda a: (a.requested(c.JAMSPACE) or a.assigned_to(c.JAMSPACE)) and not a.assigned_to(c.CHIPSPACE))
+AutomatedEmail(Attendee, 'MAGFest Chipspace volunteering', 'chipspace.txt',
+           lambda a: a.staffing and (a.requested(c.JAMSPACE) or a.assigned_to(c.JAMSPACE)) and not a.assigned_to(c.CHIPSPACE), sender='MAGFest ChipSpace <chipspace@magfest.org>')
 
 StopsEmail('MAGFest Chipspace shifts', 'chipspace_trusted.txt',
-           lambda a: a.assigned_and_trusted_in(c.CHIPSPACE))
+           lambda a: a.assigned_and_trusted_in(c.CHIPSPACE), sender='MAGFest ChipSpace <chipspace@magfest.org>')
 
 StopsEmail('MAGFest Chipspace', 'chipspace_untrusted.txt',
-           lambda a: a.has_shifts_in(c.CHIPSPACE) and not a.trusted_in(c.CHIPSPACE))
+           lambda a: a.has_shifts_in(c.CHIPSPACE) and not a.trusted_in(c.CHIPSPACE), sender='MAGFest ChipSpace <chipspace@magfest.org>')
 
 StopsEmail('MAGFest Staff Suite rules', 'food_volunteers.txt',
-           lambda a: a.has_shifts_in(c.FOOD_PREP) and not a.trusted_in(c.FOOD_PREP))
+           lambda a: a.has_shifts_in(c.FOOD_PREP) and not a.trusted_in(c.FOOD_PREP), sender='MAGFest Staff Suite <chefs@magfest.org>')
 
 StopsEmail('MAGFest message from Chef', 'food_trusted_staffers.txt',
-           lambda a: a.has_shifts_in(c.FOOD_PREP) and a.trusted_in(c.FOOD_PREP))
+           lambda a: a.has_shifts_in(c.FOOD_PREP) and a.trusted_in(c.FOOD_PREP), sender='MAGFest Staff Suite <chefs@magfest.org>')
 
 AutomatedEmail(Attendee, 'Want to help run MAGFest poker tournaments?', 'poker.txt',
-               lambda a: a.has_shifts_in(c.TABLETOP), sender='tabletop@magfest.org')
+               lambda a: a.has_shifts_in(c.TABLETOP), sender='MAGFest Tabletop <tabletop@magfest.org>')
 
 StopsEmail('MAGFest Staff Support', 'staff_support.txt',
            lambda a: a.assigned_to(c.STAFF_SUPPORT) and not a.trusted_in(c.STAFF_SUPPORT))

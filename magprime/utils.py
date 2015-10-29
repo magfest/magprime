@@ -1,5 +1,6 @@
 from magprime import *
 
+
 class SeasonEvent(Registry):
     instances = OrderedDict()
 
