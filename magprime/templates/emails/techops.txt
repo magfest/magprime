@@ -1,5 +1,11 @@
-{{ attendee.first_name }},
+Hey {{ attendee.first_name }}, thanks for offering to volunteer with the Tech Ops department for {{ c.EVENT_NAME }}!
 
-Thanks for offering to help out in the Tech Ops department at {{ c.EVENT_NAME }}.  Please tell us a little bit about your background so we can see if you would be a good fit for Tech Ops.  See https://docs.google.com/document/d/133w5OLTcVibPkq7rtlfrCd9-2koSmMHIDqeKNVQd6Sk/ for our technical requirements.
+Just to make sure you're where you want to be, TechOps handles the audio/visual gear of panels, operates the network at MAGFest events, and deploys a decent number of laptops for event use.
 
-{{ c.STOPS_EMAIL_SIGNATURE }}
+If you're wondering what we're looking for, we've got a rough document about what we're looking for in staffers: https://docs.google.com/document/d/133w5OLTcVibPkq7rtlfrCd9-2koSmMHIDqeKNVQd6Sk/
+
+We're always looking for people who have interest or experience in tech stuff, so don't be afraid to shoot us an email at techops-heads@magfest.org if you have any questions, or just to introduce yourself.
+
+We look forward to seeing you at an event soon (or sooner — we’ll have more gatherings scheduled to get ready for the next event!)
+
+-Tech Ops Department Heads
