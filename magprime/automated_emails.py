@@ -40,22 +40,22 @@ AutomatedEmail(Attendee, 'MAGFest Chipspace volunteering', 'chipspace.txt',
            lambda a: a.staffing and (a.requested(c.JAMSPACE) or a.assigned_to(c.JAMSPACE)) and not a.assigned_to(c.CHIPSPACE), sender='MAGFest ChipSpace <chipspace@magfest.org>')
 
 AutomatedEmail(Attendee, 'MAGFest Chipspace shifts', 'chipspace_trusted.txt',
-           lambda a: a.staffing and a.assigned_to(c.CHIPSPACE) and a.trusted, sender='MAGFest ChipSpace <chipspace@magfest.org>')
+           lambda a: a.staffing and a.assigned_to(c.CHIPSPACE) and a.trusted_in(c.CHIPSPACE), sender='MAGFest ChipSpace <chipspace@magfest.org>')
 
 AutomatedEmail(Attendee, 'MAGFest Chipspace', 'chipspace_untrusted.txt',
-           lambda a: a.staffing and a.has_shifts_in(c.CHIPSPACE) and not a.trusted, sender='MAGFest ChipSpace <chipspace@magfest.org>')
+           lambda a: a.staffing and a.has_shifts_in(c.CHIPSPACE) and not a.trusted_in(c.CHIPSPACE), sender='MAGFest ChipSpace <chipspace@magfest.org>')
 
 AutomatedEmail(Attendee, 'MAGFest Staff Suite rules', 'food_volunteers.txt',
-           lambda a: a.staffing and a.has_shifts_in(c.FOOD_PREP) and not a.trusted, sender='MAGFest Staff Suite <chefs@magfest.org>')
+           lambda a: a.staffing and a.has_shifts_in(c.FOOD_PREP) and not a.trusted_in(c.FOOD_PREP), sender='MAGFest Staff Suite <chefs@magfest.org>')
 
 AutomatedEmail(Attendee, 'MAGFest message from Chef', 'food_trusted_staffers.txt',
-           lambda a: a.staffing and a.has_shifts_in(c.FOOD_PREP) and a.trusted, sender='MAGFest Staff Suite <chefs@magfest.org>')
+           lambda a: a.staffing and a.has_shifts_in(c.FOOD_PREP) and a.trusted_in(c.FOOD_PREP), sender='MAGFest Staff Suite <chefs@magfest.org>')
 
 AutomatedEmail(Attendee, 'Want to help run MAGFest poker tournaments?', 'poker.txt',
                lambda a: a.has_shifts_in(c.TABLETOP), sender='MAGFest Tabletop <tabletop@magfest.org>')
 
 StopsEmail('MAGFest Staff Support', 'staff_support.txt',
-           lambda a: a.assigned_to(c.STAFF_SUPPORT) and not a.trusted)
+           lambda a: a.assigned_to(c.STAFF_SUPPORT) and not a.trusted_in(c.STAFF_SUPPORT))
 
 MarketplaceEmail('Your MAGFest Marketplace Application', 'marketplace_delay.txt',
                  lambda g: g.status == c.UNAPPROVED and g.registered < datetime(2015, 10, 29, tzinfo=c.EVENT_TIMEZONE))
