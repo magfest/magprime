@@ -1,14 +1,20 @@
 {{ attendee.first_name }},
 
-We're emailing you because you've expressed an interest in volunteering in Jamspace, and we could also use more help with Chipspace, which is basically Jamspace for chiptunes.  Since this position will potentially involve working with live sound gear, we'll need folk who can handle that responsibility.  To be more specific, we're looking for volunteers with some experience & basic knowledge of the following:
+Thank you for volunteering for {{ c.EVENT_NAME }}, and an even bigger thanks for your interest in Chipspace!  
+For general info about Chipspace, click: http://tinyurl.com/MAGChipspaceInfo. 
+Once you're done reading that, but before you go sign yourself up for shifts, which should be available around Dec. 1st. Here's some quick info on the different positions we have available: 
 
- - Stage/sound system setup (i.e. running cables, setting up the stage audio gear, etc.)
+  - General Helper: These are all purpose volunteers who are responsible for duties such as manning sign up tables, general crowd control, keeping time for the open mic, and running the occasional errand (i.e. important, but pretty straightforward stuff). Hours are weighted 1.0.
 
- - Operating a basic mixer (i.e. adjusting volume levels, preventing and eliminating feedback, managing a 3-5 channel mix, etc.)
+  - Merch Attendant: This position is weighted because it carries extra responsibilities. Merch Attendants check in & check out merch, track inventory, and handle artists' money. For a lot of artists, the money they make at our merch booth will be the most they sell all year. It's a busy place. Hours are weighted 1.5.
 
-Let us know if you have the above qualifications (or even more!).  If so, we'd love to work with you!
+  - Sound Technician: This is also a weighted position because it carries with it extra responsibilities as well as requiring a prerequisite set of skills. Sound Techs operate the mixer, run cables, act as stagehands, troubleshoot  audio gremlins, and work with artists with varying set ups. While we are willing to train on site if need be, we prefer volunteers filling this space to have at least some previous experience in live sound. Hours are weighted 1.5.
 
-Either way, see you at {{ c.EVENT_NAME }}!
+For more detailed information about any and all of these positions, please read our full "Chipspace Charter":
+http://tinyurl.com/MAGChipspaceCharter.
+
+As always, we're looking forward to working with you at Chipspace. See you at {{ c.EVENT_NAME }}!
 
 Brandon Hood,
-Chipspace Manager
+Chipspace General Manager
+presidenthoodie@magfest.org
