@@ -40,7 +40,7 @@ AutomatedEmail(Attendee, 'MAGFest Chipspace volunteering', 'chipspace.txt',
            lambda a: a.staffing and a.assigned_to(c.CHIPSPACE), sender='MAGFest ChipSpace <chipspace@magfest.org>')
 
 AutomatedEmail(Attendee, 'MAGFest Chipspace shifts', 'chipspace_trusted.txt',
-           lambda a: a.staffing and a.assigned_to(c.CHIPSPACE) and a.trusted, sender='MAGFest ChipSpace <chipspace@magfest.org>')
+           lambda a: a.staffing and a.has_shifts_in(c.CHIPSPACE) and a.trusted, sender='MAGFest ChipSpace <chipspace@magfest.org>')
 
 AutomatedEmail(Attendee, 'MAGFest Chipspace', 'chipspace_untrusted.txt',
            lambda a: a.staffing and a.has_shifts_in(c.CHIPSPACE) and not a.trusted, sender='MAGFest ChipSpace <chipspace@magfest.org>')
