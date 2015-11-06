@@ -26,7 +26,7 @@ AutomatedEmail(Attendee, 'MAGFest Volunteer Food', 'volunteer_food_info.txt',
            lambda a: a.staffing and days_before(7, c.UBER_TAKEDOWN), sender='MAGFest Staff Suite <chefs@magfest.org>')
 
 AutomatedEmail(Attendee, 'MAGFest Staff Suite Volunteering', 'food_interest.txt',
-           lambda a: a.requested(c.FOOD_PREP) and not a.assigned_depts, sender='MAGFest Staff Suite <chefs@magfest.org>')
+           lambda a: a.requested(c.FOOD_PREP) or a.assigned_to(c.Food_PREP), sender='MAGFest Staff Suite <chefs@magfest.org>')
 
 AutomatedEmail(Attendee, 'Important MAGFest PC Gaming Room Information! *PLEASE READ*', 'lan_room.html',
                lambda a: c.LAN in a.interests_ints,
