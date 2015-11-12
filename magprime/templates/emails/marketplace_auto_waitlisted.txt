@@ -1,0 +1,10 @@
+Hello {{ group.name }}!
+
+Thank you for your interest in MAGFest Marketplace. We've reviewed your application and, unfortunately,
+due to the high number of applicants this year, your marketplace application has been waitlisted.
+If a marketplace table slot becomes available, you will be notified and given the opportunity to accept
+that table. We'll be opening applications for the MAGFest 2017 Marketplace in summer 2017, so please try
+applying again in the future. Have a great evening!
+
+~ Danielle Pomfrey
+Marketplace Coordinator
