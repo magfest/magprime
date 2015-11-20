@@ -1,0 +1,34 @@
+My department needs cash and/or mpoints: {{ needs|yesno }}
+...but someone else is filling out this form: {{ defer|yesno }}
+
+Department head who will be making cash/MPoint decisions:
+{{ dept_head_name }}
+
+Email address of the department head who will be making cash/MPoint decisions:
+{{ dept_head_email }}
+
+CASH NEEDS:
+    My department needs cash: {{ needs_cash|yesno }}
+    Number of cash boxes: {{ cash_boxes }}
+    For each cash box:
+        Number of $1 Bills: {{ 1bills }}
+        Number of $5 Bills: {{ 5bills }}
+        Number of $10 Bills: {{ 10bills }}
+        Number of $20 Bills: {{ 20bills }}
+
+This department needs its cash/MPoints at this time in the morning:
+Thursday:
+    Opening: {{ thu_start_time }}
+    Closing: {{ thu_close_time }}
+Friday:
+    Opening: {{ fri_start_time }}
+    Closing: {{ fri_close_time }}
+Saturday:
+    Opening: {{ sat_start_time }}
+    Closing: {{ sat_close_time }}
+Sunday:
+    Opening: {{ sun_start_time }}
+    Closing: {{ sun_close_time }}
+
+{% if comments %}Other comments:
+{{ comments }}{% endif %}
