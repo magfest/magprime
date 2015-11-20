@@ -2,9 +2,9 @@
 {% block title %}Department Checklist - Tech Ops{% endblock %}
 {% block content %}
 
-<h2>Cash / MPoint Needs</h2>
+<h2>MPoint Needs</h2>
 
-<h3><a href="https://docs.google.com/spreadsheets/d/1v-jZ7NPIgpR0-wsfZFOTKJJbKDUrd-xVIgf0mTTbjtM/edit#gid=799868163">{{ c.EVENT_NAME_AND_YEAR }} Cash/MPoints Form</a></h3>
+<h3><a href="https://docs.google.com/spreadsheets/d/1v-jZ7NPIgpR0-wsfZFOTKJJbKDUrd-xVIgf0mTTbjtM/edit#gid=799868163">{{ c.EVENT_NAME_AND_YEAR }} MPoints Form</a></h3>
 
 <h2>Instructions</h2>
 <ol>
@@ -42,7 +42,7 @@
 {% csrf_token %}
 Once you've filled out the form above, please click the button below.<br/>
 <br/>
-<input type="submit" name="submitted" value="I Have Filled out the Cash/MPoints Form" />
+<input type="submit" name="submitted" value="I Have Filled out the MPoints Form" />
 </form>
 
 {% endblock %}
