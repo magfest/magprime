@@ -66,14 +66,8 @@ MarketplaceEmail('Your MAGFest Marketplace Application has been waitlisted', 'ma
 StopsEmail('MAGFest Dept Checklist Introduction', 'dept_checklist_intro.txt',
            lambda a: a.is_single_dept_head and a.admin_account)
 
-"""
-TODO: change the condition of this to be when:
-- can_spam == True
-- today's date < 3 days before the deadline in the email of Dec 31st 2015
-- attendee registered more than 3 days ago (wait to send them this email til 3 days after they have registered)
-- attendee paid or part of a paid group (but not part of an unpaid group, like a waitlisted dealer)
-"""
 AutomatedEmail(Attendee, 'Last Chance for MAGFest 2016 bonus swag!', 'attendee_swag_promo.html',
                lambda a: a.can_spam and
-                         a.paid == c.HAS_PAID and
-                         days_ago(3, a.registered))
+                         (a.paid == c.HAS_PAID or a.paid == c.NEED_NOT_PAY or (a.group and a.group.amount_paid)) and
+                         days_after(3, a.registered) and
+                         before(c.SUPPORTER_DEADLINE))
