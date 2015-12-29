@@ -65,3 +65,9 @@ MarketplaceEmail('Your MAGFest Marketplace Application has been waitlisted', 'ma
 
 StopsEmail('MAGFest Dept Checklist Introduction', 'dept_checklist_intro.txt',
            lambda a: a.is_single_dept_head and a.admin_account)
+
+AutomatedEmail(Attendee, 'Last Chance for MAGFest 2016 bonus swag!', 'attendee_swag_promo.html',
+               lambda a: a.can_spam and
+                         (a.paid == c.HAS_PAID or a.paid == c.NEED_NOT_PAY or (a.group and a.group.amount_paid)) and
+                         days_after(3, a.registered) and
+                         days_before(14, c.SUPPORTER_DEADLINE))
