@@ -70,4 +70,4 @@ AutomatedEmail(Attendee, 'Last Chance for MAGFest 2016 bonus swag!', 'attendee_s
                lambda a: a.can_spam and
                          (a.paid == c.HAS_PAID or a.paid == c.NEED_NOT_PAY or (a.group and a.group.amount_paid)) and
                          days_after(3, a.registered) and
-                         before(c.SUPPORTER_DEADLINE))
+                         days_before(14, c.SUPPORTER_DEADLINE))
