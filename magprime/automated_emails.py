@@ -76,7 +76,6 @@ AutomatedEmail(Attendee, 'Last Chance for MAGFest 2016 bonus swag!', 'attendee_s
 # who kicked in at the shirt level or above).	Should not be sent after the t-shirt
 # size deadline (a new deadline not yet recorded in uber).
 AutomatedEmail(Attendee, 'MAGFest 2016 t-shirt size confirmation', 'confirm_shirt_size.html',
-				lambda a: before(datetime(2016, 1, 16, tzinfo=c.EVENT_TIMEZONE) and
-						days_after(3, a.registered) and
-						a.gets_shirt))
-						
+               lambda a: before(datetime(2016, 1, 16, tzinfo=c.EVENT_TIMEZONE) and
+                         days_after(3, a.registered) and
+                         a.gets_shirt))
