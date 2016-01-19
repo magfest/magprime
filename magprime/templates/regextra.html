@@ -10,6 +10,7 @@
         }
         $("input:radio[name='amount_extra'][value=40]").parents('.btn').append($('#guitar_keychain'));
         $('#guitar_keychain').on('click', function(e) { e.stopPropagation(); });
+        {% if c.BEFORE_SUPPORTER_DEADLINE %}
         if ($("input:radio[name='amount_extra'][value={{ c.SUPPORTER_LEVEL }}]")) {
             $("input:radio[name='amount_extra'][value=250]").parents('.btn').append($('#canvas_print'));
             $("input:radio[name='amount_extra'][value=80]").parents('.btn').append($('#supporter_popup'));
@@ -19,6 +20,7 @@
             $('#supporter_popup').on('click', function(e) { e.stopPropagation(); });
             $('#season_popup').on('click', function(e) { e.stopPropagation(); });
         }
+        {% endif %}
         if ($(".badge-type-selector")) {
             $(".badge-type-selector").parents('.form-group').hide();
         }
@@ -61,6 +63,8 @@
         ({% popup_link "http://magfest.org/sites/default/files/keychainsample.png" "Art Preview" %})
     </span>
 
+{% if c.BEFORE_SUPPORTER_DEADLINE %}
+
     <span id="canvas_print">
         ({% popup_link "http://magfest.org/sites/default/files/canvassample.png" "Art Preview" %})
     </span>
@@ -72,4 +76,5 @@
     <span id="season_popup">
         ({% popup_link "../static_views/seasonPasses.html" "What's included?" %})
     </span>
+{% endif %}
 {% endif %}
