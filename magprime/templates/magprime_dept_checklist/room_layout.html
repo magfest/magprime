@@ -1,0 +1,16 @@
+{% extends "base-admin.html" %}
+{% block title %}Department Checklist - Functional Room Layout{% endblock %}
+{% block content %}
+
+<h2>Functional Room Layouy</h2>
+
+<h3><a href="https://docs.google.com/forms/d/1EddS-U3SKOYj7pe4gdCO2ZXm1faWmoOrr4kLoBEL63w/viewform/">{{ c.EVENT_NAME }} Room Setup Request</a></h3>
+
+<form method="post" action="room_setup">
+{% csrf_token %}
+Once you've filled out the form above, please click the button below.<br/>
+<br/>
+<input type="submit" name="submitted" value="I have filled out the Room Setup Form" />
+</form>
+
+{% endblock %}
