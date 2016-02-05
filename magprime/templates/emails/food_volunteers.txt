@@ -1,45 +1,31 @@
-{{ attendee.first_name }},
+Hello {{ attendee.first_name }},
 
-You're receiving this email because you've signed up to work in the {{ c.EVENT_NAME }} Food suite.  The chefs have asked us to send a list of rules, so please take the time to read over them.
+You're receiving this email because you've signed up to work in the {{ c.EVENT_NAME }} Staff Suite. Thank you!! And thank you for signing up for shifts. We still have a few more shifts if you need the hours. We can't wait to work with you. We just have a few things to share with you. Sorry for the long email. But this info is important for working in Staff Suite. To report for your shift, visit room 5211 on the 5th floor of the hotel. I promise, it's not shady. This is actually one of the rooms we work out of.
 
-1. The Chef's rule is law
-2. If you see a Chef moving with anything in their hands, do not move. freeze, they will move around you. 
-3. If you cause an injury, no matter how minor, report it.
-4. DO NOT EVER TOUCH A KNIFE UNLESS TOLD TO.
-5. DO NOT EVER, EVER, EVER TOUCH A CHEF'S KNIVES /COFFEE /FOOD/BOOZE
-6. Do not bring or cause drama
-7. Do not expect the chefs to cover for you. YOU are responsible for the stupid shit that YOU do/said and YOU will have to deal with the consequences on YOUR own.
-8. Do not be stupid
-9. Do not whine.
-10. Don't be a dick.
-11. If you are on anything harder than redbull, and show up to work, you will be kicked out and all your remaining shifts cleared.
-12. It is the job of the chefs to be innovative and creative. it is your job to do what you are told.
-13. The only way to impress us and EARN more trust and responsibilities is to do the job you are given.
-14. It is the job of the Chefs to deal with issues, it is your job to tell them about them.
-15. If you see someone who does not look like he belongs, tell the chefs, do not handle it yourself.
-16. If you don't know, ALWAYS ASK.
-17. It is the Chef's job to instruct, it is yours to obey.
-18. There is no shame in being wrong, only in staying wrong.
-19. If a Chef tells you to do something, do it. Failure to comply will get you sent out and your shift negated.
-20. You do not have the authority to make any decision involving who eats or when. that is the prerogative of the Chefs, do not attempt to take that authority on your shoulders.
-21. There are going to be people who are placed over you who are also volunteers, if they are placed above you, you will obey them.
-22. You will respect those placed over you and you will be respected by those who answer to you.
-23. Failure to follow the rules, will result in you being dismissed.
-24. Always clean up after yourself.
-25. A sense of humor is crucial
-26. If you piss off the chefs, you will do grunt work without hours.
-27. DON'T EVER LIE TO A CHEF
-28. Don't ever go behind chef's back.
-29. You are here to work. If found sleeping on the job, you will not receive those hours.
-30. If there is a chance that you will not be able to work your shift, let the chefs know immediately. Also, go to STOPS and drop the shift so that someone else can pick it up.
-31. You are not Chefling’s parents. Do NOT wander off with him or feed him or discipline him without permission.
-32. If you are asked to watch and care for Chefling, you are highly trusted. Do not betray that trust and remember you are responsible for him. Do not ask someone else to watch him or you will have to answer to not only Chef, but Mrs. Chef. 
-33. WATCH OUT FOR CHEFLING. He’s walking now and has teeth. Remove sharp objects and small objects that can fit inside a toilet paper roll to an unreachable place. At least 4 feet high.
-34. This is not an exclusive list. You will be held accountable and punished accordingly for any stupid shit you may attempt that we have not yet thought of.
-35. Any attempts to drag the Staff Suite or any of it’s staffers/volunteers into any conflict, argument, disagreement, or pissing contest will be dealt with quickly and accordingly.
-36. DO NOT ENTER THE CHEFS PRIVATE SLEEPING ROOMS. Security WILL be notified if unauthorized individuals are found in these rooms.
-37. Many of these rules are in place due to previous incidents and/or individuals. Don’t be the reason new rules have to be established.
+1. You will need to bring a hat. The type of hat does not matter as long as it covers your head, does not get in yours or anyone else's way, isn't constantly falling off, and does not get in or affect the food. If you don't have a hat or forget to bring one, we have fabulous lunch lady style bouffants. Either way, you're hair will have to be covered to be on shift.
 
-Please let us know if you have any questions.
+2. All hair that goes past the chin needs to be tied back and contained. For any luxuriously long beards, we will very likely ask you to wear a beard cover. Don't worry, it matches the lunch lady bouffant. ;)
 
-{{ c.STOPS_EMAIL_SIGNATURE }}
+3. For food safety purposes, we ask that all jewelry on hands and wrists be removed. It's recommended to leave these items in your room in a secure place. Medical alert bracelets are excused from this, but it is recommended to place it on a necklace or your lanyard while serving or prepping food. Sleeves also need to be rolled to above your elbow.
+
+4. Let's see aprons or hands first. Hands. Everyone is required to wash their hands regularly. You are also required to wear gloves. We have vinyl powder-free gloves in Small, Medium, Large, and Extra-Large available. You will also need change gloves regularly. If you touch any non-food item with gloves, change them out. If you have been handling peanut butter or ham, change them out before touching anything else. Do not save gloves to put back on later. Don't worry, we have plenty of gloves.
+
+5. Every volunteer will be given an apron at the beginning of their shift. At the end of your shift, please return the apron. This is also a good time to get your shift sheet signed. There will be a letter on your apron. Because a lot of us are new to each other, it makes it easier to identify each person by saying "Minion A, get some more turkey." There is a whole story behind this. Ask us, we'll definitely tell it.
+
+6. There are additional levels you will see. Anyone in a black apron is a trusted staffer. They have worked in the Staff Suite previously and have gained the trust of the Department Heads to help out new volunteers and make sure everything runs smoothly in the absence of a manager. Managers will be in Chef Coats and have either a Manager ribbon or a Department Head ribbon on their badge. You can ask them anything. They know what the game plan is and are in charge. Of course, Department Heads (pink ribbon) have the final say. This year there are 3. Louis aka Chef, David aka English, and Jenny aka Jenny. Managers are Connie aka Mom, Heather aka Heather, Niko aka Niko, Adam aka Pie Guy (that's a good story too), and Andrew aka Joo or Cake Monster. 
+
+7. Report ALL injuries, incidents, and accidents. It doesn't matter how small or if you think it's insignificant, we need to know everything. This includes anyone that should not be there. Do not try to solve issues on your own. Tell a member of management and let them handle it. (The guys and gals in the chef coats.)
+
+8. When on shift, you are expected to be sober and awake. Intoxication during your shift will result in immediate dismissal and banning from serving on future shifts. There are so many things that can wrong around food if you are drunk. 
+
+9. Can you cosplay on shift? Sure! But the other rules still apply, hair tied back and top covered (yes, wigs too), sleeves rolled up, and nothing that gets in anyone's way or has the potential to get in or affect the food. You will have an apron to cover the front. MAGFest and it's Staff Suite cannot be held accountable for any damages that may occur.
+
+If you have any questions. Just let us know. Don't forget your hat, unless you want to wear the stylish bouffant. :-D
+
+Also, keep a look out for another email or the website : http://staffsuite.magfe.st/. Information on the different roles will be going up prior to MAGFest. 
+
+Woooo! MAGFest!! See you all soon!!
+
+MAGFest Staff Suite
+chefs@magfest.org
+http://staffsuite.magfe.st/
