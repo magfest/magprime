@@ -1,11 +1,11 @@
 from magprime import *
 
-AutomatedEmail.extra_models['SeasonPass'] = lambda session: session.season_passes()
+AutomatedEmail.extra_models[SeasonPassTicket] = lambda session: session.season_passes()
 
 
 class SeasonSupporterEmail(AutomatedEmail):
     def __init__(self, event):
-        AutomatedEmail.__init__(self, 'SeasonPass',
+        AutomatedEmail.__init__(self, SeasonPassTicket,
                                 subject='Claim your {} tickets with your MAGFest Season Pass'.format(event.name),
                                 template='season_supporter_event_invite.txt',
                                 filter=lambda a: before(event.deadline),
