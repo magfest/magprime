@@ -1,0 +1,9 @@
+{{ attendee.first_name }},
+
+I am sorry to inform you that only a few spaces opened up for the waitlist, and unfortunately your group did not make it into the MAGFest Marketplace this year, which is why your application is now being declined.  Please try again next year.
+
+We hope you'll still want to come to MAGFest, so if you're interested then we've set it up so that you can pay the original preregistration group price (a $35 discount on the current price) if you'd still like to attend.  You can use the following link to do this: {{ c.URL_BASE }}/preregistration/confirm?id={{ attendee.id }}
+
+If you can't make it, then you don't need to do anything - if you haven't claimed this badge using the above link by 11:59pm on Tuesday, February 16th then we'll assume you're not able to come this year and delete the registration.  Again, I am very sorry that you did not make it into the Marketplace this year.
+
+{{ c.MARKETPLACE_EMAIL_SIGNATURE }}

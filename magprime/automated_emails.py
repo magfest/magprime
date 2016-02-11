@@ -71,3 +71,7 @@ AutomatedEmail(Attendee, 'Last Chance for MAGFest 2016 bonus swag!', 'attendee_s
                          (a.paid == c.HAS_PAID or a.paid == c.NEED_NOT_PAY or (a.group and a.group.amount_paid)) and
                          days_after(3, a.registered) and
                          days_before(14, c.SUPPORTER_DEADLINE))
+
+AutomatedEmail(Attendee, 'MAGFest Dealer waitlist has been exhausted', 'dealer_waitlist_exhausted.txt',
+               lambda a: 'automatically converted to unpaid discounted badge from a dealer application' in a.admin_notes,
+               sender=c.MARKETPLACE_EMAIL)
