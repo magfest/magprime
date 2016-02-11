@@ -1,11 +1,11 @@
 from magprime import *
 
-AutomatedEmail.extra_models['SeasonPass'] = lambda session: session.season_passes()
+AutomatedEmail.extra_models[SeasonPassTicket] = lambda session: session.season_passes()
 
 
 class SeasonSupporterEmail(AutomatedEmail):
     def __init__(self, event):
-        AutomatedEmail.__init__(self, 'SeasonPass',
+        AutomatedEmail.__init__(self, SeasonPassTicket,
                                 subject='Claim your {} tickets with your MAGFest Season Pass'.format(event.name),
                                 template='season_supporter_event_invite.txt',
                                 filter=lambda a: before(event.deadline),
@@ -71,6 +71,14 @@ AutomatedEmail(Attendee, 'Last Chance for MAGFest 2016 bonus swag!', 'attendee_s
                          (a.paid == c.HAS_PAID or a.paid == c.NEED_NOT_PAY or (a.group and a.group.amount_paid)) and
                          days_after(3, a.registered) and
                          days_before(14, c.SUPPORTER_DEADLINE))
+
+# Send to any attendee who will be receiving a t-shirt (staff, volunteers, anyone
+# who kicked in at the shirt level or above).	Should not be sent after the t-shirt
+# size deadline (a new deadline not yet recorded in uber).
+AutomatedEmail(Attendee, 'MAGFest 2016 t-shirt size confirmation', 'confirm_shirt_size.html',
+               lambda a: before(datetime(2016, 1, 16, tzinfo=c.EVENT_TIMEZONE)) and
+                         days_after(3, a.registered) and
+                         a.gets_shirt)
 
 AutomatedEmail(Attendee, 'MAGFest Dealer waitlist has been exhausted', 'dealer_waitlist_exhausted.txt',
                lambda a: 'automatically converted to unpaid discounted badge from a dealer application' in a.admin_notes,
