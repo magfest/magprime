@@ -79,3 +79,7 @@ AutomatedEmail(Attendee, 'MAGFest 2016 t-shirt size confirmation', 'confirm_shir
                lambda a: before(datetime(2016, 1, 16, tzinfo=c.EVENT_TIMEZONE)) and
                          days_after(3, a.registered) and
                          a.gets_shirt)
+
+AutomatedEmail(Attendee, 'MAGFest Dealer waitlist has been exhausted', 'dealer_waitlist_exhausted.txt',
+               lambda a: 'automatically converted to unpaid discounted badge from a dealer application' in a.admin_notes,
+               sender=c.MARKETPLACE_EMAIL)
