@@ -1,0 +1,41 @@
+{% extends "base-admin.html" %}
+{% block title %}Invalid Volunteers{% endblock %}
+{% block content %}
+
+<h2>Invalid Volunteers</h2>
+
+There are {{ invalids|length }} volunteers in the system whose badges are marked as "invalid",
+presumably because they clicked the "I'm not coming" button.
+
+<table style="width:100%">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Hours</th>
+            <th>Assigned Hotel Room</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for attendee in invalids %}
+        <tr>
+            <td>{{ attendee|form_link }}</td>
+            <td>
+                {% if attendee.weighted_hours %}
+                    <a href="../registration/shifts?id={{ attendee.id }}">{{ attendee.weighted_hours }}</a>
+                {% else %}
+                    0
+                {% endif %}
+            </td>
+            <td>
+                {% for room in attendee.rooms %}
+                    <a href="../hotel_assignments/index#/add-to-room/{{ room.id }}">{{ room.nights_labels|join:" / " }}</a>
+                {% empty %}
+                    no
+                {% endfor %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
