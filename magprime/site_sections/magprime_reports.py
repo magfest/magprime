@@ -30,7 +30,7 @@ class Root:
                 for job in session.jobs().filter_by(location=department):
                     if hours.intersection(job.hours):
                         for shift in job.shifts:
-                            if shift.attendee.weighted_hours > 12:
+                            if shift.attendee.badge_type == c.STAFF_BADGE or shift.attendee.weighted_hours > 12:
                                 staffers.add(shift.attendee)
 
         return {
