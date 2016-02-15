@@ -30,7 +30,8 @@ class Root:
                 for job in session.jobs().filter_by(location=department):
                     if hours.intersection(job.hours):
                         for shift in job.shifts:
-                            staffers.add(shift.attendee)
+                            if shift.attendee.weighted_hours > 12:
+                                staffers.add(shift.attendee)
 
         return {
             'message': message,
