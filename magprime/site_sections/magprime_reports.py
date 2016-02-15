@@ -15,7 +15,7 @@ class Root:
         }
 
     def volunteer_food(self, session, message='', department=None, start=None, end=None):
-        staffers = []
+        staffers = set()
         if cherrypy.request.method == 'POST':
             start = c.EVENT_TIMEZONE.localize(datetime.strptime(start, c.TIMESTAMP_FORMAT))
             end = c.EVENT_TIMEZONE.localize(datetime.strptime(end, c.TIMESTAMP_FORMAT))
@@ -30,7 +30,7 @@ class Root:
                 for job in session.jobs().filter_by(location=department):
                     if hours.intersection(job.hours):
                         for shift in job.shifts:
-                            staffers.append(shift.attendee)
+                            staffers.add(shift.attendee)
 
         return {
             'message': message,
