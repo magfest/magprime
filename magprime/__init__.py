@@ -65,6 +65,7 @@ mount_site_sections(magprime_config['module_root'])
 
 if c.AT_THE_CON:
     from uber.site_sections.preregistration import Root
+
     @cherrypy.expose
     def form(self, *args, **kwargs):
         raise HTTPRedirect('../registration/register')
