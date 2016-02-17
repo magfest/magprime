@@ -29,6 +29,16 @@
                 $(".badge-type-selector").parents('.form-group').hide();
             }
         {% endif %}
+
+        {% if c.AFTER_PREREG_TAKEDOWN %}
+            // MAGFest leaves prereg running after the supposed "deadline", so we want to turn off the warnings.
+            var origTogglePrices = window.togglePrices;
+            window.togglePrices = function () {
+                origTogglePrices();
+                $('.prereg-type-closing').empty();
+            };
+            togglePrices();
+        {% endif %}
     });
 </script>
 
