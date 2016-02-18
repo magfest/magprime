@@ -2,6 +2,8 @@
     $(function () {
         if ($.field('amount_extra')) {
             $('#extra_donation').insertAfter($.field('amount_extra').parents('.form-group'));
+        } else {
+            $('#guitar_keychain,#tax_exempt').empty();
         }
         {% if c.PAGE_PATH != '/registration/form' %}
             if ($.field('amount_extra')) {
@@ -30,11 +32,17 @@
             }
         {% endif %}
 
+        {% if c.PAGE_PATH == '/registration/register' %}
+            if ($.field('extra_donation')) {
+                $.field('extra_donation').parents('.form-group').find('label').addClass('optional-field');
+            }
+        {% endif %}
+
         {% if c.AFTER_PREREG_TAKEDOWN %}
             // MAGFest leaves prereg running after the supposed "deadline", so we want to turn off the warnings.
             var origTogglePrices = window.togglePrices;
             window.togglePrices = function () {
-                origTogglePrices();
+                (origTogglePrices || $.noop)();
                 $('.prereg-type-closing').empty();
             };
             togglePrices();
