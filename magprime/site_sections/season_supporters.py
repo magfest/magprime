@@ -12,8 +12,7 @@ class Root:
         return {'events': dict(events)}
 
     def prev_supporters(self, session):
-        
-        return {'prev': session.query(PrevSeasonSupporter).all()}
+        return {'prev': session.query(PrevSeasonSupporter).order_by('last_name', 'first_name').all()}
     
     @unrestricted
     def event(self, session, id, slug, register=None):
