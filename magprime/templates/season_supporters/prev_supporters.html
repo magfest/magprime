@@ -1,0 +1,11 @@
+{% extends "base-admin.html" %}
+{% block title %}Previous Supporters{% endblock %}
+{% block content %}
+
+<h2>Previous Supporters:</h2>
+
+{% for p in prev %}
+    <li> {{p.last_name}}, {{p.first_name}} - ({{p.email}}) </li>
+{% endfor %}
+
+{% endblock %}
