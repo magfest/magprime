@@ -11,6 +11,9 @@ class Root:
             attending.sort(key=lambda a: (a.first_name, a.last_name))
         return {'events': dict(events)}
 
+    def prev_supporters(self, session):
+        return {'prev': session.query(PrevSeasonSupporter).order_by('last_name', 'first_name').all()}
+
     @unrestricted
     def event(self, session, id, slug, register=None):
         season_pass = session.season_pass(id)
