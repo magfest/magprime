@@ -15,7 +15,7 @@ for _event in SeasonEvent.instances.values():
     SeasonSupporterEmail(_event)
 
 
-AutomatedEmail(Attendee, 'MAGFest schedule, maps, and other FAQs', 'precon_faqs.html', lambda a: days_before(7, c.EPOCH) and ((a.badge_status != (c.INVALID_STATUS or c.DEFERRED_STATUS)) or (a.paid == NOT_PAID)))
+AutomatedEmail(Attendee, 'MAGFest schedule, maps, and other FAQs', 'precon_faqs.html', lambda a: days_before(7, c.EPOCH) and ((a.badge_status != (c.INVALID_STATUS or c.DEFERRED_STATUS)) or (a.paid != NOT_PAID)))
 
 AutomatedEmail(Attendee, 'MAGFest food for guests', 'guest_food_restrictions.txt',
                lambda a: a.badge_type == c.GUEST_BADGE, sender='MAGFest Staff Suite <chefs@magfest.org>')
