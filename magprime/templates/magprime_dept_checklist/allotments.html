@@ -25,7 +25,7 @@
 <h2>Treasury Information</h2>
 
 <form method="post" action="allotments">
-{% csrf_token %}
+{{ csrf_token() }}
 <input type="checkbox" name="needs" value="yes" onClick="showOrHideForm()" /> Check this box if your department needs cash and/or MPoints, otherwise just submit this form to let us know you DON'T need any <br/>
 <input type="checkbox" name="defer" value="yes" onClick="showOrHideForm()" /> Check this box if someone else is filling out this form for your department (seriously, don't everyone just check this!) <br/>
 <div id="formcontent" style="display:none">

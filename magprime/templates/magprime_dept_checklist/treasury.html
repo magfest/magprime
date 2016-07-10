@@ -40,7 +40,7 @@
 </ol>
 
 <form method="post" action="treasury">
-{% csrf_token %}
+{{ csrf_token() }}
 Once you've filled out the form above OR done nothing if your department does not need MPoints, please click the button below.<br/>
 <br/>
 <input type="submit" name="submitted" value="I Have Filled out the MPoints Form" />
