@@ -3,6 +3,6 @@
 Here is some info about this volunteer:
 
 - Admin form: {{ c.URL_BASE }}/registration/form?id={{ attendee.id }}
-- Departments: {{ attendee.assigned_depts_labels|join:" / " }}
+- Departments: {{ attendee.assigned_depts_labels|join(" / ") }}
 - Weighted Hours: {{ attendee.weighted_hours }}
 - Hotel room assignments: {{ attendee.room_assignments|yesno }}
