@@ -11,10 +11,10 @@ CASH NEEDS:
     My department needs cash: {{ needs_cash|yesno }}
     Number of cash boxes: {{ cash_boxes }}
     For each cash box:
-        Number of $1 Bills: {{ 1bills }}
-        Number of $5 Bills: {{ 5bills }}
-        Number of $10 Bills: {{ 10bills }}
-        Number of $20 Bills: {{ 20bills }}
+        Number of $1 Bills: {{ bills_1 }}
+        Number of $5 Bills: {{ bills_5 }}
+        Number of $10 Bills: {{ bills_10 }}
+        Number of $20 Bills: {{ bills_20 }}
 
 This department needs its cash/MPoints at this time in the morning:
 Thursday:
