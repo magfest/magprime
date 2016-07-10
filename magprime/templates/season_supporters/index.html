@@ -2,7 +2,7 @@
 {% block title %}Season Pass Tickets{% endblock %}
 {% block content %}
 
-{% for event, attendees in events.items %}
+{% for event, attendees in events.items() %}
     <h2>{{ event }}</h2>
     <ul>
     {% for attendee in attendees %}
