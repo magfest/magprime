@@ -30,4 +30,3 @@ class PrevSeasonSupporter(MagModel):
     email_model_name = 'attendee'  # used by AutomatedEmail code
 
     _repr_attr_names = ['first_name', 'last_name', 'email']
-
