@@ -30,24 +30,3 @@ class PrevSeasonSupporter(MagModel):
     email_model_name = 'attendee'  # used by AutomatedEmail code
 
     _repr_attr_names = ['first_name', 'last_name', 'email']
-
-
-class FakeBadgeLock:
-    """
-    When c.SHIFT_CUSTOM_BADGES is turned on, we protect badge shifting with the
-    c.BADGE_LOCK property.  Unfortunately, we've seen some bugs with this in the
-    past where the lock might not get released after a database exception.  Since
-    badge shifting is turned off for us now, I'm going to disable this lock via
-    this dump monkeypatch, with the intention of straightening the whole thing
-    out after MAGFest.
-    """
-    def __enter__(self):
-        return self
-
-    def __exit__(self, type, value, traceback): pass
-
-    def acquire(self): pass
-
-    def release(self): pass
-
-c.BADGE_LOCK = FakeBadgeLock()
