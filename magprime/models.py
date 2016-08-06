@@ -12,6 +12,24 @@ class Attendee:
             except:
                 log.error('unable to send invalid email')
 
+    @cost_property
+    def child_discount(self):
+        if 'val' in self.age_group_conf and self.age_group_conf['val'] == c.UNDER_13:
+            return (c.BADGE_PRICE / 2) * -1
+        return 0
+
+    @presave_adjustment
+    def child_badge_under_18(self):
+        if self.age_group not in [c.UNDER_21, c.OVER_21, c.AGE_UNKNOWN]:
+            self.badge_type = c.CHILD_BADGE
+            self.ribbon = c.OVER_13
+
+    @presave_adjustment
+    def child_to_attendee(self):
+        if self.badge_type == c.CHILD_BADGE and self.age_group in [c.UNDER_21, c.OVER_21]:
+            self.badge_type = c.ATTENDEE_BADGE
+            self.ribbon = None
+
 
 class SeasonPassTicket(MagModel):
     fk_id    = Column(UUID)
