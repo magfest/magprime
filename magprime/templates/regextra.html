@@ -1,5 +1,23 @@
 <script type="text/javascript">
+    {% if attendee.is_new and not group_id %}
+        if (window.REG_TYPES) {
+            REG_TYPES.options.push({
+                title: 'Child: $' + ({{ c.BADGE_PRICE }} / 2),
+                description: '<p class="list-group-item-text">Attendees under 13 must be accompanied by an adult with a valid Attendee badge.</p>',
+                onClick: function () {
+                    $('input[name="badge_type"]').val('{{ c.CHILD_BADGE }}');
+                    togglePrices();
+                }
+            });
+        }
+    {% endif %}
+
     $(function () {
+        {% if attendee.badge_type == c.CHILD_BADGE %}
+            if (window.REG_TYPES && $(REG_TYPES.row).size()) {
+                setBadge(REG_TYPES, 2);  // default to child badge when appropriate
+            }
+        {% endif %}
         if ($.field('amount_extra')) {
             $('#extra_donation').insertAfter($.field('amount_extra').parents('.form-group'));
         } else {
