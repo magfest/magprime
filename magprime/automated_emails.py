@@ -60,8 +60,9 @@ StopsEmail('MAGFest Staff Support', 'staff_support.txt',
 MarketplaceEmail('Your MAGFest Marketplace Application', 'marketplace_delay.txt',
                  lambda g: g.status == c.UNAPPROVED and g.registered < datetime(2015, 10, 29, tzinfo=c.EVENT_TIMEZONE))
 
-MarketplaceEmail('Your MAGFest Marketplace Application has been waitlisted', 'marketplace_auto_waitlisted.txt',
-                 lambda g: g.status == c.WAITLISTED and g.registered >= c.DEALER_REG_DEADLINE)
+# Left here in case the decision to remove is re-visited later. 20160809 RAE
+# MarketplaceEmail('Your MAGFest Marketplace Application has been waitlisted', 'marketplace_auto_waitlisted.txt',
+#                 lambda g: g.status == c.WAITLISTED and g.registered >= c.DEALER_REG_DEADLINE)
 
 StopsEmail('MAGFest Dept Checklist Introduction', 'dept_checklist_intro.txt',
            lambda a: a.is_single_dept_head and a.admin_account)
