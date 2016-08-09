@@ -6,10 +6,10 @@ due to the high number of applicants this year, your marketplace application has
 If a marketplace table slot becomes available, you will be notified and given the opportunity to accept
 that table. 
 
-We also apologize because we were hoping to get this information out to applicants by Nov 8, 2015, 
+We also apologize because we were hoping to get this information out to applicants by Nov 8, {{ c.YEAR|add:1 }}, 
 but due to a technical configuration error, this email was not sent until now.
 
-We'll be opening applications for the MAGFest 2017 Marketplace in summer 2016, so please try
+We'll be opening applications for the MAGFest 2017 Marketplace in summer {{ c.YEAR|add:1 }}, so please try
 applying again in the future. Have a great evening!
 
 ~ Danielle Pomfrey
