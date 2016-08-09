@@ -64,7 +64,7 @@ StopsEmail('MAGFest Staff Support', 'staff_support.txt',
 StopsEmail('MAGFest Dept Checklist Introduction', 'dept_checklist_intro.txt',
            lambda a: a.is_single_dept_head and a.admin_account)
 
-AutomatedEmail(Attendee, 'Last Chance for MAGFest ' c.YEAR ' bonus swag!', 'attendee_swag_promo.html',
+AutomatedEmail(Attendee, 'Last Chance for MAGFest ' + c.YEAR + ' bonus swag!', 'attendee_swag_promo.html',
                lambda a: a.can_spam and
                          (a.paid == c.HAS_PAID or a.paid == c.NEED_NOT_PAY or (a.group and a.group.amount_paid)) and
                          days_after(3, a.registered) and
@@ -73,7 +73,7 @@ AutomatedEmail(Attendee, 'Last Chance for MAGFest ' c.YEAR ' bonus swag!', 'atte
 # Send to any attendee who will be receiving a t-shirt (staff, volunteers, anyone
 # who kicked in at the shirt level or above).	Should not be sent after the t-shirt
 # size deadline.
-AutomatedEmail(Attendee, 'MAGFest ' c.YEAR ' t-shirt size confirmation', 'confirm_shirt_size.html',
+AutomatedEmail(Attendee, 'MAGFest ' + c.YEAR + ' t-shirt size confirmation', 'confirm_shirt_size.html',
                lambda a: before(c.SHIRT_DEADLINE) and
                          days_after(3, a.registered) and
                          a.gets_shirt)
