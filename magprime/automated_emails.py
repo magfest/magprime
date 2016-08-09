@@ -57,9 +57,6 @@ AutomatedEmail(Attendee, 'Want to help run MAGFest poker tournaments?', 'poker.t
 StopsEmail('MAGFest Staff Support', 'staff_support.txt',
            lambda a: a.assigned_to(c.STAFF_SUPPORT) and not a.trusted_in(c.STAFF_SUPPORT))
 
-MarketplaceEmail('Your MAGFest Marketplace Application', 'marketplace_delay.txt',
-                 lambda g: g.status == c.UNAPPROVED and g.registered < datetime(2015, 10, 29, tzinfo=c.EVENT_TIMEZONE))
-
 # Left here in case the decision to remove is re-visited later. 20160809 RAE
 # MarketplaceEmail('Your MAGFest Marketplace Application has been waitlisted', 'marketplace_auto_waitlisted.txt',
 #                 lambda g: g.status == c.WAITLISTED and g.registered >= c.DEALER_REG_DEADLINE)
@@ -67,7 +64,7 @@ MarketplaceEmail('Your MAGFest Marketplace Application', 'marketplace_delay.txt'
 StopsEmail('MAGFest Dept Checklist Introduction', 'dept_checklist_intro.txt',
            lambda a: a.is_single_dept_head and a.admin_account)
 
-AutomatedEmail(Attendee, 'Last Chance for MAGFest 2016 bonus swag!', 'attendee_swag_promo.html',
+AutomatedEmail(Attendee, 'Last Chance for MAGFest ' c.YEAR ' bonus swag!', 'attendee_swag_promo.html',
                lambda a: a.can_spam and
                          (a.paid == c.HAS_PAID or a.paid == c.NEED_NOT_PAY or (a.group and a.group.amount_paid)) and
                          days_after(3, a.registered) and
@@ -75,9 +72,9 @@ AutomatedEmail(Attendee, 'Last Chance for MAGFest 2016 bonus swag!', 'attendee_s
 
 # Send to any attendee who will be receiving a t-shirt (staff, volunteers, anyone
 # who kicked in at the shirt level or above).	Should not be sent after the t-shirt
-# size deadline (a new deadline not yet recorded in uber).
-AutomatedEmail(Attendee, 'MAGFest 2016 t-shirt size confirmation', 'confirm_shirt_size.html',
-               lambda a: before(datetime(2016, 1, 16, tzinfo=c.EVENT_TIMEZONE)) and
+# size deadline.
+AutomatedEmail(Attendee, 'MAGFest ' c.YEAR ' t-shirt size confirmation', 'confirm_shirt_size.html',
+               lambda a: before(c.SHIRT_DEADLINE) and
                          days_after(3, a.registered) and
                          a.gets_shirt)
 
