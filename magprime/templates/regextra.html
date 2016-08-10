@@ -24,15 +24,18 @@
             $('#guitar_keychain,#tax_exempt').empty();
         }
         {% if c.PAGE_PATH != '/registration/form' %}
+            // TODO: rip this hardcoded stuff out?
             if ($.field('amount_extra')) {
                 $.field('amount_extra').parents('.form-group').append($('#tax_exempt'));
                 $("input:radio[name='amount_extra'][value=40]").parents('.btn').append($('#guitar_keychain'));
             }
+
             if ($.field('shirt')) {
                 $.field('shirt').parents('.form-group').append($('#tshirt_warning'));
             } else {
                 $('#tshirt_warning').hide();
             }
+            // TODO: rip all of this hardcoded swag and pricing out?
             $('#guitar_keychain').on('click', function(e) { e.stopPropagation(); });
             {% if c.BEFORE_SUPPORTER_DEADLINE %}
                 if ($("input:radio[name='amount_extra'][value={{ c.SUPPORTER_LEVEL }}]").size()) {
@@ -102,6 +105,9 @@
         </div>
     </div>
 
+
+    {% comment %}
+    do we still need this and the stuff above this?
     <span id="guitar_keychain">
         ({% popup_link "http://magfest.org/sites/default/files/keychainsample.png" "Art Preview" %})
     </span>
@@ -119,4 +125,6 @@
             ({% popup_link "../static_views/seasonPasses.html" "What's included?" %})
         </span>
     {% endif %}
+    {% endcomment %}
+
 {% endif %}
