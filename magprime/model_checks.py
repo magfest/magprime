@@ -4,7 +4,7 @@ from magprime import *
 @prereg_validation.Attendee
 def child_badge_over_13(attendee):
     if attendee.badge_type == c.CHILD_BADGE and attendee.age_group_conf['val'] not in [c.UNDER_6, c.UNDER_13]:
-        return "You cannot buy a child badge if you will be 13 or older at the start of {}".format(c.EVENT_NAME)
+        return "You cannot buy a Child badge if you will be 13 or older at the start of {}".format(c.EVENT_NAME)
 
 
 @prereg_validation.Attendee
@@ -22,4 +22,6 @@ def group_leader_under_13(attendee):
 @validation.Attendee
 def child_badge_over_18(attendee):
     if attendee.badge_type == c.CHILD_BADGE and attendee.age_group_conf['val'] in [c.UNDER_21, c.OVER_21]:
-        return "Attendees who are 18 or over (or will be at the start of {}) cannot have Child badges.".format(c.EVENT_NAME)
+        # This message is confusing for attendees, so we only show it to admins
+        if c.PAGE_PATH in ['/registration/form', '/registration/change_badge']:
+            return "Attendees who are 18 or over (or will be at the start of {}) cannot have Minor badges.".format(c.EVENT_NAME)
