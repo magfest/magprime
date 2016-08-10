@@ -13,41 +13,34 @@
     {% endif %}
 
     $(function () {
+        // This auto-selects the Child badge when the user is, e.g., editing their registration before paying
         {% if attendee.badge_type == c.CHILD_BADGE %}
             if (window.REG_TYPES && $(REG_TYPES.row).size()) {
                 setBadge(REG_TYPES, 2);  // default to child badge when appropriate
             }
         {% endif %}
+        
+        // This places our "Extra Donation" form after our kick-in selection area.
         if ($.field('amount_extra')) {
             $('#extra_donation').insertAfter($.field('amount_extra').parents('.form-group'));
-        } else {
-            $('#guitar_keychain,#tax_exempt').empty();
         }
+        
         {% if c.PAGE_PATH != '/registration/form' %}
-            // TODO: rip this hardcoded stuff out?
+            // These are explanatory fields for attendees, so admins don't need to see them
+            // #tax_exempt tells people that MAGFest is a 501(c)(3) nonprofit
             if ($.field('amount_extra')) {
                 $.field('amount_extra').parents('.form-group').append($('#tax_exempt'));
-                $("input:radio[name='amount_extra'][value=40]").parents('.btn').append($('#guitar_keychain'));
             }
-
+            
+            // #tshirt_warning tells people that we don't sell 'slim' sizes at-fest
             if ($.field('shirt')) {
                 $.field('shirt').parents('.form-group').append($('#tshirt_warning'));
             } else {
                 $('#tshirt_warning').hide();
             }
-            // TODO: rip all of this hardcoded swag and pricing out?
-            $('#guitar_keychain').on('click', function(e) { e.stopPropagation(); });
-            {% if c.BEFORE_SUPPORTER_DEADLINE %}
-                if ($("input:radio[name='amount_extra'][value={{ c.SUPPORTER_LEVEL }}]").size()) {
-                    $("input:radio[name='amount_extra'][value=250]").parents('.btn').append($('#canvas_print'));
-                    $("input:radio[name='amount_extra'][value=80]").parents('.btn').append($('#supporter_popup'));
-                    $("input:radio[name='amount_extra'][value=160]").parents('.btn').append($('#season_popup'));
-
-                    $('#canvas_print').on('click', function(e) { e.stopPropagation(); });
-                    $('#supporter_popup').on('click', function(e) { e.stopPropagation(); });
-                    $('#season_popup').on('click', function(e) { e.stopPropagation(); });
-                }
-            {% endif %}
+            
+            // Super MAGFest has a very large kick-in selection area, so we save some page space here
+            // by hiding the normal 'badge type' selectors (which are generally used to select kick-in levels).
             if ($(".badge-type-selector").size()) {
                 $(".badge-type-selector").parents('.form-group').hide();
             }
@@ -61,6 +54,7 @@
 
         {% if c.AFTER_PREREG_TAKEDOWN %}
             // MAGFest leaves prereg running after the supposed "deadline", so we want to turn off the warnings.
+            // Note: This may not actually be required anymore
             var origTogglePrices = window.togglePrices;
             window.togglePrices = function () {
                 (origTogglePrices || $.noop)();
@@ -104,27 +98,5 @@
             <em>Slim fit sizes only available during online pre-order. <a href="http://magfest.org/images/2016swag/shirtsizeguide.png">Size guide</a>.</em>
         </div>
     </div>
-
-
-    {% comment %}
-    do we still need this and the stuff above this?
-    <span id="guitar_keychain">
-        ({% popup_link "http://magfest.org/sites/default/files/keychainsample.png" "Art Preview" %})
-    </span>
-
-    {% if c.BEFORE_SUPPORTER_DEADLINE %}
-        <span id="canvas_print">
-            ({% popup_link "http://magfest.org/sites/default/files/canvassample.png" "Art Preview" %})
-        </span>
-
-        <span id="supporter_popup">
-            ({% popup_link "../static_views/supporters.html" "What's included?" %})
-        </span>
-
-        <span id="season_popup">
-            ({% popup_link "../static_views/seasonPasses.html" "What's included?" %})
-        </span>
-    {% endif %}
-    {% endcomment %}
 
 {% endif %}
