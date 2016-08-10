@@ -28,7 +28,7 @@ class Attendee:
     def child_to_attendee(self):
         if self.badge_type == c.CHILD_BADGE and self.age_group in [c.UNDER_21, c.OVER_21]:
             self.badge_type = c.ATTENDEE_BADGE
-            self.ribbon = None
+            self.ribbon = c.NO_RIBBON
 
 
 class SeasonPassTicket(MagModel):
