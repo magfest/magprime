@@ -5,6 +5,10 @@
                 title: 'Child: $' + ({{ c.BADGE_PRICE }} / 2),
                 description: '<p class="list-group-item-text">Attendees under 13 must be accompanied by an adult with a valid Attendee badge.</p>',
                 onClick: function () {
+                    $('.group_fields').addClass('hide');
+                    if ($.field('first_name')) {
+                        $('#bold-field-message').insertBefore($.field('first_name').parents('.form-group'));
+                    }
                     $('input[name="badge_type"]').val('{{ c.CHILD_BADGE }}');
                     togglePrices();
                 }
