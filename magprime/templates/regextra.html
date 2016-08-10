@@ -34,7 +34,6 @@
             // These are explanatory fields for attendees, so admins don't need to see them
             // #tax_exempt tells people that MAGFest is a 501(c)(3) nonprofit
             if ($.field('amount_extra')) {
-                $.field('amount_extra').parents('.form-group').insertAfter($("#reg-types"));
                 $.field('amount_extra').parents('.form-group').find('.help-block').hide();
                 $.field('amount_extra').parents('.form-group').append($('#tax_exempt'));
             }
