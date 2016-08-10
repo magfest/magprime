@@ -3,7 +3,8 @@
         if (window.REG_TYPES) {
             REG_TYPES.options.push({
                 title: 'Child: $' + ({{ c.BADGE_PRICE }} / 2),
-                description: '<p class="list-group-item-text">Attendees under 13 must be accompanied by an adult with a valid Attendee badge.</p>',
+                description: '<p class="list-group-item-text">Attendees under 13 must be accompanied by an adult with a valid Attendee badge.</p>' +
+            '<span class="prereg-price-notice">Price is always half that of the Single Attendee badge price.</span>',
                 onClick: function () {
                     $('.group_fields').addClass('hide');
                     if ($.field('first_name')) {
@@ -33,6 +34,7 @@
             // These are explanatory fields for attendees, so admins don't need to see them
             // #tax_exempt tells people that MAGFest is a 501(c)(3) nonprofit
             if ($.field('amount_extra')) {
+                $.field('amount_extra').parents('.form-group').find('.help-block').hide();
                 $.field('amount_extra').parents('.form-group').append($('#tax_exempt'));
             }
             
