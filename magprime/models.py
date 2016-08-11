@@ -19,10 +19,11 @@ class Attendee:
         return 0
 
     @presave_adjustment
-    def child_badge_under_18(self):
+    def child_badge(self):
         if self.age_group not in [c.UNDER_21, c.OVER_21, c.AGE_UNKNOWN]:
             self.badge_type = c.CHILD_BADGE
-            self.ribbon = c.OVER_13
+            if self.age_group == c.UNDER_18:
+                self.ribbon = c.OVER_13
 
     @presave_adjustment
     def child_to_attendee(self):
