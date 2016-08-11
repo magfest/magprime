@@ -2,7 +2,7 @@
     {% if attendee.is_new and not group_id %}
         if (window.REG_TYPES) {
             REG_TYPES.options.push({
-                title: 'Child: $' + ({{ c.BADGE_PRICE }} / 2),
+                title: 'Child: $' + Math.floor({{ c.BADGE_PRICE }} / 2),
                 description: '<p class="list-group-item-text">Attendees under 13 must be accompanied by an adult with a valid Attendee badge.</p>' +
             '<span class="prereg-price-notice">Price is always half that of the Single Attendee badge price.</span>',
                 onClick: function () {
