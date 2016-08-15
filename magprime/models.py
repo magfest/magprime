@@ -2,6 +2,18 @@ from magprime import *
 
 
 @Session.model_mixin
+class Group:
+    @presave_adjustment
+    def bucket_pricing_workaround(self):
+        if not self.is_dealer:
+            if self.auto_recalc:
+                self.cost = self.amount_paid - self.amount_extra
+                self.auto_recalc = False
+            if self.is_new:
+                self.cost = self.default_cost
+
+
+@Session.model_mixin
 class Attendee:
     @presave_adjustment
     def invalid_notification(self):
@@ -17,6 +29,11 @@ class Attendee:
         if 'val' in self.age_group_conf and self.age_group_conf['val'] == c.UNDER_13:
             return math.ceil(c.BADGE_PRICE / 2) * -1
         return 0
+
+    @presave_adjustment
+    def bucket_pricing_workaround(self):
+        if not self.overridden_price:
+            self.overridden_price = self.default_cost if self.is_new else self.amount_paid - self.amount_extra
 
     @presave_adjustment
     def child_badge(self):
