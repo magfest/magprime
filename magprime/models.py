@@ -10,7 +10,7 @@ class Group:
                 self.cost = self.amount_paid - self.amount_extra
                 self.auto_recalc = False
             if self.is_new:
-                self.cost = self.default_cost
+                self.cost = self.cost or self.default_cost
 
 
 @Session.model_mixin
@@ -32,7 +32,7 @@ class Attendee:
 
     @presave_adjustment
     def bucket_pricing_workaround(self):
-        if not self.overridden_price:
+        if not self.overridden_price and self.paid in [c.HAS_PAID, c.NOT_PAID]:
             self.overridden_price = self.default_cost if self.is_new else self.amount_paid - self.amount_extra
 
     @presave_adjustment
