@@ -16,6 +16,14 @@ class ExtraConfig:
     def SEASON_EVENTS(self):
         return magprime_config['season_events']
 
+    @property
+    def PREREG_BADGE_TYPES(self):
+        types = [self.ATTENDEE_BADGE, self.PSEUDO_DEALER_BADGE, self.CHILD_BADGE]
+        for reg_open, badge_type in [(self.BEFORE_GROUP_PREREG_TAKEDOWN, self.PSEUDO_GROUP_BADGE)]:
+            if reg_open:
+                types.append(badge_type)
+        return types
+
 
 @Session.model_mixin
 class SessionMixin:
@@ -61,6 +69,7 @@ class Attendee:
 from magprime.utils import *
 from magprime.models import *
 from magprime.automated_emails import *
+from magprime.model_checks import *
 mount_site_sections(magprime_config['module_root'])
 
 if c.AT_THE_CON:
