@@ -10,27 +10,25 @@ and complete the items on that Checklist.
 
 These are all steps that are needed in order for your volunteers to sign up for shifts, for your department to get the MPoints that you need, for your staffers that are qualified to get into MAGFest Crash space (especially those coming early or staying late), etc.
 
-This list will also include a form from Tech Ops to define what technical/electronic gear you need in your department for MAGFest. This is currently not in the online version but will uploaded shortly.
+This list will also include a form from Tech Ops to define what technical/electronic gear you need in your department for MAGFest. This is currently not in it's final version but will uploaded before the Tech Ops deadline.
 
-This also includes signage and office supplies that you might need for the MAGFest office team to make your department run more efficiently.
+This also includes signage and office supplies that you might need from the MAGFest office team to make your department run more efficiently.
 
-This email is to let you know the following deadlines are in the Department Head Checklist, as discussed on Jira at https://jira.magfest.net/browse/MAGDEV-6
+This email is to let you know the following deadlines are in the Department Head Checklist.
 
-- Creating Shifts Deadline: 11:59pm EST on Tuesday, Nov 17
-- Volunteers Assigned to Your Department Deadline: 11:59pm EST on Tuesday, Dec 1
-- Tech Requirements Deadline: 11:59pm EST on Tuesday, Dec 15
-- Cash / MPoint Needs Deadline: 11:59pm EST on Tuesday, Dec 15 
-- Approve/Decline Requests for Setup/Teardown Deadline: 11:59pm EST on Tuesday, Dec 22
-- Checking Placeholder Registrations Deadline: 11:59pm EST on Tuesday, Dec 22
-- Staffers Requesting Hotel Space Deadline: 11:59pm EST on Tuesday, Dec 29
-- Printed Signs Deadline: 11:59pm EST on Tuesday, Jan 5
-- Office Supplies Deadline: 11:59pm EST on Tuesday, Jan 5
-- Custom Ribbons Deadline: 11:59pm EST on Tuesday, Jan 5
-- (After the Event) Marking and Rating Shifts Deadline: 11:59pm EST on Tuesday, Mar 1
+- Creating Shifts Deadline: 11:59pm EST on Tuesday, Oct. 25th
+- Volunteers Assigned to Your Department Deadline: 11:59pm EST on Tuesday, Nov. 1st 
+- MPoint Needs Deadline: 11:59pm EST on Tuesday,  Nov. 15th
+- Treasury Information Deadline: 11:59pm EST on Tuesday,  Nov. 15th
+- Approve/Decline Requests for Setup/Teardown Deadline: 11:59pm EST on Tuesday, Nov. 22nd
+- Checking Placeholder Registrations Deadline: 11:59pm EST on Tuesday, Nov. 22nd
+- Staffers Requesting Hotel Space Deadline: 11:59pm EST on Tuesday, Nov. 29th
+- Tech Requirements Deadline: 11:59pm EST on Tuesday, Nov. 29
+- Printed Signs Deadline: 11:59pm EST on Tuesday, Dec. 6th
+- Office Supplies Deadline: 11:59pm EST on Tuesday, Dec. 6th
+- Custom Ribbons Deadline: 11:59pm EST on Tuesday, Dec. 6th
+- (After the Event) Marking and Rating Shifts Deadline: 11:59pm EST on Tuesday, Jan 24th.
 
 You will receive a follow-up email for each item on the list 7 days prior to the deadline if the item hasn't already been completed.
 
-Thanks,
-Staff Operations. 
-MAGFest 2016
-stops@magest.org
+{{ c.STOPS_EMAIL_SIGNATURE }}
