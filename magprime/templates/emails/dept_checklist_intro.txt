@@ -2,19 +2,18 @@
 
 You are receiving this email because you are listed as a MAGFest Department Head of the {{ attendee.assigned_depts_labels.0 }} department.
 
-While you might not be the actual Department Head, but one of many within your department, you are on the list to receive the Department Head Checklist.
+While you might not be the actual Department Head, you are on the list to receive the Department Head Checklist.
 
 This means that you have access in Rams/Uber to go to:
-{{ c.URL_BASE }}/dept_checklist/index
-and complete the items on that Checklist.
+{{ c.URL_BASE }}/dept_checklist/index and complete the items on that Checklist.
 
-These are all steps that are needed in order for your volunteers to sign up for shifts, for your department to get the MPoints that you need, for your staffers that are qualified to get into MAGFest Crash space (especially those coming early or staying late), etc.
+These are the steps that are needed for your volunteers to sign up for shifts, and for your department to get the MPoints that it needs, and for your qualified staffers to get into MAGFest Crash space (especially those coming early or staying late), etc.
 
-This list will also include a form from Tech Ops to define what technical/electronic gear you need in your department for MAGFest. The Tech Ops form is not in its final version but will be uploaded before the Tech Ops deadline.
+This list also includes the Tech Ops form you will need to complete detailing what technical/electronic gear your department will need for MAGFest. The Tech Ops form is not in its final version but will be uploaded before the Tech Ops deadline (see below).
 
 The Checklist also includes signage and office supplies that you might need from the MAGFest office team to make your department run more efficiently.
 
-This email is to let you know the following deadlines are in the Department Head Checklist.
+The following deadlines are part of your Department Head Checklist.
 
 - Creating Shifts Deadline: 11:59pm EST on Tuesday, Oct. 25th
 - Volunteers Assigned to Your Department Deadline: 11:59pm EST on Tuesday, Nov. 1st 
