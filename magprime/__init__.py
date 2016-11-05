@@ -79,3 +79,9 @@ if c.AT_THE_CON:
     def form(self, *args, **kwargs):
         raise HTTPRedirect('../registration/register')
     Root.form = form
+
+# override badge CSV exports for magfest prime specific settings.
+# magfest prime no longer uses one-day badges, so remove it.
+_summary = uber.site_sections.summary.Root
+_summary.badge_zipfile_contents = \
+    [fn for fn in _summary.badge_zipfile_contents if fn.__name__ is not 'printed_badges_one_day']
