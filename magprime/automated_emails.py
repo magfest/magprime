@@ -80,4 +80,4 @@ AutomatedEmail(Attendee, 'MAGFest ' + c.YEAR + ' t-shirt size confirmation', 'co
 
 AutomatedEmail(Attendee, 'MAGFest Dealer waitlist has been exhausted', 'dealer_waitlist_exhausted.txt',
                lambda a: 'automatically converted to unpaid discounted badge from a dealer application' in a.admin_notes,
-               sender=c.MARKETPLACE_EMAIL)
+               sender=c.MARKETPLACE_EMAIL, ident='magprime_marketplace_waitlist_exhausted')
