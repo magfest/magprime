@@ -2,18 +2,6 @@ from magprime import *
 
 
 @Session.model_mixin
-class Group:
-    @presave_adjustment
-    def bucket_pricing_workaround(self):
-        if not self.is_dealer:
-            if self.auto_recalc:
-                self.cost = self.amount_paid - self.amount_extra
-                self.auto_recalc = False
-            if self.is_new:
-                self.cost = self.cost or self.default_cost
-
-
-@Session.model_mixin
 class Attendee:
     @presave_adjustment
     def invalid_notification(self):
@@ -32,8 +20,11 @@ class Attendee:
 
     @presave_adjustment
     def bucket_pricing_workaround(self):
-        if not self.overridden_price and self.paid in [c.HAS_PAID, c.NOT_PAID]:
-            self.overridden_price = self.default_cost if self.is_new else self.amount_paid - self.amount_extra
+        if not self.overridden_price:
+            if self.paid in [c.HAS_PAID, c.NOT_PAID]:
+                self.overridden_price = self.badge_cost if self.is_new else self.amount_paid - self.amount_extra
+            elif self.paid == c.PAID_BY_GROUP:
+                self.overridden_price = self.badge_cost
 
     @presave_adjustment
     def child_badge(self):
