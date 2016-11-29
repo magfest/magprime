@@ -15,7 +15,9 @@ for _event in SeasonEvent.instances.values():
     SeasonSupporterEmail(_event)
 
 
-AutomatedEmail(Attendee, 'MAGFest schedule, maps, and other FAQs', 'precon_faqs.html', when=days_before(7, c.EPOCH))
+AutomatedEmail(Attendee, 'MAGFest schedule, maps, and other FAQs', 'precon_faqs.html',
+               filter=lambda a: True,
+               when=days_before(7, c.EPOCH))
 
 AutomatedEmail(Attendee, 'MAGFest food for guests', 'guest_food_restrictions.txt',
                lambda a: a.badge_type == c.GUEST_BADGE, sender='MAGFest Staff Suite <chefs@magfest.org>')
