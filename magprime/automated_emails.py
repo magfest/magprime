@@ -8,7 +8,7 @@ class SeasonSupporterEmail(AutomatedEmail):
         AutomatedEmail.__init__(self, SeasonPassTicket,
                                 subject='Claim your {} tickets with your MAGFest Season Pass'.format(event.name),
                                 template='season_supporter_event_invite.txt',
-                                filter=lambda a: before(event.deadline),
+                                when=before(event.deadline),
                                 extra_data={'event': event})
 
 for _event in SeasonEvent.instances.values():
@@ -71,14 +71,14 @@ StopsEmail('MAGFest Dept Checklist Introduction', 'dept_checklist_intro.txt',
 AutomatedEmail(Attendee, 'Last Chance for MAGFest ' + c.YEAR + ' bonus swag!', 'attendee_swag_promo.html',
                lambda a: a.can_spam and
                          (a.paid == c.HAS_PAID or a.paid == c.NEED_NOT_PAY or (a.group and a.group.amount_paid)) and
-                         days_after(3, a.registered),
+                         days_after(3, a.registered)(),
                          when=days_before(14, c.SUPPORTER_DEADLINE))
 
 # Send to any attendee who will be receiving a t-shirt (staff, volunteers, anyone
 # who kicked in at the shirt level or above).	Should not be sent after the t-shirt
 # size deadline.
 AutomatedEmail(Attendee, 'MAGFest ' + c.YEAR + ' t-shirt size confirmation', 'confirm_shirt_size.html',
-               lambda a: days_after(3, a.registered) and
+               lambda a: days_after(3, a.registered)() and
                          a.gets_shirt, when=before(c.SHIRT_DEADLINE))
 
 AutomatedEmail(Attendee, 'MAGFest Dealer waitlist has been exhausted', 'dealer_waitlist_exhausted.txt',
