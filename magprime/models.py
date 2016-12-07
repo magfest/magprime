@@ -20,13 +20,10 @@ class Attendee:
 
     @presave_adjustment
     def bucket_pricing_workaround(self):
-        if not self.overridden_price and self.paid in [c.HAS_PAID, c.NOT_PAID]:
-            self.overridden_price = self.badge_cost if self.is_new else self.amount_paid - self.amount_extra
         if not self.overridden_price:
-            if self.paid in [c.HAS_PAID, c.NOT_PAID]:
-                self.overridden_price = self.badge_cost if self.is_new else self.amount_paid - self.amount_extra
-            elif self.paid == c.PAID_BY_GROUP:
-                self.overridden_price = self.badge_cost
+            self.overridden_price = self.badge_cost
+        elif self.extra_donation and self.overridden_price == self.amount_paid - self.amount_extra:
+            self.overridden_price -= self.extra_donation
 
     @presave_adjustment
     def child_badge(self):
