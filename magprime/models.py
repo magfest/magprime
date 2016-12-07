@@ -22,7 +22,7 @@ class Attendee:
     def bucket_pricing_workaround(self):
         if not self.overridden_price:
             self.overridden_price = self.badge_cost
-        elif self.extra_donation and self.overridden_price == self.amount_paid - self.amount_extra:
+        elif self.extra_donation and self.overridden_price == self.default_cost:
             self.overridden_price -= self.extra_donation
 
     @presave_adjustment
