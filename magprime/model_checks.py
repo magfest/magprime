@@ -31,5 +31,5 @@ def total_cost_over_paid(attendee):
 def child_badge_over_18(attendee):
     if attendee.badge_type == c.CHILD_BADGE and attendee.age_group_conf['val'] in [c.UNDER_21, c.OVER_21]:
         # This message is confusing for attendees, so we only show it to admins
-        if c.PAGE_PATH in ['/registration/form', '/registration/change_badge']:
+        if c.PAGE_PATH in ['/registration/change_badge']:
             return "Attendees who are 18 or over (or will be at the start of {}) cannot have Minor badges.".format(c.EVENT_NAME)
