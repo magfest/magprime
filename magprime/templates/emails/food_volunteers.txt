@@ -1,31 +1,29 @@
 Hello {{ attendee.first_name }},
 
-You're receiving this email because you've signed up to work in the {{ c.EVENT_NAME }} Staff Suite. Thank you!! And thank you for signing up for shifts. We still have a few more shifts if you need the hours. We can't wait to work with you. We just have a few things to share with you. Sorry for the long email. But this info is important for working in Staff Suite. To report for your shift, visit room 5211 on the 5th floor of the hotel. I promise, it's not shady. This is actually one of the rooms we work out of.
+You're receiving this email because you've signed up to work in the {{ c.EVENT_NAME }} Staff Suite. Thank you! And thank you for signing up for shifts. We still have a few more shifts if you need the hours. We can't wait to work with you. We just have a few things to get through with you. To report for your shift, visit room 5217 on the 5th floor of the hotel. We work out of two conference suites. Plan for elevator travel times when coming to shifts! 
 
-1. You will need to bring a hat. The type of hat does not matter as long as it covers your head, does not get in yours or anyone else's way, isn't constantly falling off, and does not get in or affect the food. If you don't have a hat or forget to bring one, we have fabulous lunch lady style bouffants. Either way, you're hair will have to be covered to be on shift.
+1. Hair has to be covered on shift. So you can bring a hat or bandana, or you can use one of the bouffants we'll have ready. 
 
-2. All hair that goes past the chin needs to be tied back and contained. For any luxuriously long beards, we will very likely ask you to wear a beard cover. Don't worry, it matches the lunch lady bouffant. ;)
+2. For food safety purposes, we ask that all jewelry on hands and wrists be removed, medical jewelry is fine. Leave them in your room (lots of people coming in and out). In the same vein, sleeves have to be rolled up. 
 
-3. For food safety purposes, we ask that all jewelry on hands and wrists be removed. It's recommended to leave these items in your room in a secure place. Medical alert bracelets are excused from this, but it is recommended to place it on a necklace or your lanyard while serving or prepping food. Sleeves also need to be rolled to above your elbow.
+3. You must wash your hands regularly. You are also required to wear gloves. We have vinyl powder-free gloves in Small, Medium, Large, and Extra-Large available. Change gloves frequently. Non-food item? Change gloves. Peanut Butter? Change them. Meat? Definitely. Do not save gloves to put back on later. We have tons of gloves! 
 
-4. Let's see aprons or hands first. Hands. Everyone is required to wash their hands regularly. You are also required to wear gloves. We have vinyl powder-free gloves in Small, Medium, Large, and Extra-Large available. You will also need change gloves regularly. If you touch any non-food item with gloves, change them out. If you have been handling peanut butter or ham, change them out before touching anything else. Do not save gloves to put back on later. Don't worry, we have plenty of gloves.
+4. We'll give you an apron to wear. Keeps your clothes clean, and helps us identify you quickly as we learn your names! (You'll see!) Just return it at the end of your shift! 
 
-5. Every volunteer will be given an apron at the beginning of their shift. At the end of your shift, please return the apron. This is also a good time to get your shift sheet signed. There will be a letter on your apron. Because a lot of us are new to each other, it makes it easier to identify each person by saying "Minion A, get some more turkey." There is a whole story behind this. Ask us, we'll definitely tell it.
+5. If you have any questions, there will always be a supervisor or department head around. Look for a black apron or chef coat! When in doubt, ask! Nothing is trivial when it's a safety concern. Department Heads are Louis, David, Heather and Terri. Heather is around in the morning and David and Louis come in for lunch and dinner. Terri floats and wrangles the carry out section. 
 
-6. There are additional levels you will see. Anyone in a black apron is a trusted staffer. They have worked in the Staff Suite previously and have gained the trust of the Department Heads to help out new volunteers and make sure everything runs smoothly in the absence of a manager. Managers will be in Chef Coats and have either a Manager ribbon or a Department Head ribbon on their badge. You can ask them anything. They know what the game plan is and are in charge. Of course, Department Heads (pink ribbon) have the final say. This year there are 3. Louis aka Chef, David aka English, and Jenny aka Jenny. Managers are Connie aka Mom, Heather aka Heather, Niko aka Niko, Adam aka Pie Guy (that's a good story too), and Andrew aka Joo or Cake Monster. 
+6. Report ALL injuries, incidents, and accidents. ABSOLUTELY EVERYTHING. We cannot play around with safety here. This includes anyone that should not be there. Do not try to solve issues on your own. Tell a member of management and let them handle it.
 
-7. Report ALL injuries, incidents, and accidents. It doesn't matter how small or if you think it's insignificant, we need to know everything. This includes anyone that should not be there. Do not try to solve issues on your own. Tell a member of management and let them handle it. (The guys and gals in the chef coats.)
+7. When on shift, you are expected to be sober and awake. Intoxication during your shift will result in immediate dismissal and banning from serving on future shifts. There are so many things that can wrong around food if you are drunk. 
 
-8. When on shift, you are expected to be sober and awake. Intoxication during your shift will result in immediate dismissal and banning from serving on future shifts. There are so many things that can wrong around food if you are drunk. 
+8. Can you cosplay on shift? Sure! But the other rules still apply, hair back and covered (wigs too), sleeves rolled, nothing that can affect food. You will have an apron to cover the front. MAGFest and it's Staff Suite cannot be held accountable for any damages that may occur.
 
-9. Can you cosplay on shift? Sure! But the other rules still apply, hair tied back and top covered (yes, wigs too), sleeves rolled up, and nothing that gets in anyone's way or has the potential to get in or affect the food. You will have an apron to cover the front. MAGFest and it's Staff Suite cannot be held accountable for any damages that may occur.
+If you have any questions. Just let us know. I suggest you bring a hat! (The bouffants suck!)
 
-If you have any questions. Just let us know. Don't forget your hat, unless you want to wear the stylish bouffant. :-D
+Also, keep a look out for another email or the website : staffsuite.magfe.st. Information on the different roles will be going up prior to MAGFest. 
 
-Also, keep a look out for another email or the website : http://staffsuite.magfe.st/. Information on the different roles will be going up prior to MAGFest. 
-
-Woooo! MAGFest!! See you all soon!!
+Thanks!
 
 MAGFest Staff Suite
 chefs@magfest.org
-http://staffsuite.magfe.st/
+staffsuite.magfe.st
