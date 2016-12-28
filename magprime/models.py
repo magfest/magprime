@@ -29,8 +29,15 @@ class Attendee:
     def child_badge(self):
         if self.age_group not in [c.UNDER_21, c.OVER_21, c.AGE_UNKNOWN] and self.badge_type == c.ATTENDEE_BADGE:
             self.badge_type = c.CHILD_BADGE
-            if self.age_group == c.UNDER_18 and self.ribbon == c.NO_RIBBON:
-                self.ribbon = c.OVER_13
+            if self.age_group in [c.UNDER_6, c.UNDER_13] and self.ribbon == c.NO_RIBBON:
+                self.ribbon = c.UNDER_13
+
+    @presave_adjustment
+    def child_ribbon_or_not(self):
+        if self.ribbon == c.NO_RIBBON and self.age_group in [c.UNDER_6, c.UNDER_13]:
+            self.ribbon = c.UNDER_13
+        elif self.ribbon == c.UNDER_13 and self.age_group not in [c.UNDER_6, c.UNDER_13]:
+            self.ribbon = c.NO_RIBBON
 
     @presave_adjustment
     def child_to_attendee(self):
