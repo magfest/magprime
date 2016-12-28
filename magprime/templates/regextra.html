@@ -80,6 +80,7 @@
     });
 </script>
 
+{% if c.PAGE_PATH != '/registration/register' %}
 <div id="price_explanation">
     <div class="form-group">
     <p class="help-block col-sm-6 col-sm-offset-2">
@@ -89,6 +90,7 @@
     </p>
         </div>
 </div>
+{% endif %}
 
 {% if c.PAGE_PATH != '/preregistration/transfer_badge' %}
     <div id="extra_donation">
