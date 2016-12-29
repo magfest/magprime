@@ -36,7 +36,7 @@ class Attendee:
     def child_ribbon_or_not(self):
         if self.ribbon == c.NO_RIBBON and self.age_group in [c.UNDER_6, c.UNDER_13]:
             self.ribbon = c.UNDER_13
-        elif self.ribbon == c.UNDER_13 and self.age_group not in [c.UNDER_6, c.UNDER_13]:
+        elif self.ribbon in [c.UNDER_13, c.OVER_13] and self.age_group not in [c.UNDER_6, c.UNDER_13]:
             self.ribbon = c.NO_RIBBON
 
     @presave_adjustment
