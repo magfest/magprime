@@ -16,7 +16,9 @@ for _event in SeasonEvent.instances.values():
 
 
 AutomatedEmail(Attendee, 'MAGFest schedule, maps, and other FAQs', 'precon_faqs.html',
-               filter=lambda a: True,
+               filter=lambda a: a.badge_status not in [c.INVALID_STATUS, c.DEFERRED_STATUS]
+                            and a.paid != c.NOT_PAID
+                            and (a.paid != c.PAID_BY_GROUP or a.group and not a.group.amount_unpaid),
                when=days_before(7, c.EPOCH))
 
 AutomatedEmail(Attendee, 'MAGFest food for guests', 'guest_food_restrictions.txt',
