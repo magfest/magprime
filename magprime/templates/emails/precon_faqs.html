@@ -9,7 +9,7 @@ Please refer to this FAQ for instructions on how to get your badge, and how to v
 
 <p>
     <b>Where do I go when I arrive? How do I pick up my pass?</b><br />
-    The first step is to go to the registration desk, located in Expo Hall E to pick up your pass. The registration desk is open 24 hours a day from Thursday 10am - Sunday 3pm. Follow the green line in <a href="http://magfest.org/static/images/mag2017_map_to_reg.png" target="_blank"><b>this map</b></a> to help find your way to registration from any of the three entrances to the hotel. Please bring photo id such as a driver's license, military id, or student id.
+    The first step is to go to the registration desk, located in Expo Hall E, to pick up your pass. The registration desk is open 24 hours a day from Thursday 10am - Sunday 3pm. Follow the green line in <a href="http://magfest.org/static/images/mag2017_map_to_reg.png" target="_blank"><b>this map</b></a> to help find your way to registration from any of the three entrances to the hotel. Please bring photo id such as a driver's license, military id, or student id.
 </p>
 <p>
     <b> Will additional passes be sold at the door?</b><br />
@@ -32,15 +32,19 @@ Please refer to this FAQ for instructions on how to get your badge, and how to v
     There are multiple ways to view our schedule:</p>
     <ul>
         <li><i>Using the Guidebook app or website (desktop or mobile)</i>: Go to the  <a href="http://schedule.magfest.org/" target="_blank">Guidebook website</a> to view the guidebook in your web browser or download the mobile app. Make sure to check for guidebook updates periodically through the weekend, as we may make schedule changes.</li>
-        <li><i>Print your own schedule</i>: We have 11x17 a double-sided formatted <a href="http://magfest.org/static/files/M2017_Schedule.pdf" target="_blank">print schedule</a> that will be available in our registration area. Since schedules are posted outside individual rooms, and are also available online, we will only have limited quantities of the printed schedule available. To be safe, please print your own copy of the schedule if you rely on having a hard copy handy.</li>
+        <li><i>Print your own schedule</i>: We have a 11x17 double-sided formatted <a href="http://magfest.org/static/files/M2017_Schedule.pdf" target="_blank">print schedule</a> that will be available in our registration area. Since schedules are posted outside individual rooms, and are also available online, we will only have limited quantities of the printed schedule available. To be safe, please print your own copy of the schedule if you rely on having a hard copy handy.</li>
     </ul>
 </p>
-{% if attendee.is_transferable %}
     <p>
         <b>Do you provide refunds or ticket transfers?</b><br />
-        We do not provide refunds, but we do allow you to sell or transfer your ticket to anyone you wish by <a href="{{ c.URL_BASE }}/preregistration/transfer_badge?id={{ attendee.id }}" target="_blank">using this link</a>.
+        We do not provide refunds, but we do allow you to sell or transfer your ticket to anyone you wish.
+        {% if attendee.is_transferable %}
+            You can <a href="{{ c.URL_BASE }}/preregistration/transfer_badge?id={{ attendee.id }}" target="_blank">use this link</a> to transfer your badge.
+        {% else %}
+            E-mail <a href="mailto:regsupport@magfest.org">regsupport@magfest.org</a> with any questions about badge transfers.
+            <b>Only questions about ticket transfers, ticket confirmations, or general registration questions should be e-mailed to the registration desk e-mail address. We are unable to answer questions for any other matters sent to this address.</b>
+        {% endif %}
     </p>
-{% endif %}
 <p><em>Answers to more Frequently Asked Questions can be found on <a href="http://magfest.org/faq/" target="_blank">our website</a>.</em></p>
 
 </body>
