@@ -86,3 +86,22 @@ AutomatedEmail(Attendee, 'MAGFest ' + c.YEAR + ' t-shirt size confirmation', 'co
 AutomatedEmail(Attendee, 'MAGFest Dealer waitlist has been exhausted', 'dealer_waitlist_exhausted.txt',
                lambda a: 'automatically converted to unpaid discounted badge from a dealer application' in a.admin_notes,
                sender=c.MARKETPLACE_EMAIL, ident='magprime_marketplace_waitlist_exhausted')
+
+
+@on_startup
+def onsite_email_performance():
+    """
+    This is purely a performance tweak.  MAGFest has a large enough database
+    that we don't want to iterate over all rows and instances every time the
+    email task fires while we're in at-the-con mode, since we're more sensitive
+    to performance while on-site.  Since we know that the only emails we care
+    about sending while on-site are Attendee emails, we turn off all other
+    database queries when in at-the-con mode so that we won't perform them.
+    We then turn off all emails which aren't enabled to send during the con
+    as a further optimization.
+    """
+    if c.AT_THE_CON:
+        AutomatedEmail.queries = {Attendee: AutomatedEmail.queries[Attendee]}
+        for ident, instance in list(AutomatedEmail.instances.items()):
+            if not instance.allow_during_con:
+                del AutomatedEmail.instances[ident]
