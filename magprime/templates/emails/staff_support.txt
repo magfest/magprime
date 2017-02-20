@@ -4,7 +4,7 @@ Dear {{ attendee.first_name }},
 
 The best part about volunteering in Staff Support is that you’ll be randomly sampling different departments based on what the needs are during {{ c.EVENT_NAME }}. On your Staff Support shifts, you could be working in Consoles, Staff Suite, Security, or even Panels! Wherever help is needed, we will send you! As you volunteer, we’d hope that you find your niche with {{ c.EVENT_NAME }} in whatever department interests you the most. That way, you can help them out from the get-go the following year!
 
-When shifts go out closer to {{ c.EVENT_NAME }}, you’ll see that Staff Support shifts run in 4-hour blocks all through the event. Sign up for as many as you’d like, but please be aware of what shifts you’re selecting so that you don’t end up working ridiculous hours. We love your help, but not at the cost of you enjoying the event!
+Sign up for as many as you’d like, but please be aware of what shifts you’re selecting so that you don’t end up working ridiculous hours. We love your help, but not at the cost of you enjoying the event!
 
 If you have any questions at all, please email Staff Operations, our parent department, at stops@magfest.org 
 

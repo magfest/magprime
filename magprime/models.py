@@ -2,18 +2,6 @@ from magprime import *
 
 
 @Session.model_mixin
-class Group:
-    @presave_adjustment
-    def bucket_pricing_workaround(self):
-        if not self.is_dealer:
-            if self.auto_recalc:
-                self.cost = self.amount_paid - self.amount_extra
-                self.auto_recalc = False
-            if self.is_new:
-                self.cost = self.cost or self.default_cost
-
-
-@Session.model_mixin
 class Attendee:
     @presave_adjustment
     def invalid_notification(self):
@@ -32,15 +20,24 @@ class Attendee:
 
     @presave_adjustment
     def bucket_pricing_workaround(self):
-        if not self.overridden_price and self.paid in [c.HAS_PAID, c.NOT_PAID]:
-            self.overridden_price = self.default_cost if self.is_new else self.amount_paid - self.amount_extra
+        if self.overridden_price is None:
+            self.overridden_price = self.badge_cost
+        elif self.extra_donation and self.overridden_price == self.default_cost:
+            self.overridden_price -= self.extra_donation
 
     @presave_adjustment
     def child_badge(self):
-        if self.age_group not in [c.UNDER_21, c.OVER_21, c.AGE_UNKNOWN]:
+        if self.age_group not in [c.UNDER_21, c.OVER_21, c.AGE_UNKNOWN] and self.badge_type == c.ATTENDEE_BADGE:
             self.badge_type = c.CHILD_BADGE
-            if self.age_group == c.UNDER_18:
-                self.ribbon = c.OVER_13
+            if self.age_group in [c.UNDER_6, c.UNDER_13] and self.ribbon == c.NO_RIBBON:
+                self.ribbon = c.UNDER_13
+
+    @presave_adjustment
+    def child_ribbon_or_not(self):
+        if self.ribbon == c.NO_RIBBON and self.age_group in [c.UNDER_6, c.UNDER_13]:
+            self.ribbon = c.UNDER_13
+        elif self.ribbon in [c.UNDER_13, c.OVER_13] and self.age_group not in [c.UNDER_6, c.UNDER_13]:
+            self.ribbon = c.NO_RIBBON
 
     @presave_adjustment
     def child_to_attendee(self):

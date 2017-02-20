@@ -28,13 +28,19 @@
         // This places our "Extra Donation" form after our kick-in selection area.
         if ($.field('amount_extra')) {
             $('#extra_donation').insertAfter($.field('amount_extra').parents('.form-group'));
+        } else {
+            $('#extra_donation').insertBefore($.field('staffing').parents('.form-group'));
+        }
+
+        if ($.field('payment_method')) {
+            $('#price_explanation').insertAfter($.field('payment_method').parents('.form-group'));
         }
         
         {% if c.PAGE_PATH != '/registration/form' %}
             // These are explanatory fields for attendees, so admins don't need to see them
             // #tax_exempt tells people that MAGFest is a 501(c)(3) nonprofit
             if ($.field('amount_extra')) {
-                $.field('amount_extra').parents('.form-group').find('.help-block').hide();
+                $.field('amount_extra').parents('.form-group').find('.help-block').addClass('col-sm-offset-2');
                 $.field('amount_extra').parents('.form-group').append($('#tax_exempt'));
             }
             
@@ -75,6 +81,18 @@
         }
     });
 </script>
+
+{% if c.PAGE_PATH == '/registration/register' %}
+<div id="price_explanation">
+    <div class="form-group">
+    <p class="help-block col-sm-6 col-sm-offset-2">
+        Badges for attendees under 13 are half-price. <br/>
+        Attendees under 6 enter free. <br/>
+        All attendees under 13 must be accompanied by an adult with a valid Attendee badge.
+    </p>
+        </div>
+</div>
+{% endif %}
 
 {% if c.PAGE_PATH != '/preregistration/transfer_badge' %}
     <div id="extra_donation">
