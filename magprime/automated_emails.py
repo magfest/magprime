@@ -7,7 +7,7 @@ class SeasonSupporterEmail(AutomatedEmail):
     def __init__(self, event):
         AutomatedEmail.__init__(self, SeasonPassTicket,
                                 subject='Claim your {} tickets with your MAGFest Season Pass'.format(event.name),
-                                ident='magprime_season_supporter_{}_invite'.format(event.name.lower().strip().replace(' ', '_'))
+                                ident='magprime_season_supporter_{}_invite'.format(event.name.lower().strip().replace(' ', '_')),
                                 template='season_supporter_event_invite.txt',
                                 when=before(event.deadline),
                                 extra_data={'event': event})
@@ -48,44 +48,51 @@ AutomatedEmail(Attendee, 'Important MAGFest PC Gaming Room Information! *PLEASE 
                sender='MAGFest LAN <lan@magfest.org>')
 
 AutomatedEmail(Attendee, 'MAGFest Tech Ops volunteering', 'techops.txt',
+           lambda a: a.staffing and a.assigned_to(c.TECH_OPS),
            ident='magprime_techops_volunteer',
-           lambda a: a.staffing and a.assigned_to(c.TECH_OPS), sender='MAGFest TechOps <techops-heads@magfest.org>')
+           sender='MAGFest TechOps <techops-heads@magfest.org>')
 
 AutomatedEmail(Attendee, 'MAGFest Chipspace volunteering', 'chipspace.txt',
+           lambda a: a.staffing and a.assigned_to(c.CHIPSPACE),
            ident='magprime_chipspace_volunteer',
-           lambda a: a.staffing and a.assigned_to(c.CHIPSPACE), sender='MAGFest ChipSpace <chipspace@magfest.org>')
+           sender='MAGFest ChipSpace <chipspace@magfest.org>')
 
 AutomatedEmail(Attendee, 'MAGFest Chipspace shifts', 'chipspace_trusted.txt',
+           lambda a: a.staffing and a.has_shifts_in(c.CHIPSPACE) and a.trusted_in(c.CHIPSPACE),
            ident='magprime_chipspace_trusted_volunteer',
-           lambda a: a.staffing and a.has_shifts_in(c.CHIPSPACE) and a.trusted_in(c.CHIPSPACE), sender='MAGFest ChipSpace <chipspace@magfest.org>')
+           sender='MAGFest ChipSpace <chipspace@magfest.org>')
 
 AutomatedEmail(Attendee, 'MAGFest Chipspace', 'chipspace_untrusted.txt',
+           lambda a: a.staffing and a.has_shifts_in(c.CHIPSPACE) and not a.trusted_in(c.CHIPSPACE),
            ident='magprime_chipspace_untrusted_volunteer',
-           lambda a: a.staffing and a.has_shifts_in(c.CHIPSPACE) and not a.trusted_in(c.CHIPSPACE), sender='MAGFest ChipSpace <chipspace@magfest.org>')
+           sender='MAGFest ChipSpace <chipspace@magfest.org>')
 
 AutomatedEmail(Attendee, 'MAGFest Staff Suite rules', 'food_volunteers.txt',
+           lambda a: a.staffing and a.has_shifts_in(c.FOOD_PREP) and not a.trusted_in(c.FOOD_PREP),
            ident='magprime_food_untrusted_volunteer',
-           lambda a: a.staffing and a.has_shifts_in(c.FOOD_PREP) and not a.trusted_in(c.FOOD_PREP), sender='MAGFest Staff Suite <chefs@magfest.org>')
+           sender='MAGFest Staff Suite <chefs@magfest.org>')
 
 AutomatedEmail(Attendee, 'MAGFest message from Chef', 'food_trusted_staffers.txt',
+           lambda a: a.staffing and a.has_shifts_in(c.FOOD_PREP) and a.trusted_in(c.FOOD_PREP),
            ident='magprime_food_trusted_volunteer',
-           lambda a: a.staffing and a.has_shifts_in(c.FOOD_PREP) and a.trusted_in(c.FOOD_PREP), sender='MAGFest Staff Suite <chefs@magfest.org>')
+           sender='MAGFest Staff Suite <chefs@magfest.org>')
 
 AutomatedEmail(Attendee, 'Want to help run MAGFest poker tournaments?', 'poker.txt',
+               lambda a: a.has_shifts_in(c.TABLETOP),
                ident='magprime_tabletop_volunteer_poker_inquiry',
-               lambda a: a.has_shifts_in(c.TABLETOP), sender='MAGFest Tabletop <tabletop@magfest.org>')
+               sender='MAGFest Tabletop <tabletop@magfest.org>')
 
 StopsEmail('MAGFest Staff Support', 'staff_support.txt',
-           ident='magprime_staff_support_volunteer',
-           lambda a: a.assigned_to(c.STAFF_SUPPORT) and not a.trusted_in(c.STAFF_SUPPORT))
+           lambda a: a.assigned_to(c.STAFF_SUPPORT) and not a.trusted_in(c.STAFF_SUPPORT),
+           ident='magprime_staff_support_volunteer',)
 
 # Left here in case the decision to remove is re-visited later. 20160809 RAE
 # MarketplaceEmail('Your MAGFest Marketplace Application has been waitlisted', 'marketplace_auto_waitlisted.txt',
 #                 lambda g: g.status == c.WAITLISTED and g.registered >= c.DEALER_REG_DEADLINE)
 
 StopsEmail('MAGFest Dept Checklist Introduction', 'dept_checklist_intro.txt',
-           ident='magprime_magprime_dept_checklist_intro',
-           lambda a: a.is_single_dept_head and a.admin_account)
+           lambda a: a.is_single_dept_head and a.admin_account,
+           ident='magprime_magprime_dept_checklist_intro')
 
 AutomatedEmail(Attendee, 'Last Chance for MAGFest ' + c.YEAR + ' bonus swag!', 'attendee_swag_promo.html',
                lambda a: a.can_spam and
