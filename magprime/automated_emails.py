@@ -7,7 +7,7 @@ class SeasonSupporterEmail(AutomatedEmail):
     def __init__(self, event):
         AutomatedEmail.__init__(self, SeasonPassTicket,
                                 subject='Claim your {} tickets with your MAGFest Season Pass'.format(event.name),
-                                ident='magprime_season_supporter_{}_invite'.format(event.name.lower().strip().replace(' ', '_')),
+                                ident='magprime_season_supporter_{}_invite'.format(event.slug),
                                 template='season_supporter_event_invite.txt',
                                 when=before(event.deadline),
                                 extra_data={'event': event})
@@ -84,7 +84,7 @@ AutomatedEmail(Attendee, 'Want to help run MAGFest poker tournaments?', 'poker.t
 
 StopsEmail('MAGFest Staff Support', 'staff_support.txt',
            lambda a: a.assigned_to(c.STAFF_SUPPORT) and not a.trusted_in(c.STAFF_SUPPORT),
-           ident='magprime_staff_support_volunteer',)
+           ident='magprime_staff_support_volunteer')
 
 # Left here in case the decision to remove is re-visited later. 20160809 RAE
 # MarketplaceEmail('Your MAGFest Marketplace Application has been waitlisted', 'marketplace_auto_waitlisted.txt',
@@ -92,7 +92,7 @@ StopsEmail('MAGFest Staff Support', 'staff_support.txt',
 
 StopsEmail('MAGFest Dept Checklist Introduction', 'dept_checklist_intro.txt',
            lambda a: a.is_single_dept_head and a.admin_account,
-           ident='magprime_magprime_dept_checklist_intro')
+           ident='magprime_dept_checklist_intro')
 
 AutomatedEmail(Attendee, 'Last Chance for MAGFest ' + c.YEAR + ' bonus swag!', 'attendee_swag_promo.html',
                lambda a: a.can_spam and
