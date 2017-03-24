@@ -77,7 +77,7 @@
 
         // MAGFest uses tiered badge pricing based on caps, so we want to link to our FAQ explaining this
         if ($('.prereg-price-notice').size()) {
-            $('#reg-types').append("<div class='help-block col-sm-6 col-sm-offset-'>Prices may increase before the set date. {% popup_link "http://magfest.org/faq#-KOpcFnNhdsUIqvvf6VB" "Why is this?" %}</div>");
+            $('#reg-types').append("<div class='help-block col-sm-6 col-sm-offset-'>Prices may increase before the set date. {{ macros.popup_link("http://magfest.org/faq#-KOpcFnNhdsUIqvvf6VB", "Why is this?") }}</div>");
         }
     });
 </script>
@@ -124,25 +124,25 @@
 
     <div id="tshirt_warning">
         <div class="help-block col-sm-6 col-sm-offset-2">
-            <em>Slim fit sizes only available during online pre-order. {% popup_link "http://magfest.org/images/2016swag/shirtsizeguide.png" "Size guide." %}</em>
+            <em>Slim fit sizes only available during online pre-order. {{ macros.popup_link("http://magfest.org/images/2016swag/shirtsizeguide.png", "Size guide.") }}</em>
         </div>
     </div>
 
     <span id="guitar_keychain">
-        ({{ macros.popup_link("http://magfest.org/sites/default/files/keychainsample.png","Art Preview") }})
+        ({{ macros.popup_link("http://magfest.org/sites/default/files/keychainsample.png", "Art Preview") }})
     </span>
 
     {% if c.BEFORE_SUPPORTER_DEADLINE %}
         <span id="canvas_print">
-            ({{ macros.popup_link("http://magfest.org/sites/default/files/canvassample.png","Art Preview") }})
+            ({{ macros.popup_link("http://magfest.org/sites/default/files/canvassample.png", "Art Preview") }})
         </span>
 
         <span id="supporter_popup">
-            ({{ macros.popup_link("../static_views/supporters.html","What's included?") }})
+            ({{ macros.popup_link("../static_views/supporters.html", "What's included?") }})
         </span>
 
         <span id="season_popup">
-            ({{ macros.popup_link("../static_views/seasonPasses.html","What's included?") }})
+            ({{ macros.popup_link("../static_views/seasonPasses.html", "What's included?") }})
         </span>
     {% endif %}
 {% endif %}
