@@ -24,7 +24,7 @@
                 setBadge(REG_TYPES, 2);  // default to child badge when appropriate
             }
         {% endif %}
-        
+
         // This places our "Extra Donation" form after our kick-in selection area.
         if ($.field('amount_extra')) {
             $('#extra_donation').insertAfter($.field('amount_extra').parents('.form-group'));
@@ -35,7 +35,7 @@
         if ($.field('payment_method')) {
             $('#price_explanation').insertAfter($.field('payment_method').parents('.form-group'));
         }
-        
+
         {% if c.PAGE_PATH != '/registration/form' %}
             // These are explanatory fields for attendees, so admins don't need to see them
             // #tax_exempt tells people that MAGFest is a 501(c)(3) nonprofit
@@ -43,14 +43,14 @@
                 $.field('amount_extra').parents('.form-group').find('.help-block').addClass('col-sm-offset-2');
                 $.field('amount_extra').parents('.form-group').append($('#tax_exempt'));
             }
-            
+
             // #tshirt_warning tells people that we don't sell 'slim' sizes at-fest
             if ($.field('shirt')) {
                 $.field('shirt').parents('.form-group').append($('#tshirt_warning'));
             } else {
                 $('#tshirt_warning').hide();
             }
-            
+
             // Super MAGFest has a very large kick-in selection area, so we save some page space here
             // by hiding the normal 'badge type' selectors (which are generally used to select kick-in levels).
             if ($(".badge-type-selector").size()) {
@@ -128,7 +128,6 @@
         </div>
     </div>
 
-<<<<<<< HEAD
     <span id="guitar_keychain">
         ({{ macros.popup_link("http://magfest.org/sites/default/files/keychainsample.png","Art Preview") }})
     </span>
@@ -146,6 +145,4 @@
             ({{ macros.popup_link("../static_views/seasonPasses.html","What's included?") }})
         </span>
     {% endif %}
-=======
->>>>>>> master
 {% endif %}
