@@ -20,18 +20,18 @@ presumably because they clicked the "I'm not coming" button.
         <tr>
             <td>{{ attendee|form_link }}</td>
             <td>
-                {% if attendee.weighted_hours %}
+                {% if attendee.weighted_hours -%}
                     <a href="../registration/shifts?id={{ attendee.id }}">{{ attendee.weighted_hours }}</a>
-                {% else %}
+                {% else -%}
                     0
-                {% endif %}
+                {%- endif %}
             </td>
             <td>
-                {% for room in attendee.rooms %}
-                    <a href="../hotel_assignments/index#/add-to-room/{{ room.id }}">{{ room.nights_labels|join:" / " }}</a>
-                {% empty %}
+                {% for room in attendee.rooms -%}
+                    <a href="../hotel_assignments/index#/add-to-room/{{ room.id }}">{{ room.nights_labels|join(" / ") }}</a>
+                {% else -%}
                     no
-                {% endfor %}
+                {%- endfor %}
             </td>
         </tr>
     {% endfor %}

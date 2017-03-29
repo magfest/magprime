@@ -2,7 +2,7 @@
 <head></head>
 <body>
 
-You ({{ attendee.full_name }}) have preregistered for {{ c.EVENT_NAME }} this coming {% event_dates %}
+You ({{ attendee.full_name }}) have preregistered for {{ c.EVENT_NAME }} this coming {{ event_dates() }}
 {% if attendee.group %}
     by claiming one of the badges in the {{ attendee.group.name }} group.
 {% else %}
@@ -38,7 +38,7 @@ Badges are not mailed out before the event, so your badge will be available for 
     {{ c.EVENT_NAME }} has a no-refund policy for all registrations.  If for any reason you can't make it, we allow and encourage
     you to resell your registration for the exact price you paid for it.  To transfer your registration to another person,
     send them <a href="{{ c.URL_BASE }}/preregistration/transfer_badge?id={{ attendee.id }}">this personalized link</a>,
-    which will work until {{ c.UBER_TAKEDOWN|datetime }}.
+    which will work until {{ c.UBER_TAKEDOWN|datetime_local }}.
 {% endif %}
 
 </body>

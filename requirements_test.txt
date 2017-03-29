@@ -1,0 +1,4 @@
+-r requirements.txt
+pep8
+-e "git+https://github.com/magfest/sideboard#egg=sideboard"
+-e "git+https://github.com/magfest/ubersystem#egg=uber"

@@ -9,9 +9,9 @@ Select a range of times to see a list of all volunteers working during those tim
 <form method="post" action="volunteer_food">
 <table style="width:66%">
 <tr>
-    <td>Department: <select name="department">{% options c.JOB_LOCATION_OPTS department %}</select></td>
-    <td>Start: <select name="start">{% options c.START_TIME_OPTS start %}</select></td>
-    <td>End: <select name="end">{% options c.START_TIME_OPTS end %}</select></td>
+    <td>Department: <select name="department">{{ options(c.JOB_LOCATION_OPTS,department) }}</select></td>
+    <td>Start: <select name="start">{{ options(c.START_TIME_OPTS,start) }}</select></td>
+    <td>End: <select name="end">{{ options(c.START_TIME_OPTS,end) }}</select></td>
     <td><input type="submit" value="Show Volunteers" /></td>
 </tr>
 </table>
@@ -33,8 +33,8 @@ Select a range of times to see a list of all volunteers working during those tim
             <tr>
                 <td><nobr>{{ attendee|form_link }}</nobr></td>
                 <td>{{ attendee.badge_num }}</td>
-                <td>{{ attendee.food_restrictions.sandwich_pref_labels|join:', ' }}</td>
-                <td>{{ attendee.food_restrictions.standard_labels|join:', ' }}</td>
+                <td>{{ attendee.food_restrictions.sandwich_pref_labels|join(', ') }}</td>
+                <td>{{ attendee.food_restrictions.standard_labels|join(', ') }}</td>
                 <td>{{ attendee.food_restrictions.freeform|linebreaksbr }}</td>
             </tr>
         {% endfor %}
