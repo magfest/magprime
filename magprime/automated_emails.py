@@ -106,7 +106,7 @@ AutomatedEmail(Attendee, 'Last Chance for MAGFest ' + c.YEAR + ' bonus swag!', '
 # size deadline.
 AutomatedEmail(Attendee, 'MAGFest ' + c.YEAR + ' t-shirt size confirmation', 'confirm_shirt_size.html',
                lambda a: days_after(3, a.registered)() and
-                         a.gets_any_kind_of_shirt, when=before(c.SHIRT_DEADLINE),
+                         a.gets_shirt, when=before(c.SHIRT_DEADLINE),
                ident='magprime_shirt_size_confirmation')
 
 AutomatedEmail(Attendee, 'MAGFest Dealer waitlist has been exhausted', 'dealer_waitlist_exhausted.txt',
