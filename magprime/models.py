@@ -12,12 +12,6 @@ class Attendee:
             except:
                 log.error('unable to send invalid email')
 
-    @cost_property
-    def child_discount(self):
-        if 'val' in self.age_group_conf and self.age_group_conf['val'] == c.UNDER_13:
-            return math.ceil(c.BADGE_PRICE / 2) * -1
-        return 0
-
     @presave_adjustment
     def bucket_pricing_workaround(self):
         if self.overridden_price is None:
