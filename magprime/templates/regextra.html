@@ -7,6 +7,7 @@
             '<span class="prereg-price-notice">Price is always half that of the Single Attendee badge price.</span>',
                 onClick: function () {
                     $('.group_fields').addClass('hide');
+                    $('.non_group_fields').removeClass('hide');
                     if ($.field('first_name')) {
                         $('#bold-field-message').insertBefore($.field('first_name').parents('.form-group'));
                     }
