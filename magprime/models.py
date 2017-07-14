@@ -13,13 +13,6 @@ class Attendee:
                 log.error('unable to send invalid email')
 
     @presave_adjustment
-    def bucket_pricing_workaround(self):
-        if self.overridden_price is None:
-            self.overridden_price = self.badge_cost
-        elif self.extra_donation and self.overridden_price == self.default_cost:
-            self.overridden_price -= self.extra_donation
-
-    @presave_adjustment
     def child_badge(self):
         if self.age_group not in [c.UNDER_21, c.OVER_21, c.AGE_UNKNOWN] and self.badge_type == c.ATTENDEE_BADGE:
             self.badge_type = c.CHILD_BADGE
