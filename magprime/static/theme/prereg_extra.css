@@ -4,5 +4,9 @@
 
 body {
     background-color: #2BA082;
-    background-image: url(../theme/tile-background.gif);
+    background-image: url(../theme/tile-background.png);
+
+    background-image: url(../theme/tile-background.png), -webkit-linear-gradient(top, #8CB872, #2BA082 450px, #003935);
+    background-image: url(../theme/tile-background.png), -o-linear-gradient(top, #8CB872, #2BA082 450px, #003935);
+    background-image: url(../theme/tile-background.png), linear-gradient(to bottom, #8CB872, #2BA082 450px, #003935);
 }
