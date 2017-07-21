@@ -78,7 +78,7 @@
 
         // MAGFest uses tiered badge pricing based on caps, so we want to link to our FAQ explaining this
         if ($('.prereg-price-notice').size()) {
-            $('#reg-types').append("<div class='help-block col-sm-9 col-sm-offset-3'>Prices may increase before the set date. {{ macros.popup_link("http://magfest.org/faq#-KOpcFnNhdsUIqvvf6VB", "Why is this?")|e }}</div>");
+            $('#reg-types').append("<div class='help-block col-sm-9 col-sm-offset-3'>Availability of tickets at this price: <strong>{{ c.BADGES_LEFT_AT_CURRENT_PRICE }}</strong>. {{ macros.popup_link("http://magfest.org/faq#-KOpcFnNhdsUIqvvf6VB", "What does this mean?")|e }}</div>");
         }
 
         if ($.field('website')) {
