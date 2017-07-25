@@ -79,19 +79,23 @@
         // MAGFest uses tiered badge pricing based on caps, so we want to link to our FAQ explaining this
         {% if c.BADGES_LEFT_AT_CURRENT_PRICE %}
             {% if c.BADGES_LEFT_AT_CURRENT_PRICE == -1 %}
-                {% set badges_left_text = 'Limitless' %}
+                {% set badges_left_text = 'Unlimited' %}
             {% elif c.BADGES_LEFT_AT_CURRENT_PRICE <= 100 %}
-                {% set badges_left_text = 'Critical' %}
+                {% set badges_left_text = 'Almost Gone' %}
             {% elif c.BADGES_LEFT_AT_CURRENT_PRICE <= 250 %}
-                {% set badges_left_text = 'Low' %}
+                {% set badges_left_text = 'Very Low' %}
             {% else %}
-                {% set badges_left_text = 'Medium' if c.BADGES_LEFT_AT_CURRENT_PRICE <= 500 else 'High' %}
+                {% set badges_left_text = 'Low' if c.BADGES_LEFT_AT_CURRENT_PRICE <= 500 else 'High' %}
             {% endif %}
 
-            if ($('.prereg-price-notice').size()) {
-                $('#reg-types').append("<div class='help-block col-sm-9 col-sm-offset-3'>Availability of tickets at this price: <strong>{{ badges_left_text }}</strong>. {{ macros.popup_link("http://magfest.org/faq#-KOpcFnNhdsUIqvvf6VB", "What does this mean?")|e }}</div>");
-            }
+            var bucket_notice = "Availability of tickets at these prices: <strong>{{ badges_left_text }}</strong>. {{ macros.popup_link("http://magfest.org/faq#-KOpcFnNhdsUIqvvf6VB", "What does this mean?")|e }}";
+        {% else %}
+            var bucket_notice = "Prices may increase before the set date. {{ macros.popup_link("http://magfest.org/faq#-KOpcFnNhdsUIqvvf6VB", "Why is this?")|e }}";
         {% endif %}
+
+        if ($('.prereg-price-notice').size()) {
+            $('#reg-types').append("<div class='help-block col-sm-9 col-sm-offset-3'>"+ bucket_notice + "</div>");
+        }
 
         if ($.field('website')) {
             $.field('website').parents('.form-group').find('.help-block').html('Dealers who don\'t provide a ' +
