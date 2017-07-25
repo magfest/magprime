@@ -86,10 +86,6 @@ StopsEmail('MAGFest Staff Support', 'staff_support.txt',
            lambda a: a.assigned_to(c.STAFF_SUPPORT) and not a.trusted_in(c.STAFF_SUPPORT),
            ident='magprime_staff_support_volunteer')
 
-# Left here in case the decision to remove is re-visited later. 20160809 RAE
-# MarketplaceEmail('Your MAGFest Marketplace Application has been waitlisted', 'marketplace_auto_waitlisted.txt',
-#                 lambda g: g.status == c.WAITLISTED and g.registered >= c.DEALER_REG_DEADLINE)
-
 StopsEmail('MAGFest Dept Checklist Introduction', 'dept_checklist_intro.txt',
            lambda a: a.is_single_dept_head and a.admin_account,
            ident='magprime_dept_checklist_intro')
