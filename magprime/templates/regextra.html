@@ -98,8 +98,11 @@
         }
 
         if ($.field('website')) {
-            $.field('website').parents('.form-group').find('.help-block').html('Dealers who don\'t provide a ' +
-                'website that includes images of their wares will be automatically waitlisted.')
+            $.field('website').parents('.form-group').find('.help-block').html(
+                'A website is required to view what you plan to sell in the Marketplace--it can ' +
+                'be a link to your business page, online shop, facebook, tumblr (with appropriate ' +
+                'tag for your art), etc. If no link is provided, then you will be automatically ' +
+                'waitlisted because we cannot fully evaluate your wares or application.');
         }
     });
 </script>
