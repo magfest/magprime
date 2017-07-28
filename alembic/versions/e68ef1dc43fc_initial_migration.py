@@ -44,10 +44,9 @@ def upgrade():
     sa.Column('slug', sa.Unicode(), server_default='', nullable=False),
     sa.PrimaryKeyConstraint('id', name=op.f('pk_season_pass_ticket'))
     )
-    op.add_column('attendee', sa.Column('extra_donation', sa.Integer(), server_default='0', nullable=False))
 
 
 def downgrade():
-    op.drop_column('attendee', 'extra_donation')
+    op.drop_column('attendee')
     op.drop_table('season_pass_ticket')
     op.drop_table('prev_season_supporter')
