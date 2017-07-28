@@ -1,16 +1,6 @@
 from magprime import *
 
 
-@validation.Attendee
-def extra_donation_valid(attendee):
-    try:
-        extra_donation = int(float(attendee.extra_donation if attendee.extra_donation else 0))
-        if extra_donation < 0:
-            return 'Extra Donation must be a number that is 0 or higher.'
-    except:
-        return "What you entered for Extra Donation ({}) isn't even a number".format(attendee.extra_donation)
-
-
 @prereg_validation.Attendee
 def child_badge_over_13(attendee):
     if attendee.is_new and attendee.badge_type == c.CHILD_BADGE and attendee.age_group_conf['val'] not in [c.UNDER_6, c.UNDER_13]:
