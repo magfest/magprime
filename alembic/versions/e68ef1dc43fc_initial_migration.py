@@ -47,6 +47,5 @@ def upgrade():
 
 
 def downgrade():
-    op.drop_column('attendee')
     op.drop_table('season_pass_ticket')
     op.drop_table('prev_season_supporter')
