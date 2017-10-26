@@ -50,7 +50,7 @@ AutomatedEmail(Attendee, 'Important MAGFest PC Gaming Room Information! *PLEASE 
 AutomatedEmail(Attendee, 'MAGFest Tech Ops volunteering', 'techops.txt',
            lambda a: a.staffing and a.assigned_to(c.TECH_OPS),
            ident='magprime_techops_volunteer',
-           sender='MAGFest TechOps <techops-heads@magfest.org>')
+           sender='MAGFest TechOps <techops@magfest.org>')
 
 AutomatedEmail(Attendee, 'MAGFest Chipspace volunteering', 'chipspace.txt',
            lambda a: a.staffing and a.assigned_to(c.CHIPSPACE),
