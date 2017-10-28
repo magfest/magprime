@@ -14,7 +14,7 @@ class Root:
                                .order_by(Attendee.full_name).all()
         }
 
-    def volunteer_food(self, session, message='', department=None, start=None, end=None):
+    def volunteer_food(self, session, message='', department_id=None, start=None, end=None):
         staffers = set()
         if cherrypy.request.method == 'POST':
             start = c.EVENT_TIMEZONE.localize(datetime.strptime(start, c.TIMESTAMP_FORMAT))
@@ -27,7 +27,8 @@ class Root:
                 while hour < end:
                     hours.add(hour)
                     hour += timedelta(hours=1)
-                for job in session.jobs().filter_by(location=department):
+                department_id = Department.to_id(department_id)
+                for job in session.jobs().filter_by(department_id=department_id):
                     if hours.intersection(job.hours):
                         for shift in job.shifts:
                             if shift.attendee.badge_type == c.STAFF_BADGE or shift.attendee.weighted_hours > 12:
@@ -37,6 +38,6 @@ class Root:
             'message': message,
             'end': end,
             'start': start,
-            'department': department,
+            'department_id': department_id,
             'staffers': sorted(staffers, key=lambda a: a.full_name)
         }
