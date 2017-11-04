@@ -14,6 +14,7 @@ class Root:
                                .order_by(Attendee.full_name).all()
         }
 
+    @department_id_adapter
     def volunteer_food(self, session, message='', department_id=None, start=None, end=None):
         staffers = set()
         if cherrypy.request.method == 'POST':
@@ -27,7 +28,6 @@ class Root:
                 while hour < end:
                     hours.add(hour)
                     hour += timedelta(hours=1)
-                department_id = Department.to_id(department_id)
                 for job in session.jobs().filter_by(department_id=department_id):
                     if hours.intersection(job.hours):
                         for shift in job.shifts:
