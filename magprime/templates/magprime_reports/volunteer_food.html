@@ -9,7 +9,7 @@ Select a range of times to see a list of all volunteers working during those tim
 <form method="post" action="volunteer_food">
 <table style="width:66%">
 <tr>
-    <td>Department: <select name="department">{{ options(c.JOB_LOCATION_OPTS,department) }}</select></td>
+    <td>Department: <select name="department_id">{{ options(c.DEPARTMENT_OPTS, department_id) }}</select></td>
     <td>Start: <select name="start">{{ options(c.START_TIME_OPTS,start) }}</select></td>
     <td>End: <select name="end">{{ options(c.START_TIME_OPTS,end) }}</select></td>
     <td><input type="submit" value="Show Volunteers" /></td>

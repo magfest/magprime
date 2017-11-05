@@ -87,7 +87,7 @@ StopsEmail('MAGFest Staff Support', 'staff_support.txt',
            ident='magprime_staff_support_volunteer')
 
 StopsEmail('MAGFest Dept Checklist Introduction', 'dept_checklist_intro.txt',
-           lambda a: a.is_single_dept_head and a.admin_account,
+           lambda a: a.is_checklist_admin and a.admin_account,
            ident='magprime_dept_checklist_intro')
 
 AutomatedEmail(Attendee, 'Last Chance for MAGFest ' + c.YEAR + ' bonus swag!', 'attendee_swag_promo.html',
