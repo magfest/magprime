@@ -96,7 +96,7 @@ AutomatedEmail(Attendee, 'Last Chance for MAGFest ' + c.YEAR + ' bonus swag!', '
                          (a.paid == c.HAS_PAID or a.paid == c.NEED_NOT_PAY or (a.group and a.group.amount_paid)) and
                          days_after(3, a.registered)(),
                when=days_before(14, c.SUPPORTER_DEADLINE),
-               sender=c.MARKETPLACE_EMAIL,
+               sender='MAGFest Merch Team <merch@magfest.org>',
                ident='magprime_bonus_swag_reminder_last_chance')
 
 # Send to any attendee who will be receiving a t-shirt (staff, volunteers, anyone
@@ -105,7 +105,7 @@ AutomatedEmail(Attendee, 'Last Chance for MAGFest ' + c.YEAR + ' bonus swag!', '
 AutomatedEmail(Attendee, 'MAGFest ' + c.YEAR + ' t-shirt size confirmation', 'confirm_shirt_size.html',
                lambda a: days_after(3, a.registered)() and a.gets_any_kind_of_shirt,
                when=before(c.SHIRT_DEADLINE),
-               sender=c.MARKETPLACE_EMAIL,
+               sender='MAGFest Merch Team <merch@magfest.org>',
                ident='magprime_shirt_size_confirmation')
 
 AutomatedEmail(Attendee, 'MAGFest Dealer waitlist has been exhausted', 'dealer_waitlist_exhausted.txt',
