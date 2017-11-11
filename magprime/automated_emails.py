@@ -21,7 +21,8 @@ AutomatedEmail(Attendee, 'MAGFest schedule, maps, and other FAQs', 'precon_faqs.
                             and a.paid != c.NOT_PAID
                             and (a.paid != c.PAID_BY_GROUP or a.group and not a.group.amount_unpaid),
                ident='magprime_precon_faqs',
-               when=days_before(7, c.EPOCH))
+               when=days_before(7, c.EPOCH),
+               sender='MAGFest Info Desk <infodesk@magfest.org>')
 
 AutomatedEmail(Attendee, 'MAGFest food for guests', 'guest_food_restrictions.txt',
                lambda a: a.badge_type == c.GUEST_BADGE, sender='MAGFest Staff Suite <chefs@magfest.org>',
@@ -94,15 +95,17 @@ AutomatedEmail(Attendee, 'Last Chance for MAGFest ' + c.YEAR + ' bonus swag!', '
                lambda a: a.can_spam and
                          (a.paid == c.HAS_PAID or a.paid == c.NEED_NOT_PAY or (a.group and a.group.amount_paid)) and
                          days_after(3, a.registered)(),
-                         when=days_before(14, c.SUPPORTER_DEADLINE),
+               when=days_before(14, c.SUPPORTER_DEADLINE),
+               sender=c.MARKETPLACE_EMAIL,
                ident='magprime_bonus_swag_reminder_last_chance')
 
 # Send to any attendee who will be receiving a t-shirt (staff, volunteers, anyone
 # who kicked in at the shirt level or above).	Should not be sent after the t-shirt
 # size deadline.
 AutomatedEmail(Attendee, 'MAGFest ' + c.YEAR + ' t-shirt size confirmation', 'confirm_shirt_size.html',
-               lambda a: days_after(3, a.registered)() and
-                         a.gets_any_kind_of_shirt, when=before(c.SHIRT_DEADLINE),
+               lambda a: days_after(3, a.registered)() and a.gets_any_kind_of_shirt,
+               when=before(c.SHIRT_DEADLINE),
+               sender=c.MARKETPLACE_EMAIL,
                ident='magprime_shirt_size_confirmation')
 
 AutomatedEmail(Attendee, 'MAGFest Dealer waitlist has been exhausted', 'dealer_waitlist_exhausted.txt',
