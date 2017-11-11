@@ -22,7 +22,7 @@ AutomatedEmail(Attendee, 'MAGFest schedule, maps, and other FAQs', 'precon_faqs.
                             and (a.paid != c.PAID_BY_GROUP or a.group and not a.group.amount_unpaid),
                ident='magprime_precon_faqs',
                when=days_before(7, c.EPOCH),
-               sender='MAGFest Info Desk <infodesk@magfest.org>')
+               sender='MAGFest Support <support@magfest.org>')
 
 AutomatedEmail(Attendee, 'MAGFest food for guests', 'guest_food_restrictions.txt',
                lambda a: a.badge_type == c.GUEST_BADGE, sender='MAGFest Staff Suite <chefs@magfest.org>',
