@@ -1,0 +1,18 @@
+<html>
+<head></head>
+<body>
+
+<p>Hello {{ attendee.first_name }},</p>
+
+<p>
+    You are receiving this e-mail because you're a staffer eligible for complimentary shirts.
+    We've <a href="{{ c.URL_BASE }}/signups/shirt_size">added a step to the volunteer checklist</a>
+    for you to read our staff shirt policy, and choose whether you'd like two staff shirts, or
+    substitute one of them for the standard event themed swag shirt. We are printing shirts very soon,
+    so please complete this step no later than <b>{{ c.SHIRT_DEADLINE|datetime_local }}</b>.
+</p>
+
+<p>{{ c.STOPS_EMAIL_SIGNATURE|linebreaksbr }}</p>
+
+</body>
+</html>

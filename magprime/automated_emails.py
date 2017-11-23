@@ -91,6 +91,11 @@ StopsEmail('MAGFest Dept Checklist Introduction', 'dept_checklist_intro.txt',
            lambda a: a.is_checklist_admin and a.admin_account,
            ident='magprime_dept_checklist_intro')
 
+StopsEmail('Last Chance to enter your MAGFest staff shirt preferences', 'second_shirt.html',
+           lambda a: not a.shirt_info_marked,
+           when=days_before(21, c.SHIRT_DEADLINE),
+           ident='magprime_second_shirt')
+
 AutomatedEmail(Attendee, 'Last Chance for MAGFest ' + c.YEAR + ' bonus swag!', 'attendee_swag_promo.html',
                lambda a: a.can_spam and
                          (a.paid == c.HAS_PAID or a.paid == c.NEED_NOT_PAY or (a.group and a.group.amount_paid)) and
