@@ -17,7 +17,7 @@ Once you're done reading that, here's some quick info on the different positions
 
 For more detailed information about any and all of these positions, please read our full "Chipspace Charter" found here: http://tinyurl.com/MAGChipspaceCharter
 
-As always, we're looking forward to working with you at Chipspace. See you at Super MAGFest!
+As always, we're looking forward to working with you at Chipspace. See you at {{ c.EVENT_NAME }}!
 
 Rob “Bory” Carballo,
 Chipspace Department Head
