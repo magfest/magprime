@@ -1,19 +1,25 @@
 from magprime import *
 
-AutomatedEmail.queries[SeasonPassTicket] = lambda session: session.season_passes()
+# leave this off for now, this code is now old and needs updating
+_send_season_supporter_emails = False
 
 
-class SeasonSupporterEmail(AutomatedEmail):
-    def __init__(self, event):
-        AutomatedEmail.__init__(self, SeasonPassTicket,
-                                subject='Claim your {} tickets with your MAGFest Season Pass'.format(event.name),
-                                ident='magprime_season_supporter_{}_invite'.format(event.slug),
-                                template='season_supporter_event_invite.txt',
-                                when=before(event.deadline),
-                                extra_data={'event': event})
+if _send_season_supporter_emails:
+    # This line currently does, but should not, return Attendee objects.
+    # It can cause issues. see _assert_same_model_type()
+    # !!THIS LINE IS BROKEN!! # AutomatedEmail.queries[SeasonPassTicket] = lambda session: session.season_passes()
 
-for _event in SeasonEvent.instances.values():
-    SeasonSupporterEmail(_event)
+    class SeasonSupporterEmail(AutomatedEmail):
+        def __init__(self, event):
+            AutomatedEmail.__init__(self, SeasonPassTicket,
+                                    subject='Claim your {} tickets with your MAGFest Season Pass'.format(event.name),
+                                    ident='magprime_season_supporter_{}_invite'.format(event.slug),
+                                    template='season_supporter_event_invite.txt',
+                                    when=before(event.deadline),
+                                    extra_data={'event': event})
+
+    for _event in SeasonEvent.instances.values():
+        SeasonSupporterEmail(_event)
 
 
 AutomatedEmail(Attendee, 'MAGFest schedule, maps, and other FAQs', 'precon_faqs.html',
