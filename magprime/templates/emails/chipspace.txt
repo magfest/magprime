@@ -1,8 +1,10 @@
 {{ attendee.first_name }},
 
 Thank you for volunteering for {{ c.EVENT_NAME }}, and an even bigger thanks for your interest in Chipspace!  
-For general info about Chipspace, click: http://tinyurl.com/MAGChipspaceInfo. 
-Once you're done reading that, but before you go sign yourself up for shifts, which should be available around Dec. 1st. Here's some quick info on the different positions we have available: 
+
+For general info about Chipspace, please read the following: super.magfest.org/chipspaceinfo. 
+
+Once you're done reading that, here's some quick info on the different positions we have available: 
 
   - General Helper: These are all purpose volunteers who are responsible for duties such as manning sign up tables, general crowd control, keeping time for the open mic, and running the occasional errand (i.e. important, but pretty straightforward stuff). Hours are weighted 1.0.
 
@@ -10,11 +12,13 @@ Once you're done reading that, but before you go sign yourself up for shifts, wh
 
   - Sound Technician: This is also a weighted position because it carries with it extra responsibilities as well as requiring a prerequisite set of skills. Sound Techs operate the mixer, run cables, act as stagehands, troubleshoot  audio gremlins, and work with artists with varying set ups. While we are willing to train on site if need be, we prefer volunteers filling this space to have at least some previous experience in live sound. Hours are weighted 1.5.
 
-For more detailed information about any and all of these positions, please read our full "Chipspace Charter":
-http://tinyurl.com/MAGChipspaceCharter.
+- Stream Technician: This is also a weighted position because it carries with it extra responsibilities as well as requiring a prerequisite set of skills. Stream Techs monitor the audio and video streams, run cables, act as a/v techs, troubleshoot video gremlins, and work with visualists with varying set ups . While we are willing to train on site if need be, we prefer volunteers filling this space to have at least some previous experience or familiarity. Hours are weighted 1.5
+
+
+For more detailed information about any and all of these positions, please read our full "Chipspace Charter" found here: http://tinyurl.com/MAGChipspaceCharter
 
 As always, we're looking forward to working with you at Chipspace. See you at {{ c.EVENT_NAME }}!
 
-Brandon Hood,
-Chipspace General Manager
-presidenthoodie@magfest.org
+Rob “Bory” Carballo,
+Chipspace Department Head
+boryalic@magfest.org
