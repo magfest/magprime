@@ -2,6 +2,10 @@
     padding-top: 37.037%;  /* The height is 37.037% of the width (300px / 810px) */
 }
 
+.bling-icon:before {
+  content: "🍩";
+}
+
 body {
     background-color: #2BA082;
     background-image: url(../theme/tile-background.png);
