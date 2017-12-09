@@ -1,4 +1,5 @@
 from uber.common import *
+from uber.config import dynamic
 from magprime._version import __version__
 
 magprime_config = parse_config(__file__)
@@ -9,6 +10,7 @@ template_overrides(join(magprime_config['module_root'], 'templates'))
 @Config.mixin
 class ExtraConfig:
     @property
+    @dynamic
     def SEASON_BADGE_PRICE(self):
         return self.BADGE_PRICE + self.SEASON_LEVEL
 
