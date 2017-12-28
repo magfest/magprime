@@ -147,4 +147,3 @@ def onsite_email_performance():
         AutomatedEmail.instances_by_model[Attendee] = list(filter(
             lambda instance: instance.allow_during_con,
             _instances_by_model[Attendee]))
-
