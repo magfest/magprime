@@ -141,3 +141,9 @@ def onsite_email_performance():
         for ident, instance in list(AutomatedEmail.instances.items()):
             if not instance.allow_during_con:
                 del AutomatedEmail.instances[ident]
+
+        _instances_by_model = AutomatedEmail.instances_by_model
+        AutomatedEmail.instances_by_model = defaultdict(list)
+        AutomatedEmail.instances_by_model[Attendee] = list(filter(
+            lambda instance: instance.allow_during_con,
+            _instances_by_model[Attendee]))
