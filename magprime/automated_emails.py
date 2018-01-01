@@ -12,7 +12,7 @@ if _send_season_supporter_emails:
     class SeasonSupporterEmail(AutomatedEmail):
         def __init__(self, event):
             AutomatedEmail.__init__(self, SeasonPassTicket,
-                                    subject='Claim your {} tickets with your MAGFest Season Pass'.format(event.name),
+                                    subject='Claim your {} badges with your MAGFest Season Pass'.format(event.name),
                                     ident='magprime_season_supporter_{}_invite'.format(event.slug),
                                     template='season_supporter_event_invite.txt',
                                     when=before(event.deadline),

@@ -75,7 +75,7 @@
                 {% set badges_left_text = 'Low' if c.BADGES_LEFT_AT_CURRENT_PRICE <= 500 else 'High' %}
             {% endif %}
 
-            var bucket_notice = "Availability of tickets at these prices: <strong>{{ badges_left_text }}</strong>. {{ macros.popup_link("http://magfest.org/faq#-KOpcFnNhdsUIqvvf6VB", "What does this mean?")|e }}";
+            var bucket_notice = "Availability of badges at these prices: <strong>{{ badges_left_text }}</strong>. {{ macros.popup_link("http://magfest.org/faq#-KOpcFnNhdsUIqvvf6VB", "What does this mean?")|e }}";
         {% else %}
             var bucket_notice = "Prices may increase before the set date. {{ macros.popup_link("http://magfest.org/faq#-KOpcFnNhdsUIqvvf6VB", "Why is this?")|e }}";
         {% endif %}
