@@ -1,11 +1,13 @@
 {{ attendee.first_name }},
 
-Thanks again for volunteering at {{ c.EVENT_NAME }} this year. We feed our volunteers three meals per day during {{ c.EVENT_NAME }}, so you can drop by the Hospitality Suite in Room 5211 on the 5th floor of the hotel for food at anytime during {{ c.EVENT_NAME }} for a snack or drink. Meals will be served at the following times:
+Thanks again for volunteering at {{ c.EVENT_NAME }} this year. We feed our volunteers three meals per day during {{ c.EVENT_NAME }}, so you can drop by the Hospitality Suite in Room 5217 on the 5th floor of the hotel for food at anytime during {{ c.EVENT_NAME }} for a snack or drink. Meals will be served at the following times:
 
-Breakfast: 7:00 am to 11:00 am
-Lunch: 12:00 pm to 4:00 pm
+Breakfast: 8:00 am to 11:00 am
+Lunch: 12:00 pm to 3:00 pm
 Dinner: 5:00 pm to 9:00 pm
 Overnight: 9:00 pm to 4:00 am (or until the hot food has run out, whichever occurs first)
+
+We also have a grab and go station availbale 24/7 with sandwiches, instant oatmeal and ramen. Gluten free options, vegan options and non dairy is available, just ask if you have a restriction! 
 
 {% if attendee.badge_type == ATTENDEE_BADGE %}You will become eligible for food after working your first shift if you have signed up for at least 12 weighted hours. Please visit Staffing Ops (in Camelia 1 on the Ballroom level) after you first get your badge to get your shift schedule, and then come back to get your ribbon marked after working your first shift and getting your department head to sign your sheet. You will not be able to get snacks, drinks, or meals, or have food picked up without your volunteer ribbon being properly marked.
 
