@@ -102,7 +102,7 @@ StopsEmail('Last Chance to enter your MAGFest staff shirt preferences', 'second_
            when=days_before(21, c.SHIRT_DEADLINE),
            ident='magprime_second_shirt')
 
-AutomatedEmail(Attendee, 'Last Chance for MAGFest ' + c.YEAR + ' bonus swag!', 'attendee_swag_promo.html',
+AutomatedEmail(Attendee, 'Last Chance for MAGFest ' + c.EVENT_YEAR + ' bonus swag!', 'attendee_swag_promo.html',
                lambda a: a.can_spam and
                          (a.paid == c.HAS_PAID or a.paid == c.NEED_NOT_PAY or (a.group and a.group.amount_paid)) and
                          days_after(3, a.registered)(),
@@ -113,7 +113,7 @@ AutomatedEmail(Attendee, 'Last Chance for MAGFest ' + c.YEAR + ' bonus swag!', '
 # Send to any attendee who will be receiving a t-shirt (staff, volunteers, anyone
 # who kicked in at the shirt level or above).	Should not be sent after the t-shirt
 # size deadline.
-AutomatedEmail(Attendee, 'MAGFest ' + c.YEAR + ' t-shirt size confirmation', 'confirm_shirt_size.html',
+AutomatedEmail(Attendee, 'MAGFest ' + c.EVENT_YEAR + ' t-shirt size confirmation', 'confirm_shirt_size.html',
                lambda a: days_after(3, a.registered)() and a.gets_any_kind_of_shirt,
                when=before(c.SHIRT_DEADLINE),
                sender='MAGFest Merch Team <merch@magfest.org>',
