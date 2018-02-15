@@ -9,7 +9,7 @@ class Attendee:
             try:
                 send_email(c.STAFF_EMAIL, c.STAFF_EMAIL, 'Volunteer invalidated',
                            render('emails/invalidated_volunteer.txt', {'attendee': self}), model=self)
-            except:
+            except Exception:
                 log.error('unable to send invalid email')
 
     @presave_adjustment

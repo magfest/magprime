@@ -19,5 +19,6 @@ class SeasonEvent(Registry):
         else:
             self.deadline = (self.day - timedelta(days=7)).replace(hour=23, minute=59)
 
+
 for _slug, _conf in c.SEASON_EVENTS.items():
     SeasonEvent.register(_slug, _conf)
