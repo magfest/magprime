@@ -1,11 +1,19 @@
-from magprime import *
+from pockets.autolog import log
+from sideboard.lib.sa import CoerceUTF8 as UnicodeText, UUID
+
+from uber.config import c
+from uber.decorators import presave_adjustment, render
+from uber.models import MagModel, DefaultColumn as Column, Session
+from uber.notifications import send_email
+from uber.utils import add_opt, remove_opt
 
 
 @Session.model_mixin
 class Attendee:
     @presave_adjustment
     def invalid_notification(self):
-        if self.staffing and self.badge_status == c.INVALID_STATUS and self.badge_status != self.orig_value_of('badge_status'):
+        if self.staffing and self.badge_status == c.INVALID_STATUS \
+                and self.badge_status != self.orig_value_of('badge_status'):
             try:
                 send_email(c.STAFF_EMAIL, c.STAFF_EMAIL, 'Volunteer invalidated',
                            render('emails/invalidated_volunteer.txt', {'attendee': self}), model=self)
@@ -34,8 +42,8 @@ class Attendee:
 
 
 class SeasonPassTicket(MagModel):
-    fk_id    = Column(UUID)
-    slug     = Column(UnicodeText)
+    fk_id = Column(UUID)
+    slug = Column(UnicodeText)
 
     @property
     def fk(self):
@@ -44,8 +52,8 @@ class SeasonPassTicket(MagModel):
 
 class PrevSeasonSupporter(MagModel):
     first_name = Column(UnicodeText)
-    last_name  = Column(UnicodeText)
-    email      = Column(UnicodeText)
+    last_name = Column(UnicodeText)
+    email = Column(UnicodeText)
 
     email_model_name = 'attendee'  # used by AutomatedEmail code
 

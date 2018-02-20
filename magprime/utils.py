@@ -1,4 +1,9 @@
-from magprime import *
+import re
+from collections import OrderedDict
+from datetime import datetime, timedelta
+
+from uber.config import c
+from uber.utils import Registry
 
 
 class SeasonEvent(Registry):
