@@ -1,4 +1,12 @@
-from magprime import *
+from collections import defaultdict
+
+from uber.config import c
+from uber.decorators import all_renderable, unrestricted
+from uber.errors import HTTPRedirect
+from uber.utils import localized_now
+
+from magprime.models import PrevSeasonSupporter, SeasonPassTicket
+from magprime.utils import SeasonEvent
 
 
 @all_renderable(c.PEOPLE)

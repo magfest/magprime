@@ -1,4 +1,11 @@
-from magprime import *
+from datetime import datetime, timedelta
+
+import cherrypy
+from sqlalchemy.orm import subqueryload
+
+from uber.config import c
+from uber.decorators import all_renderable, department_id_adapter
+from uber.models import Attendee, Shift
 
 
 @all_renderable(c.PEOPLE)

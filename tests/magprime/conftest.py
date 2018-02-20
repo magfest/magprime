@@ -1,1 +1,1 @@
-from tests.uber.conftest import *
+from tests.uber import conftest  # noqa: F401

@@ -1,6 +1,16 @@
-from uber.common import *
-from uber.config import dynamic
-from magprime._version import __version__
+from os.path import join
+
+import cherrypy
+import uber
+from sideboard.lib import parse_config
+from uber.config import c, Config, dynamic
+from uber.errors import HTTPRedirect
+from uber.jinja import template_overrides
+from uber.models import Attendee, Session
+from uber.utils import mount_site_sections, static_overrides
+
+from magprime._version import __version__  # noqa: F401
+
 
 magprime_config = parse_config(__file__)
 static_overrides(join(magprime_config['module_root'], 'static'))
@@ -27,6 +37,16 @@ class ExtraConfig:
         return types
 
 
+# These need to come last so they can make use of config properties
+from magprime.utils import *  # noqa: F401,E402,F403
+from magprime.models import *  # noqa: F401,E402,F403
+from magprime.automated_emails import *  # noqa: F401,E402,F403
+from magprime.model_checks import *  # noqa: F401,E402,F403
+
+# Silence pyflakes
+from magprime.models import PrevSeasonSupporter  # noqa: E402
+
+
 @Session.model_mixin
 class SessionMixin:
     def season_pass(self, id):
@@ -44,11 +64,6 @@ class SessionMixin:
         return prev + list(attendees.values())
 
 
-# these need to come last so they can make use of everything defined above
-from magprime.utils import *
-from magprime.models import *
-from magprime.automated_emails import *
-from magprime.model_checks import *
 mount_site_sections(magprime_config['module_root'])
 
 if c.AT_THE_CON:

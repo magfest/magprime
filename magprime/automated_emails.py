@@ -1,4 +1,15 @@
-from magprime import *
+from collections import defaultdict
+
+from sideboard.lib import on_startup
+from uber.models import Attendee
+from uber.automated_emails import StopsEmail
+from uber.automated_emails_server import AutomatedEmail
+from uber.config import c
+from uber.utils import before, days_after, days_before
+
+from magprime.models import SeasonPassTicket
+from magprime.utils import SeasonEvent
+
 
 # leave this off for now, this code is now old and needs updating
 _send_season_supporter_emails = False
@@ -23,9 +34,9 @@ if _send_season_supporter_emails:
 
 
 AutomatedEmail(Attendee, 'MAGFest schedule, maps, and other FAQs', 'precon_faqs.html',
-               filter=lambda a: a.badge_status not in [c.INVALID_STATUS, c.DEFERRED_STATUS]
-                            and a.paid != c.NOT_PAID
-                            and (a.paid != c.PAID_BY_GROUP or a.group and not a.group.amount_unpaid),
+               filter=(lambda a: a.badge_status not in [c.INVALID_STATUS, c.DEFERRED_STATUS]
+                       and a.paid != c.NOT_PAID
+                       and (a.paid != c.PAID_BY_GROUP or a.group and not a.group.amount_unpaid)),
                ident='magprime_precon_faqs',
                when=days_before(7, c.EPOCH),
                sender='MAGFest <contact@magfest.org>')
@@ -38,10 +49,10 @@ AutomatedEmail(Attendee, 'MAGFest hospitality suite information', 'guest_food_in
                ident='magprime_hospitality_suite_guest_food_info')
 
 AutomatedEmail(Attendee, 'MAGFest Volunteer Food', 'volunteer_food_info.txt',
-            lambda a: a.staffing,
-            ident='magprime_volunteer_food_info',
-            when=days_before(7, c.UBER_TAKEDOWN),
-            sender='MAGFest Staff Suite <chefs@magfest.org>')
+               lambda a: a.staffing,
+               ident='magprime_volunteer_food_info',
+               when=days_before(7, c.UBER_TAKEDOWN),
+               sender='MAGFest Staff Suite <chefs@magfest.org>')
 
 AutomatedEmail(Attendee, 'MAGFest Staff Suite Volunteering', 'food_interest.txt',
                lambda a: a.requested(c.FOOD_PREP) or a.assigned_to(c.FOOD_PREP),
@@ -55,34 +66,34 @@ AutomatedEmail(Attendee, 'Important MAGFest PC Gaming Room Information! *PLEASE 
                sender='MAGFest LAN <lan@magfest.org>')
 
 AutomatedEmail(Attendee, 'MAGFest Tech Ops volunteering', 'techops.txt',
-           lambda a: a.staffing and a.assigned_to(c.TECH_OPS),
-           ident='magprime_techops_volunteer',
-           sender='MAGFest TechOps <techops@magfest.org>')
+               lambda a: a.staffing and a.assigned_to(c.TECH_OPS),
+               ident='magprime_techops_volunteer',
+               sender='MAGFest TechOps <techops@magfest.org>')
 
 AutomatedEmail(Attendee, 'MAGFest Chipspace volunteering', 'chipspace.txt',
-           lambda a: a.staffing and a.assigned_to(c.CHIPSPACE),
-           ident='magprime_chipspace_volunteer',
-           sender='MAGFest ChipSpace <chipspace@magfest.org>')
+               lambda a: a.staffing and a.assigned_to(c.CHIPSPACE),
+               ident='magprime_chipspace_volunteer',
+               sender='MAGFest ChipSpace <chipspace@magfest.org>')
 
 AutomatedEmail(Attendee, 'MAGFest Chipspace shifts', 'chipspace_trusted.txt',
-           lambda a: a.staffing and a.has_shifts_in(c.CHIPSPACE) and a.trusted_in(c.CHIPSPACE),
-           ident='magprime_chipspace_trusted_volunteer',
-           sender='MAGFest ChipSpace <chipspace@magfest.org>')
+               lambda a: a.staffing and a.has_shifts_in(c.CHIPSPACE) and a.trusted_in(c.CHIPSPACE),
+               ident='magprime_chipspace_trusted_volunteer',
+               sender='MAGFest ChipSpace <chipspace@magfest.org>')
 
 AutomatedEmail(Attendee, 'MAGFest Chipspace', 'chipspace_untrusted.txt',
-           lambda a: a.staffing and a.has_shifts_in(c.CHIPSPACE) and not a.trusted_in(c.CHIPSPACE),
-           ident='magprime_chipspace_untrusted_volunteer',
-           sender='MAGFest ChipSpace <chipspace@magfest.org>')
+               lambda a: a.staffing and a.has_shifts_in(c.CHIPSPACE) and not a.trusted_in(c.CHIPSPACE),
+               ident='magprime_chipspace_untrusted_volunteer',
+               sender='MAGFest ChipSpace <chipspace@magfest.org>')
 
 AutomatedEmail(Attendee, 'MAGFest Staff Suite rules', 'food_volunteers.txt',
-           lambda a: a.staffing and a.has_shifts_in(c.FOOD_PREP) and not a.trusted_in(c.FOOD_PREP),
-           ident='magprime_food_untrusted_volunteer',
-           sender='MAGFest Staff Suite <chefs@magfest.org>')
+               lambda a: a.staffing and a.has_shifts_in(c.FOOD_PREP) and not a.trusted_in(c.FOOD_PREP),
+               ident='magprime_food_untrusted_volunteer',
+               sender='MAGFest Staff Suite <chefs@magfest.org>')
 
 AutomatedEmail(Attendee, 'MAGFest message from Chef', 'food_trusted_staffers.txt',
-           lambda a: a.staffing and a.has_shifts_in(c.FOOD_PREP) and a.trusted_in(c.FOOD_PREP),
-           ident='magprime_food_trusted_volunteer',
-           sender='MAGFest Staff Suite <chefs@magfest.org>')
+               lambda a: a.staffing and a.has_shifts_in(c.FOOD_PREP) and a.trusted_in(c.FOOD_PREP),
+               ident='magprime_food_trusted_volunteer',
+               sender='MAGFest Staff Suite <chefs@magfest.org>')
 
 AutomatedEmail(Attendee, 'Want to help run MAGFest poker tournaments?', 'poker.txt',
                lambda a: a.has_shifts_in(c.TABLETOP),
@@ -120,7 +131,8 @@ AutomatedEmail(Attendee, 'MAGFest ' + c.EVENT_YEAR + ' t-shirt size confirmation
                ident='magprime_shirt_size_confirmation')
 
 AutomatedEmail(Attendee, 'MAGFest Dealer waitlist has been exhausted', 'dealer_waitlist_exhausted.txt',
-               lambda a: 'automatically converted to unpaid discounted badge from a dealer application' in a.admin_notes,
+               lambda a: (
+                   'automatically converted to unpaid discounted badge from a dealer application' in a.admin_notes),
                sender=c.MARKETPLACE_EMAIL, ident='magprime_marketplace_waitlist_exhausted')
 
 
