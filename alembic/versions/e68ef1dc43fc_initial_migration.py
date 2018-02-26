@@ -15,7 +15,7 @@ depends_on = None
 
 from alembic import op
 import sqlalchemy as sa
-import sideboard.lib.sa
+import residue
 
 
 try:
@@ -32,15 +32,15 @@ else:
 
 def upgrade():
     op.create_table('prev_season_supporter',
-    sa.Column('id', sideboard.lib.sa.UUID(), nullable=False),
+    sa.Column('id', residue.UUID(), nullable=False),
     sa.Column('first_name', sa.Unicode(), server_default='', nullable=False),
     sa.Column('last_name', sa.Unicode(), server_default='', nullable=False),
     sa.Column('email', sa.Unicode(), server_default='', nullable=False),
     sa.PrimaryKeyConstraint('id', name=op.f('pk_prev_season_supporter'))
     )
     op.create_table('season_pass_ticket',
-    sa.Column('id', sideboard.lib.sa.UUID(), nullable=False),
-    sa.Column('fk_id', sideboard.lib.sa.UUID(), nullable=False),
+    sa.Column('id', residue.UUID(), nullable=False),
+    sa.Column('fk_id', residue.UUID(), nullable=False),
     sa.Column('slug', sa.Unicode(), server_default='', nullable=False),
     sa.PrimaryKeyConstraint('id', name=op.f('pk_season_pass_ticket'))
     )

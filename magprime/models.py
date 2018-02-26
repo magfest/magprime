@@ -1,5 +1,5 @@
 from pockets.autolog import log
-from sideboard.lib.sa import CoerceUTF8 as UnicodeText, UUID
+from residue import CoerceUTF8 as UnicodeText, UUID
 
 from uber.config import c
 from uber.decorators import presave_adjustment, render
