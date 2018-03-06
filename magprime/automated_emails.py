@@ -43,12 +43,14 @@ AutomatedEmailFixture(
 
 AutomatedEmailFixture(
     Attendee, 'MAGFest food for guests', 'guest_food_restrictions.txt',
-    lambda a: a.badge_type == c.GUEST_BADGE, sender='MAGFest Staff Suite <chefs@magfest.org>',
+    lambda a: a.badge_type == c.GUEST_BADGE,
+    sender='MAGFest Staff Suite <chefs@magfest.org>',
     ident='magprime_guest_food_restrictions')
 
 AutomatedEmailFixture(
     Attendee, 'MAGFest hospitality suite information', 'guest_food_info.txt',
-    lambda a: a.badge_type == c.GUEST_BADGE, sender='MAGFest Staff Suite <chefs@magfest.org>',
+    lambda a: a.badge_type == c.GUEST_BADGE,
+    sender='MAGFest Staff Suite <chefs@magfest.org>',
     ident='magprime_hospitality_suite_guest_food_info')
 
 AutomatedEmailFixture(
@@ -140,7 +142,7 @@ AutomatedEmailFixture(
     ident='magprime_bonus_swag_reminder_last_chance')
 
 # Send to any attendee who will be receiving a t-shirt (staff, volunteers, anyone
-# who kicked in at the shirt level or above).	Should not be sent after the t-shirt
+# who kicked in at the shirt level or above). Should not be sent after the t-shirt
 # size deadline.
 AutomatedEmailFixture(
     Attendee, 'MAGFest ' + c.EVENT_YEAR + ' t-shirt size confirmation', 'confirm_shirt_size.html',
@@ -152,4 +154,5 @@ AutomatedEmailFixture(
 AutomatedEmailFixture(
     Attendee, 'MAGFest Dealer waitlist has been exhausted', 'dealer_waitlist_exhausted.txt',
     lambda a: 'automatically converted to unpaid discounted badge from a dealer application' in a.admin_notes,
-    sender=c.MARKETPLACE_EMAIL, ident='magprime_marketplace_waitlist_exhausted')
+    sender=c.MARKETPLACE_EMAIL,
+    ident='magprime_marketplace_waitlist_exhausted')
