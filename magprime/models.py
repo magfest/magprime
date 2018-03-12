@@ -4,7 +4,7 @@ from residue import CoerceUTF8 as UnicodeText, UUID
 from uber.config import c
 from uber.decorators import presave_adjustment, render
 from uber.models import MagModel, DefaultColumn as Column, Session
-from uber.notifications import send_email
+from uber.tasks.email import send_email
 from uber.utils import add_opt, remove_opt
 
 
@@ -15,8 +15,8 @@ class Attendee:
         if self.staffing and self.badge_status == c.INVALID_STATUS \
                 and self.badge_status != self.orig_value_of('badge_status'):
             try:
-                send_email(c.STAFF_EMAIL, c.STAFF_EMAIL, 'Volunteer invalidated',
-                           render('emails/invalidated_volunteer.txt', {'attendee': self}), model=self)
+                send_email.delay(c.STAFF_EMAIL, c.STAFF_EMAIL, 'Volunteer invalidated',
+                                 render('emails/invalidated_volunteer.txt', {'attendee': self}), model=self)
             except Exception:
                 log.error('unable to send invalid email')
 
