@@ -15,10 +15,14 @@ class Attendee:
         if self.staffing and self.badge_status == c.INVALID_STATUS \
                 and self.badge_status != self.orig_value_of('badge_status'):
             try:
-                send_email.delay(c.STAFF_EMAIL, c.STAFF_EMAIL, 'Volunteer invalidated',
-                                 render('emails/invalidated_volunteer.txt', {'attendee': self}), model=self)
+                send_email.delay(
+                    c.STAFF_EMAIL,
+                    c.STAFF_EMAIL,
+                    'Volunteer invalidated',
+                    render('emails/invalidated_volunteer.txt', {'attendee': self}, encoding=None),
+                    model=self.to_dict('id'))
             except Exception:
-                log.error('unable to send invalid email')
+                log.error('unable to send invalid email', exc_info=True)
 
     @presave_adjustment
     def child_badge(self):
