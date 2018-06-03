@@ -19,7 +19,6 @@ if __name__ == '__main__':
         description='Sideboard ' + pkg_name + ' plugin',
         license='GPLv3',
         scripts=[],
-        setup_requires=['distribute'],
         install_requires=requires,
         packages=find_packages(),
         include_package_data=True,
