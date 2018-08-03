@@ -2,19 +2,41 @@
 
 {{ creator }} has created an admin account for you on the {{ c.EVENT_NAME }} ubersystem at {{ c.URL_BASE }}.
 
-This account allows you to:{% if c.INDIE_ADMIN|string() in account.access %}
-    - set up MIVS judges and assign them to games.{% elif c.INDIE_JUDGE|string() in account.access %}
-    - review and rate games for the MAGFest Indie Videogame Showcase.{% endif %}{% if c.PANEL_APPS|string() in account.access %}
-    - review and approve panel applications. {% endif %}{% if c.BANDS|string() in account.access %}
-    - add and manage bands and their contracts.{% endif %}{% if c.PEOPLE|string() in account.access %}
-    - view and manage attendees.{% elif c.REG_AT_CON|string() in account.access %}
-    - check in attendees during the event.{% endif %}{% if c.STUFF|string() in account.access %}
-    - access inventory and event scheduling.{% endif %}{% if c.MONEY|string() in account.access %}
-    - view the budget pages.{% endif %}{% if c.CHECKINS|string() in account.access %}
-    - check tabletop games in and out.{% endif %}{% if c.STATS|string() in account.access %}
-    - access statistics about the event.{% endif %}{% if c.STAFF_ROOMS|string() in account.access %}
-    - change staff hotel assignments.{% endif %}{% if c.WATCHLIST|string() in account.access %}
-    - view details of attendees on the watchlist.{% endif %}
+This account allows you to:
+{% if c.INDIE_ADMIN|string() in account.access %}
+    - set up MIVS judges and assign them to games.
+{% elif c.INDIE_JUDGE|string() in account.access %}
+    - review and rate games for the MAGFest Indie Videogame Showcase.
+{% endif %}
+{% if c.PANEL_APPS|string() in account.access %}
+    - review and approve panel applications.
+{% endif %}
+{% if c.BANDS|string() in account.access %}
+    - add and manage bands and their contracts.
+{% endif %}
+{% if c.PEOPLE|string() in account.access %}
+    - view and manage attendees.
+{% elif c.REG_AT_CON|string() in account.access %}
+    - check in attendees during the event.
+{% endif %}
+{% if c.STUFF|string() in account.access %}
+    - access inventory and event scheduling.
+{% endif %}
+{% if c.MONEY|string() in account.access %}
+    - view the budget pages.
+{% endif %}
+{% if c.CHECKINS|string() in account.access %}
+    - check tabletop games in and out.
+{% endif %}
+{% if c.STATS|string() in account.access %}
+    - access statistics about the event.
+{% endif %}
+{% if c.STAFF_ROOMS|string() in account.access %}
+    - change staff hotel assignments.
+{% endif %}
+{% if c.WATCHLIST|string() in account.access %}
+    - view details of attendees on the watchlist.
+{% endif %}
 
 The email address we used is: {{ account.attendee.email }}
 Your password is: {{ password|safe }}
