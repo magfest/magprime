@@ -1,0 +1,49 @@
+<html>
+<head></head>
+<body>
+
+Your group ({{ group.name }}) has successfully submitted a Dealer application for {{ c.EVENT_NAME }}
+this coming {{ event_dates() }}. Below is a copy of your application. You may
+<a href="{{ c.URL_BASE }}/preregistration/group_members?id={{ group.id }}">update it here</a> or
+<a href="{{ c.URL_BASE }}/preregistration/confirm?id={{ group.leader.id }}">view your badge here</a>.
+<ul>
+    <li><strong>Dealer Table Name</strong>: {{ group.name }}</li>
+    <li><strong>Tables</strong>: {{ group.tables }} table{{ group.tables|pluralize }} (${{ group.table_cost|round(2) }}) </li>
+    <li><strong>Badges</strong>: {{ group.badges }} badge{{ group.badges|pluralize }} (${{ group.badge_cost|round(2) }}) </li>
+    <li><strong>Total Price</strong> ${{ group.cost }}</li>
+    <li><strong>What do you sell?</strong> {{ group.wares }}</li>
+    <li><strong>Description</strong>: {{ group.description }}</li>
+    {% if group.special_needs %}<li><strong>Table Requests and Special Requests</strong>: {{ group.special_needs }}</li>{% endif %}
+    <li><strong>Website URL</strong>: {{ group.website }}</li>
+    <li><strong>Address</strong>: {{ group.address1 }}{% if group.address2 %}, {{ group.address2 }}{% endif %}
+    <br/> {{ group.city }}, {{ group.region }} {{ group.zip_code }} ({{ group.country }})</li>
+</ul>
+
+We will review your request and provide you with a payment link once your application has been approved.
+
+<br/><br/><strong>IMPORTANT NOTE</strong>: Make sure you included links to galleries, portfolios, your shop, etc in the application
+so we can adequately judge your application. If there is no place online for us to view your product, then please email images of
+what you plan to sell to {{ c.MARKETPLACE_EMAIL|email_only }}. If you do not provide links for us to view, then you will be automatically
+waitlisted. If you frequently put your shop on vacation mode, then please include links to a gallery elsewhere. If we make 3 attempts
+to view a closed shop and are unable to see your wares, we will also automatically waitlist you.
+
+<br/><br/>In the coming weeks, you'll be emailed a link to a page with instructions on booking a room. This link will not initially
+be announced publicly, it will be sent to people registered for {{ c.EVENT_NAME }} first, so keep a lookout for the e-mail in case
+it goes into your spam folder. It will go to the email address that you provide in your badge information. Receiving the link does
+not guarantee you a room.
+
+<br/><br/>Vendor applications automatically reserves the ability to purchase badges for you and the number of assistants on the
+application at the pre-registration price of ${{ c.BADGE_PRICE }}, if the application is not accepted. PLEASE DO NOT BUY A BADGE
+IF YOU APPLIED FOR A MARKETPLACE SPOT. Your ability to purchase the badges will happen after the waitlist is exhausted if you are
+not accepted to vend.
+
+{% if group.requested_hotel_info and c.PREREG_REQUEST_HOTEL_INFO_OPEN -%}
+    <br/> <br/>
+    {% include "preregistration/hotel_disclaimer.html" %}
+{%- endif %}
+
+<br/> <br/> <u>Dealer Rules and Information</u>
+{% include "static_views/dealerRules.html" %}
+
+</body>
+</html>
