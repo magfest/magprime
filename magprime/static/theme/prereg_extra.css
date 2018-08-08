@@ -1,16 +1,51 @@
 .masthead {
-    padding-top: 37.037%;  /* The height is 37.037% of the width (300px / 810px) */
+    padding-top: 23%;  /* The height is 23% of the width (186px / 810px) */
+}
+
+@media
+only screen and (-webkit-min-device-pixel-ratio:2),
+only screen and (min--moz-device-pixel-ratio:2),
+only screen and (-moz-min-device-pixel-ratio:2),
+only screen and (-o-min-device-pixel-ratio:2/1),
+only screen and (min-device-pixel-ratio:2),
+only screen and (min-resolution:192dpi),
+only screen and (min-resolution:2dppx) {
+    .masthead {
+        background-image: url("../theme/banner_2x.png");
+    }
+}
+
+.masthead-text {
+    color: #fff;
+    font-size: 1.5em;
+    padding-bottom: 2%;
+}
+
+.text-left .masthead-text-item,
+.text-center .masthead-text-item {
+    padding-left: 10px;
+}
+
+.text-right .masthead-text-item {
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .bling-icon:before {
-  content: "🍩";
+  content: "✷";
+}
+
+@media (max-width: 767px) {
+    .text-sm-left { text-align: left; }
+    .text-sm-right { text-align: right; }
+    .text-sm-center { text-align: center; }
 }
 
 body {
-    background-color: #2BA082;
+    background-color: #000;
     background-image: url(../theme/tile-background.png);
 
-    background-image: url(../theme/tile-background.png), -webkit-linear-gradient(top, #8CB872, #2BA082 450px, #003935);
-    background-image: url(../theme/tile-background.png), -o-linear-gradient(top, #8CB872, #2BA082 450px, #003935);
-    background-image: url(../theme/tile-background.png), linear-gradient(to bottom, #8CB872, #2BA082 450px, #003935);
+    background-image: url(../theme/tile-background.png), -webkit-linear-gradient(top, #000, #200020 75%, #400040);
+    background-image: url(../theme/tile-background.png), -o-linear-gradient(top, #000, #200020 75%, #400040);
+    background-image: url(../theme/tile-background.png), linear-gradient(to bottom, #000, #200020 75%, #400040);
 }
