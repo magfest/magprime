@@ -36,6 +36,8 @@
             if ($.field('amount_extra')) {
                 $.field('amount_extra').parents('.form-group').find('.help-block').addClass('col-sm-offset-3');
                 $.field('amount_extra').parents('.form-group').append($('#tax_exempt'));
+            } else {
+              $('#tax_exempt').hide();
             }
 
             // #tshirt_warning tells people that we don't sell 'slim' sizes at-fest
