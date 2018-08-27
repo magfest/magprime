@@ -1,6 +1,23 @@
 .masthead {
-    padding-top: 23%;  /* The height is 23% of the width (186px / 810px) */
+    padding-top: 30.86%;  /* The height is 30.86% of the width (250px / 810px) */
 }
+
+
+img.tier-icon {
+    background-color: transparent;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    display: inline-block;
+    height: 0;
+    padding: 50px 0 0 50px;
+    vertical-align: middle;
+    width: 0;
+}
+
+img.tier-icon-iconshirt { background-image: url("../icons/iconshirt.png"); }
+img.tier-icon-supporter { background-image: url("../icons/supporter.png"); }
+img.tier-icon-barrel-roller { background-image: url("../icons/barrel_roller.png"); }
 
 @media
 only screen and (-webkit-min-device-pixel-ratio:2),
@@ -10,9 +27,10 @@ only screen and (-o-min-device-pixel-ratio:2/1),
 only screen and (min-device-pixel-ratio:2),
 only screen and (min-resolution:192dpi),
 only screen and (min-resolution:2dppx) {
-    .masthead {
-        background-image: url("../theme/banner_2x.png");
-    }
+    .masthead { background-image: url("../theme/banner_2x.png"); }
+    img.tier-icon-iconshirt { background-image: url("../icons/iconshirt_2x.png"); }
+    img.tier-icon-supporter { background-image: url("../icons/supporter_2x.png"); }
+    img.tier-icon-barrel-roller { background-image: url("../icons/barrel_roller_2x.png"); }
 }
 
 .masthead-text {
@@ -45,7 +63,8 @@ body {
     background-color: #000;
     background-image: url(../theme/tile-background.png);
 
-    background-image: url(../theme/tile-background.png), -webkit-linear-gradient(top, #000, #200020 75%, #400040);
-    background-image: url(../theme/tile-background.png), -o-linear-gradient(top, #000, #200020 75%, #400040);
-    background-image: url(../theme/tile-background.png), linear-gradient(to bottom, #000, #200020 75%, #400040);
+    background-image: url(../theme/tile-background.png), -webkit-linear-gradient(top, #000, #000020 75%, #180030 90%, #300040);
+    background-image: url(../theme/tile-background.png), -o-linear-gradient(top, #000, #000020 75%, #180030 90%, #300040);
+    background-image: url(../theme/tile-background.png), linear-gradient(to bottom, #000 -100px, #000, #000020 75%, #180030 90%, #300040);
+    background-image: url(../theme/tile-background.png), linear-gradient(to bottom, #000 -100px, #000, #000020 75%, #180030 90%, #300040);
 }
