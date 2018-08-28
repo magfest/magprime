@@ -71,5 +71,5 @@ body {
     background-color: #000110;
     background-image: url(../theme/tile-background.png);
     background-image: url(../theme/tile-background.png), linear-gradient(to bottom, #000110, #000030 64%, #304430 80%, #CC7C2B 96%, #FF692A);
-    background-image: url(../theme/tile-background.png), radial-gradient(ellipse at top right, #1CCCCB, #168Af0a0 5%, #10308080 14%, #00206000 50%), radial-gradient(ellipse at bottom left, #FF692A, #CC7C2Be0, #304430e0 25%, #00011000 50%), linear-gradient(to bottom right, #002030, #00011000);
+    background-image: url(../theme/tile-background.png), radial-gradient(ellipse at top right, #1CCCCB, #105BA0 5%, #0B1E4D 14%, transparent 50%), radial-gradient(ellipse at bottom left, #FF692A, #B86D2B, #2B3D2E 25%, transparent 50%), linear-gradient(to bottom right, #002030, transparent);
 }
