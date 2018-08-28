@@ -44,7 +44,7 @@ class Attendee:
             self.badge_type = c.ATTENDEE_BADGE
             self.ribbon = remove_opt(self.ribbon_ints, c.UNDER_13)
 
-    age_discountable_badge_types = [c.ATTENDEE_BADGE, c.CHILD_BADGE]
+    _AGE_DISCOUNTABLE_BADGE_TYPES = [c.ATTENDEE_BADGE, c.CHILD_BADGE]
 
 
 class SeasonPassTicket(MagModel):
