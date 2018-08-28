@@ -44,6 +44,31 @@ class Attendee:
             self.badge_type = c.ATTENDEE_BADGE
             self.ribbon = remove_opt(self.ribbon_ints, c.UNDER_13)
 
+    def calculate_badge_cost(self, use_promo_code=True):
+        registered = self.registered_local if self.registered else None
+        base_badge_price = self.base_badge_price or c.get_attendee_price(registered)
+
+        if self.paid == c.NEED_NOT_PAY:
+            return 0
+        elif self.overridden_price is not None:
+            return self.overridden_price
+        elif self.is_dealer:
+            return c.DEALER_BADGE_PRICE
+        elif self.badge_type in [c.CHILD_BADGE, c.ATTENDEE_BADGE] and self.age_discount != 0:
+            return max(0, base_badge_price + self.age_discount)
+        elif self.badge_type in [c.ATTENDEE_BADGE, c.PSEUDO_GROUP_BADGE] and self.group \
+                and self.paid == c.PAID_BY_GROUP:
+            return base_badge_price - c.GROUP_DISCOUNT
+        elif self.base_badge_price:
+            cost = base_badge_price
+        else:
+            cost = self.new_badge_cost
+
+        if c.BADGE_PROMO_CODES_ENABLED and self.promo_code and use_promo_code:
+            return self.promo_code.calculate_discounted_price(cost)
+        else:
+            return cost
+
 
 class SeasonPassTicket(MagModel):
     fk_id = Column(UUID)
