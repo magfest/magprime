@@ -5,13 +5,12 @@ from sqlalchemy.orm import subqueryload
 
 from uber.config import c
 from uber.decorators import all_renderable, department_id_adapter
-from uber.models import Attendee, Shift
+from uber.models import Attendee, Shift, RoomAssignment
 
 
 @all_renderable(c.PEOPLE)
 class Root:
     def index(self, session):
-        from hotel import RoomAssignment
         return {
             'invalids': session.query(Attendee)
                                .options(subqueryload(Attendee.room_assignments).joinedload(RoomAssignment.room),
