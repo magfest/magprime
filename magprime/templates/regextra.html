@@ -65,7 +65,7 @@
             togglePrices();
         {% endif %}
 
-        // MAGFest uses tiered badge pricing based on caps, so we want to link to our FAQ explaining this
+        // Show a current estimate of badges left.
         {% if c.BADGES_LEFT_AT_CURRENT_PRICE %}
             {% if c.BADGES_LEFT_AT_CURRENT_PRICE == -1 %}
                 {% set badges_left_text = 'Unlimited' %}
@@ -77,14 +77,12 @@
                 {% set badges_left_text = 'Low' if c.BADGES_LEFT_AT_CURRENT_PRICE <= 500 else 'High' %}
             {% endif %}
 
-            var bucket_notice = "Availability of badges at these prices: <strong>{{ badges_left_text }}</strong>. {{ macros.popup_link("http://magfest.org/faq#-KOpcFnNhdsUIqvvf6VB", "What does this mean?")|e }}";
-        {% else %}
-            var bucket_notice = "Prices may increase before the set date. {{ macros.popup_link("http://magfest.org/faq#-KOpcFnNhdsUIqvvf6VB", "Why is this?")|e }}";
+            if ($('.prereg-price-notice').size()) {
+            $('#reg-types').append("<div class='help-block col-sm-9 col-sm-offset-3'>Availability of badges: <strong>{{ badges_left_text }}</strong>.</div>");
+        }
         {% endif %}
 
-        if ($('.prereg-price-notice').size()) {
-            $('#reg-types').append("<div class='help-block col-sm-9 col-sm-offset-3'>"+ bucket_notice + "</div>");
-        }
+
     });
 </script>
 
