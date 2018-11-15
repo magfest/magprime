@@ -3,13 +3,15 @@ from residue import CoerceUTF8 as UnicodeText, UUID
 
 from uber.config import c
 from uber.decorators import presave_adjustment, render
-from uber.models import MagModel, DefaultColumn as Column, Session
+from uber.models import MagModel, Choice, DefaultColumn as Column, Session
 from uber.tasks.email import send_email
 from uber.utils import add_opt, remove_opt
 
 
 @Session.model_mixin
 class Attendee:
+    sweatpants = Column(Choice(c.SWEATPANTS_OPTS), default=c.NO_SWEATPANTS)
+
     @presave_adjustment
     def invalid_notification(self):
         if self.staffing and self.badge_status == c.INVALID_STATUS \

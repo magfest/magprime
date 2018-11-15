@@ -1,0 +1,14 @@
+<html>
+<head></head>
+<body>
+
+<p>Hello {{ attendee.first_name }},</p>
+
+<p>Thanks for being a Supporter for MAGFest! For this year, all $75 tier (and above) Supporters will receive a pair of sweatpants as part of their swag. Please take a moment to select the size of sweatpants you would like by going to your <a href="{{ c.URL_BASE }}/preregistration/confirm?id={{ attendee.id }}">registration information page</a> and selecting your size in the "Sweatpants Size" dropdown. After selecting a size, simply click the "Update Info" button to confirm the size you want.</p>
+
+<p>Please make sure that we have your desired sweatpants size no later than <b>{{ c.SHIRT_DEADLINE|timedelta(days=-5)|datetime("%B %-e, %Y") }}</b>, so that we can ensure we have enough stock for your size. Your sweatpants will be available for pickup at the MAGFest merchandise booth.</p>
+
+<p>MAGFest Merch Team<br>merch@magfest.org</p>
+
+</body>
+</html>
