@@ -152,6 +152,13 @@ AutomatedEmailFixture(
     ident='magprime_shirt_size_confirmation')
 
 AutomatedEmailFixture(
+    Attendee, 'MAGFest ' + c.EVENT_YEAR + ' sweatpants size confirmation', 'confirm_sweatpants_size.html',
+    lambda a: a.amount_extra >= c.SUPPORTER_LEVEL and (a.sweatpants == c.NO_SWEATPANTS or not a.sweatpants),
+    when=before(c.SHIRT_DEADLINE),
+    sender='MAGFest Merch Team <merch@magfest.org>',
+    ident='magprime_sweatpants_size_confirmation')
+
+AutomatedEmailFixture(
     Attendee, 'MAGFest Dealer waitlist has been exhausted', 'dealer_waitlist_exhausted.txt',
     lambda a: 'automatically converted to unpaid discounted badge from a dealer application' in a.admin_notes,
     sender=c.MARKETPLACE_EMAIL,
