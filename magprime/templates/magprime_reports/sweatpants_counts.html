@@ -1,0 +1,20 @@
+{% extends "base.html" %}{% set admin_area=True %}
+{% block title %}Sweatpants Counts{% endblock %}
+{% block content %}
+
+<style type="text/css">
+    td { padding: 5px 10px 5px 10px; }
+</style>
+
+<h3>Sweatpant Counts</h3>
+
+<table>
+{% for label, count in counts.items() %}
+    <tr>
+        <td class="pull-right">{{ label }}:</td>
+        <td>{{ count }}</td>
+    </tr>
+{% endfor %}
+</table>
+
+{% endblock %}
