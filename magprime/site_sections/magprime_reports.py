@@ -47,3 +47,43 @@ class Root:
             'department_id': department_id,
             'staffers': sorted(staffers, key=lambda a: a.full_name)
         }
+def sweatpants_counts(self, session):
+        counts = defaultdict(lambda: defaultdict(lambda: defaultdict(int)))
+        labels = ['size unknown'] + [label for val, label in c.SWEATPANTS_OPTS][1:]
+
+        def sort(d):
+            return sorted(d.items(), key=lambda tup: labels.index(tup[0]))
+
+        def label(s):
+            return 'size unknown' if s == c.SWEATPANTS[c.NO_SWEATPANTS] else s
+
+        def status(got_merch):
+            return 'picked_up' if got_merch else 'outstanding'
+
+        sales_by_week = OrderedDict([(i, 0) for i in range(50)])
+
+        for attendee in session.all_attendees():
+            sweatpants_label = attendee.sweatpants_label or 'size unknown'
+            counts['all_staff_sweatpantss'][label(sweatpants_label)][status(attendee.got_merch)] += attendee.num_staff_sweatpantss_owed
+            counts['all_event_sweatpantss'][label(sweatpants_label)][status(attendee.got_merch)] += attendee.num_event_sweatpantss_owed
+            if attendee.volunteer_event_sweatpants_eligible or attendee.replacement_staff_sweatpantss:
+                counts['free_event_sweatpantss'][label(sweatpants_label)][status(attendee.got_merch)] += 1
+            if attendee.paid_for_a_sweatpants:
+                counts['paid_event_sweatpantss'][label(sweatpants_label)][status(attendee.got_merch)] += 1
+                sales_by_week[(min(datetime.now(UTC), c.ESCHATON) - attendee.registered).days // 7] += 1
+
+        for week in range(48, -1, -1):
+            sales_by_week[week] += sales_by_week[week + 1]
+
+        categories = [
+            ('Free Event Sweatpants', sort(counts['free_event_sweatpantss'])),
+            ('Paid Event Sweatpants', sort(counts['paid_event_sweatpantss'])),
+            ('All Event Sweatpants', sort(counts['all_event_sweatpantss'])),
+        ]
+        if c.SWEATPANTS_PER_STAFFER > 0:
+            categories.append(('Staff Sweatpants', sort(counts['all_staff_sweatpantss'])))
+
+        return {
+            'sales_by_week': sales_by_week,
+            'categories': categories,
+}
