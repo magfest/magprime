@@ -54,6 +54,13 @@ AutomatedEmailFixture(
     ident='magprime_hospitality_suite_guest_food_info')
 
 AutomatedEmailFixture(
+    Attendee, 'Department Heads', 'food/department_heads.txt',
+    lambda a: a.is_poc and a.admin_account,
+    ident='magprime_deparment_water_and_food_info',
+    when=days_before(7, c.UBER_TAKEDOWN),
+    sender='MAGFest Staff Suite <chefs@magfest.org>')
+
+AutomatedEmailFixture(
     Attendee, 'MAGFest Volunteer Food', 'volunteer_food_info.txt',
     lambda a: a.staffing,
     ident='magprime_volunteer_food_info',
