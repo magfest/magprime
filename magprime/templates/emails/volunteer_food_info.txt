@@ -1,30 +1,27 @@
 {{ attendee.first_name }},
 
-Thanks again for volunteering at {{ c.EVENT_NAME }} this year. We feed our volunteers three meals per day during {{ c.EVENT_NAME }}, so you can drop by the Hospitality Suite in Room 5217 on the 5th floor of the hotel for food at anytime during {{ c.EVENT_NAME }} for a snack or drink. Meals will be served at the following times:
+Thank you for volunteering at {{ c.EVENT_NAME }} this year. We feed our volunteers three meals per day during {{ c.EVENT_NAME }}, you may drop by the Hospitality Suite in Room 5217 on the 5th floor of the hotel anytime during {{ c.EVENT_NAME }}. Meals will be served at the following times: 
 
 Breakfast: 8:00 am to 11:00 am
 Lunch: 12:00 pm to 3:00 pm
-Dinner: 5:00 pm to 9:00 pm
-Overnight: 9:00 pm to 4:00 am (or until the hot food has run out, whichever occurs first)
+Dinner: 6:00 pm to 8:00 pm
 
-We also have a grab and go station availbale 24/7 with sandwiches, instant oatmeal and ramen. Gluten free options, vegan options and non dairy is available, just ask if you have a restriction! 
+We also have a grab and go station available 24/7 with snacks and fruit. 
 
-{% if attendee.badge_type == ATTENDEE_BADGE %}You will become eligible for food after working your first shift if you have signed up for at least 12 weighted hours. Please visit Staffing Ops (in Camelia 1 on the Ballroom level) after you first get your badge to get your shift schedule, and then come back to get your ribbon marked after working your first shift and getting your department head to sign your sheet. You will not be able to get snacks, drinks, or meals, or have food picked up without your volunteer ribbon being properly marked.
+Note: No Queuing is allowed in the hallway. If meal service has not yet started, please come in and get a snack.
 
-{% endif %}The first meal served will be breakfast on Thursday morning, and the suite will remain open through Sunday afternoon. Monday will have a breakfast option, but once breakfast is over, leftovers will be served. You will be able to help yourself. Please feel free to bring tupperware or storage bags to carry items home. You will be responsible for their proper storage.
+Gluten free, vegan, and non dairy dishes are available.  If your dietary restrictions are not met by the food on the line, please alert any of our service staff.
 
-You will also have the option to have food picked up for you while on shift. This option is primarily for those staffers and volunteers who are unable to visit the suite during meal service. See your department head to order food to be picked up.
+{% if attendee.badge_type == ATTENDEE_BADGE %}If you are signed up for more than 12 hours, you will become eligible to eat in Staff Suite after working your first shift. Please visit Staff Ops (Azalea 3) after you get your badge to get your shift schedule. Have your department head sign your schedule after you work your first shift, then return to Staff Ops to get your ribbon punched.
 
-Meal schedule, menu, food pick up process, and suite rules can all be found at http://staffsuite.magfe.st/.
+{% endif %}The first meal served is breakfast on Thursday morning, and the suite will remain open 24/7 through Sunday afternoon.
 
-In addition to the Staff Suite, you will be eligible to buy food at the Galaxy Cafe, which is the Gaylord's cafeteria for its own staff which they have generously allowed us to use. To get to the Galaxy Cafe, go to the far back of the Maryland Ballroom foyer, then go through the doors and turn left. Just before you get to the Security desk in the hallway, look to your left and there will be a wide set of stairs going down. Go down those stairs and then the Galaxy Cafe will be on your right. You can use the Galaxy Cafe during any of the following times and is at your own expense:
+Carryout is available for volunteers & staff who are scheduled to work during meal service hours. Department Heads will have meal signup forms for lunch and dinner. Please note any dietary restrictions.
 
-Breakfast : 6:30 am - 9:30 am
-Lunch/Dinner : 1:00 pm - 11:00 pm
-Overnight : 2:00 am - 4:00 am
+Staff Suite Info: https://bit.ly/2Bymxg7
+
 
 Please let us know if you have any questions.
 
 MAGFest Staff Suite
 chefs@magfest.org
-http://staffsuite.magfe.st/
