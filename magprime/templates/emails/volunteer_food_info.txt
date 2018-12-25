@@ -8,11 +8,11 @@ Dinner: 6:00 pm to 8:00 pm
 
 We also have a grab and go station available 24/7 with snacks and fruit. 
 
-Note: No Queuing is allowed in the hallway. If meal service has not yet started, please come in and get a snack.
+Note: No queuing is allowed in the hallway. If meal service has not yet started, please come in and get a snack.
 
-Gluten free, vegan, and non dairy dishes are available.  If your dietary restrictions are not met by the food on the line, please alert any of our service staff.
+Gluten free, vegan, and non-dairy dishes are available.  If your dietary restrictions are not met by the food on the line, please alert any of our service staff.
 
-{% if attendee.badge_type == ATTENDEE_BADGE %}If you are signed up for more than 12 hours, you will become eligible to eat in Staff Suite after working your first shift. Please visit Staff Ops (Azalea 3) after you get your badge to get your shift schedule. Have your department head sign your schedule after you work your first shift, then return to Staff Ops to get your ribbon punched.
+{% if attendee.badge_type == c.ATTENDEE_BADGE %}If you are signed up for more than 12 hours, you will become eligible to eat in Staff Suite after working your first shift. Please visit Staff Ops (Azalea 3) after you get your badge to get your shift schedule. Have your department head sign your schedule after you work your first shift, then return to Staff Ops to get your ribbon punched.
 
 {% endif %}The first meal served is breakfast on Thursday morning, and the suite will remain open 24/7 through Sunday afternoon.
 
