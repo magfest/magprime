@@ -48,10 +48,17 @@ AutomatedEmailFixture(
     ident='magprime_guest_food_restrictions')
 
 AutomatedEmailFixture(
-    Attendee, 'MAGFest hospitality suite information', 'guest_food_info.txt',
+    Attendee, 'MAGFest hospitality suite information', 'food/guest_food_info.txt',
     lambda a: a.badge_type == c.GUEST_BADGE,
     sender='MAGFest Staff Suite <chefs@magfest.org>',
     ident='magprime_hospitality_suite_guest_food_info')
+
+AutomatedEmailFixture(
+    Attendee, 'Department Heads', 'food/department_heads.txt',
+    lambda a: a.is_poc and a.admin_account,
+    ident='magprime_department_water_and_food_info',
+    when=days_before(7, c.UBER_TAKEDOWN),
+    sender='MAGFest Staff Suite <chefs@magfest.org>')
 
 AutomatedEmailFixture(
     Attendee, 'MAGFest Volunteer Food', 'volunteer_food_info.txt',
@@ -61,7 +68,7 @@ AutomatedEmailFixture(
     sender='MAGFest Staff Suite <chefs@magfest.org>')
 
 AutomatedEmailFixture(
-    Attendee, 'MAGFest Staff Suite Volunteering', 'food_interest.txt',
+    Attendee, 'MAGFest Staff Suite Volunteering', 'food/food_interest.txt',
     lambda a: a.requested(c.FOOD_PREP) or a.assigned_to(c.FOOD_PREP),
     ident='magprime_staff_suite_volunteer_food_interest',
     sender='MAGFest Staff Suite <chefs@magfest.org>')

@@ -1,0 +1,19 @@
+Hello {{ attendee.first_name }}!
+
+Thanks for signing up to volunteer with the {{ c.EVENT_NAME }} Staff Suite. When you signed up to volunteer, you either checked "ANY" or specifically checked “Staff Suite” as a requested department to work in.
+
+Access to Staff Suite is one of the perks of volunteering. We provide three meals a day, as well as snacks and drinks to volunteers, guests and staff. Tasks include badge checking, serving food, preparing food, cleaning and washing dishes, maintaining supplies, and other miscellaneous jobs as needed. 
+
+If you are interested in working with us, please go sign up for shifts here: {{ c.URL_BASE }}/signups/login?first_name={{ attendee.first_name|urlencode }}&last_name={{ attendee.last_name|urlencode }}&email={{ attendee.email|urlencode }}&zip_code={{ attendee.zip_code|urlencode }}
+We have several opportunities for shifts that have extra weight!
+
+If you are no longer interested in working with us, please let us know as soon as possible, and we will get that corrected within the system.
+
+We look forward to working with you, if you have any questions please let us know!
+
+Thanks!
+
+MAGFest Staff Suite
+chefs@magfest.org
+https://bit.ly/2Bymxg7
+
