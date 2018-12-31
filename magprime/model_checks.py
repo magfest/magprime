@@ -20,7 +20,8 @@ def attendee_badge_under_13(attendee):
 
 @prereg_validation.Attendee
 def sweatpants_size_if_supporter(attendee):
-    if attendee.amount_extra >= c.SUPPORTER_LEVEL and attendee.sweatpants == c.NO_SWEATPANTS:
+    if attendee.amount_extra >= c.SUPPORTER_LEVEL and attendee.sweatpants == c.NO_SWEATPANTS \
+            and c.BEFORE_SHIRT_DEADLINE:
         return "Please select a sweatpants size."
 
 
