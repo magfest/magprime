@@ -46,6 +46,60 @@ class Attendee:
             self.badge_type = c.ATTENDEE_BADGE
             self.ribbon = remove_opt(self.ribbon_ints, c.UNDER_13)
 
+    @property
+    def merch_items(self):
+        """
+        Here is the business logic surrounding shirts:
+        - People who kick in enough to get a shirt get an event shirt.
+        - People with staff badges get a configurable number of staff shirts.
+        - Volunteers who meet the requirements get a complementary event shirt
+            (NOT a staff shirt).
+
+        If the c.SEPARATE_STAFF_SWAG setting is true, then this excludes staff
+        merch; see the staff_merch property.
+
+        This property returns a list containing strings and sub-lists of each
+        donation tier with multiple sub-items, e.g.
+            [
+                'tshirt',
+                'Supporter Pack',
+                [
+                    'Swag Bag',
+                    'Badge Hpolder'
+                ],
+                'Season Pass Certificate'
+            ]
+        """
+        merch = []
+        for amount, desc in sorted(c.DONATION_TIERS.items()):
+            if amount and self.amount_extra >= amount:
+                merch.append(desc)
+                items = c.DONATION_TIER_ITEMS.get(amount, [])
+                if len(items) == 1:
+                    merch[-1] = items[0]
+                elif len(items) > 1:
+                    merch.append(items)
+
+        if self.num_event_shirts_owed == 1 and not self.paid_for_a_shirt:
+            merch.append('a tshirt')
+        elif self.num_event_shirts_owed > 1:
+            merch.append('a 2nd tshirt')
+
+        if self.amount_extra >= c.SUPPORTER_LEVEL:
+            merch.append('a {} size pair of sweatpants'.format(self.sweatpants_label))
+
+        if self.volunteer_event_shirt_eligible and not self.volunteer_event_shirt_earned:
+            merch[-1] += (
+                ' (this volunteer must work at least 6 hours or they will be reported for picking up their shirt)')
+
+        if not c.SEPARATE_STAFF_MERCH:
+            merch.extend(self.staff_merch_items)
+
+        if self.extra_merch:
+            merch.append(self.extra_merch)
+
+        return merch
+
 
 class SeasonPassTicket(MagModel):
     fk_id = Column(UUID)
