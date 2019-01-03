@@ -57,7 +57,6 @@ AutomatedEmailFixture(
     Attendee, 'Department Heads', 'food/department_heads.txt',
     lambda a: a.is_dept_head,
     ident='magprime_department_water_and_food_info',
-   # when=days_before(7, c.UBER_TAKEDOWN),
     sender='MAGFest Staff Suite <chefs@magfest.org>')
 
 AutomatedEmailFixture(

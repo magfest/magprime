@@ -1,7 +1,6 @@
 from datetime import datetime, timedelta
 
 import cherrypy
-from collections import defaultdict
 from sqlalchemy.orm import subqueryload
 
 from uber.config import c
@@ -54,7 +53,8 @@ class Root:
         sweatpants_attendees = session.query(Attendee).filter(Attendee.amount_extra >= c.SUPPORTER_LEVEL)
 
         for key, val in c.SWEATPANTS_OPTS:
-            counts['Size unknown' if key == c.NO_SWEATPANTS else val] = sweatpants_attendees.filter(Attendee.sweatpants == key).count()
+            counts['Size unknown' if key == c.NO_SWEATPANTS else val] = \
+                sweatpants_attendees.filter(Attendee.sweatpants == key).count()
 
         return {
             'counts': counts,
