@@ -101,6 +101,15 @@ class Attendee:
         return merch
 
 
+@Session.model_mixin
+class Group:
+    @presave_adjustment
+    def delete_declined(self):
+        if self.status == c.DECLINED:
+            self.session.query(Group).filter_by(id=self.id).delete()
+            self.session.expunge(self)
+
+
 class SeasonPassTicket(MagModel):
     fk_id = Column(UUID)
     slug = Column(UnicodeText)
