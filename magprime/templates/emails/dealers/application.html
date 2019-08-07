@@ -2,12 +2,12 @@
 <head></head>
 <body>
 
-Your group ({{ group.name }}) has successfully submitted a Dealer application for {{ c.EVENT_NAME }}
+Your group ({{ group.name }}) has successfully submitted a Marketplace application for {{ c.EVENT_NAME }}
 this coming {{ event_dates() }}. Below is a copy of your application. You may
 <a href="{{ c.URL_BASE }}/preregistration/group_members?id={{ group.id }}">update it here</a> or
 <a href="{{ c.URL_BASE }}/preregistration/confirm?id={{ group.leader.id }}">view your badge here</a>.
 <ul>
-    <li><strong>Dealer Table Name</strong>: {{ group.name }}</li>
+    <li><strong>Marketplace Table Name</strong>: {{ group.name }}</li>
     <li><strong>Tables</strong>: {{ group.tables }} table{{ group.tables|pluralize }} (${{ group.table_cost|round(2) }}) </li>
     <li><strong>Badges</strong>: {{ group.badges }} badge{{ group.badges|pluralize }} (${{ group.badge_cost|round(2) }}) </li>
     <li><strong>Total Price</strong> ${{ group.cost }}</li>
@@ -28,6 +28,9 @@ what you plan to sell to {{ c.MARKETPLACE_EMAIL|email_only }}. If you do not pro
 waitlisted. If you frequently put your shop on vacation mode, then please include links to a gallery elsewhere. If we make 3 attempts
 to view a closed shop and are unable to see your wares, we will also automatically waitlist you.
 
+<br/><br/><strong>IMPORTANT NOTE NUMBER 2</strong>: MAGFest no longer allows proxy selling. If you have applied as a proxy seller,
+then you will be declined. We do still allow table sharing with prior email approval.
+
 <br/><br/>In the coming weeks, you'll be emailed a link to a page with instructions on booking a room. This link will not initially
 be announced publicly, it will be sent to people registered for {{ c.EVENT_NAME }} first, so keep a lookout for the e-mail in case
 it goes into your spam folder. It will go to the email address that you provide in your badge information. Receiving the link does
@@ -43,7 +46,7 @@ not approved to vend.
     {% include "preregistration/hotel_disclaimer.html" %}
 {%- endif %}
 
-<br/> <br/> <u>Dealer Rules and Information</u>
+<br/> <br/> <u>Marketplace Rules and Information</u>
 {% include "static_views/dealerRules.html" %}
 
 </body>

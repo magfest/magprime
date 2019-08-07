@@ -55,11 +55,11 @@
         {% endif %}
 
         // Shows or hides the sweatpants option for Supporters
-        if ($.field('sweatpants')) {
+        if ($.field('sweatpants') && $.field('shirt')) {
             $('#sweatpants_size').insertAfter($.field('shirt').parents('.form-group'));
             {% if admin_area and attendee.amount_extra >= c.SUPPORTER_LEVEL %}
                 setVisible('#sweatpants_size', true);
-            {% else %}
+            {% elif not admin_area %}
                 var base_donationChanged = donationChanged;
                 donationChanged = function() {
                     base_donationChanged();
