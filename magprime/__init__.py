@@ -80,6 +80,6 @@ if c.AT_THE_CON:
 
 # override badge CSV exports for magfest prime specific settings.
 # magfest prime no longer uses one-day badges, so remove it.
-_summary = uber.site_sections.summary.Root
-_summary.badge_zipfile_contents = \
-    [fn for fn in _summary.badge_zipfile_contents if fn.__name__ is not 'printed_badges_one_day']
+_badge_exports = uber.site_sections.badge_exports.Root
+_badge_exports.badge_zipfile_contents = \
+    [fn for fn in _badge_exports.badge_zipfile_contents if fn.__name__ is not 'printed_badges_one_day']
