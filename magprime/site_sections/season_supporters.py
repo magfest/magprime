@@ -1,7 +1,7 @@
 from collections import defaultdict
 
 from uber.config import c
-from uber.decorators import all_renderable, unrestricted
+from uber.decorators import all_renderable, public
 from uber.errors import HTTPRedirect
 from uber.utils import localized_now
 
@@ -9,7 +9,7 @@ from magprime.models import PrevSeasonSupporter, SeasonPassTicket
 from magprime.utils import SeasonEvent
 
 
-@all_renderable(c.PEOPLE)
+@all_renderable()
 class Root:
     def index(self, session):
         events = defaultdict(list)
@@ -22,7 +22,7 @@ class Root:
     def prev_supporters(self, session):
         return {'prev': session.query(PrevSeasonSupporter).order_by('last_name', 'first_name').all()}
 
-    @unrestricted
+    @public
     def event(self, session, id, slug, register=None):
         season_pass = session.season_pass(id)
         event = SeasonEvent.instances[slug]
