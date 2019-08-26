@@ -28,7 +28,7 @@ presumably because they clicked the "I'm not coming" button.
             </td>
             <td>
                 {% for room in attendee.rooms -%}
-                    <a href="../hotel_assignments/index#/add-to-room/{{ room.id }}">{{ room.nights_labels|join(" / ") }}</a>
+                    <a href="../hotel_admin/index#/add-to-room/{{ room.id }}">{{ room.nights_labels|join(" / ") }}</a>
                 {% else -%}
                     no
                 {%- endfor %}

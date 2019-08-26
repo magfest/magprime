@@ -9,7 +9,7 @@ from uber.decorators import all_renderable, department_id_adapter
 from uber.models import Attendee, Shift, RoomAssignment
 
 
-@all_renderable(c.PEOPLE)
+@all_renderable()
 class Root:
     def index(self, session):
         return {
