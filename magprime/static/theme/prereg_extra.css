@@ -1,5 +1,5 @@
 .masthead {
-    padding-top: 30.86%;  /* The height is 30.86% of the width (250px / 810px) */
+    padding-top: 32%;  /* The height is 32% of the width (160px / 500px) */
 }
 
 
@@ -27,7 +27,7 @@ only screen and (-o-min-device-pixel-ratio:2/1),
 only screen and (min-device-pixel-ratio:2),
 only screen and (min-resolution:192dpi),
 only screen and (min-resolution:2dppx) {
-    .masthead { background-image: url("../theme/banner_2x.png"); }
+    .masthead { background-image: url("../theme/banner.png"); }
     img.tier-icon-iconshirt { background-image: url("../icons/iconshirt_2x.png"); }
     img.tier-icon-supporter { background-image: url("../icons/supporter_2x.png"); }
     img.tier-icon-barrel-roller { background-image: url("../icons/barrel_roller_2x.png"); }
@@ -68,8 +68,6 @@ only screen and (min-resolution:2dppx) {
 }
 
 body {
-    background-color: #000110;
-    background-image: url(../theme/tile-background.png);
-    background-image: url(../theme/tile-background.png), linear-gradient(to bottom, #000110, #000030 64%, #304430 80%, #CC7C2B 96%, #FF692A);
-    background-image: url(../theme/tile-background.png), radial-gradient(ellipse at top right, #1CCCCB, #105BA0 5%, #0B1E4D 14%, transparent 50%), radial-gradient(ellipse at bottom left, #FF692A, #B86D2B, #2B3D2E 25%, transparent 50%), linear-gradient(to bottom right, #002030, transparent);
-}
+    background-color: #fdda2b;
+    background-image: none;
+    }
