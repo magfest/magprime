@@ -1,5 +1,5 @@
 .masthead {
-    padding-top: 32%;  /* The height is 32% of the width (160px / 500px) */
+    padding-top: 30.86%; /* The height is 30.86% of the width (250px / 810px) */
 }
 
 
@@ -27,7 +27,7 @@ only screen and (-o-min-device-pixel-ratio:2/1),
 only screen and (min-device-pixel-ratio:2),
 only screen and (min-resolution:192dpi),
 only screen and (min-resolution:2dppx) {
-    .masthead { background-image: url("../theme/banner.png"); }
+    .masthead { background-image: url("../theme/banner_2x.png"); }
     img.tier-icon-iconshirt { background-image: url("../icons/iconshirt_2x.png"); }
     img.tier-icon-supporter { background-image: url("../icons/supporter_2x.png"); }
     img.tier-icon-barrel-roller { background-image: url("../icons/barrel_roller_2x.png"); }
