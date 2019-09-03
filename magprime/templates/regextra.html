@@ -54,21 +54,6 @@
             }
         {% endif %}
 
-        // Shows or hides the sweatpants option for Supporters
-        if ($.field('sweatpants') && $.field('shirt')) {
-            $('#sweatpants_size').insertAfter($.field('shirt').parents('.form-group'));
-            {% if admin_area and attendee.amount_extra >= c.SUPPORTER_LEVEL %}
-                setVisible('#sweatpants_size', true);
-            {% elif not admin_area %}
-                var base_donationChanged = donationChanged;
-                donationChanged = function() {
-                    base_donationChanged();
-                    setVisible('#sweatpants_size', $.val('amount_extra') >= {{ c.SUPPORTER_LEVEL }});
-                };
-                donationChanged();
-            {% endif %}
-        }
-
         {% if c.AFTER_PREREG_TAKEDOWN %}
             // MAGFest leaves prereg running after the supposed "deadline", so we want to turn off the warnings.
             // Note: This may not actually be required anymore
@@ -126,13 +111,3 @@
         </div>
     </div>
 {% endif %}
-
-<div id="sweatpants_size" class="extra-row form-group" style="display:none">
-  <label for="sweatpants" class="col-sm-3 control-label">Sweatpants Size</label>
-  <div class="col-sm-6">
-    <select name="sweatpants" class="form-control">
-      {{ options(c.SWEATPANTS_OPTS,attendee.sweatpants) }}
-    </select>
-  </div>
-  <div class="help-block col-sm-9 col-sm-offset-3"><em>{{ macros.popup_link("../static/swag/sweatpantssizeguide.png", "Size guide.") }}</em></div>
-</div>

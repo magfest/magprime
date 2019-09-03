@@ -17,7 +17,7 @@ img.tier-icon {
 
 img.tier-icon-iconshirt { background-image: url("../icons/iconshirt.png"); }
 img.tier-icon-supporter { background-image: url("../icons/supporter.png"); }
-img.tier-icon-barrel-roller { background-image: url("../icons/barrel_roller.png"); }
+img.tier-icon-barrel-roller { background-image: url("../icons/funky.png"); }
 
 @media
 only screen and (-webkit-min-device-pixel-ratio:2),
@@ -30,7 +30,7 @@ only screen and (min-resolution:2dppx) {
     .masthead { background-image: url("../theme/banner_2x.png"); }
     img.tier-icon-iconshirt { background-image: url("../icons/iconshirt_2x.png"); }
     img.tier-icon-supporter { background-image: url("../icons/supporter_2x.png"); }
-    img.tier-icon-barrel-roller { background-image: url("../icons/barrel_roller_2x.png"); }
+    img.tier-icon-barrel-roller { background-image: url("../icons/funky_2x.png"); }
 }
 
 .masthead-text {

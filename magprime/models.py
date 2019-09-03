@@ -10,8 +10,6 @@ from uber.utils import add_opt, remove_opt
 
 @Session.model_mixin
 class Attendee:
-    sweatpants = Column(Choice(c.SWEATPANTS_OPTS), default=c.NO_SWEATPANTS)
-
     @presave_adjustment
     def invalid_notification(self):
         if self.staffing and self.badge_status == c.INVALID_STATUS \
@@ -84,9 +82,6 @@ class Attendee:
             merch.append('a tshirt')
         elif self.num_event_shirts_owed > 1:
             merch.append('a 2nd tshirt')
-
-        if self.amount_extra >= c.SUPPORTER_LEVEL:
-            merch.append('a {} size pair of sweatpants'.format(self.sweatpants_label))
 
         if self.volunteer_event_shirt_eligible and not self.volunteer_event_shirt_earned:
             merch[-1] += (
