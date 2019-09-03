@@ -85,9 +85,6 @@ class Attendee:
         elif self.num_event_shirts_owed > 1:
             merch.append('a 2nd tshirt')
 
-        if self.amount_extra >= c.SUPPORTER_LEVEL:
-            merch.append('a {} size pair of sweatpants'.format(self.sweatpants_label))
-
         if self.volunteer_event_shirt_eligible and not self.volunteer_event_shirt_earned:
             merch[-1] += (
                 ' (this volunteer must work at least 6 hours or they will be reported for picking up their shirt)')

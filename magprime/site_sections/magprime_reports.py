@@ -48,14 +48,3 @@ class Root:
             'department_id': department_id,
             'staffers': sorted(staffers, key=lambda a: a.full_name)
         }
-
-    def sweatpants_counts(self, session):
-        counts = {}
-        sweatpants_attendees = session.query(Attendee).filter(Attendee.amount_extra >= c.SUPPORTER_LEVEL)
-
-        for key, val in c.SWEATPANTS_OPTS:
-            counts['Size unknown' if key == c.NO_SWEATPANTS else val] = sweatpants_attendees.filter(Attendee.sweatpants == key).count()
-
-        return {
-            'counts': counts,
-        }
