@@ -10,6 +10,8 @@ from uber.utils import add_opt, remove_opt
 
 @Session.model_mixin
 class Attendee:
+    sweatpants = Column(Choice(c.SWEATPANTS_OPTS), default=c.NO_SWEATPANTS)
+
     @presave_adjustment
     def invalid_notification(self):
         if self.staffing and self.badge_status == c.INVALID_STATUS \
