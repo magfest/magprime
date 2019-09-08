@@ -21,7 +21,7 @@ presumably because they clicked the "I'm not coming" button.
             <td>{{ attendee|form_link }}</td>
             <td>
                 {% if attendee.weighted_hours -%}
-                    <a href="../registration/shifts?id={{ attendee.id }}">{{ attendee.weighted_hours }}</a>
+                    <a href="../shifts_admin/attendee_shifts?id={{ attendee.id }}">{{ attendee.weighted_hours }}</a>
                 {% else -%}
                     0
                 {%- endif %}
