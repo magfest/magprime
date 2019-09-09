@@ -69,5 +69,5 @@ only screen and (min-resolution:2dppx) {
 
 body {
     background-color: #fdda2b;
-    background-image: none;
+    background-image: url(../theme/tile-background.png);
     }
