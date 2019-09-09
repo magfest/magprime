@@ -6,11 +6,6 @@ from uber.utils import before, days_after, days_before
 from magprime.models import SeasonPassTicket
 from magprime.utils import SeasonEvent
 
-# Super MAGFest's Marketplace is accustomed to not needing to approve these emails
-AutomatedEmail._fixtures['dealer_reg_payment_reminder'].needs_approval = False
-AutomatedEmail._fixtures['dealer_reg_payment_reminder_due_soon'].needs_approval = False
-AutomatedEmail._fixtures['dealer_reg_payment_reminder_last_chance'].needs_approval = False
-
 
 # leave this off for now, this code is now old and needs updating
 _send_season_supporter_emails = False
