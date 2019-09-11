@@ -82,6 +82,12 @@
         }
         {% endif %}
 
+        // No more personalized swadges -- hide the field for attendees!
+        {% if attendee and attendee.badge_type not in c.PREASSIGNED_BADGE_TYPES %}
+          if ($.field('badge_printed_name') && $.field('badge_printed_name').size()) {
+              $.field('badge_printed_name').parents('.form-group').remove();
+          }
+        {% endif %}
 
     });
 </script>
