@@ -82,6 +82,10 @@
         }
         {% endif %}
 
+        // No more personalized badges -- hide the field!
+        if ($.field('badge_printed_name') && $.field('badge_printed_name').size()) {
+            $.field('badge_printed_name').parents('.form-group').remove();
+        }
 
     });
 </script>
