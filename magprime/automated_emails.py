@@ -1,7 +1,7 @@
 from uber.models import Attendee, AutomatedEmail
 from uber.automated_emails import StopsEmailFixture, AutomatedEmailFixture
 from uber.config import c
-from uber.utils import before, days_after, days_before
+from uber.utils import before, days_after, days_before, DeptChecklistConf
 
 from magprime.models import SeasonPassTicket
 from magprime.utils import SeasonEvent
@@ -130,6 +130,7 @@ StopsEmailFixture(
 StopsEmailFixture(
     'MAGFest Dept Checklist Introduction', 'dept_checklist_intro.txt',
     lambda a: a.is_checklist_admin and a.admin_account,
+    extra_data={'checklist_items': DeptChecklistConf.instances},
     ident='magprime_dept_checklist_intro')
 
 StopsEmailFixture(
