@@ -15,9 +15,9 @@ The Checklist also includes signage and office supplies that you might need from
 
 The following deadlines are part of your Department Head Checklist.
 
-{%- for item in checklist_items -%}
+{% for item in checklist_items %}
 - {{ item.name }} Deadline: {{ item.deadline|datetime_local }}.
-{%- endfor -%}
+{% endfor %}
 
 You will receive a follow-up email for each item on the list 7 days prior to the deadline if the item hasn't already been completed.
 

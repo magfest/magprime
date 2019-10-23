@@ -130,7 +130,7 @@ StopsEmailFixture(
 StopsEmailFixture(
     'MAGFest Dept Checklist Introduction', 'dept_checklist_intro.txt',
     lambda a: a.is_checklist_admin and a.admin_account,
-    extra_data={'checklist_items': DeptChecklistConf.instances},
+    extra_data={'checklist_items': DeptChecklistConf.instances.values()},
     ident='magprime_dept_checklist_intro')
 
 StopsEmailFixture(
