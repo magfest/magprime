@@ -30,7 +30,7 @@
             $('#price_explanation').insertAfter($.field('payment_method').parents('.form-group'));
         }
 
-        {% if c.PAGE_PATH != '/registration/form' %}
+        {% if not admin_area %}
             // These are explanatory fields for attendees, so admins don't need to see them
             // #tax_exempt tells people that MAGFest is a 501(c)(3) nonprofit
             if ($.field('amount_extra')) {
@@ -104,7 +104,7 @@
   </div>
 {% endif %}
 
-{% if c.PAGE_PATH != '/registration/form' %}
+{% if not admin_area %}
     <div id="tax_exempt">
         <div class="help-block col-sm-9 col-sm-offset-3">
             Badge tier upgrades may be partially tax deductible. E-mail contact@magfest.org for details.
