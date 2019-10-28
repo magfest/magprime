@@ -1,0 +1,13 @@
+{% import 'macros.html' as macros %}
+
+{% if attendee.takes_shifts %}
+    <li>
+        {{ macros.checklist_image(attendee.shifts) }}
+        {% if attendee.reviewed_emergency_procedures %}
+            <a href="shifts">Sign up</a>
+        {% else %}
+            Sign up
+        {% endif %}
+        for shifts. (after December 27, you cannot drop shifts, but you can continue to sign up for shifts through January 1)
+    </li>
+{% endif %}
