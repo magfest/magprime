@@ -1,17 +1,15 @@
 {% import 'macros.html' as macros %}
-
-
-    <li>
-        {{ macros.checklist_image(attendee.reviewed_emergency_procedures) }}
-        {% if not attendee.reviewed_emergency_procedures %}
-            Please review
-        {% else %}
-            You have acknowledged that you reviewed
-        {%- endif -%}
-        {%- if attendee.shirt_info_marked %}
-        <a href="emergency_procedures">our Emergency Procedures</a>
-        {%- else %}our Emergency Procedures{% endif %}
-        {%- if not attendee.reviewed_emergency_procedures -%}
-        and acknowledge that you have done so
-        {%- endif -%}. (Deadline: December 18, 2019)
-    </li>
+<li>
+    {{ macros.checklist_image(attendee.reviewed_emergency_procedures) }}
+    {% if not attendee.reviewed_emergency_procedures %}
+        Please review
+    {% else %}
+        You have acknowledged that you reviewed
+    {% endif %}
+    {% if attendee.shirt_info_marked and false %}
+    <a href="emergency_procedures">our Emergency Procedures</a>
+    {%- else %}our Emergency Procedures{% endif %}
+    {%- if not attendee.reviewed_emergency_procedures -%}
+    and acknowledge that you have done so
+    {%- endif -%}. (Check back on 11/11/2019 for this step!) (Deadline: December 18, 2019)
+</li>
