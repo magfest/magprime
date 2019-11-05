@@ -40,12 +40,12 @@
               $('#tax_exempt').hide();
             }
 
-            // #tshirt_warning tells people that we don't sell 'slim' sizes at-fest
+            /*// #tshirt_warning tells people that we don't sell 'slim' sizes at-fest
             if ($.field('shirt')) {
                 $.field('shirt').parents('.form-group').append($('#tshirt_warning'));
             } else {
                 $('#tshirt_warning').hide();
-            }
+            }*/
 
             // Super MAGFest has a very large kick-in selection area, so we save some page space here
             // by hiding the normal 'badge type' selectors (which are generally used to select kick-in levels).
@@ -111,9 +111,9 @@
         </div>
     </div>
 
-    <div id="tshirt_warning">
+    <!--<div id="tshirt_warning">
         <div class="help-block col-sm-9 col-sm-offset-3">
             <em>Slim fit sizes only available during online pre-order. {{ macros.popup_link("../static/swag/shirtsizeguide.png", "Size guide.") }}</em>
         </div>
-    </div>
+    </div>-->
 {% endif %}
