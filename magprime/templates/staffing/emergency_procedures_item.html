@@ -4,12 +4,9 @@
     {% if not attendee.reviewed_emergency_procedures %}
         Please review
     {% else %}
-        You have acknowledged that you reviewed
+        You have acknowledged that you reviewed our
     {% endif %}
-    {% if attendee.shirt_info_marked and false %}
-    <a href="emergency_procedures">our Emergency Procedures</a>
-    {% else %}our Emergency Procedures{% endif %}
-    {% if not attendee.reviewed_emergency_procedures %}
-    and acknowledge that you have done so
-    {% endif %}. (We'll let you know when this step is live!) (Deadline: December 18, 2019)
+    {% if attendee.shirt_info_marked %}<a href="emergency_procedures">Emergency Procedures</a>{% else %}Emergency Procedures{% endif %}
+    {% if not attendee.reviewed_emergency_procedures %}and acknowledge that you have done so{% endif %}. 
+    (Deadline: December 18, 2019)
 </li>
