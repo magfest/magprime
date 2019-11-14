@@ -135,7 +135,7 @@ StopsEmailFixture(
 
 StopsEmailFixture(
     'Last Chance to enter your MAGFest staff shirt preferences', 'second_shirt.html',
-    lambda a: not a.shirt_info_marked,
+    lambda a: a.gets_staff_shirt and not a.shirt_info_marked,
     when=days_before(21, c.SHIRT_DEADLINE),
     ident='magprime_second_shirt')
 
