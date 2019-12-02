@@ -104,6 +104,21 @@
   </div>
 {% endif %}
 
+{% if admin_area %}
+<div class="form-group staffing staffing-checked">
+  <label class="col-sm-3 control-label">Reviewed Emergency Procedures</label>
+  <div class="col-sm-9">
+    <div class="form-control-static">
+      {{ attendee.reviewed_emergency_procedures|yesno("Yes,No") }}
+      <input type="hidden" name="reviewed_emergency_procedures" value="{{ attendee.reviewed_emergency_procedures|yesno("1,0") }}" />
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$.field('reviewed_emergency_procedures').parents('.form-group').insertAfter($.field('agreed_to_volunteer_agreement').parents('.form-group'));
+</script>
+{% endif %}
+
 {% if not admin_area %}
     <div id="tax_exempt">
         <div class="help-block col-sm-9 col-sm-offset-3">
