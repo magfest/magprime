@@ -99,17 +99,6 @@ class Attendee:
         return merch
 
 
-@Session.model_mixin
-class Group:
-    @presave_adjustment
-    def delete_declined(self):
-        from uber.models import Tracking
-        if self.status == c.DECLINED and not self.is_new:
-            Tracking.track(c.DELETED, self)
-            self.session.query(Group).filter_by(id=self.id).delete()
-            self.session.expunge(self)
-
-
 class SeasonPassTicket(MagModel):
     fk_id = Column(UUID)
     slug = Column(UnicodeText)
