@@ -12,6 +12,7 @@ from uber.utils import add_opt, remove_opt
 class Attendee:
     sweatpants = Column(Choice(c.SWEATPANTS_OPTS), default=c.NO_SWEATPANTS)
     reviewed_emergency_procedures = Column(Boolean, default=False)
+    walk_on_volunteer = Column(Boolean, default=False)
 
     @presave_adjustment
     def invalid_notification(self):
@@ -46,55 +47,33 @@ class Attendee:
         if self.badge_type == c.CHILD_BADGE and self.age_group in [c.UNDER_21, c.OVER_21]:
             self.badge_type = c.ATTENDEE_BADGE
             self.ribbon = remove_opt(self.ribbon_ints, c.UNDER_13)
-
+            
+    @presave_adjustment
+    def walk_on_volunteer_at_con(self):
+        if self.is_new and c.AT_THE_CON:
+            self.walk_on_volunteer = True
+            
     @property
-    def merch_items(self):
-        """
-        Here is the business logic surrounding shirts:
-        - People who kick in enough to get a shirt get an event shirt.
-        - People with staff badges get a configurable number of staff shirts.
-        - Volunteers who meet the requirements get a complementary event shirt
-            (NOT a staff shirt).
+    def volunteer_event_shirt_eligible(self):
+        return bool(c.VOLUNTEER_RIBBON in self.ribbon_ints and c.HOURS_FOR_SHIRT and not self.walk_on_volunteer)
+            
+    @property
+    def staff_merch_items(self):
+        """Used by the merch and staff_merch properties for staff swag."""
+        merch = ["Volunteer lanyard", "Volunteer button"]
+        if self.walk_on_volunteer and self.worked_hours >= 6:
+            merch.append("Walk-on volunteer coffee mug")
+        if not self.walk_on_volunteer and self.worked_hours >= c.HOURS_FOR_REFUND:
+            merch.append("Staff Swadge")
+        num_staff_shirts_owed = self.num_staff_shirts_owed
+        if num_staff_shirts_owed > 0:
+            staff_shirts = '{} Staff Shirt{}'.format(num_staff_shirts_owed, 's' if num_staff_shirts_owed > 1 else '')
+            if self.shirt_size_marked:
+                staff_shirts += ' [{}]'.format(c.SHIRTS[self.shirt])
+            merch.append(staff_shirts)
 
-        If the c.SEPARATE_STAFF_SWAG setting is true, then this excludes staff
-        merch; see the staff_merch property.
-
-        This property returns a list containing strings and sub-lists of each
-        donation tier with multiple sub-items, e.g.
-            [
-                'tshirt',
-                'Supporter Pack',
-                [
-                    'Swag Bag',
-                    'Badge Hpolder'
-                ],
-                'Season Pass Certificate'
-            ]
-        """
-        merch = []
-        for amount, desc in sorted(c.DONATION_TIERS.items()):
-            if amount and self.amount_extra >= amount:
-                merch.append(desc)
-                items = c.DONATION_TIER_ITEMS.get(amount, [])
-                if len(items) == 1:
-                    merch[-1] = items[0]
-                elif len(items) > 1:
-                    merch.append(items)
-
-        if self.num_event_shirts_owed == 1 and not self.paid_for_a_shirt:
-            merch.append('a tshirt')
-        elif self.num_event_shirts_owed > 1:
-            merch.append('a 2nd tshirt')
-
-        if self.volunteer_event_shirt_eligible and not self.volunteer_event_shirt_earned:
-            merch[-1] += (
-                ' (this volunteer must work at least 6 hours or they will be reported for picking up their shirt)')
-
-        if not c.SEPARATE_STAFF_MERCH:
-            merch.extend(self.staff_merch_items)
-
-        if self.extra_merch:
-            merch.append(self.extra_merch)
+        if self.staffing:
+            merch.append('Staffer Info Packet')
 
         return merch
 
