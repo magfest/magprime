@@ -4,7 +4,7 @@ All sections of the Volunteer Checklist for Super 2020 are now live! If you've a
 
 If you don't sign up by {{ c.ROOM_DEADLINE|datetime_local }} then you will not receive hotel room space.
 
-All volunteers who receive hotel room space must sign up for at least {{ c.HOTEL_REQ_HOURS }} weighted hours worth of shifts, but you won't be charged any money. If you requested and are approved for set up and/or load out days, those shifts will be visible to you in two weeks. Those shifts will count towards the 30 hour requirement.
+All volunteers who receive hotel room space must sign up for at least {{ c.HOURS_FOR_HOTEL_SPACE }} weighted hours worth of shifts, but you won't be charged any money. If you requested and are approved for set up and/or load out days, those shifts will be visible to you in two weeks. Those shifts will count towards the 30 hour requirement.
 
 If you have trouble with the login information, please go to: {{ c.URL_BASE }}/preregistration/confirm?id={{ attendee.id }} and verify your registration information.
 

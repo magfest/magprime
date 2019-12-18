@@ -132,3 +132,22 @@ $.field('reviewed_emergency_procedures').parents('.form-group').insertAfter($.fi
         </div>
     </div>-->
 {% endif %}
+
+{% if admin_area %}
+{% set read_only = (walk_on_ro or page_ro) or not c.HAS_STAFFING_ADMIN_ACCESS %}
+<div class="form-group staffing staffing-checked">
+    <label class="col-sm-3 control-label">Walk-on Volunteer</label>
+    <div class="checkbox col-sm-6">
+      {{ macros.checkbox(attendee, 'walk_on_volunteer', label='This person volunteered at-fest', is_readonly=read_only, clientside_bool=clientside_bool) }}
+    </div>
+</div>
+<script type="text/javascript">
+$.field('walk_on_volunteer').parents('.form-group').insertAfter($.field('can_work_teardown').parents('.form-group'));
+{% if not attendee.staffing %}
+checkWalkOn = function () {
+    $.field('walk_on_volunteer').prop('checked', $.field('staffing').prop('checked'));
+}
+$.field('staffing').on('click', checkWalkOn);
+{% endif %}
+</script>
+{% endif %}
