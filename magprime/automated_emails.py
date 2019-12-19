@@ -145,7 +145,6 @@ AutomatedEmailFixture(
         a.can_spam
         and (a.paid == c.HAS_PAID or a.paid == c.NEED_NOT_PAY or (a.group and a.group.amount_paid))
         and days_after(3, a.registered)()),
-    when=days_before(14, c.SUPPORTER_DEADLINE),
     sender='MAGFest Merch Team <merch@magfest.org>',
     ident='magprime_bonus_swag_reminder_last_chance')
 
