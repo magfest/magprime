@@ -18,12 +18,6 @@ def attendee_badge_under_13(attendee):
             "please select a 12 and Under badge instead of an Attendee badge.".format(c.EVENT_NAME)
 
 
-@prereg_validation.Attendee
-def sweatpants_size_if_supporter(attendee):
-    if attendee.amount_extra >= c.SUPPORTER_LEVEL and attendee.sweatpants == c.NO_SWEATPANTS:
-        return "Please select a sweatpants size."
-
-
 @validation.Attendee
 def child_badge_over_18(attendee):
     if attendee.badge_type == c.CHILD_BADGE and attendee.age_group_conf['val'] in [c.UNDER_21, c.OVER_21]:

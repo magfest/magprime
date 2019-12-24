@@ -3,15 +3,16 @@ Thanks again for coming out to {{ c.EVENT_NAME }} as a Guest! As we've previousl
 
 Breakfast: 8:00 am to 11:00 am
 Lunch: 12:00 pm to 3:00 pm
-Dinner: 5:00 pm to 9:00 pm
+Dinner: 6:00 pm to 8:00 pm
 SUITE IS OPEN 24/7 WITH SNACKS & GRAB AND GO
 
 The first meal served will be breakfast on Thursday morning, and the suite will remain open through Sunday afternoon. Sunday will have a breakfast option, but once breakfast is over, leftovers will be served. You will be able to help yourself. Please feel free to bring tupperware or storage bags to carry items home. You will be responsible for their proper storage.
 
-Meal schedule, menu, and suite rules can all be found at staffsuite.magfe.st
+Meal schedule, menu, and suite rules can all be found at https://bit.ly/2Bymxg7
 
 Please let us know if you have any questions.
 
 MAGFest Staff Suite
 chefs@magfest.org
-staffsuite.magfe.st
+https://bit.ly/2Bymxg7
+

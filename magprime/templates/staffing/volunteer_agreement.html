@@ -1,0 +1,92 @@
+{% extends "base.html" %}{% set admin_area=True %}
+{% block title %}Volunteer Agreement{% endblock %}
+{% block backlink %}{% endblock %}
+{% block content %}
+
+<h1>Volunteer Agreement</h1>
+
+<p>
+MAGFest depends on committed volunteers to make our events happen. We could not do this without you, 
+are so grateful for all you do, and the community you have helped to create. To ensure that staff, 
+volunteers, attendees, and guests have the best experience possible, we have developed the following 
+agreement between volunteers and MAGFest, Inc.</p>
+
+<p>MAGFest, Inc. agrees to:
+<ul>
+<li>Be forthcoming with information as it pertains to event logistics and changes in policy.</li>
+<li>Serve as the liaison between volunteers and employees when needed.</li>
+<li>Provide a brief description of duties for positions open to volunteers.</li>
+<li>Train and support volunteers where needed.</li>
+<li>Provide volunteers with working conditions equal to those of paid employees doing similar work, including space, 
+equipment and supplies.</li>
+<li>Provide volunteers the opportunity to ask questions, communicate openly, and share any concerns.</li>
+<li>Be responsible for the coordination, support, and termination (if necessary) of all volunteers.</li>
+</ul>
+</p>
+
+<p>The Volunteer agrees to:
+<ul>
+<li>Meet the commitment required of chosen position. This includes being aware of pre-event duties or deadlines and 
+completing them accordingly.</li>
+<li>Become thoroughly familiar with MAGFest's 
+<a href="https://super.magfest.org/codeofconduct/" target="_blank">Event Code of Conduct</a>, 
+<a href="https://www.notion.so/magfest/Volunteer-Guidelines-Policies-e7a5c3abac144a96a98bf6586833f61d" target="_blank">Volunteer Guidelines and Policies</a>, 
+and <a href="https://www.notion.so/magfest/Communications-Code-of-Conduct-cd27b6f1976d4685925cc7a2500e94ed" target="_blank">Communications Code of Conduct</a>.</li>
+<li>Carry out duties in alignment with our 
+<a href="https://www.notion.so/magfest/Mission-Core-Values-6656a5b2bf3340d183912f4db3211b00" target="_blank">Core Values</a>.</li>
+<li>Work all shifts that they have signed up for, being present and prepared to work on time. If unable to work as 
+scheduled, they will notify their department supervisor.</li>
+<li>Seek the assistance of their immediate supervisor or DH in any situation requiring special guidance.</li>
+<li>Provide feedback and suggestions to STOPS in order to increase the effectiveness of the program.</li>
+<li>Accept the right of MAGFest, Inc. to dismiss any volunteer for poor performance, including poor attendance.</li>
+<li>Notify MAGFest about any resignation, request for a leave of absence, or change of volunteer commitment.</li>
+</ul>
+</p>
+
+<h1>Performance Problems and Disciplinary Actions</h1>
+<p>In general, volunteers can receive verbal or written warnings of unacceptable behavior or performance and are 
+allowed time and support to improve.</p>
+
+<p>MAGFest supports an atmosphere of open discussion of issues between volunteers, staff, and employees.  Should a 
+volunteer take exception to a disciplinary action, they may discuss it with the head(s) of STOPS for their event. 
+In the case that further arbitration is needed, the Director of Volunteer Infrastructure will have final say on 
+disciplinary actions regarding volunteers.</p>
+
+<p>In instances of gross misconduct, warnings may not be possible or desirable for the overall interests of MAGFest, 
+event attendees, or the community.  Engaging in any of the following behaviors or actions will not be tolerated and 
+may result in immediate termination of duties:
+<ul>
+<li>Physical assault or threat of violence to anyone involved with the event.</li>
+<li>Theft (equipment, supplies, money).</li>
+<li>Possession or use of a weapon.</li>
+<li>Racial, sexual, or other harassment of anyone involved with the event.</li>
+<li>Reckless or deliberate action that endangers the physical or psychological well-being of another person involved 
+with the event.</li>
+<li>Reckless or deliberate action that damages MAGFest property or property belonging to MAGFest partners.</li>
+<li>Reckless or deliberate action which damages the reputation of MAGFest.</li>
+</ul>
+</p>
+
+<p>The above list is representative of the types of behavior that will not be tolerated and is not intended to be an 
+exhaustive list.</p>
+
+<p>Should a volunteer be accused of engaging in any of these behaviors, MAGFest’s Safety and Security Team, along with 
+Staff Operations, will investigate the incident(s) and take appropriate disciplinary action up to and including immediate 
+termination.</p>
+
+<p>I, {{ attendee.legal_first_name }} {{ attendee.legal_last_name }}, acknowledge that I have read the volunteering policies and guidelines. I understand the volunteer expectations, and I will fulfill them to the best of my ability. I understand that there may be consequences if I don’t meet these expectations.</p>
+
+{% if not attendee.agreed_to_volunteer_agreement %}
+    <form method="post" action="volunteer_agreement">
+        {{ csrf_token() }}
+        <label for="agreed_to_terms">
+          I agree to the terms of the volunteer agreement: <input type="checkbox" id="agreed_to_terms" name="agreed_to_terms" />
+        </label>
+        <br><br>
+        <input class="btn btn-primary" type="submit" value="Save" />
+    </form>
+{% else %}
+    <p>You have accepted the terms of this agreement already.</p>
+{% endif %}
+
+{% endblock %}

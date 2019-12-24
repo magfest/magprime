@@ -9,7 +9,7 @@ from uber.decorators import all_renderable, department_id_adapter
 from uber.models import Attendee, Shift, RoomAssignment
 
 
-@all_renderable(c.PEOPLE)
+@all_renderable()
 class Root:
     def index(self, session):
         return {
@@ -47,15 +47,4 @@ class Root:
             'start': start,
             'department_id': department_id,
             'staffers': sorted(staffers, key=lambda a: a.full_name)
-        }
-
-    def sweatpants_counts(self, session):
-        counts = {}
-        sweatpants_attendees = session.query(Attendee).filter(Attendee.amount_extra >= c.SUPPORTER_LEVEL)
-
-        for key, val in c.SWEATPANTS_OPTS:
-            counts['Size unknown' if key == c.NO_SWEATPANTS else val] = sweatpants_attendees.filter(Attendee.sweatpants == key).count()
-
-        return {
-            'counts': counts,
         }

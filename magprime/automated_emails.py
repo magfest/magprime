@@ -1,7 +1,7 @@
-from uber.models import Attendee
+from uber.models import Attendee, AutomatedEmail
 from uber.automated_emails import StopsEmailFixture, AutomatedEmailFixture
 from uber.config import c
-from uber.utils import before, days_after, days_before
+from uber.utils import before, days_after, days_before, DeptChecklistConf
 
 from magprime.models import SeasonPassTicket
 from magprime.utils import SeasonEvent
@@ -48,10 +48,17 @@ AutomatedEmailFixture(
     ident='magprime_guest_food_restrictions')
 
 AutomatedEmailFixture(
-    Attendee, 'MAGFest hospitality suite information', 'guest_food_info.txt',
+    Attendee, 'MAGFest hospitality suite information', 'food/guest_food_info.txt',
     lambda a: a.badge_type == c.GUEST_BADGE,
     sender='MAGFest Staff Suite <chefs@magfest.org>',
     ident='magprime_hospitality_suite_guest_food_info')
+
+AutomatedEmailFixture(
+    Attendee, 'Department Heads', 'food/department_heads.txt',
+    lambda a: a.is_dept_head,
+    ident='magprime_department_water_and_food_info',
+   # when=days_before(7, c.UBER_TAKEDOWN),
+    sender='MAGFest Staff Suite <chefs@magfest.org>')
 
 AutomatedEmailFixture(
     Attendee, 'MAGFest Volunteer Food', 'volunteer_food_info.txt',
@@ -61,7 +68,7 @@ AutomatedEmailFixture(
     sender='MAGFest Staff Suite <chefs@magfest.org>')
 
 AutomatedEmailFixture(
-    Attendee, 'MAGFest Staff Suite Volunteering', 'food_interest.txt',
+    Attendee, 'MAGFest Staff Suite Volunteering', 'food/food_interest.txt',
     lambda a: a.requested(c.FOOD_PREP) or a.assigned_to(c.FOOD_PREP),
     ident='magprime_staff_suite_volunteer_food_interest',
     sender='MAGFest Staff Suite <chefs@magfest.org>')
@@ -123,11 +130,12 @@ StopsEmailFixture(
 StopsEmailFixture(
     'MAGFest Dept Checklist Introduction', 'dept_checklist_intro.txt',
     lambda a: a.is_checklist_admin and a.admin_account,
+    extra_data={'checklist_items': DeptChecklistConf.instances.values()},
     ident='magprime_dept_checklist_intro')
 
 StopsEmailFixture(
     'Last Chance to enter your MAGFest staff shirt preferences', 'second_shirt.html',
-    lambda a: not a.shirt_info_marked,
+    lambda a: a.gets_staff_shirt and not a.shirt_info_marked,
     when=days_before(21, c.SHIRT_DEADLINE),
     ident='magprime_second_shirt')
 
@@ -137,7 +145,6 @@ AutomatedEmailFixture(
         a.can_spam
         and (a.paid == c.HAS_PAID or a.paid == c.NEED_NOT_PAY or (a.group and a.group.amount_paid))
         and days_after(3, a.registered)()),
-    when=days_before(14, c.SUPPORTER_DEADLINE),
     sender='MAGFest Merch Team <merch@magfest.org>',
     ident='magprime_bonus_swag_reminder_last_chance')
 
@@ -150,13 +157,6 @@ AutomatedEmailFixture(
     when=before(c.SHIRT_DEADLINE),
     sender='MAGFest Merch Team <merch@magfest.org>',
     ident='magprime_shirt_size_confirmation')
-
-AutomatedEmailFixture(
-    Attendee, 'MAGFest ' + c.EVENT_YEAR + ' sweatpants size confirmation', 'confirm_sweatpants_size.html',
-    lambda a: a.amount_extra >= c.SUPPORTER_LEVEL and (a.sweatpants == c.NO_SWEATPANTS or not a.sweatpants),
-    when=before(c.SHIRT_DEADLINE),
-    sender='MAGFest Merch Team <merch@magfest.org>',
-    ident='magprime_sweatpants_size_confirmation')
 
 AutomatedEmailFixture(
     Attendee, 'MAGFest Dealer waitlist has been exhausted', 'dealer_waitlist_exhausted.txt',

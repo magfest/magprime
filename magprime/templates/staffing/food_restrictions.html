@@ -1,0 +1,60 @@
+{% extends "base.html" %}{% set admin_area=True %}
+{% block title %}Dietary Restrictions{% endblock %}
+{% block backlink %}{% endblock %}
+{% block content %}
+
+<h2> Dietary Restrictions </h2>
+
+{% if attendee.badge_type == c.GUEST_BADGE %}
+<p>We feed our guests three meals per day during {{ c.EVENT_NAME }}, and we have an easier time planning meals
+when we know what kind of food restrictions everyone has.</p><p>
+{% else %}
+<p>Thank you for volunteering! We’re glad you’re here. The form below helps us better understand the dietary 
+restrictions and allergies of our volunteers and staff.</p>
+<p>Volunteers and staff who commit to 12 or more weighted hours are eligible to eat from Staff Suite, where 
+we serve breakfast, lunch, and dinner.
+{% endif %}
+
+Breakfast starts on Thursday, January 2 and meal service ends with lunch on Sunday, January 5. Staff suite 
+hours are 6AM to 2AM. Grab & Go (fruit, veggies, snacks, and drinks) will move downstairs to Tea Room during the 
+wee hours of the morning.</p>
+
+<p>All ingredients for breakfast and lunch will be available on our notion page: 
+<a href="http://bitly.com/StaffSuite2020" target="_blank">bitly.com/StaffSuite2020</a>. Dinners are catered 
+by outside restaurants, so we can only provide details on the Big Eight food allergens: <strong>Milk, eggs, fish, 
+shellfish, tree nuts, peanus, wheat, and soy</strong>. If you have dietary restrictions outside of the Big Eight, 
+we recommend you consider alternate options for dinners. Please note that Grab & Go will be available at all times 
+that staff suite is open.
+</p>
+
+<p><strong>We have open containers of peanut butter in Staff Suite.</strong></p>
+
+<form method="post" action="food_restrictions">
+    {{ csrf_token() }}
+    <input type="hidden" name="id" value="{{ fr.db_id }}" />
+
+    Please select any options that apply:<br/>
+    <div id="restrictions">{{ macros.checkgroup(fr, 'standard') }}</div>
+
+    <br/>
+    Let us know if you have any other allergies or restrictions, please use commas to separate each allergy and 
+    food restriction. Please note we are unable to accommodate every constraint, and the form below is not designed 
+    for preferences due to taste. Menus and ingredients will be posted before Super MAGFest 2020 on our Notion page:
+     <a href="http://bitly.com/StaffSuite2020" target="_blank">bitly.com/StaffSuite2020</a>
+    <br/><br/>
+    <textarea name="freeform" rows="3" cols="80">{{ fr.freeform }}</textarea>
+
+    <br/> <br/> <input type="submit" value="Save" /><br/>
+    By clicking Save I agree that I have read the above information and indicated any restrictions requested.
+
+    <br/> <br/> 
+    [1] Vegan food will be labeled accordingly.
+</form>
+
+<script>
+    $(function () {
+        $(':checkbox[value={{  c.VEGAN }}]').parent().append('[1]');
+    });
+</script>
+
+{% endblock %}

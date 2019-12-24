@@ -15,18 +15,9 @@ The Checklist also includes signage and office supplies that you might need from
 
 The following deadlines are part of your Department Head Checklist.
 
-- Creating Shifts Deadline: 11:59pm EST on Tuesday, Nov. 1st
-- Volunteers Assigned to Your Department Deadline: 11:59pm EST on Tuesday, Nov. 1st
-- MPoint Needs Deadline: 11:59pm EST on Tuesday,  Nov. 15th
-- Treasury Information Deadline: 11:59pm EST on Tuesday,  Nov. 15th
-- Approve/Decline Requests for Setup/Teardown Deadline: 11:59pm EST on Tuesday, Nov. 22nd
-- Checking Placeholder Registrations Deadline: 11:59pm EST on Tuesday, Nov. 22nd
-- Staffers Requesting Hotel Space Deadline: 11:59pm EST on Tuesday, Nov. 29th
-- Tech Requirements Deadline: 11:59pm EST on Tuesday, Nov. 29
-- Printed Signs Deadline: 11:59pm EST on Tuesday, Dec. 6th
-- Office Supplies Deadline: 11:59pm EST on Tuesday, Dec. 6th
-- Custom Ribbons Deadline: 11:59pm EST on Tuesday, Dec. 6th
-- (After the Event) Marking and Rating Shifts Deadline: 11:59pm EST on Tuesday, Jan 24th.
+{% for item in checklist_items %}
+- {{ item.name }} Deadline: {{ item.deadline|datetime_local }}.
+{% endfor %}
 
 You will receive a follow-up email for each item on the list 7 days prior to the deadline if the item hasn't already been completed.
 

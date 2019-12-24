@@ -2,15 +2,15 @@
 <head></head>
 <body>
 
-Your group ({{ group.name }}) has successfully submitted a Dealer application for {{ c.EVENT_NAME }}
+Your group ({{ group.name }}) has successfully submitted a Marketplace application for {{ c.EVENT_NAME }}
 this coming {{ event_dates() }}. Below is a copy of your application. You may
 <a href="{{ c.URL_BASE }}/preregistration/group_members?id={{ group.id }}">update it here</a> or
 <a href="{{ c.URL_BASE }}/preregistration/confirm?id={{ group.leader.id }}">view your badge here</a>.
 <ul>
-    <li><strong>Dealer Table Name</strong>: {{ group.name }}</li>
-    <li><strong>Tables</strong>: {{ group.tables }} table{{ group.tables|pluralize }} (${{ group.table_cost|round(2) }}) </li>
-    <li><strong>Badges</strong>: {{ group.badges }} badge{{ group.badges|pluralize }} (${{ group.badge_cost|round(2) }}) </li>
-    <li><strong>Total Price</strong> ${{ group.cost }}</li>
+    <li><strong>Marketplace Table Name</strong>: {{ group.name }}</li>
+    <li><strong>Tables</strong>: {{ group.tables }} table{{ group.tables|pluralize }} (${{ '%0.2f' % group.table_cost }}) </li>
+    <li><strong>Badges</strong>: {{ group.badges }} badge{{ group.badges|pluralize }} (${{ '%0.2f' % group.badge_cost }}) </li>
+    <li><strong>Total Price</strong> ${{ '%0.2f' % group.cost }}</li>
     <li><strong>What do you sell?</strong> {{ group.wares }}</li>
     <li><strong>Description</strong>: {{ group.description }}</li>
     {% if group.special_needs %}<li><strong>Table Requests and Special Requests</strong>: {{ group.special_needs }}</li>{% endif %}
@@ -28,12 +28,15 @@ what you plan to sell to {{ c.MARKETPLACE_EMAIL|email_only }}. If you do not pro
 waitlisted. If you frequently put your shop on vacation mode, then please include links to a gallery elsewhere. If we make 3 attempts
 to view a closed shop and are unable to see your wares, we will also automatically waitlist you.
 
+<br/><br/><strong>IMPORTANT NOTE NUMBER 2</strong>: MAGFest no longer allows proxy selling. If you have applied as a proxy seller,
+then you will be declined. We do still allow table sharing with prior email approval.
+
 <br/><br/>In the coming weeks, you'll be emailed a link to a page with instructions on booking a room. This link will not initially
 be announced publicly, it will be sent to people registered for {{ c.EVENT_NAME }} first, so keep a lookout for the e-mail in case
 it goes into your spam folder. It will go to the email address that you provide in your badge information. Receiving the link does
 not guarantee you a room.
 
-<br/><br/>Vendor applications automatically reserve the ability to purchase badges for you and the number of assistants on the
+<br/><br/>{{ c.DEALER_APP_TERM|capitalize }}s automatically reserve the ability to purchase badges for you and the number of assistants on the
 application at the pre-registration price of ${{ c.BADGE_PRICE }}, if the application is not approved. PLEASE DO NOT BUY A BADGE
 IF YOU APPLIED FOR A MARKETPLACE SPOT. Your ability to purchase the badges will happen after the waitlist is exhausted if you are
 not approved to vend.
@@ -43,7 +46,7 @@ not approved to vend.
     {% include "preregistration/hotel_disclaimer.html" %}
 {%- endif %}
 
-<br/> <br/> <u>Dealer Rules and Information</u>
+<br/> <br/> <u>Marketplace Rules and Information</u>
 {% include "static_views/dealerRules.html" %}
 
 </body>
