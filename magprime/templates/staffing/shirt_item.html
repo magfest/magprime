@@ -1,5 +1,5 @@
 {% import 'macros.html' as macros %}
-{% if not attendee.badge_type == c.CONTRACTOR_BADGE and c.HOURS_FOR_SHIRT %}
+{% if c.HOURS_FOR_SHIRT and attendee.gets_any_kind_of_shirt %}
 <li>
     {{ macros.checklist_image(attendee.shirt_info_marked) }}
     {% if attendee.food_restrictions_filled_out %}
