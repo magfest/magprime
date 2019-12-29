@@ -48,11 +48,6 @@ class Attendee:
             self.badge_type = c.ATTENDEE_BADGE
             self.ribbon = remove_opt(self.ribbon_ints, c.UNDER_13)
             
-    @presave_adjustment
-    def walk_on_volunteer_at_con(self):
-        if self.is_new and c.AT_THE_CON:
-            self.walk_on_volunteer = True
-            
     @property
     def volunteer_event_shirt_eligible(self):
         return bool(c.VOLUNTEER_RIBBON in self.ribbon_ints and c.HOURS_FOR_SHIRT and not self.walk_on_volunteer)
