@@ -132,7 +132,7 @@ $.field('reviewed_emergency_procedures').parents('.form-group').insertAfter($.fi
 {% endif %}
 
 {% if admin_area %}
-{% set read_only = (walk_on_ro or page_ro) or not c.HAS_STAFFING_ADMIN_ACCESS %}
+{% set read_only = (walk_on_ro or page_ro) or (not c.HAS_STAFFING_ADMIN_ACCESS and not c.HAS_REG_ADMIN_ACCESS) %}
 <div class="form-group staffing staffing-checked">
     <label class="col-sm-3 control-label">Walk-on Volunteer</label>
     <div class="checkbox col-sm-6">
