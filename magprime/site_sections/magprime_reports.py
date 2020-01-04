@@ -5,7 +5,7 @@ from collections import defaultdict
 from sqlalchemy.orm import subqueryload
 
 from uber.config import c
-from uber.decorators import all_renderable, department_id_adapter
+from uber.decorators import all_renderable, csv_file, department_id_adapter
 from uber.models import Attendee, Shift, RoomAssignment
 
 
@@ -48,3 +48,10 @@ class Root:
             'department_id': department_id,
             'staffers': sorted(staffers, key=lambda a: a.full_name)
         }
+        
+    @csv_file
+    def credits(self, out, session):
+        out.writerow(["Name submitted for credits"])
+        for attendee in session.all_attendees():
+            if attendee.name_in_credits:
+                out.writerow([attendee.name_in_credits])
