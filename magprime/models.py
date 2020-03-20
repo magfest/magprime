@@ -13,6 +13,7 @@ class Attendee:
     sweatpants = Column(Choice(c.SWEATPANTS_OPTS), default=c.NO_SWEATPANTS)
     reviewed_emergency_procedures = Column(Boolean, default=False)
     walk_on_volunteer = Column(Boolean, default=False)
+    name_in_credits = Column(UnicodeText, nullable=True)
 
     @presave_adjustment
     def invalid_notification(self):
