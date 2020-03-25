@@ -13,3 +13,4 @@ dist
 .coverage
 development.ini
 test.ini
+*.DS_Store
