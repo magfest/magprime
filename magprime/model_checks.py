@@ -25,3 +25,9 @@ def child_badge_over_18(attendee):
         if c.PAGE_PATH in ['/registration/change_badge']:
             return "Attendees who are 18 or over (or will be at the start of {}) cannot have Minor badges. " \
                 "Please update their date of birth instead.".format(c.EVENT_NAME)
+                
+@validation.Attendee
+def no_more_child_badges(attendee):
+    if attendee.is_new and attendee.age_group_conf['val'] not in [c.UNDER_21, c.OVER_21, c.AGE_UNKNOWN] \
+            and not c.CHILD_BADGE_AVAILABLE:
+        return "Unfortunately, we are sold out of badges for attendees under 18."

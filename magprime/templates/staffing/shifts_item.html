@@ -3,7 +3,7 @@
 {% if attendee.takes_shifts %}
     <li>
         {{ macros.checklist_image(attendee.shifts) }}
-        {% if attendee.reviewed_emergency_procedures %}
+        {% if attendee.shift_prereqs_complete %}
             <a href="shifts">Sign up</a>
         {% else %}
             Sign up
