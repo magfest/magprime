@@ -1,0 +1,20 @@
+<html>
+<head></head>
+<body>
+
+{{ attendee.first_name }},
+<br><br>
+
+{% if attendee.badge_type == c.STAFF_BADGE %}
+    Thanks again for Staffing at {{ c.EVENT_NAME }}!
+{% elif c.VOLUNTEER_RIBBON in attendee.ribbon_ints %}
+    Thanks again for Volunteering at {{ c.EVENT_NAME }}!
+{% endif %}
+
+<br><br>
+{% include "staffing/printable_schedule.html" %}
+
+<br> {{ c.STOPS_EMAIL_SIGNATURE|linebreaksbr }}
+
+</body>
+</html>
