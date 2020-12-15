@@ -68,6 +68,6 @@ only screen and (min-resolution:2dppx) {
 }
 
 body {
-    background-color: #fdda2b;
-    background-image: url(../theme/tile-background.png);
+    background-color: #17181c;
+    /* background-image: url(../theme/tile-background.png); */
     }
