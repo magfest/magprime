@@ -1,5 +1,5 @@
 .masthead {
-    padding-top: 30.86%; /* The height is 30.86% of the width (250px / 810px) */
+    padding-top: 60.4%; /* The height is 60.4% of the width (302px / 500px) */
 }
 
 
@@ -69,5 +69,5 @@ only screen and (min-resolution:2dppx) {
 
 body {
     background-color: #17181c;
-    /* background-image: url(../theme/tile-background.png); */
+    background-image: none;
     }
