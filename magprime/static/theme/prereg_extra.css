@@ -1,5 +1,5 @@
 .masthead {
-    padding-top: 60.4%; /* The height is 60.4% of the width (302px / 500px) */
+    padding-top: 25.68%; /* The height is 25.68% of the width (197px / 767px) */
 }
 
 
@@ -15,7 +15,7 @@ img.tier-icon {
     width: 0;
 }
 
-img.tier-icon-iconshirt { background-image: url("../icons/iconshirt.png"); }
+img.tier-icon-shirt { background-image: url("../icons/shirt.png"); }
 img.tier-icon-supporter { background-image: url("../icons/supporter.png"); }
 img.tier-icon-super { background-image: url("../icons/super.png"); }
 
@@ -28,9 +28,6 @@ only screen and (min-device-pixel-ratio:2),
 only screen and (min-resolution:192dpi),
 only screen and (min-resolution:2dppx) {
     .masthead { background-image: url("../theme/banner_2x.png"); }
-    img.tier-icon-iconshirt { background-image: url("../icons/iconshirt_2x.png"); }
-    img.tier-icon-supporter { background-image: url("../icons/supporter_2x.png"); }
-    img.tier-icon-super { background-image: url("../icons/super_2x.png"); }
 }
 
 .masthead-text {
@@ -68,6 +65,5 @@ only screen and (min-resolution:2dppx) {
 }
 
 body {
-    background-color: #17181c;
-    background-image: none;
+    background-color: #060404;
     }
