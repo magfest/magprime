@@ -2,43 +2,13 @@ from os.path import join
 
 import cherrypy
 import uber
-from sideboard.lib import parse_config
-from uber.config import c, Config, dynamic
 from uber.errors import HTTPRedirect
 from uber.jinja import template_overrides
 from uber.models import Attendee, Session
 from uber.utils import mount_site_sections, static_overrides
 
 from magprime._version import __version__  # noqa: F401
-
-
-magprime_config = parse_config(__file__)
-static_overrides(join(magprime_config['module_root'], 'static'))
-template_overrides(join(magprime_config['module_root'], 'templates'))
-
-
-@Config.mixin
-class ExtraConfig:
-    @property
-    @dynamic
-    def SEASON_BADGE_PRICE(self):
-        return self.BADGE_PRICE + self.SEASON_LEVEL
-
-    @property
-    def SEASON_EVENTS(self):
-        return magprime_config['season_events']
-
-    @property
-    def PREREG_BADGE_TYPES(self):
-        types = [self.ATTENDEE_BADGE, self.PSEUDO_DEALER_BADGE, self.CHILD_BADGE]
-        for reg_open, badge_type in [(self.BEFORE_GROUP_PREREG_TAKEDOWN, self.PSEUDO_GROUP_BADGE)]:
-            if reg_open:
-                types.append(badge_type)
-        return types
-
-    @property
-    def DEALER_REG_OPEN(self):
-        return self.AFTER_DEALER_REG_START and self.BEFORE_DEALER_REG_SHUTDOWN and not self.DEALER_REG_SOFT_CLOSED
+from .config import config
 
 
 # These need to come last so they can make use of config properties
@@ -68,7 +38,7 @@ class SessionMixin:
         return prev + list(attendees.values())
 
 
-mount_site_sections(magprime_config['module_root'])
+mount_site_sections(config['module_root'])
 
 if c.AT_THE_CON:
     from uber.site_sections.preregistration import Root
@@ -83,3 +53,7 @@ if c.AT_THE_CON:
 _badge_exports = uber.site_sections.badge_exports.Root
 _badge_exports.badge_zipfile_contents = \
     [fn for fn in _badge_exports.badge_zipfile_contents if fn.__name__ is not 'printed_badges_one_day']
+
+static_overrides(join(config['module_root'], 'static'))
+template_overrides(join(config['module_root'], 'templates'))
+mount_site_sections(config['module_root'])
