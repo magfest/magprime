@@ -4,10 +4,8 @@ from uber.model_checks import prereg_validation, validation
 
 @prereg_validation.Attendee
 def read_covid_policy(attendee):
-    if not attendee.covid_password:
-        return "Please read the COVID Policies and enter the passcode at the end of the page."
-    if attendee.covid_password.lower().strip() != c.COVID_PASSWORD.lower().strip():
-        return "Incorrect COVID Policy passcode. Try again!"
+    if not attendee.agreed_to_covid_policies:
+        return "Please read and agree to the COVID Policies for Super MAGFest 2022."
 
 @prereg_validation.Attendee
 def child_badge_over_13(attendee):
