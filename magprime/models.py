@@ -15,7 +15,7 @@ class Group:
 @Session.model_mixin
 class Attendee:
     sweatpants = Column(Choice(c.SWEATPANTS_OPTS), default=c.NO_SWEATPANTS)
-    covid_password = Column(UnicodeText)
+    agreed_to_covid_policies = Column(Boolean, default=False)
 
     @presave_adjustment
     def invalid_notification(self):

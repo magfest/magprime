@@ -30,10 +30,6 @@
             $('#price_explanation').insertAfter($.field('payment_method').parents('.form-group'));
         }
 
-        if ($.field('covid_password') && $.field('promo_code')) {
-            $('#covid-password').insertAfter($.field('promo_code').parents('.form-group'));
-        }
-
         {% if not admin_area %}
             // These are explanatory fields for attendees, so admins don't need to see them
             // #tax_exempt tells people that MAGFest is a 501(c)(3) nonprofit
@@ -123,20 +119,18 @@
         </div>
     </div>-->
 
-    <div id="covid-password" class="form-group">
-        <label class="col-sm-3 control-label">COVID Policy Password</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="covid_password" value="{{ attendee.covid_password }}" />
-        </div>
-        <div class="clearfix"></div>
-        <p class="help-block col-sm-offset-3 col-sm-9">
-            By entering this password, I acknowledge that I have read and agree to abide by the 
-            {{ macros.popup_link("https://super.magfest.org/covid", "Super MAGFest 2022 COVID Policies") }} 
-            in their entirety. I understand the <strong>vaccination and face covering requirements</strong> for all individuals, 
-            including minors. I will contact {{ "accessibility@magfest.org"|email_to_link }} if I require an exemption for 
-            medical reasons, or {{ "regsupport@magfest.org"|email_to_link }} if I have any other questions regarding exemptions.
-        </p>
+<div class="form-group">
+    <div class="checkbox col-sm-9 col-sm-offset-3">
+        <label class="checkbox-label">
+        {{ macros.checkbox(attendee, 'agreed_to_covid_policies', is_readonly=read_only, clientside_bool=clientside_bool, is_required=True) }}
+        <strong>Yes</strong>, I acknowledge that I have read and agree to abide by the 
+        {{ macros.popup_link("https://super.magfest.org/covid", "Super MAGFest 2022 COVID Policies") }} 
+        in their entirety. I understand the <strong>vaccination and face covering requirements</strong> for all individuals, 
+        including minors. I will contact {{ "accessibility@magfest.org"|email_to_link }} if I require an exemption for 
+        medical reasons, or {{ "regsupport@magfest.org"|email_to_link }} if I have any other questions regarding exemptions.
+        </label>
     </div>
+</div>
 {% endif %}
 
 {% if admin_area %}
