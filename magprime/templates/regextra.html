@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    {% if attendee.is_new and not group_id %}
+    {% if attendee.is_new and not group_id and c.CHILD_BADGE in c.PREREG_BADGE_TYPES %}
         if (window.REG_TYPES) {
             REG_TYPES.options.push({
                 title: '12 and Under: $' + Math.floor({{ c.BADGE_PRICE }} / 2),
