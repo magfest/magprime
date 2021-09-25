@@ -22,7 +22,8 @@
         // This auto-selects the Child badge when the user is, e.g., editing their registration before paying
         {% if attendee.badge_type == c.CHILD_BADGE %}
             if (window.REG_TYPES && $(REG_TYPES.row).size()) {
-                setBadge(REG_TYPES, 2);  // default to child badge when appropriate
+                {% set child_badge_index = 2 if c.GROUPS_ENABLED else 1 %}
+                setBadge(REG_TYPES, {{ child_badge_index }});  // default to child badge when appropriate
             }
         {% endif %}
 
