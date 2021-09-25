@@ -30,6 +30,8 @@
             $('#price_explanation').insertAfter($.field('payment_method').parents('.form-group'));
         }
 
+        $('.season-row').insertAfter($('.shirt-row'));
+
         {% if not admin_area %}
             // These are explanatory fields for attendees, so admins don't need to see them
             // #tax_exempt tells people that MAGFest is a 501(c)(3) nonprofit
@@ -119,7 +121,6 @@
         </div>
     </div>-->
 
-<div class="form-group">
     <div class="checkbox col-sm-9 col-sm-offset-3">
         <label class="checkbox-label">
         {{ macros.checkbox(attendee, 'agreed_to_covid_policies', is_readonly=read_only, clientside_bool=clientside_bool, is_required=True) }}
@@ -130,8 +131,15 @@
         medical reasons, or {{ "regsupport@magfest.org"|email_to_link }} if I have any other questions regarding exemptions.
         </label>
     </div>
-</div>
 {% endif %}
+
+<div class="form-group season-row">
+    <label class="col-sm-3 control-label">Button-Down Shirt Size</label>
+    <div class="col-sm-6">
+        <select name="special_merch" class="form-control">{{ options(c.SPECIAL_MERCH_OPTS) }}</select>
+    </div>
+    <div class="form-control-static">{{ macros.popup_link("../static/shirt_guide.png", "[size guide]") }}</div>
+</div>
 
 {% if admin_area %}
 {% set read_only = (walk_on_ro or page_ro) or (not c.HAS_STAFFING_ADMIN_ACCESS and not c.HAS_REG_ADMIN_ACCESS) %}
