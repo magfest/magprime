@@ -17,7 +17,7 @@ def select_special_merch_size(attendee):
 @prereg_validation.Attendee
 def child_badge_over_13(attendee):
     if attendee.is_new and attendee.badge_type == c.CHILD_BADGE \
-            and attendee.age_group_conf['val'] not in [c.UNDER_6, c.UNDER_13]:
+            and attendee.age_group_conf['val'] in [c.UNDER_18, c.UNDER_21, c.OVER_21]:
         return "If you will be 13 or older at the start of {}, " \
             "please select an Attendee badge instead of a 12 and Under badge.".format(c.EVENT_NAME)
 
@@ -25,15 +25,16 @@ def child_badge_over_13(attendee):
 @validation.Attendee
 def allowed_to_register(attendee):
     if not attendee.age_group_conf['can_register']:
-        return 'Per our COVID policies, that age group currently may not register. Please check back later or email regsupport@magfest.org for more info.'
+        return 'Per our COVID policies, attendees {} years of age currently may not register. \
+                Please check back later or email regsupport@magfest.org for more info.'.format(attendee.age_group_conf['desc'].lower())
 
 
 @prereg_validation.Attendee
 def attendee_badge_under_13(attendee):
     if attendee.is_new and attendee.badge_type == c.ATTENDEE_BADGE \
-            and attendee.age_group_conf['val'] in [c.UNDER_6, c.UNDER_13]:
-        return "If you will be 12 or under at the start of {}, " \
-            "please select a 12 and Under badge instead of an Attendee badge.".format(c.EVENT_NAME)
+            and attendee.age_group_conf['val'] not in [c.UNDER_18, c.UNDER_21, c.OVER_21]:
+        return "If you will be 12 years old at the start of {}, " \
+            "please select the 12 years old badge instead of an Attendee badge.".format(c.EVENT_NAME)
 
 
 @validation.Attendee
