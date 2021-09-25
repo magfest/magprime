@@ -1,15 +1,15 @@
-"""Replace sweatpants with special_merch column
+"""Add group name text field.
 
-Revision ID: 949614626eac
-Revises: 89836ebbe83a
-Create Date: 2021-09-25 15:24:43.768422
+Revision ID: f1a8832dd569
+Revises: 949614626eac
+Create Date: 2021-09-25 16:30:28.959997
 
 """
 
 
 # revision identifiers, used by Alembic.
-revision = '949614626eac'
-down_revision = '89836ebbe83a'
+revision = 'f1a8832dd569'
+down_revision = '949614626eac'
 branch_labels = None
 depends_on = None
 
@@ -52,10 +52,8 @@ sqlite_reflect_kwargs = {
 
 
 def upgrade():
-    op.drop_column('attendee', 'sweatpants')
-    op.add_column('attendee', sa.Column('special_merch', sa.Integer(), server_default='31392575', nullable=False))
+    op.add_column('attendee', sa.Column('group_name', sa.Unicode(), server_default='', nullable=False))
 
 
 def downgrade():
-    op.drop_column('attendee', 'special_merch')
-    op.add_column('attendee', sa.Column('sweatpants', sa.INTEGER(), server_default=sa.text('197883498'), autoincrement=False, nullable=False))
+    op.drop_column('attendee', 'group_name')

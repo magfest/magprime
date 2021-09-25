@@ -7,6 +7,12 @@ def read_covid_policy(attendee):
     if not attendee.agreed_to_covid_policies:
         return "Please read and agree to the COVID Policies for Super MAGFest 2022."
 
+
+@prereg_validation.Attendee
+def select_special_merch_size(attendee):
+    if attendee.amount_extra >= c.SEASON_LEVEL and attendee.special_merch == c.NO_MERCH:
+        return "Please select a button-down shirt size."
+
 @prereg_validation.Attendee
 def child_badge_over_13(attendee):
     if attendee.is_new and attendee.badge_type == c.CHILD_BADGE \
