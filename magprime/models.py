@@ -14,7 +14,7 @@ class Group:
 
 @Session.model_mixin
 class Attendee:
-    sweatpants = Column(Choice(c.SWEATPANTS_OPTS), default=c.NO_SWEATPANTS)
+    special_merch = Column(Choice(c.SPECIAL_MERCH_OPTS), default=c.NO_MERCH)
     agreed_to_covid_policies = Column(Boolean, default=False)
 
     @presave_adjustment
