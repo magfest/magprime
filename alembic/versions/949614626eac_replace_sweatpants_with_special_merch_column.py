@@ -52,8 +52,10 @@ sqlite_reflect_kwargs = {
 
 
 def upgrade():
+    op.drop_column('attendee', 'sweatpants')
     op.add_column('attendee', sa.Column('special_merch', sa.Integer(), server_default='31392575', nullable=False))
 
 
 def downgrade():
-    op.drop_column('attendee', 'special_merch_opts')
+    op.drop_column('attendee', 'special_merch')
+    op.add_column('attendee', sa.Column('sweatpants', sa.INTEGER(), server_default=sa.text('197883498'), autoincrement=False, nullable=False))
