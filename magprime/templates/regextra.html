@@ -30,7 +30,7 @@
             $('#price_explanation').insertAfter($.field('payment_method').parents('.form-group'));
         }
 
-        $('.season-row').insertAfter($('.shirt-row'));
+        $('.season-row').insertAfter($.field('shirt').parents('.form-group'));
 
         {% if not admin_area %}
             // These are explanatory fields for attendees, so admins don't need to see them
@@ -88,7 +88,6 @@
               $.field('badge_printed_name').parents('.form-group').remove();
           }
         {% endif %}
-
     });
 </script>
 

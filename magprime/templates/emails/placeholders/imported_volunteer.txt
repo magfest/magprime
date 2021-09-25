@@ -1,0 +1,15 @@
+{% if attendee.first_name %}{{ attendee.first_name }},
+
+{% endif %}Hey all! We’re so excited to see you at Super {{ c.EVENT_YEAR }}! Thank you for staffing Super 2020, and for hanging in there with us for the last couple of years. You're eligible for a complimentary badge for the next {{ c.EVENT_NAME }}, which will be {{ event_dates() }} {{ c.EVENT_YEAR }}. You can accept your  badge by visiting {{ c.URL_BASE }}/preregistration/confirm?id={{ attendee.id }}.
+
+All attendees at Super {{ c.EVENT_NAME }} {{ c.EVENT_YEAR }} (including minors, volunteers, staff, guests, contractors, and vendors) are required to be fully vaccinated against COVID-19. Additionally, acceptable face coverings must be worn properly at all times in any {{ c.EVENT_NAME }} event space. When you register, you will be asked to acknowledge that you will abide by the event’s COVID-19 precautions. You can find more information at https://super.magfest.org/covid.
+
+At this stage, you can apply to volunteer again this year. By default, the checkbox labeled "Yes, I want to staff {{ c.EVENT_NAME }}." is toggled ON, which means that you'll automatically be enrolled. If you are not interested in applying to volunteer again, you can uncheck that box (toggle it OFF), and your badge will be set to a complimentary Attendee Badge (instead of Staff Badge).
+
+You can also choose to defer your staff status for a year, for any reason. If you would like to skip staffing at Super {{ c.EVENT_YEAR }}, but want to staff in {{ c.EVENT_YEAR|int + 1 }}, please email {{ c.STAFF_EMAIL|email_only }}.
+
+You will be emailed when your Volunteer Checklist launches. The Checklist will need to be completed before the event starts, and will have a link to our volunteering guidelines and agreement. As a returning volunteer, you'll also be eligible for crash space in one of our staffer hotel rooms. This is included in our Volunteer Checklist, but you'll be emailed closer to the event with details about how to sign up.
+
+Please let us know if you have any questions.
+
+{{ c.STOPS_EMAIL_SIGNATURE }}
