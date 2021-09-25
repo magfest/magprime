@@ -31,6 +31,7 @@
         }
 
         $('.season-row').insertAfter($.field('shirt').parents('.form-group'));
+        $.field('group_name').parents('.form-group').insertAfter($.field('legal_name').parents('.form-group'));
 
         {% if not admin_area %}
             // These are explanatory fields for attendees, so admins don't need to see them
@@ -139,6 +140,12 @@
     </div>
     <div class="form-control-static">{{ macros.popup_link("../static/shirt_guide.png", "[size guide]") }}</div>
 </div>
+
+{{ macros.form_group(
+    attendee,
+    'group_name',
+    label="Group Name",
+    help="Enter a group name to easily check in with other attendees in the same group.") }}
 
 {% if admin_area %}
 {% set read_only = (walk_on_ro or page_ro) or (not c.HAS_STAFFING_ADMIN_ACCESS and not c.HAS_REG_ADMIN_ACCESS) %}

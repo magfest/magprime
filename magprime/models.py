@@ -16,6 +16,7 @@ class Group:
 class Attendee:
     special_merch = Column(Choice(c.SPECIAL_MERCH_OPTS), default=c.NO_MERCH)
     agreed_to_covid_policies = Column(Boolean, default=False)
+    group_name = Column(UnicodeText)
 
     @presave_adjustment
     def invalid_notification(self):
