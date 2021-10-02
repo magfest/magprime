@@ -71,7 +71,7 @@ class Attendee:
                 try:
                     staff_shirts += ' [{}]'.format(c.SHIRTS[self.shirt])
                 except KeyError:
-                    pass
+                    staff_shirts += ' [{}]'.format("Size unknown")
             merch.append(staff_shirts)
 
         if self.staffing:
