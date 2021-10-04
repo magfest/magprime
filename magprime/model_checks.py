@@ -32,7 +32,7 @@ def allowed_to_register(attendee):
 @prereg_validation.Attendee
 def attendee_badge_under_13(attendee):
     if attendee.is_new and attendee.badge_type == c.ATTENDEE_BADGE \
-            and attendee.age_group_conf['val'] not in [c.UNDER_18, c.UNDER_21, c.OVER_21]:
+            and attendee.age_group_conf['val'] == c.UNDER_13:
         return "If you will be 12 years old at the start of {}, " \
             "please select the 12 years old badge instead of an Attendee badge.".format(c.EVENT_NAME)
 
