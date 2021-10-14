@@ -48,3 +48,20 @@ class Root:
             'department_id': department_id,
             'staffers': sorted(staffers, key=lambda a: a.full_name)
         }
+
+    def special_merch_counts(self, session):
+        counts = defaultdict(int)
+        labels = ['Unknown'] + [label for val, label in c.SPECIAL_MERCH_OPTS if val != c.NO_MERCH]
+
+        def label(s):
+            return 'Unknown' if s == c.NO_MERCH else s
+
+        # This is a little backwards, but we do it this way to catch anyone who has an option
+        # that is no longer in our list of special merch options
+        for attendee in session.query(Attendee).filter(Attendee.amount_extra >= c.SEASON_LEVEL):
+            merch_label = attendee.special_merch_label or 'Unknown'
+            counts[label(merch_label)] += 1
+
+        return {
+            'counts': counts,
+        }
