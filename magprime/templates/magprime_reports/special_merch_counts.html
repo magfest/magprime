@@ -1,0 +1,24 @@
+{% extends "base.html" %}{% set admin_area=True %}
+{% block title %}Special Merch Counts{% endblock %}
+{% block content %}
+
+<style type="text/css">
+    td { padding: 2px 5px 2px 5px; }
+</style>
+
+<h2>Special Merch Manufacturing Reports</h2>
+<p>
+    This report is designed to give you the correct numbers ready to be sent to the manufacturer.
+    We recommend adding in a few extra merch items for safety margins to these numbers.
+</p>
+
+<table>
+{% for key in counts %}
+    <tr>
+        <td>{{ key }}: </td>
+        <td>{{ counts[key] }}</td>
+    </tr>
+{% endfor %}
+</table>
+
+{% endblock %}
