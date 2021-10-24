@@ -11,7 +11,6 @@ from uber.utils import add_opt, remove_opt
 @Session.model_mixin
 class Attendee:
     sweatpants = Column(Choice(c.SWEATPANTS_OPTS), default=c.NO_SWEATPANTS)
-    walk_on_volunteer = Column(Boolean, default=False)
 
     @presave_adjustment
     def invalid_notification(self):
