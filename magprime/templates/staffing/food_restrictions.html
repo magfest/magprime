@@ -7,7 +7,7 @@
 
 {% if attendee.badge_type == c.GUEST_BADGE %}
 <p>We feed our guests three meals per day during {{ c.EVENT_NAME }}, and we have an easier time planning meals
-when we know what kind of food restrictions everyone has.</p><p>
+when we know what kind of food restrictions everyone has.</p>
 {% else %}
 <p>Thank you for volunteering! We’re glad you’re here. The form below helps us better understand the dietary 
 restrictions and allergies of our volunteers and staff.</p>
@@ -15,17 +15,14 @@ restrictions and allergies of our volunteers and staff.</p>
 we serve breakfast, lunch, and dinner.
 {% endif %}
 
-Breakfast starts on Thursday, January 2 and meal service ends with lunch on Sunday, January 5. Staff suite 
-hours are 6AM to 2AM. Grab & Go (fruit, veggies, snacks, and drinks) will move downstairs to Tea Room during the 
-wee hours of the morning.</p>
+<p>Breakfast starts on Thursday, January 6 and meal service ends with lunch on Sunday, January 9. Staff suite hours are 8AM to 12AM.</p>
+<p>All meals and snacks available in Staff Suite will be Grab & Go (i.e. take-out) for Super 2022.</p>
 
 <p>All ingredients for breakfast and lunch will be available on our notion page: 
-<a href="http://bitly.com/StaffSuite2020" target="_blank">bitly.com/StaffSuite2020</a>. Dinners are catered 
+<a href="http://bitly.com/StaffSuite2022" target="_blank">bitly.com/StaffSuite2022</a>. Dinners are catered 
 by outside restaurants, so we can only provide details on the Big Eight food allergens: <strong>Milk, eggs, fish, 
 shellfish, tree nuts, peanus, wheat, and soy</strong>. If you have dietary restrictions outside of the Big Eight, 
-we recommend you consider alternate options for dinners. Please note that Grab & Go will be available at all times 
-that staff suite is open.
-</p>
+we recommend you consider alternate options for dinners.</p>
 
 <p><strong>We have open containers of peanut butter in Staff Suite.</strong></p>
 
@@ -37,24 +34,15 @@ that staff suite is open.
     <div id="restrictions">{{ macros.checkgroup(fr, 'standard') }}</div>
 
     <br/>
-    Let us know if you have any other allergies or restrictions, please use commas to separate each allergy and 
-    food restriction. Please note we are unable to accommodate every constraint, and the form below is not designed 
-    for preferences due to taste. Menus and ingredients will be posted before Super MAGFest 2020 on our Notion page:
-     <a href="http://bitly.com/StaffSuite2020" target="_blank">bitly.com/StaffSuite2020</a>
+    Let us know if you have any other allergies or restrictions. Please use commas to separate each allergy and food restriction. 
+    Please note we are unable to accommodate every constraint, and the form below is not designed for preferences due to taste. 
+    Menus and ingredients will be posted before Super MAGFest 2022 on our Notion page:
+     <a href="http://bitly.com/StaffSuite2022" target="_blank">bitly.com/StaffSuite2022</a>
     <br/><br/>
     <textarea name="freeform" rows="3" cols="80">{{ fr.freeform }}</textarea>
 
     <br/> <br/> <input type="submit" value="Save" /><br/>
     By clicking Save I agree that I have read the above information and indicated any restrictions requested.
-
-    <br/> <br/> 
-    [1] Vegan food will be labeled accordingly.
 </form>
-
-<script>
-    $(function () {
-        $(':checkbox[value={{  c.VEGAN }}]').parent().append('[1]');
-    });
-</script>
 
 {% endblock %}
