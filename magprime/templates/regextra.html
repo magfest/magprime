@@ -2,8 +2,8 @@
     {% if attendee.is_new and not group_id and c.CHILD_BADGE in c.PREREG_BADGE_TYPES %}
         if (window.REG_TYPES) {
             REG_TYPES.options.push({
-                title: '12 years old: $' + Math.floor({{ c.BADGE_PRICE }} / 2),
-                description: '<p class="list-group-item-text">Attendees 12 years old must be accompanied by an adult with a valid Attendee badge.</p>' +
+                title: '12 and Under: $' + Math.floor({{ c.BADGE_PRICE }} / 2),
+                description: '<p class="list-group-item-text">Attendees 12 and younger must be accompanied by an adult with a valid Attendee badge.</p>' +
             '<span class="prereg-price-notice">Price is always half that of the Single Attendee badge price.</span>',
                 onClick: function () {
                     $('.group_fields').addClass('hide');

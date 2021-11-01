@@ -36,14 +36,14 @@ class Attendee:
     def child_badge(self):
         if self.age_group not in [c.UNDER_21, c.OVER_21, c.AGE_UNKNOWN] and self.badge_type == c.ATTENDEE_BADGE:
             self.badge_type = c.CHILD_BADGE
-            if self.age_group in [c.UNDER_6, c.UNDER_13]:
+            if self.age_group != c.UNDER_18:
                 self.ribbon = add_opt(self.ribbon_ints, c.UNDER_13)
 
     @presave_adjustment
     def child_ribbon_or_not(self):
-        if self.age_group in [c.UNDER_6, c.UNDER_13]:
+        if self.age_group not in [c.UNDER_18, c.UNDER_21, c.OVER_21]:
             self.ribbon = add_opt(self.ribbon_ints, c.UNDER_13)
-        elif c.UNDER_13 in self.ribbon_ints and self.age_group not in [c.UNDER_6, c.UNDER_13]:
+        elif c.UNDER_13 in self.ribbon_ints and self.age_group in [c.UNDER_18, c.UNDER_21, c.OVER_21]:
             self.ribbon = remove_opt(self.ribbon_ints, c.UNDER_13)
 
     @presave_adjustment
@@ -51,6 +51,18 @@ class Attendee:
         if self.badge_type == c.CHILD_BADGE and self.age_group in [c.UNDER_21, c.OVER_21]:
             self.badge_type = c.ATTENDEE_BADGE
             self.ribbon = remove_opt(self.ribbon_ints, c.UNDER_13)
+
+    @property
+    def age_discount(self):
+        # We dynamically calculate the age discount to be half the
+        # current badge price. If for some reason the default discount
+        # (if it exists) is greater than half off, we use that instead.
+        import math
+        if self.age_group_conf.get('val') in [c.UNDER_12, c.UNDER_13]:
+            half_off = math.ceil(c.BADGE_PRICE / 2)
+            if not self.age_group_conf['discount'] or self.age_group_conf['discount'] < half_off:
+                return -half_off
+        return -self.age_group_conf['discount']
             
     @property
     def volunteer_event_shirt_eligible(self):
