@@ -133,11 +133,12 @@ StopsEmailFixture(
     extra_data={'checklist_items': DeptChecklistConf.instances.values()},
     ident='magprime_dept_checklist_intro')
 
-StopsEmailFixture(
-    'Last Chance to enter your MAGFest staff shirt preferences', 'second_shirt.html',
-    lambda a: a.gets_staff_shirt and not a.shirt_info_marked,
-    when=days_before(21, c.SHIRT_DEADLINE),
-    ident='magprime_second_shirt')
+if c.STAFF_EVENT_SHIRT_OPTS:
+    StopsEmailFixture(
+        'Last Chance to enter your MAGFest staff shirt preferences', 'second_shirt.html',
+        lambda a: a.gets_staff_shirt and not a.shirt_info_marked,
+        when=days_before(21, c.SHIRT_DEADLINE),
+        ident='magprime_second_shirt')
 
 AutomatedEmailFixture(
     Attendee, 'Last Chance for MAGFest ' + c.EVENT_YEAR + ' bonus swag!', 'attendee_swag_promo.html',

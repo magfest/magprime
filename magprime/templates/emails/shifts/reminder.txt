@@ -4,7 +4,7 @@ Thanks again for signing up to volunteer at {{ c.EVENT_NAME }}!  You are not cur
 
 Please sign up for shifts at {{ c.URL_BASE }}/staffing/login?first_name={{ attendee.first_name|urlencode }}&last_name={{ attendee.last_name|urlencode }}&email={{ attendee.email|urlencode }}&zip_code={{ attendee.zip_code|urlencode }} -- if you need to, you can verify/update your personal information at {{ c.URL_BASE }}/preregistration/confirm?id={{ attendee.id }}
 
-You can drop shifts up until 11:59pm on December 27. After that time, you will need to contact STOPS at {{ c.STAFF_EMAIL|email_only }}. You can add shifts up until 8:00am EST on Wednesday, January 1. Counts will be taken for perks by the end of December 22.
+You can drop shifts up until 11:59pm on December 30. After that time, you will need to contact STOPS at {{ c.STAFF_EMAIL|email_only }}. You can add shifts up until 8:00am EST on Wednesday, January 5. Counts will be taken for perks by the end of December 17.
 
 Please let us know if you have any questions.
 
