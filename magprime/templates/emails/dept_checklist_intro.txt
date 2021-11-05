@@ -7,11 +7,7 @@ While you might not be the actual Department Head, you are on the list to receiv
 This means that you have access in Rams/Uber to go to:
 {{ c.URL_BASE }}/dept_checklist/index and complete the items on that Checklist.
 
-These are the steps that are needed for your volunteers to sign up for shifts, and for your department to get the MPoints that it needs, and for your qualified staffers to get into MAGFest Crash space (especially those coming early or staying late), etc.
-
-This list also includes the Tech Ops form you will need to complete detailing what technical/electronic gear your department will need for MAGFest. The Tech Ops form is not in its final version but will be uploaded before the Tech Ops deadline (see below).
-
-The Checklist also includes signage and office supplies that you might need from the MAGFest office team to make your department run more efficiently.
+These are the steps that are needed for your volunteers to sign up for shifts, for your department to assess its needs regarding PPE, TechOps needs, Office Supplies, Signage, and so much more! Each step plays a part in ensuring STOPS and other Ops departments know what you need to run efficiently during the event.
 
 The following deadlines are part of your Department Head Checklist.
 
