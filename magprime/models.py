@@ -41,7 +41,7 @@ class Attendee:
 
     @presave_adjustment
     def child_ribbon_or_not(self):
-        if self.age_group not in [c.UNDER_18, c.UNDER_21, c.OVER_21]:
+        if self.age_group not in [c.UNDER_18, c.UNDER_21, c.OVER_21, c.AGE_UNKNOWN]:
             self.ribbon = add_opt(self.ribbon_ints, c.UNDER_13)
         elif c.UNDER_13 in self.ribbon_ints and self.age_group in [c.UNDER_18, c.UNDER_21, c.OVER_21]:
             self.ribbon = remove_opt(self.ribbon_ints, c.UNDER_13)
