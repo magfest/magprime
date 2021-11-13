@@ -1,0 +1,51 @@
+<html>
+<head></head>
+<body>
+Your group ({{ group.name }}) has been approved as a {{ c.EVENT_NAME }} {{ c.DEALER_TERM }} for this coming {{ event_dates() }}!
+You can pay the {{ group.cost|format_currency }} you owe using the credit card button
+<a href="{{ c.URL_BASE }}/preregistration/group_members?id={{ group.id }}">on this page</a>.
+Payment is expected by: {{ c.DEALER_PAYMENT_DUE|datetime_local }} or your application will be removed and your tables filled by another applicant.
+
+{% if group.unassigned_badges %}
+    <br/> <br/>
+    Some of your badges are not yet assigned to a specific person. If you assign these badges
+    now then it will take much less time for their owners to pick them up at the festival.
+    You may do this by <a href="{{ c.URL_BASE }}/preregistration/group_members?id={{ group.id }}">clicking here</a>.
+{% endif %}
+
+<br/> <br/><strong>New Tax Information <span style="color:red">*Please Read*</span></strong>
+<p>All sellers in the Marketplace are required to obtain a Seller's Permit from the State of Maryland.
+    To ease the burden on the Comptroller's office for issuing mass permits, we submit the names of our sellers in advance 
+    to ensure everyone has the right documentation; the Comptroller's office then issues the seller's permits directly to 
+    you. In order to make sure we get you your documentation, we need you to fill out 
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfxVM_ymIfWbetRfPkLiJmFuIbq-Ap0-W5Xt4xBRxJkHeIMuQ/viewform" target="_blank">this form</a> 
+    no later than December 12th, 2021. After that date, you will need to obtain your own permit, 
+    directions on how to do this can be found here: 
+    <a href="https://tinyurl.com/MAGFestSellers" target="_blank">https://tinyurl.com/MAGFestSellers</a>. 
+    <strong>Finally, if you are multiple Artists or Vendors sharing the same table space through an approved table share or 
+    you applied and were accepted together: then each individual seller *MUST* fill out the form above and get their 
+    exhibitor's affidavit.</strong></p>
+
+<p>TLDR; fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLSfxVM_ymIfWbetRfPkLiJmFuIbq-Ap0-W5Xt4xBRxJkHeIMuQ/viewform" target="_blank">this form</a>
+    no later than December 12th, 2021. Check your email and/or physical mail for your sellers permit that will be 
+    sent directly from MD Comptroller. ANY and ALL issues regarding receiving your permit must be directed to the 
+    Comptroller's office as we, unfortunately, have no power to help!</p>
+
+<br/><strong>Covid Information <span style="color:red">*Please Read*</span></strong>
+<p>Please read the Covid Rules for MAGFest found here: <a href="https://super.magfest.org/covid" target="_blank">COVID Information — Super Magfest</a></p>
+<p>By paying for your table(s) and assigning your badge(s), you and anyone with badges associated with your table agree to abide by and follow these rules and guidelines. This is non-negotiable, and anyone who does not follow them will have their tables rescinded immediately with no refund and will have to leave. </p>
+
+
+This registration includes:
+<ul>
+    <li> {{ group.tables }} table{{ group.tables|pluralize }} ({{ group.table_cost|format_currency }}) </li>
+    <li> {{ group.badges }} badge{{ group.badges|pluralize }} ({{ group.badge_cost|format_currency }}) </li>
+</ul>
+
+<br/> <u>{{ c.DEALER_LOC_TERM|title }} Rules and Information</u>
+{% include "static_views/dealerRules.html" %}
+
+
+{{ c.MARKETPLACE_EMAIL_SIGNATURE }}
+</body>
+</html>
