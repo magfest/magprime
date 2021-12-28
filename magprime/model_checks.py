@@ -17,7 +17,7 @@ def select_special_merch_size(attendee):
 @prereg_validation.Attendee
 def child_badge_over_13(attendee):
     if attendee.is_new and attendee.badge_type == c.CHILD_BADGE \
-            and attendee.age_group_conf['val'] in [c.UNDER_18, c.UNDER_21, c.OVER_21]:
+            and attendee.age_now_or_at_con and attendee.age_now_or_at_con >= 13:
         return "If you will be 13 or older at the start of {}, " \
             "please select an Attendee badge instead of a 12 and Under badge.".format(c.EVENT_NAME)
 
@@ -32,22 +32,18 @@ def allowed_to_register(attendee):
 @prereg_validation.Attendee
 def attendee_badge_under_13(attendee):
     if attendee.is_new and attendee.badge_type == c.ATTENDEE_BADGE \
-            and attendee.age_group_conf['val'] in [c.UNDER_13, c.UNDER_12]:
+            and attendee.age_now_or_at_con and attendee.age_now_or_at_con < 13:
         return "If you will be 12 or younger at the start of {}, " \
             "please select the 12 and Under badge instead of an Attendee badge.".format(c.EVENT_NAME)
-
-
-@validation.Attendee
-def child_badge_over_18(attendee):
-    if attendee.badge_type == c.CHILD_BADGE and attendee.age_group_conf['val'] in [c.UNDER_21, c.OVER_21]:
-        # This message is confusing for attendees, so we only show it to admins
-        if c.PAGE_PATH in ['/registration/change_badge']:
-            return "Attendees who are 18 or over (or will be at the start of {}) cannot have Minor badges. " \
-                "Please update their date of birth instead.".format(c.EVENT_NAME)
 
            
 @validation.Attendee
 def no_more_child_badges(attendee):
-    if attendee.is_new and attendee.age_group_conf['val'] not in [c.UNDER_21, c.OVER_21, c.AGE_UNKNOWN] \
+    if attendee.is_new and attendee.age_now_or_at_con and attendee.age_now_or_at_con < 18 \
             and not c.CHILD_BADGE_AVAILABLE:
         return "Unfortunately, we are sold out of badges for attendees under 18."
+
+@validation.Attendee
+def checked_in_covid_ready(attendee):
+    if attendee.checked_in and not attendee.covid_ready:
+        return "Attendees must be marked as eligible to attend under our COVID policies before they can be checked in."

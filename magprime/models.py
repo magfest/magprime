@@ -17,6 +17,7 @@ class Attendee:
     special_merch = Column(Choice(c.SPECIAL_MERCH_OPTS), default=c.NO_MERCH)
     agreed_to_covid_policies = Column(Boolean, default=False)
     group_name = Column(UnicodeText)
+    covid_ready = Column(Boolean, default=False)
 
     @presave_adjustment
     def invalid_notification(self):
@@ -34,21 +35,21 @@ class Attendee:
 
     @presave_adjustment
     def child_badge(self):
-        if self.age_group not in [c.UNDER_21, c.OVER_21, c.AGE_UNKNOWN] and self.badge_type == c.ATTENDEE_BADGE:
+        if self.age_now_or_at_con and self.age_now_or_at_con < 18 and self.badge_type == c.ATTENDEE_BADGE:
             self.badge_type = c.CHILD_BADGE
-            if self.age_group != c.UNDER_18:
+            if self.age_now_or_at_con < 13:
                 self.ribbon = add_opt(self.ribbon_ints, c.UNDER_13)
 
     @presave_adjustment
     def child_ribbon_or_not(self):
-        if self.age_group not in [c.UNDER_18, c.UNDER_21, c.OVER_21, c.AGE_UNKNOWN]:
+        if self.age_now_or_at_con and self.age_now_or_at_con < 13:
             self.ribbon = add_opt(self.ribbon_ints, c.UNDER_13)
-        elif c.UNDER_13 in self.ribbon_ints and self.age_group in [c.UNDER_18, c.UNDER_21, c.OVER_21]:
+        elif c.UNDER_13 in self.ribbon_ints and self.age_now_or_at_con and self.age_now_or_at_con >= 13:
             self.ribbon = remove_opt(self.ribbon_ints, c.UNDER_13)
 
     @presave_adjustment
     def child_to_attendee(self):
-        if self.badge_type == c.CHILD_BADGE and self.age_group in [c.UNDER_21, c.OVER_21]:
+        if self.badge_type == c.CHILD_BADGE and self.age_now_or_at_con and self.age_now_or_at_con >= 18:
             self.badge_type = c.ATTENDEE_BADGE
             self.ribbon = remove_opt(self.ribbon_ints, c.UNDER_13)
 
@@ -58,7 +59,7 @@ class Attendee:
         # current badge price. If for some reason the default discount
         # (if it exists) is greater than half off, we use that instead.
         import math
-        if self.age_group_conf.get('val') in [c.UNDER_12, c.UNDER_13]:
+        if self.age_now_or_at_con and self.age_now_or_at_con < 13:
             half_off = math.ceil(c.BADGE_PRICE / 2)
             if not self.age_group_conf['discount'] or self.age_group_conf['discount'] < half_off:
                 return -half_off
