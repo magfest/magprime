@@ -42,3 +42,8 @@ def no_more_child_badges(attendee):
     if attendee.is_new and attendee.age_now_or_at_con and attendee.age_now_or_at_con < 18 \
             and not c.CHILD_BADGE_AVAILABLE:
         return "Unfortunately, we are sold out of badges for attendees under 18."
+
+@validation.Attendee
+def checked_in_covid_ready(attendee):
+    if attendee.checked_in and not attendee.covid_ready:
+        return "Attendees must be marked as eligible to attend under our COVID policies before they can be checked in."

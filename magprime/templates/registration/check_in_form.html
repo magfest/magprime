@@ -1,0 +1,13 @@
+{% extends "registration/check_in_form_base.html" %}
+{% block checkin_fields %}
+{{ super() }}
+<div class="form-group">
+    <label for="covid_ready" class="col-sm-3 control-label">Ready to Check In</label>
+    <div class="checkbox col-sm-9">
+        <label class="checkbox-label">
+        {{ macros.checkbox(attendee, 'covid_ready', is_required=True) }}
+        This attendee is cleared to attend {{ c.EVENT_NAME }} under our COVID policies.
+        </label>
+    </div>
+</div>
+{% endblock %}
