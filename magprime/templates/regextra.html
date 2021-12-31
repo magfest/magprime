@@ -31,7 +31,9 @@
             $('#price_explanation').insertAfter($.field('payment_method').parents('.form-group'));
         }
 
-        $('.season-row').insertAfter($.field('shirt').parents('.form-group'));
+        if ($.field('shirt')) {
+            $('.season-row').insertAfter($.field('shirt').parents('.form-group'));
+        }
         {% if not attendee.group and not attendee.promo_code_group %}
         $.field('group_name').parents('.form-group').insertAfter($('label[for="legal_name"]').parents('.form-group'));
         {% endif %}
@@ -187,7 +189,7 @@
                 $.field('country').prop("disabled", false);
                 $('.address_details{{ attendee_address_suffix }} input').prop("disabled", false);
                 $.field('zip_code').parents('.form-group').hide();
-                $('.address_details{{ attendee_address_suffix }} input[name="zip_code"]').parents('.form-group').show();
+                $('.address_detailsc3130646a2964f598d6de045aec19011 input[name="zip_code"]').parents('.form-group').show();
             } else {
                 $.field('zip_code').prop("disabled", false);
                 $.field('country').prop("disabled", true);
