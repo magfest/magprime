@@ -68,8 +68,8 @@ class Root:
     
     @csv_file
     def donated_badge_attendees(self, out, session):
-        out.writerow(["Full Name", "Legal Name", "Email", "Phone #", "Amount Paid", "Kick-In Level",
+        out.writerow(["Full Name", "Legal Name", "Email", "Phone #", "Amount Paid", "Amount Unpaid", "Kick-In Level",
                       "Country", "Address1", "Address2", "City", "State/Region", "ZIP/Postal Code"])
         for a in session.query(Attendee).filter_by(donate_badge_cost=True).order_by('country').order_by('region'):
-            out.writerow([a.full_name, a.legal_name, a.email, a.cellphone, a.amount_paid, a.amount_extra_label,
+            out.writerow([a.full_name, a.legal_name, a.email, a.cellphone, a.amount_paid, a.amount_unpaid, a.amount_extra_label,
                           a.country, a.address1, a.address2, a.city, a.region, a.zip_code])
