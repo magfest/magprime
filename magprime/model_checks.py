@@ -1,5 +1,5 @@
 from .config import c
-from uber.model_checks import prereg_validation, validation
+from uber.model_checks import prereg_validation, validation, ignore_unassigned_and_placeholders
 
 
 @prereg_validation.Attendee
@@ -47,3 +47,16 @@ def no_more_child_badges(attendee):
 def checked_in_covid_ready(attendee):
     if attendee.checked_in and not attendee.covid_ready:
         return "Attendees must be marked as eligible to attend under our COVID policies before they can be checked in."
+
+@validation.Attendee
+@ignore_unassigned_and_placeholders
+def address(attendee):
+    if c.COLLECT_FULL_ADDRESS or attendee.donate_badge_cost:
+        if not attendee.address1:
+            return 'Please enter a street address.'
+        if not attendee.city:
+            return 'Please enter a city.'
+        if not attendee.region and attendee.country in ['United States', 'Canada']:
+            return 'Please enter a state, province, or region.'
+        if not attendee.country:
+            return 'Please enter a country.'

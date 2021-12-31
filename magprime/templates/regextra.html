@@ -46,6 +46,8 @@
               $('#tax_exempt').hide();
             }
 
+            $('#attend_virtually').insertBefore('#bold-field-message');
+
             /*// #tshirt_warning tells people that we don't sell 'slim' sizes at-fest
             if ($.field('shirt')) {
                 $.field('shirt').parents('.form-group').append($('#tshirt_warning'));
@@ -152,6 +154,68 @@
     'group_name',
     label="Group Name",
     help="Enter a group name to easily check in with other attendees in the same group.") }}
+{% endif %}
+
+{% if not attendee.checked_in %}
+<div id="attend_virtually" class="alert alert-success">
+    <div class="form-group">
+        <label class="col-sm-3 control-label optional-field">Attend Virtually</label>
+        <div class="checkbox col-sm-6">
+            <label class="checkbox-label">
+            {{ macros.checkbox(attendee, 'donate_badge_cost', is_readonly=read_only, clientside_bool=clientside_bool) }}
+            <strong>Yes, I want to donate the cost of my badge to {{ c.ORGANIZATION_NAME }}.</strong> I understand that I will have my badge
+            <span id="and-merch">{% if attendee.amount_extra %}and kick-in merch {% endif %}</span> shipped to me and that I will receive a tracking number
+            by email before the end of January 2022.
+            </label>
+        </div>
+    </div>
+    {% if not c.COLLECT_FULL_ADDRESS %}
+    {%- set attendee_address_suffix = attendee.id|replace("-", "") -%}
+    <script type="text/javascript">
+        {% include "region_opts.html" %}
+        var setInternational = function () {
+            countryName = $.field('country').val();
+            if(countryName == 'United States') {
+                $.field('international').prop('checked', false);
+            } else {
+                $.field('international').prop('checked', true);
+            }
+        };
+        var showOrHideMailingAddress = function() {
+            if ($.field('donate_badge_cost') && $.field('donate_badge_cost').prop('checked')) {
+                $.field('zip_code').prop("disabled", true);
+                $.field('country').prop("disabled", false);
+                $('.address_details{{ attendee_address_suffix }} input').prop("disabled", false);
+                $.field('zip_code').parents('.form-group').hide();
+                $('.address_details{{ attendee_address_suffix }} input[name="zip_code"]').parents('.form-group').show();
+            } else {
+                $.field('zip_code').prop("disabled", false);
+                $.field('country').prop("disabled", true);
+                $('.address_details{{ attendee_address_suffix }} input').prop("disabled", true);
+                $.field('zip_code').parents('.form-group').show();
+            }
+            setVisible($('#merch_mailing_address'), $.field('donate_badge_cost').prop('checked'));
+            $('#hidden_region{{ attendee_address_suffix }}').prop("disabled", true);
+        };
+        var andMerchText = function() {
+            if ($.field('amount_extra') && $.val('amount_extra')) {
+                $('#and-merch').html('and kick-in merch ');
+            } else {
+                $('#and-merch').html('');
+            }
+        }
+        $(function() {
+            showOrHideMailingAddress();
+            $.field('donate_badge_cost').on('click', showOrHideMailingAddress);
+            $.field('amount_extra').on('change', andMerchText);
+        });
+    </script>
+    <div id="merch_mailing_address">
+    <div class="row"><label class="col-sm-6 col-sm-offset-3 address_details{{ attendee.id|replace('-', '') }}">Mailing Address</label></div>
+    {{ macros.address_form(attendee, update_international=True, is_required=(not admin_area)) }}
+    </div>
+    {% endif %}
+</div>
 {% endif %}
 
 {% if admin_area %}
