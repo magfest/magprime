@@ -158,7 +158,7 @@
     help="Enter a group name to easily check in with other attendees in the same group.") }}
 {% endif %}
 
-{% if not attendee.checked_in %}
+{% if not attendee.checked_in and not attendee.amount_unpaid %}
 <div id="attend_virtually" class="alert alert-success">
     <div class="form-group">
         <label class="col-sm-3 control-label optional-field">Attend Virtually</label>
