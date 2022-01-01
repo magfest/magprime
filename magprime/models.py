@@ -1,3 +1,4 @@
+from pockets import classproperty
 from pockets.autolog import log
 from residue import CoerceUTF8 as UnicodeText, UUID
 
@@ -53,6 +54,19 @@ class Attendee:
         if self.badge_type == c.CHILD_BADGE and self.age_now_or_at_con and self.age_now_or_at_con >= 18:
             self.badge_type = c.ATTENDEE_BADGE
             self.ribbon = remove_opt(self.ribbon_ints, c.UNDER_13)
+
+    @classproperty
+    def searchable_fields(cls):
+        # List of fields for the attendee search to check search terms against
+        return ['first_name', 'last_name', 'legal_name', 'badge_printed_name', 'group_name',
+                'email', 'comments', 'admin_notes', 'for_review', 'promo_code_group_name']
+
+    @classproperty
+    def searchable_bools(cls):
+        return ['placeholder', 'requested_accessibility_services', 'can_spam', 
+                'got_merch', 'got_staff_merch', 'confirmed', 'checked_in', 'staffing', 
+                'agreed_to_volunteer_agreement', 'reviewed_emergency_procedures', 'walk_on_volunteer', 
+                'can_work_setup', 'can_work_teardown', 'hotel_eligible', 'attractions_opt_out', 'donate_badge_cost']
 
     @property
     def age_discount(self):
