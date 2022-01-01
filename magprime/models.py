@@ -63,10 +63,14 @@ class Attendee:
 
     @classproperty
     def searchable_bools(cls):
-        return ['placeholder', 'requested_accessibility_services', 'can_spam', 
+        return ['placeholder', 'requested_accessibility_services', 'can_spam', 'covid_ready', 
                 'got_merch', 'got_staff_merch', 'confirmed', 'checked_in', 'staffing', 
                 'agreed_to_volunteer_agreement', 'reviewed_emergency_procedures', 'walk_on_volunteer', 
                 'can_work_setup', 'can_work_teardown', 'hotel_eligible', 'attractions_opt_out', 'donate_badge_cost']
+    
+    @classproperty
+    def checkin_bools(self):
+        return ['got_merch', 'covid_ready'] if c.MERCH_AT_CHECKIN else ['covid_ready']
 
     @property
     def age_discount(self):
