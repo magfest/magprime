@@ -72,6 +72,14 @@ class Attendee:
     def checkin_bools(self):
         return ['got_merch', 'covid_ready'] if c.MERCH_AT_CHECKIN else ['covid_ready']
 
+    def calculate_shipping_fee_cost(self):
+        if self.amount_extra >= c.SEASON_LEVEL:
+                return 15
+        elif self.amount_extra >= c.SUPPORTER_LEVEL:
+            return 10
+        elif self.amount_extra >= c.SHIRT_LEVEL:
+            return 5
+
     @property
     def age_discount(self):
         # We dynamically calculate the age discount to be half the
