@@ -54,6 +54,12 @@ class Attendee:
         if self.badge_type == c.CHILD_BADGE and self.age_now_or_at_con and self.age_now_or_at_con >= 18:
             self.badge_type = c.ATTENDEE_BADGE
             self.ribbon = remove_opt(self.ribbon_ints, c.UNDER_13)
+    
+    @presave_adjustment
+    def keep_covid_agreement(self):
+        if self.orig_value_of('agreed_to_covid_policies') and self.orig_value_of('agreed_to_covid_policies') == True:
+            # Workaround for a bug on how the admin form handles booleans
+            self.agreed_to_covid_policies = True
 
     @classproperty
     def searchable_fields(cls):
