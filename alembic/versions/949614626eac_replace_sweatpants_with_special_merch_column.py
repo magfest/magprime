@@ -1,7 +1,7 @@
 """Replace sweatpants with special_merch column
 
 Revision ID: 949614626eac
-Revises: 89836ebbe83a
+Revises: 6b7b26e2385a
 Create Date: 2021-09-25 15:24:43.768422
 
 """
@@ -9,7 +9,7 @@ Create Date: 2021-09-25 15:24:43.768422
 
 # revision identifiers, used by Alembic.
 revision = '949614626eac'
-down_revision = '89836ebbe83a'
+down_revision = '6b7b26e2385a'
 branch_labels = None
 depends_on = None
 
