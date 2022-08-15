@@ -18,7 +18,6 @@ class Attendee:
     special_merch = Column(Choice(c.SPECIAL_MERCH_OPTS), default=c.NO_MERCH)
     agreed_to_covid_policies = Column(Boolean, default=False)
     group_name = Column(UnicodeText)
-    covid_ready = Column(Boolean, default=False)
     donate_badge_cost = Column(Boolean, default=False)
 
     @presave_adjustment
