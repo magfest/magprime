@@ -1,7 +1,7 @@
 """Add ability to donate badge cost
 
 Revision ID: 169452382261
-Revises: a6be9c5b471e
+Revises: f1a8832dd569
 Create Date: 2021-12-30 22:23:47.949776
 
 """
@@ -9,7 +9,7 @@ Create Date: 2021-12-30 22:23:47.949776
 
 # revision identifiers, used by Alembic.
 revision = '169452382261'
-down_revision = 'a6be9c5b471e'
+down_revision = 'f1a8832dd569'
 branch_labels = None
 depends_on = None
 
