@@ -1,7 +1,7 @@
 """Add prior name field for dealers
 
 Revision ID: 6b7b26e2385a
-Revises: dcb18612e9d0
+Revises: 739fe558fde9
 Create Date: 2021-09-23 06:10:03.805852
 
 """
@@ -9,7 +9,7 @@ Create Date: 2021-09-23 06:10:03.805852
 
 # revision identifiers, used by Alembic.
 revision = '6b7b26e2385a'
-down_revision = 'dcb18612e9d0'
+down_revision = '739fe558fde9'
 branch_labels = None
 depends_on = None
 
