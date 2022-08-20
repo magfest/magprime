@@ -34,7 +34,7 @@
         if ($.field('shirt')) {
             $('.season-row').insertAfter($.field('shirt').parents('.form-group'));
         }
-        {% if not attendee.group and not attendee.promo_code_group %}
+        {% if not attendee.group and not attendee.promo_code_group and not is_prereg_dealer %}
         $.field('group_name').parents('.form-group').insertAfter($('label[for="legal_name"]').parents('.form-group'));
         {% endif %}
 
@@ -150,7 +150,7 @@
     <div class="form-control-static">{{ macros.popup_link("../static/shirt_guide.png", "[size guide]") }}</div>
 </div>
 
-{% if not attendee.group and not attendee.promo_code_group %}
+{% if not attendee.group and not attendee.promo_code_group and not is_prereg_dealer %}
 {{ macros.form_group(
     attendee,
     'group_name',
