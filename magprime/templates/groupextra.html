@@ -6,6 +6,7 @@
             {{ macros.toggle_checkbox(
                 '.form-group-prior-name',
                 'I have run a table under a different name at one of the past two in-person Super MAGFest events.',
+                suffix="prior_name",
                 name='has_prior_name',
                 required_selector='.form-group-prior-name .form-control',
                 hide_on_checked=False,
@@ -23,6 +24,14 @@
 <script type="text/javascript">
 if ($.field('prior_name')) {
     $('#prior_name').insertAfter($.field('website').parents('.form-group'));
+}
+if ($.field('website')) {
+    $.field('website').closest('.form-group').find('.help-block').html(
+        "This is where you post your main portfolio link. " +
+        "<strong>This link CANNOT be a twitter or instagram link because of the account requirements to view posts here. " +
+        "If no suitable link is provided, you will not be accepted.</strong> " +
+        "Please include additional links to social media accounts or additional " +
+        "places to view your items in the What do you sell box? above.");
 }
 </script>
 {% endif %}
