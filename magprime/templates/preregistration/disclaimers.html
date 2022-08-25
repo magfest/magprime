@@ -2,9 +2,15 @@
 <ul>
   <li>
     All attendees (including vendors, performers, panelists, etc.) must abide by our
-    <a href="http://super.magfest.org/codeofconduct" target="_blank">code of conduct</a> 
-    and our <a href="http://super.magfest.org/covid" target="_blank">COVID policies</a>.
+    <a href="http://super.magfest.org/codeofconduct" target="_blank">code of conduct</a>{% if c.COVID_POLICIES_URL %}
+    and our <a href="http://super.magfest.org/covid" target="_blank">COVID policies</a>{% endif %}.
   </li>
+
+  {% if c.DEALER_REG_START and attendee and attendee.is_dealer %}
+    <li>All {{ c.DEALER_TERM }}s in the MAGFest marketplace must abide by the 
+      <a href="https://super.magfest.org/marketplace-rules" target="_blank">marketplace rules</a>.
+    </li>
+  {% endif %}
 
   <li>
     Please review our badge policies and other
@@ -17,10 +23,6 @@
     ensure that each badge is purchased in the name of the individual for whom
     the badge is intended. You may use the same email address for multiple
     badges so any surprises aren't ruined.
-  </li>
-  <li>
-    If you don't pay for your registration, it will be deleted and you will
-    have to pay full price at the door.
   </li>
   <li>
     {{ c.EVENT_NAME }} has a <a href="https://super.magfest.org/faq/#badge-refunds" target="_blank">limited refund policy</a>
@@ -37,8 +39,6 @@
     </li>
   {% endif %}
   {% if c.DEALER_REG_START and attendee and attendee.is_dealer %}
-    <li>Vendors in the MAGFest marketplace must abide by the 
-      <a href="https://super.magfest.org/marketplace-rules" target="_blank">marketplace rules</a>.</li>
     <li>
       Submitting this form to vend does not guarantee you will be selected for the Marketplace - it is only the application.
     </li>

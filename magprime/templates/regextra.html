@@ -129,16 +129,21 @@
     </div>-->
 
     <div class="form-group">
-    <div class="checkbox col-sm-9 col-sm-offset-3">
-        <label class="checkbox-label">
-        {{ macros.checkbox(attendee, 'agreed_to_covid_policies', is_readonly=read_only, clientside_bool=clientside_bool, is_required=True) }}
-        <strong>Yes</strong>, I acknowledge that I have read and agree to abide by the 
-        {{ macros.popup_link("https://super.magfest.org/covid", "Super MAGFest 2022 COVID Policies") }} 
-        in their entirety. I understand the <strong>vaccination and face covering requirements</strong> for all individuals, 
-        including minors. I will contact {{ "accessibility@magfest.org"|email_to_link }} if I require an exemption for 
-        medical reasons, or {{ "regsupport@magfest.org"|email_to_link }} if I have any other questions regarding exemptions.
-        </label>
-    </div>
+        <div class="checkbox col-sm-9 col-sm-offset-3">
+            <label class="checkbox-label"> {{ c.COVID_POLICIES_URL }}
+            {{ macros.checkbox(attendee, 'agreed_to_covid_policies', is_readonly=read_only, clientside_bool=clientside_bool, is_required=True) }}
+            {% if c.COVID_POLICIES_URL %}
+            <strong>Yes</strong>, I acknowledge that I have read and agree to abide by the 
+            {{ macros.popup_link(c.COVID_POLICIES_URL, c.EVENT_NAME_AND_YEAR ~ " COVID Policies") }} 
+            in their entirety. I understand the <strong>vaccination and face covering requirements</strong> for all individuals, 
+            including minors. I will contact {{ "exemptions@magfest.org"|email_to_link }} if I require an exemption for 
+            medical reasons, or if I have any other questions regarding exemptions.
+            {% else %}
+            <strong>Yes</strong>, I understand that if accepted, I will need to agree to the {{ c.EVENT_NAME_AND_YEAR ~ " COVID Policy" }} 
+            in order to complete my application.{% if c.PRIOR_COVID_POLICIES_URL %} ({{ macros.popup_link(c.PRIOR_COVID_POLICIES_URL, "See last year's policy here") }}){% endif %}
+            {% endif %}
+            </label>
+        </div>
     </div>
 {% endif %}
 

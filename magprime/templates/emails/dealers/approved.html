@@ -12,6 +12,12 @@ Payment is expected by: {{ c.DEALER_PAYMENT_DUE|datetime_local }} or your applic
     now then it will take much less time for their owners to pick them up at the festival.
     You may do this by <a href="{{ c.URL_BASE }}/preregistration/group_members?id={{ group.id }}">clicking here</a>.
 {% endif %}
+{% if group.unagreed_covid_attendees %}
+<br/> <br/> The following group members need to agree to the <a href="https://super.magfest.org/covid" target="_blank">Super MAGFest COVID policy</a>:
+<ul>
+    {% for attendee in group.unagreed_covid_attendees %}<li>{{ attendee.full_name }}</li>{% endfor %}
+</ul>
+{% endif %}
 
 <br/> <br/><strong>New Tax Information <span style="color:red">*Please Read*</span></strong>
 <p>All sellers in the Marketplace are required to obtain a Seller's Permit from the State of Maryland.

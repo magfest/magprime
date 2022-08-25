@@ -13,6 +13,16 @@ from uber.utils import add_opt, check, localized_now, remove_opt
 class Group:
     prior_name = Column(UnicodeText)
 
+    @presave_adjustment
+    def unagree_covid_when_approved(self):
+        if self.orig_value_of('status') != c.APPROVED and self.status == c.APPROVED:
+            for attendee in self.attendees:
+                attendee.agreed_to_covid_policies = False
+    
+    @property
+    def has_unagreed_covid_attendees(self):
+        return [attendee for attendee in self.attendees if not attendee.is_unassigned and not attendee.agreed_to_covid_policies]
+
 @Session.model_mixin
 class Attendee:
     special_merch = Column(Choice(c.SPECIAL_MERCH_OPTS), default=c.NO_MERCH)
@@ -52,12 +62,6 @@ class Attendee:
         if self.badge_type == c.CHILD_BADGE and self.age_now_or_at_con and self.age_now_or_at_con >= 18:
             self.badge_type = c.ATTENDEE_BADGE
             self.ribbon = remove_opt(self.ribbon_ints, c.UNDER_13)
-    
-    @presave_adjustment
-    def keep_covid_agreement(self):
-        if self.orig_value_of('agreed_to_covid_policies') and self.orig_value_of('agreed_to_covid_policies') == True:
-            # Workaround for a bug on how the admin form handles booleans
-            self.agreed_to_covid_policies = True
 
     @classproperty
     def searchable_fields(cls):
@@ -72,10 +76,6 @@ class Attendee:
                 'agreed_to_volunteer_agreement', 'reviewed_emergency_procedures', 'walk_on_volunteer', 
                 'can_work_setup', 'can_work_teardown', 'hotel_eligible', 'attractions_opt_out', 'donate_badge_cost']
     
-    @classproperty
-    def checkin_bools(self):
-        return ['got_merch', 'covid_ready'] if c.MERCH_AT_CHECKIN else ['covid_ready']
-
     def calculate_shipping_fee_cost(self):
         if self.amount_extra >= c.SEASON_LEVEL:
                 return 15
@@ -154,6 +154,9 @@ class Attendee:
 
         if self.donate_badge_cost:
             return "Asked badge + merch to be shipped to them"
+
+        if self.group and self.group.is_dealer and self.group != c.APPROVED:
+            return "Unapproved dealer"
 
         message = check(self)
         return message
