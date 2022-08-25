@@ -33,5 +33,13 @@ if ($.field('website')) {
         "Please include additional links to social media accounts or additional " +
         "places to view your items in the What do you sell box? above.");
 }
+
+if ($('#business-info-intro')) {
+    $('#business-info-intro').html(
+        "Please enter your <strong>business</strong> address, phone number, and email below. " +
+        "This should be the information you use for tax purposes. " +
+        "If you are selected to sell at MAGFest, then we will provide this information to the Maryland Comptroller's Office for Tax Permits. "
+    )
+}
 </script>
 {% endif %}
