@@ -12,6 +12,8 @@ from uber.utils import add_opt, check, localized_now, remove_opt
 @Session.model_mixin
 class Group:
     prior_name = Column(UnicodeText)
+    has_permit = Column(Boolean, default=False)
+    license = Column(UnicodeText)
 
     @presave_adjustment
     def unagree_covid_when_approved(self):

@@ -2,6 +2,12 @@ from .config import c
 from uber.model_checks import prereg_validation, validation, ignore_unassigned_and_placeholders
 
 
+@prereg_validation.Group
+def license_if_permit(group):
+    if group.has_permit and not group.license:
+        return "Please provide your license number."
+
+
 @prereg_validation.Attendee
 def select_special_merch_size(attendee):
     if attendee.amount_extra >= c.SEASON_LEVEL and attendee.special_merch == c.NO_MERCH:
