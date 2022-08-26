@@ -6,7 +6,7 @@
     and our <a href="http://super.magfest.org/covid" target="_blank">COVID policies</a>{% endif %}.
   </li>
 
-  {% if c.DEALER_REG_START and attendee and attendee.is_dealer %}
+  {% if c.DEALER_REG_START and attendee and attendee.is_dealer or show_dealer_disclaimers %}
     <li>All {{ c.DEALER_TERM }}s in the MAGFest marketplace must abide by the 
       <a href="https://super.magfest.org/marketplace-rules" target="_blank">marketplace rules</a>.
     </li>
@@ -38,7 +38,7 @@
       accompanied by an adult with a paid badge.
     </li>
   {% endif %}
-  {% if c.DEALER_REG_START and attendee and attendee.is_dealer %}
+  {% if c.DEALER_REG_START and attendee and attendee.is_dealer or show_dealer_disclaimers %}
     <li>
       Submitting this form to vend does not guarantee you will be selected for the Marketplace - it is only the application.
     </li>

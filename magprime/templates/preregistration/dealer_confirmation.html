@@ -37,56 +37,8 @@
     when the waitlist is exhausted. You will receive an email when these badges are available for purchase. If you do not move 
     on to the application process from the lottery, then you will need to pre-register for your badges separately.
 
-    <h4 class="text-danger">Disclaimers</h4>
-<ul>
-  <li>
-    All attendees (including vendors, performers, panelists, etc.) must abide by our
-    <a href="http://super.magfest.org/codeofconduct" target="_blank">code of conduct</a>{% if c.COVID_POLICIES_URL %}
-    and our <a href="http://super.magfest.org/covid" target="_blank">COVID policies</a>{% endif %}.
-  </li>
-
-  {% if c.DEALER_REG_START and attendee and attendee.is_dealer %}
-    <li>All {{ c.DEALER_TERM }}s in the MAGFest marketplace must abide by the 
-      <a href="https://super.magfest.org/marketplace-rules" target="_blank">marketplace rules</a>.
-    </li>
-  {% endif %}
-
-  <li>
-    Please review our badge policies and other
-    <a href="http://super.magfest.org/faq" target="_blank">frequently asked questions</a>
-    prior to purchasing your badge.
-  </li>
-  <li>
-    {{ c.EVENT_NAME }} has a <a href="https://super.magfest.org/faq/#multiple-badges" target="_blank">one badge per person policy</a>.
-    If you purchase multiple badges (for your family or as a gift), please
-    ensure that each badge is purchased in the name of the individual for whom
-    the badge is intended. You may use the same email address for multiple
-    badges so any surprises aren't ruined.
-  </li>
-  <li>
-    {{ c.EVENT_NAME }} has a <a href="https://super.magfest.org/faq/#badge-refunds" target="_blank">limited refund policy</a>
-    but you may <a href="https://super.magfest.org/faq/#sell-or-transfer" target="_blank">sell/transfer your badge</a>.
-  </li>
-
-  {% if c.CONSENT_FORM_URL %}
-    <li>
-      Attendees under 18 MUST bring a
-      <a href="http://super.magfest.org/parentalconsentform">signed parental consent form</a>,
-      which MUST be notarized if the parent is not with the minor when the
-      badge is picked up. Also, all children 12 and under will need to be
-      accompanied by an adult with a paid badge.
-    </li>
-  {% endif %}
-  {% if c.DEALER_REG_START and attendee and attendee.is_dealer %}
-    <li>
-      Submitting this form to vend does not guarantee you will be selected for the Marketplace - it is only the application.
-    </li>
-    <li>
-      MAGFest Marketplace no longer allows proxy selling. If you are a proxy seller, please do not apply.
-    </li>
-  {% endif %}
-</ul>
-
+    {% set show_dealer_disclaimers = True %}
+    {% include "preregistration/disclaimers.html" %}
   </div>
 </div>
 {% endblock %}
