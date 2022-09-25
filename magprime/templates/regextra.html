@@ -1,38 +1,25 @@
 <script type="text/javascript">
-    {% if attendee.is_new and not group_id and c.CHILD_BADGE in c.PREREG_BADGE_TYPES %}
-        if (window.REG_TYPES) {
-            REG_TYPES.options.push({
-                title: '12 and Under: $' + Math.floor({{ c.BADGE_PRICE }} / 2),
-                description: '<p class="list-group-item-text">Attendees 12 and younger must be accompanied by an adult with a valid Attendee badge.</p>' +
-            '<span class="prereg-price-notice">Price is always half that of the Single Attendee badge price.</span>',
-                onClick: function () {
-                    $('.group_fields').addClass('hide');
-                    $('.non_group_fields').removeClass('hide');
-                    if ($.field('first_name')) {
-                        $('#bold-field-message').insertBefore($.field('first_name').parents('.form-group'));
-                    }
-                    $('input[name="badge_type"]').val('{{ c.CHILD_BADGE }}');
-                    togglePrices();
-                }
-            });
-        }
-    {% endif %}
-
     $(function () {
-        // This auto-selects the Child badge when the user is, e.g., editing their registration before paying
-        {% if attendee.badge_type == c.CHILD_BADGE %}
-            if (window.REG_TYPES && $(REG_TYPES.row).size()) {
-                {% set child_badge_index = 2 if c.GROUPS_ENABLED else 1 %}
-                setBadge(REG_TYPES, {{ child_badge_index }});  // default to child badge when appropriate
-            }
-        {% endif %}
-
         if ($.field('payment_method')) {
             $('#price_explanation').insertAfter($.field('payment_method').parents('.form-group'));
         }
 
         if ($.field('shirt')) {
             $('.season-row').insertAfter($.field('shirt').parents('.form-group'));
+        }
+        if ($('#extra_donation')) {
+            $('#extra_donation .control-label span').text('Donate extra and become a MAG Superstar!');
+            $('#extra_donation p.help-block').html(
+                                '<a href="https://super.magfest.org/magfest-superstars-info-page" target="_blank"><img src="{{ c.URL_BASE }}/static/swag/superstar.png" width="400" alt="Become a Superstar" /></a>' +
+                '<p>Donate to MAGFest and <a href="https://super.magfest.org/magfest-superstars-info-page" target="_blank">become a Superstar</a>! With a donation of $30 or more, you’ll be listed as a Superstar donor on our website and get other perks!</p>' +
+                '<strong>Donations are not merch packages and do not come with merchandise.</strong> MAGFest, Inc. is a 501(c)(3) charitable organization, so your donation is tax-deductible. For more information, please contact {{ "accounting@magfest.org"|email_to_link }}.'
+                );
+            $('#extra_donation_preselect').insertBefore($('#extra_donation .input-group'));
+
+            $('input[name="superstar_opts"]').change( function() {
+                var newVal = $(this).val() == 0 ? '' : $(this).val();
+                $('input[name="extra_donation"').val(newVal).trigger('blur');
+            });
         }
         {% if not attendee.group and not attendee.promo_code_group and not is_prereg_dealer %}
         $.field('group_name').parents('.form-group').insertAfter($('label[for="legal_name"]').parents('.form-group'));
@@ -46,6 +33,10 @@
                 $.field('amount_extra').parents('.form-group').append($('#tax_exempt'));
             } else {
               $('#tax_exempt').hide();
+            }
+
+            if ($.field('agreed_to_covid_policies') && $.field('pii_consent')) {
+                $.field('agreed_to_covid_policies').parents('.form-group').insertAfter($.field('pii_consent').parents('.form-group'))
             }
 
             $('#attend_virtually').insertBefore('#bold-field-message');
@@ -116,11 +107,11 @@
 {% endif %}
 
 {% if not admin_area %}
-    <div id="tax_exempt">
-        <div class="help-block col-sm-9 col-sm-offset-3">
-            Badge tier upgrades may be partially tax deductible. E-mail contact@magfest.org for details.
-        </div>
-    </div>
+  <span id="extra_donation_preselect">
+    {% set superstar_dict = {30: '$30', 420: '$420', 1337: '$1337', 0: 'Custom'} %}
+    {{ macros.button_radio_opts('', superstar_dict.items(), suffix="superstar_opts", default=attendee.extra_donation if attendee.extra_donation in superstar_dict else 0) }}
+  </span>
+  <br/>
 
     <!--<div id="tshirt_warning">
         <div class="help-block col-sm-9 col-sm-offset-3">
@@ -130,17 +121,18 @@
 
     <div class="form-group">
         <div class="checkbox col-sm-9 col-sm-offset-3">
-            <label class="checkbox-label"> {{ c.COVID_POLICIES_URL }}
+            <label class="checkbox-label">
             {{ macros.checkbox(attendee, 'agreed_to_covid_policies', is_readonly=read_only, clientside_bool=clientside_bool, is_required=True) }}
             {% if c.COVID_POLICIES_URL %}
-            <strong>Yes</strong>, I acknowledge that I have read and agree to abide by the 
-            {{ macros.popup_link(c.COVID_POLICIES_URL, c.EVENT_NAME_AND_YEAR ~ " COVID Policies") }} 
-            in their entirety. I understand the <strong>vaccination and face covering requirements</strong> for all individuals, 
-            including minors. I will contact {{ "exemptions@magfest.org"|email_to_link }} if I require an exemption for 
-            medical reasons, or if I have any other questions regarding exemptions.
+            By checking this box, I acknowledge that I have read and agree to abide by the 
+            {{ macros.popup_link(c.COVID_POLICIES_URL, c.EVENT_NAME_AND_YEAR ~ " COVID Policies") }} in their entirety.
+            I understand the <strong>vaccination and face covering requirements</strong> for all individuals, including minors, and I
+            understand that MAGFest has a <strong>no-refunds policy</strong>. I will contact 
+            {{ "exemptions@magfest.org"|email_to_link }} no later than <strong>November 15</strong> if I need to request an 
+            exemption, and I understand that exemption requests may not be granted if received after this date.
             {% else %}
             <strong>Yes</strong>, I understand that if accepted, I will need to agree to the {{ c.EVENT_NAME_AND_YEAR ~ " COVID Policy" }} 
-            in order to complete my application.{% if c.PRIOR_COVID_POLICIES_URL %} ({{ macros.popup_link(c.PRIOR_COVID_POLICIES_URL, "See last year's policy here") }}){% endif %}
+            in order to complete my {{ 'application' if attendee.is_dealer else 'registration' }}.{% if c.PRIOR_COVID_POLICIES_URL %} ({{ macros.popup_link(c.PRIOR_COVID_POLICIES_URL, "See last year's policy here") }}){% endif %}
             {% endif %}
             </label>
         </div>
@@ -163,7 +155,7 @@
     help="Enter a group name to easily check in with other attendees in the same group.") }}
 {% endif %}
 
-{% if attendee.paid != c.NEED_NOT_PAY and not attendee.checked_in and not attendee.amount_unpaid and attendee.badge_status == c.COMPLETED_STATUS and (admin_area or c.PAGE_PATH == '/preregistration/confirm') %}
+{% if False and attendee.paid != c.NEED_NOT_PAY and not attendee.checked_in and not attendee.amount_unpaid and attendee.badge_status == c.COMPLETED_STATUS and (admin_area or c.PAGE_PATH == '/preregistration/confirm') %}
 <div id="attend_virtually" class="alert alert-success">
     <div class="form-group">
         <label class="col-sm-3 control-label optional-field">Attend Virtually</label>
