@@ -3,6 +3,13 @@
         if ($.field('payment_method')) {
             $('#price_explanation').insertAfter($.field('payment_method').parents('.form-group'));
         }
+        if ($.field('comments')) {
+            $.field('comments').parents('.form-group').hide();
+        }
+
+        if ($.field('found_how')) {
+            $.field('found_how').parents('.form-group').hide();
+        }
 
         if ($.field('shirt')) {
             $('.season-row').insertAfter($.field('shirt').parents('.form-group'));
@@ -120,7 +127,8 @@
     </div>-->
 
     <div class="form-group">
-        <div class="checkbox col-sm-9 col-sm-offset-3">
+        <label class="col-sm-3 control-label">COVID Policy</label>
+        <div class="checkbox col-sm-9">
             <label class="checkbox-label">
             {{ macros.checkbox(attendee, 'agreed_to_covid_policies', is_readonly=read_only, clientside_bool=clientside_bool, is_required=True) }}
             {% if c.COVID_POLICIES_URL %}
