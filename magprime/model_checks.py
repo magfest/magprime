@@ -10,7 +10,7 @@ def license_if_permit(group):
 
 @prereg_validation.Attendee
 def select_special_merch_size(attendee):
-    if attendee.amount_extra >= c.SEASON_LEVEL and attendee.special_merch == c.NO_MERCH:
+    if attendee.amount_extra >= c.SEASON_LEVEL and attendee.special_merch == c.NO_MERCH and c.SPECIAL_MERCH_OPTS > 1:
         return "Please select a button-down shirt size."
 
 
