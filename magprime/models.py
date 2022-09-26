@@ -32,6 +32,13 @@ class Attendee:
     donate_badge_cost = Column(Boolean, default=False)
 
     @presave_adjustment
+    def convert_imported_badges(self):
+        # MAGFest uses attendee badge importing for deferred attendees, who should have valid badges and be comped
+        if self.badge_status == c.IMPORTED_STATUS:
+            self.badge_status = c.NEW_STATUS
+            self.paid = c.NEED_NOT_PAY
+
+    @presave_adjustment
     def invalid_notification(self):
         if self.staffing and self.badge_status == c.INVALID_STATUS \
                 and self.badge_status != self.orig_value_of('badge_status'):
