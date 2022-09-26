@@ -29,7 +29,9 @@
             });
         }
         {% if not attendee.group and not attendee.promo_code_group and not is_prereg_dealer %}
-        $.field('group_name').parents('.form-group').insertAfter($('label[for="legal_name"]').parents('.form-group'));
+        if ($.field('group_name')) {
+            $.field('group_name').parents('.form-group').insertAfter($('label[for="legal_name"]').parents('.form-group'));
+        }
         {% endif %}
 
         {% if not admin_area %}
@@ -147,6 +149,7 @@
     </div>
 {% endif %}
 
+{% if c.SPECIAL_MERCH_OPTS|length > 1 %}
 <div class="form-group season-row" style="display:none">
     <label class="col-sm-3 control-label">Button-Down Shirt Size</label>
     <div class="col-sm-6">
@@ -154,8 +157,9 @@
     </div>
     <div class="form-control-static">{{ macros.popup_link("../static/shirt_guide.png", "[size guide]") }}</div>
 </div>
+{% endif %}
 
-{% if not attendee.group and not attendee.promo_code_group and not is_prereg_dealer %}
+{% if False and not attendee.group and not attendee.promo_code_group and not is_prereg_dealer %}
 {{ macros.form_group(
     attendee,
     'group_name',
