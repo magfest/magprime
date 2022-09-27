@@ -16,7 +16,7 @@
         }
         if ($('#extra_donation')) {
             $('#extra_donation .control-label span').text('Superstar Donation');
-            {% if is_prereg_attendee or not attendee.extra_donation %}$('#extra_donation').prepend('<img class="center-block" width="100%" src="{{ c.URL_BASE }}/static/theme/superstar.png" width="400" alt="Become a Superstar" />');{% endif %}
+            {% if not is_prereg_dealer and not admin_area %}$('#extra_donation').prepend('<img class="center-block" width="100%" src="{{ c.URL_BASE }}/static/theme/superstar.png" width="400" alt="Become a Superstar" />');{% endif %}
             $('#extra_donation p.help-block').html(
                 '<p>Become a MAGFest Superstar! With a donation of $30 (or <i>more</i> &#128558;), you’ll receive a number of exclusive (and mostly pointless!) perks, earning a coveted spot on our Superstars Squad. <a href="https://super.magfest.org/superstars" target="_blank">Click here to learn more</a> (and to see the absolute BS perks you get for a donation of $420 and $1337).</p>' +
                 '<strong>Remember!</strong> MAGFest, Inc. is a 501(c)(3) charitable organization, so your donation is tax-deductible! <strong>Donations are not merch packages and do not come with merchandise.</strong> Please only donate if you are in a financial position to do so—we thank you for your help!'
@@ -24,9 +24,28 @@
             $('#extra_donation_preselect').insertBefore($('#extra_donation .input-group'));
 
             $('input[name="superstar_opts"]').change( function() {
+                if($(this).val() == -1) {
+                    $('input[name="extra_donation"').focus();
+                    return false;
+                }
+
+                var currentVal = $('input[name="extra_donation"').val();
                 var newVal = $(this).val() == 0 ? '' : $(this).val();
-                $('input[name="extra_donation"').val(newVal).trigger('blur');
+                if (currentVal != newVal) {
+                    $('input[name="extra_donation"').val(newVal).trigger('blur');
+                }
             });
+            $('input[name="extra_donation"').on('blur', function() {
+                var extraDonationVal = $(this).val();
+                $('input[name="superstar_opts"]').each(function() {
+                    if ($(this).val() == extraDonationVal) {
+                        $(this).click();
+                        return false;
+                    }
+                })
+                
+                $('input[name="superstar_opts"][value=-1]').click();
+            })
         }
         {% if not attendee.group and not attendee.promo_code_group and not is_prereg_dealer %}
         if ($.field('group_name')) {
@@ -117,8 +136,8 @@
 
 {% if not admin_area %}
   <span id="extra_donation_preselect">
-    {% set superstar_dict = {30: '$30', 420: '$420', 1337: '$1337', 0: 'Custom'} %}
-    {{ macros.button_radio_opts('', superstar_dict.items(), suffix="superstar_opts", default=attendee.extra_donation if attendee.extra_donation in superstar_dict else 0) }}
+    {% set superstar_dict = {0: 'No Thanks', 30: '$30', 420: '$420', 1337: '$1337', -1: 'Custom'} %}
+    {{ macros.button_radio_opts('', superstar_dict.items(), suffix="superstar_opts", default=attendee.extra_donation if attendee.extra_donation == 0 or attendee.extra_donation in superstar_dict else -1) }}
   </span>
   <br/>
 
