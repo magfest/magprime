@@ -1,0 +1,75 @@
+<html>
+<head></head>
+<body>
+
+You ({{ attendee.full_name }}) have preregistered for {{ c.EVENT_NAME_AND_YEAR }} this coming {{ event_dates() }}
+{% if attendee.promo_code_id %}
+    using promotional code {{ attendee.promo_code.code }}
+{% endif %}
+
+{% if attendee.group %}
+    by claiming one of the badges in the {{ attendee.group.name }} group.
+{% elif attendee.paid == c.NEED_NOT_PAY and attendee.promo_code_id %}
+    to claim a free badge.
+{% elif attendee.paid == c.NEED_NOT_PAY %}
+    by claiming your free badge.
+{% else %}
+    and your payment of {{ (attendee.amount_paid / 100)|format_currency }} has been received.
+{% endif %}
+Your registration confirmation number is {{ attendee.id }}, and you can update your information, preorder merch, or donate
+extra money <a href="{{ c.URL_BASE }}/preregistration/confirm?id={{ attendee.id }}">here</a>.
+
+{% if attendee.is_group_leader %}
+    If you don't remember claiming a badge, it may have been created for you by {{ c.EVENT_NAME }} staff. Please
+    check your information to make sure it is correct.
+{% endif %}
+
+<br/> <br/>
+
+Badges are not mailed out before the event, so your badge will be available for pickup at the registration desk when you arrive at {{ c.EVENT_NAME }}.  Simply bring a photo ID and <a href="{{ c.COVID_POLICIES_URL }}" target="_blank">proof of vaccination</a> to the registration desk, where you'll be provided with your badge.
+{% if c.DONATIONS_ENABLED and not attendee.amount_extra %}
+    If you order any merchandise, you can pick those up at our merchandise booth.
+    The location and hours of the registration desk and merchandise booth will be e-mailed prior to the event.
+{% endif %}
+
+{% if attendee.amount_extra %}
+    <br/> <br/>
+    Your preordered {{ c.DONATION_TIERS[attendee.amount_extra] }} merch provides you with the following items, which may be picked up at our merch booth:
+    <ul style="margin-bottom: 0">
+    {% for swag in attendee.donation_swag|list %}
+        <li>{{ swag }}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+
+{% if attendee.extra_donation %}
+    <br/><br/>
+    You contributed an extra charitable donation of {{ attendee.extra_donation|format_currency }}. 
+    Thank you so much for your support! Your employer may match your contributions to charitable organizations, 
+    so be sure to ask them. Donations over $250 will receive a donation receipt later this year. If you require a 
+    receipt, but donated less than $250, please email {{ "accounting@magfest.org"|email_to_link }} to request one.
+    {% if attendee.extra_donation > 30 %}Even cooler, you are now a proud MAGFest Superstar! Check out our <a href="http://magfest.org/superstars">Superstars page</a> for more details on your perks.{% endif %}
+{% endif %}
+
+{% if attendee.addons %}
+    <br/> <br/>
+    Additionally, you will receive the following add-ons:
+    <ul style="margin-bottom: 0">
+    {% for addon in attendee.addons|list %}
+        <li>{{ addon }}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+
+{% if attendee.requested_hotel_info and c.PREREG_REQUEST_HOTEL_INFO_OPEN %}
+    <br/> <br/>
+    {% include "preregistration/hotel_disclaimer.html" %}
+{% endif %}
+
+{% include "emails/reg_workflow/reg_notes.html" %}
+
+<br/><br/>
+{% include "emails/reg_workflow/refund_policy.html" %}
+
+</body>
+</html>
