@@ -14,6 +14,9 @@
         if ($.field('shirt')) {
             $('.season-row').insertAfter($.field('shirt').parents('.form-group'));
         }
+        if ($.field('onsite_contact')) {
+            $.field('onsite_contact').parents('.form-group').find('.control-label').text('MAGBuddy');
+        }
         if ($('#extra_donation')) {
             $('#extra_donation .control-label span').text('Superstar Donation');
             {% if not is_prereg_dealer and not admin_area %}$('#extra_donation').prepend('<img class="center-block" width="100%" src="{{ c.URL_BASE }}/static/theme/superstar.png" width="400" alt="Become a Superstar" />');{% endif %}
