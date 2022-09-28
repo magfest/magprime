@@ -32,6 +32,13 @@ class Attendee:
     donate_badge_cost = Column(Boolean, default=False)
 
     @presave_adjustment
+    def set_superstar_ribbon(self):
+        if self.extra_donation >= 30 and c.SUPERSTAR_RIBBON not in self.ribbon_ints:
+            self.ribbon = add_opt(self.ribbon_ints, c.SUPERSTAR_RIBBON)
+        elif self.extra_donation < 30 and self.orig_value_of('extra_donation') >= 30 and c.SUPERSTAR_RIBBON in self.ribbon_ints:
+            self.ribbon = remove_opt(self.ribbon_ints, c.SUPERSTAR_RIBBON)
+
+    @presave_adjustment
     def convert_imported_badges(self):
         # MAGFest uses attendee badge importing for deferred attendees, who should have valid badges and be comped
         if self.badge_status == c.IMPORTED_STATUS:
