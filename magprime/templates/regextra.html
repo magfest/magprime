@@ -138,11 +138,13 @@
 {% endif %}
 
 {% if not admin_area %}
+{% if c.PAGE_PATH != '/preregistration/transfer_badge' %}
   <span id="extra_donation_preselect">
     {% set superstar_dict = {0: 'No Thanks', 30: '$30', 420: '$420', 1337: '$1337', -1: 'Custom'} %}
     {{ macros.button_radio_opts('', superstar_dict.items(), suffix="superstar_opts", default=attendee.extra_donation if attendee.extra_donation == 0 or attendee.extra_donation in superstar_dict else -1) }}
   </span>
   <br/>
+{% endif %}
 
     <!--<div id="tshirt_warning">
         <div class="help-block col-sm-9 col-sm-offset-3">
