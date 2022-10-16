@@ -1,0 +1,9 @@
+{% import 'macros.html' as macros %}
+{% if c.EMERGENCY_PROCEDURES_ENABLED %}
+<li>
+    {{ macros.checklist_image(attendee.reviewed_emergency_procedures) }}
+
+    Please review our Emergency Procedures and acknowledge that you have done so. (Coming soon!) 
+    (Deadline: {{ c.EMERGENCY_PROCEDURES_DEADLINE }})
+</li>
+{% endif %}
