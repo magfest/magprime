@@ -143,6 +143,10 @@ class Attendee:
         return merch
 
     @property
+    def gets_staff_shirt(self):
+        return bool(self.badge_type == c.STAFF_BADGE)
+
+    @property
     def is_not_ready_to_checkin(self):
         """
         Returns None if we are ready for checkin, otherwise a short error
