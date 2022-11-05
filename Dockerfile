@@ -1,4 +1,4 @@
-FROM ghcr.io/magfest/ubersystem:docker_support
+FROM ghcr.io/magfest/ubersystem:main
 
 # add our code
 COPY . plugins/magprime/
