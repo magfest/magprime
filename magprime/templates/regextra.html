@@ -22,7 +22,8 @@
             {% if not is_prereg_dealer and not admin_area %}$('#extra_donation').prepend('<img class="center-block" width="100%" src="{{ c.URL_BASE }}/static/theme/superstar.png" width="400" alt="Become a Superstar" />');{% endif %}
             $('#extra_donation p.help-block').html(
                 '<p>Become a MAGFest Superstar! With a donation of $30 (or <i>more</i> &#128558;), you’ll receive a number of exclusive (and mostly pointless!) perks, earning a coveted spot on our Superstars Squad. <a href="https://super.magfest.org/superstars" target="_blank">Click here to learn more</a> (and to see the absolute BS perks you get for a donation of $420 and $1337).</p>' +
-                '<strong>Remember!</strong> MAGFest, Inc. is a 501(c)(3) charitable organization, so your donation is tax-deductible! <strong>Donations are not merch packages and do not come with merchandise.</strong> Please only donate if you are in a financial position to do so—we thank you for your help!'
+                '<p><strong>Remember!</strong> MAGFest, Inc. is a 501(c)(3) charitable organization, so your donation is tax-deductible! <strong>Donations are not merch packages and do not come with merchandise.</strong> Please only donate if you are in a financial position to do so—we thank you for your help!</p>' +
+                '<em>Any Superstar donations made after Dec. 1st may not receive perks by Super MAGFest 2023.</em>'
                 );
             $('#extra_donation_preselect').insertBefore($('#extra_donation .input-group'));
 
