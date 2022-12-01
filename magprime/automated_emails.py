@@ -81,6 +81,13 @@ AutomatedEmailFixture(
     sender='MAGFest LAN <lan@magfest.org>')
 
 AutomatedEmailFixture(
+    Attendee, 'Get Ready for MAGFest LAN!', 'lan_hype.html',
+    lambda a: c.LAN in a.interests_ints,
+    ident='magprime_lan_hype',
+    needs_approval=True,
+    sender='MAGFest LAN <lan@magfest.org>')
+
+AutomatedEmailFixture(
     Attendee, 'MAGFest Tech Ops volunteering', 'techops.txt',
     lambda a: a.staffing and a.assigned_to(c.TECH_OPS),
     ident='magprime_techops_volunteer',
