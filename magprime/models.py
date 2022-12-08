@@ -19,7 +19,8 @@ class Group:
     def unagree_covid_when_approved(self):
         if self.orig_value_of('status') != c.APPROVED and self.status == c.APPROVED:
             for attendee in self.attendees:
-                attendee.agreed_to_covid_policies = False
+                if not attendee.is_group_leader:
+                    attendee.agreed_to_covid_policies = False
     
     @property
     def has_unagreed_covid_attendees(self):
