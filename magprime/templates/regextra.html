@@ -140,7 +140,7 @@
   </div>
 {% endif %}
 
-{% if not admin_area %}
+{% if not admin_area and not c.AT_THE_CON %}
 {% if c.PAGE_PATH != '/preregistration/transfer_badge' %}
   <span id="extra_donation_preselect">
     {% set superstar_dict = {0: 'No Thanks', 30: '$30', 420: '$420', 1337: '$1337', -1: 'Custom'} %}
