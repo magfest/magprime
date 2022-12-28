@@ -17,6 +17,7 @@
         if ($.field('onsite_contact')) {
             $.field('onsite_contact').parents('.form-group').find('.control-label').text('MAGBuddy');
         }
+        {% if not c.AT_THE_CON %}
         if ($('#extra_donation')) {
             $('#extra_donation .control-label span').text('Superstar Donation');
             {% if not is_prereg_dealer and not admin_area %}$('#extra_donation').prepend('<img class="center-block" width="100%" src="{{ c.URL_BASE }}/static/theme/superstar.png" width="400" alt="Become a Superstar" />');{% endif %}
@@ -51,6 +52,7 @@
                 $('input[name="superstar_opts"][value=-1]').click();
             })
         }
+        {% endif %}
         {% if not attendee.group and not attendee.promo_code_group and not is_prereg_dealer %}
         if ($.field('group_name')) {
             $.field('group_name').parents('.form-group').insertAfter($('label[for="legal_name"]').parents('.form-group'));
@@ -138,7 +140,7 @@
   </div>
 {% endif %}
 
-{% if not admin_area %}
+{% if not admin_area and not c.AT_THE_CON %}
 {% if c.PAGE_PATH != '/preregistration/transfer_badge' %}
   <span id="extra_donation_preselect">
     {% set superstar_dict = {0: 'No Thanks', 30: '$30', 420: '$420', 1337: '$1337', -1: 'Custom'} %}
