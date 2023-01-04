@@ -124,22 +124,6 @@
     });
 </script>
 
-{% if c.PAGE_PATH == '/registration/register' %}
-  <div id="price_explanation">
-    <div class="form-group">
-      <p class="help-block col-sm-9 col-sm-offset-3">
-      {% if c.CHILD_BADGE_AVAILABLE %}
-        Badges for attendees under 13 are half-price. <br/>
-        Attendees under 6 enter free. <br/>
-        All attendees under 13 must be accompanied by an adult with a valid Attendee badge.
-    {% else %}
-    <span class="text-danger">Unfortunately, we are sold out of badges for attendees under 18.</span>
-    {% endif %}
-      </p>
-    </div>
-  </div>
-{% endif %}
-
 {% if not admin_area %}
 {% if c.PAGE_PATH != '/preregistration/transfer_badge' and not c.AT_THE_CON %}
   <span id="extra_donation_preselect">
