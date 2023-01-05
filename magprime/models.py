@@ -162,6 +162,9 @@ class Attendee:
 
         if self.badge_status not in [c.COMPLETED_STATUS, c.NEW_STATUS]:
             return "Badge status is {}".format(self.badge_status_label)
+
+        if self.group and self.paid == c.PAID_BY_GROUP and self.group.is_dealer and self.group.status != c.APPROVED:
+            return "Unapproved dealer"
         
         if self.placeholder:
             return "Placeholder badge"
@@ -169,15 +172,12 @@ class Attendee:
         if self.is_unassigned:
             return "Badge not assigned"
 
-        if self.is_presold_oneday:
-            if self.badge_type_label != localized_now().strftime('%A'):
-                return "Wrong day"
-
         if self.donate_badge_cost:
             return "Asked badge + merch to be shipped to them"
 
-        if self.group and self.group.is_dealer and self.group != c.APPROVED:
-            return "Unapproved dealer"
+        if self.is_presold_oneday:
+            if self.badge_type_label != localized_now().strftime('%A'):
+                return "Wrong day"
 
         message = check(self)
         return message
