@@ -1,0 +1,46 @@
+# docker-compose for development of ubersystem
+
+services: 
+  web:
+    platform: linux/amd64
+    build: .
+    ports:
+      - 80:80
+    environment:
+      - DB_CONNECTION_STRING=postgresql://uber_db:uber_db@db:5432/uber_db
+      - PORT=80
+    volumes:
+      - type: bind
+        source: .
+        target: /app/plugins/magprime
+  db:
+    platform: linux/amd64
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=uber_db
+      - POSTGRES_USER=uber_db
+      - POSTGRES_DB=uber_db
+  redis:
+    platform: linux/amd64
+    image: redis
+  rabbitmq:
+    platform: linux/arm64/v8
+    ports:
+      - "5672"
+    image: rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=celery
+      - RABBITMQ_DEFAULT_PASS=celery
+      - RABBITMQ_DEFAULT_VHOST=uber
+  celery-beat:
+    platform: linux/amd64
+    build: .
+    command: ['celery-beat']
+    environment:
+      - DB_CONNECTION_STRING=postgresql://uber_db:uber_db@db:5432/uber_db
+  celery-worker:
+    platform: linux/amd64
+    build: .
+    command: ['celery-worker']
+    environment:
+      - DB_CONNECTION_STRING=postgresql://uber_db:uber_db@db:5432/uber_db
