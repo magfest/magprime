@@ -41,20 +41,15 @@ class ExtraConfig:
         """
         donation_list = self.DONATION_TIER_DESCRIPTIONS.items()
 
-        donation_list = sorted(donation_list, key=lambda tier: tier[1]['price'])
+        donation_list = sorted(donation_list, key=lambda tier: tier[1]['value'])
 
         # add in all previous descriptions.  the higher tiers include all the lower tiers
         for entry in donation_list:
-            all_desc_and_links = [(entry[1]['description'], entry[1]['link'])]
-
-            # maybe slight hack. descriptions and links are separated by '|' characters so we can have multiple
-            # items displayed in the donation tiers.  in an ideal world, these would already be separated in the INI
-            # and we wouldn't have to do it here.
-            entry[1]['all_descriptions'] = []
-            for item in all_desc_and_links:
-                descriptions = item[0].split('|')
-                links = item[1].split('|')
-                entry[1]['all_descriptions'] += list(zip(descriptions, links))
+            descriptions = entry[1]['description'].split('|')
+            entry[1]['desc'] = '<ul class="list-group list-group-flush">'
+            for desc in descriptions:
+                entry[1]['desc'] += '<li class="list-group-item">' + desc + '</li>'
+            entry[1]['desc'] += '</ul>'
 
         return [dict(tier[1]) for tier in donation_list]
 

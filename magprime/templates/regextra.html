@@ -14,9 +14,6 @@
         if ($.field('shirt')) {
             $('.season-row').insertAfter($.field('shirt').parents('.form-group'));
         }
-        if ($.field('onsite_contact')) {
-            $.field('onsite_contact').parents('.form-group').find('.control-label').text('MAGBuddy');
-        }
         {% if not c.AT_THE_CON %}
         if ($('#extra_donation')) {
             $('#extra_donation .control-label span').text('Superstar Donation');
@@ -138,26 +135,6 @@
             <em>Slim fit sizes only available during online pre-order. {{ macros.popup_link("../static/swag/shirtsizeguide.png", "Size guide.") }}</em>
         </div>
     </div>-->
-
-    <div class="form-group">
-        <label class="col-sm-3 control-label">COVID Policy</label>
-        <div class="checkbox col-sm-9">
-            <label class="checkbox-label">
-            {{ macros.checkbox(attendee, 'agreed_to_covid_policies', is_readonly=read_only, clientside_bool=clientside_bool, is_required=True) }}
-            {% if c.COVID_POLICIES_URL %}
-            By checking this box, I acknowledge that I have read and agree to abide by the 
-            {{ macros.popup_link(c.COVID_POLICIES_URL, c.EVENT_NAME_AND_YEAR ~ " COVID Policies") }} in their entirety.
-            I understand the <strong>vaccination and face covering requirements</strong> for all individuals, including minors, and I
-            understand that MAGFest has a <strong>no-refunds policy</strong>. I will contact 
-            {{ "exemptions@magfest.org"|email_to_link }} no later than <strong>November 15</strong> if I need to request an 
-            exemption, and I understand that exemption requests may not be granted if received after this date.
-            {% else %}
-            <strong>Yes</strong>, I understand that if accepted, I will need to agree to the {{ c.EVENT_NAME_AND_YEAR ~ " COVID Policy" }} 
-            in order to complete my {{ 'application' if attendee.is_dealer else 'registration' }}.{% if c.PRIOR_COVID_POLICIES_URL %} ({{ macros.popup_link(c.PRIOR_COVID_POLICIES_URL, "See last year's policy here") }}){% endif %}
-            {% endif %}
-            </label>
-        </div>
-    </div>
 {% endif %}
 
 {% if c.SPECIAL_MERCH_OPTS|length > 1 %}
@@ -179,7 +156,7 @@
 {% endif %}
 
 {% if False and attendee.paid != c.NEED_NOT_PAY and not attendee.checked_in and not attendee.amount_unpaid and attendee.badge_status == c.COMPLETED_STATUS and (admin_area or c.PAGE_PATH == '/preregistration/confirm') %}
-<div id="attend_virtually" class="alert alert-success">
+<div id="attend_virtually" class="alert alert-success" role="alert">
     <div class="form-group">
         <label class="col-sm-3 control-label optional-field">Attend Virtually</label>
         <div class="checkbox col-sm-6">

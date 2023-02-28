@@ -16,6 +16,7 @@ from magprime.utils import *  # noqa: F401,E402,F403
 from magprime.models import *  # noqa: F401,E402,F403
 from magprime.automated_emails import *  # noqa: F401,E402,F403
 from magprime.model_checks import *  # noqa: F401,E402,F403
+from magprime.forms import *  # noqa: F401,E402,F403
 
 # Silence pyflakes
 from magprime.models import PrevSeasonSupporter  # noqa: E402
