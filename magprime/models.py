@@ -30,6 +30,7 @@ class Attendee:
     special_merch = Column(Choice(c.SPECIAL_MERCH_OPTS), default=c.NO_MERCH)
     group_name = Column(UnicodeText)
     donate_badge_cost = Column(Boolean, default=False)
+    stream_message = Column(UnicodeText)
 
     @presave_adjustment
     def set_superstar_ribbon(self):
