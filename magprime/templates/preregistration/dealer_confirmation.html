@@ -2,9 +2,8 @@
 {% block title %}Marketplace Application Received{% endblock %}
 {% block backlink %}{% endblock %}
 {% block content %}
-{% include 'prereg_masthead.html' %}
-<div class="panel panel-default">
-  <div class="panel-body">
+<div class="card">
+  <div class="card-body">
     <h2>{% if group.status == c.WAITLISTED %}You've been added to our waitlist!{% else %}Thanks for applying to the Marketplace!{% endif %}</h2>
 
     We've received your application for {{ group.name }} to purchase a Marketplace registration for {{ c.EVENT_NAME }}.
@@ -17,7 +16,7 @@
         Approvals will be done as promptly as possible; usually no later than <strong>two months</strong> before the event.
     {% endif %}
 
-    <h3>What Happens Next</h3>
+    <br/><br/><h3>What Happens Next</h3>
     After approval, you will be emailed a link to manage your marketplace registration. From this link, you will be able to:
     <ul>
         <li>Pay for your marketplace registration, which includes the cost of tables and badges.</li>
@@ -38,7 +37,7 @@
     on to the application process from the lottery, then you will need to pre-register for your badges separately.
 
     {% set show_dealer_disclaimers = True %}
-    {% include "preregistration/disclaimers.html" %}
+    <br/><br/>{% include "preregistration/disclaimers.html" %}
   </div>
 </div>
 {% endblock %}
