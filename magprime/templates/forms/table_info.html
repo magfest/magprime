@@ -1,0 +1,40 @@
+{% extends 'forms/table_info.html' %}
+
+{% block website %}
+<div class="row g-sm-3">
+    <div class="col-12 col-sm-6">{{ form_macros.form_input(table_info.website) }}</div>
+    <div class="col-12 col-sm-6">
+        <div class="alert alert-warning" role="alert">
+            <em>
+                <strong>Your website link CANNOT be an X/Twitter or Instagram link 
+                    because of the account requirements to view posts there.
+                    If no suitable link is provided, you will not be accepted.</strong>
+            </em>
+          </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block textareas %}
+{{ super() }}
+
+<div class="row g-sm-3">
+    <div class="col-12">
+        {{ form_macros.form_input(table_info.has_prior_name, checked=group.prior_name != '') }}
+    
+        {{ form_macros.form_input(table_info.prior_name) }}
+        {{ form_macros.toggle_fields_js(table_info.has_prior_name, [table_info.prior_name],
+            toggle_required=True, closest_hide_selector='.form-floating') }}
+    </div>
+</div>
+
+<div class="row g-sm-3">
+    <div class="col-12">
+        {{ form_macros.form_input(table_info.has_permit, checked=group.license != '') }}
+    
+        {{ form_macros.form_input(table_info.license) }}
+        {{ form_macros.toggle_fields_js(table_info.has_permit, [table_info.license],
+            toggle_required=True, closest_hide_selector='.form-floating') }}
+    </div>
+</div>
+{% endblock %}

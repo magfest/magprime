@@ -2,23 +2,23 @@ from os.path import join
 
 import cherrypy
 import uber
+import uber.site_sections
 from uber.errors import HTTPRedirect
 from uber.jinja import template_overrides
 from uber.models import Attendee, Session
 from uber.utils import mount_site_sections, static_overrides
 
-from magprime._version import __version__  # noqa: F401
+from ._version import __version__  # noqa: F401
 from .config import config
-
-
-# These need to come last so they can make use of config properties
-from magprime.utils import *  # noqa: F401,E402,F403
-from magprime.models import *  # noqa: F401,E402,F403
-from magprime.automated_emails import *  # noqa: F401,E402,F403
-from magprime.model_checks import *  # noqa: F401,E402,F403
+from . import forms  # noqa: F401
+from .utils import *  # noqa: F401,E402,F403
+from .models import *  # noqa: F401,E402,F403
+from .automated_emails import *  # noqa: F401,E402,F403
+from .model_checks import *  # noqa: F401,E402,F403
+from .validations import attendee, group
 
 # Silence pyflakes
-from magprime.models import PrevSeasonSupporter  # noqa: E402
+from .models import PrevSeasonSupporter  # noqa: E402
 
 
 @Session.model_mixin
@@ -50,7 +50,7 @@ if c.AT_THE_CON:
 
 # override badge CSV exports for magfest prime specific settings.
 # magfest prime no longer uses one-day badges, so remove it.
-_badge_exports = uber.site_sections.badge_exports.Root
+from uber.site_sections.badge_exports import Root as _badge_exports
 _badge_exports.badge_zipfile_contents = \
     [fn for fn in _badge_exports.badge_zipfile_contents if fn.__name__ is not 'printed_badges_one_day']
 
