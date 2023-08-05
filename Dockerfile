@@ -1,4 +1,5 @@
-FROM ghcr.io/magfest/ubersystem:main
+ARG BRANCH=main
+FROM ghcr.io/magfest/ubersystem:${BRANCH}
 
 # install plugins
 COPY . plugins/magprime/
