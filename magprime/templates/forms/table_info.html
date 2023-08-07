@@ -3,6 +3,7 @@
 {% block website %}
 <div class="row g-sm-3">
     <div class="col-12 col-sm-6">{{ form_macros.form_input(table_info.website) }}</div>
+    {% if not admin_area %}
     <div class="col-12 col-sm-6">
         <div class="alert alert-warning" role="alert">
             <em>
@@ -12,6 +13,7 @@
             </em>
           </div>
     </div>
+    {% endif %}
 </div>
 {% endblock %}
 
