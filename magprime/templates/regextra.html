@@ -137,7 +137,7 @@
   </div>
 {% endif %}
 
-{% if not admin_area %}
+{% if not admin_area and False %}
 {% if c.PAGE_PATH != '/preregistration/transfer_badge' %}
   <span id="extra_donation_preselect">
     {% set superstar_dict = {0: 'No Thanks', 30: '$30', 420: '$420', 1337: '$1337', -1: 'Custom'} %}
@@ -152,6 +152,7 @@
         </div>
     </div>-->
 
+    {% if False %}
     <div class="form-group">
         <label class="col-sm-3 control-label">COVID Policy</label>
         <div class="checkbox col-sm-9">
@@ -171,6 +172,7 @@
             </label>
         </div>
     </div>
+    {% endif %}
 {% endif %}
 
 {% if c.SPECIAL_MERCH_OPTS|length > 1 %}
