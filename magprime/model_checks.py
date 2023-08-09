@@ -2,6 +2,12 @@ from .config import c
 from uber.model_checks import prereg_validation, validation, ignore_unassigned_and_placeholders
 
 
+@validation.PanelApplication
+def magscouts(app):
+    if c.NONE in app.granular_rating_ints and app.magscouts_opt_in == c.NO_CHOICE:
+        return "Please choose whether to participate in the MAGScouts program."
+
+
 @prereg_validation.Group
 def license_if_permit(group):
     if group.has_permit and not group.license:

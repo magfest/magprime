@@ -10,6 +10,10 @@ from uber.utils import add_opt, check, localized_now, remove_opt
 
 
 @Session.model_mixin
+class PanelApplication:
+    magscouts_opt_in = Column(Choice(c.PANEL_MAGSCOUTS_OPTS), default=c.NO_CHOICE)
+
+@Session.model_mixin
 class Group:
     prior_name = Column(UnicodeText)
     has_permit = Column(Boolean, default=False)
@@ -111,7 +115,7 @@ class Attendee:
             if not self.age_group_conf['discount'] or self.age_group_conf['discount'] < half_off:
                 return -half_off
         return -self.age_group_conf['discount']
-            
+
     @property
     def volunteer_event_shirt_eligible(self):
         return bool(c.VOLUNTEER_RIBBON in self.ribbon_ints and c.HOURS_FOR_SHIRT and not self.walk_on_volunteer)
