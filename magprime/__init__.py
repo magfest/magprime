@@ -15,7 +15,6 @@ from .utils import *  # noqa: F401,E402,F403
 from .models import *  # noqa: F401,E402,F403
 from .automated_emails import *  # noqa: F401,E402,F403
 from .model_checks import *  # noqa: F401,E402,F403
-from .validations import attendee, group
 
 # Silence pyflakes
 from .models import PrevSeasonSupporter  # noqa: E402
