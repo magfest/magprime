@@ -3,22 +3,6 @@
 }
 
 
-img.tier-icon {
-    background-color: transparent;
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-    background-size: 100% auto;
-    display: inline-block;
-    height: 0;
-    padding: 50px 0 0 50px;
-    vertical-align: middle;
-    width: 0;
-}
-
-img.tier-icon-shirt { background-image: url("../icons/shirt.png"); }
-img.tier-icon-supporter { background-image: url("../icons/supporter.png"); }
-img.tier-icon-super { background-image: url("../icons/super.png"); }
-
 /*@media
 only screen and (-webkit-min-device-pixel-ratio:2),
 only screen and (min--moz-device-pixel-ratio:2),
@@ -66,4 +50,9 @@ only screen and (min-resolution:2dppx) {
 
 body {
     background-color: #060404;
+    background-image: url("../theme/static-background.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: 100%;
     }
