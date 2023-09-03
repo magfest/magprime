@@ -11,6 +11,24 @@
     Thanks again for Volunteering at {{ c.EVENT_NAME }}!
 {% endif %}
 
+{% if attendee.badge_type == c.STAFF_BADGE and c.SHIRTS_PER_STAFFER > 0 %}
+<br><br>Please remember to also pick up your Staff shirt from STOPS at pre-reg on Wednesday night, or Thursday-Sunday in STOPS.
+While you are encouraged to wear your shirt while on shift, it is not required. Former year staff shirts are allowed, 
+so long as they are in good condition. When not on shift, you should wear a different shirt, so you can enjoy {{ c.EVENT_NAME }} 
+with everyone else.
+{% endif %}
+
+{% if attendee.takes_shifts and attendee.shifts %}
+    <br><br>
+    If you'd like, you can print this out for your own reference. If your 
+    department head isn't able to mark off your shift electronically, you 
+    can have them sign this and bring it to STOPS so we can.
+    <br><br>
+    If you forget to print out this sheet and would like to pick up a spare
+    copy, or if you want to change your hours, you can drop by Staffing Ops
+    during {{ c.EVENT_NAME }}.
+{% endif %}
+
 <br><br>
 {% include "staffing/printable_schedule.html" %}
 
