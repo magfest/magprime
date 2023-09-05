@@ -137,44 +137,6 @@
   </div>
 {% endif %}
 
-{% if not admin_area and False %}
-{% if c.PAGE_PATH != '/preregistration/transfer_badge' %}
-  <span id="extra_donation_preselect">
-    {% set superstar_dict = {0: 'No Thanks', 30: '$30', 420: '$420', 1337: '$1337', -1: 'Custom'} %}
-    {{ macros.button_radio_opts('', superstar_dict.items(), suffix="superstar_opts", default=attendee.extra_donation if attendee.extra_donation == 0 or attendee.extra_donation in superstar_dict else -1) }}
-  </span>
-  <br/>
-{% endif %}
-
-    <!--<div id="tshirt_warning">
-        <div class="help-block col-sm-9 col-sm-offset-3">
-            <em>Slim fit sizes only available during online pre-order. {{ macros.popup_link("../static/swag/shirtsizeguide.png", "Size guide.") }}</em>
-        </div>
-    </div>-->
-
-    {% if False %}
-    <div class="form-group">
-        <label class="col-sm-3 control-label">COVID Policy</label>
-        <div class="checkbox col-sm-9">
-            <label class="checkbox-label">
-            {{ macros.checkbox(attendee, 'agreed_to_covid_policies', is_readonly=read_only, clientside_bool=clientside_bool, is_required=True) }}
-            {% if c.COVID_POLICIES_URL %}
-            By checking this box, I acknowledge that I have read and agree to abide by the 
-            {{ macros.popup_link(c.COVID_POLICIES_URL, c.EVENT_NAME_AND_YEAR ~ " COVID Policies") }} in their entirety.
-            I understand the <strong>vaccination and face covering requirements</strong> for all individuals, including minors, and I
-            understand that MAGFest has a <strong>no-refunds policy</strong>. I will contact 
-            {{ "exemptions@magfest.org"|email_to_link }} no later than <strong>November 15</strong> if I need to request an 
-            exemption, and I understand that exemption requests may not be granted if received after this date.
-            {% else %}
-            <strong>Yes</strong>, I understand that if accepted, I will need to agree to the {{ c.EVENT_NAME_AND_YEAR ~ " COVID Policy" }} 
-            in order to complete my {{ 'application' if attendee.is_dealer else 'registration' }}.{% if c.PRIOR_COVID_POLICIES_URL %} ({{ macros.popup_link(c.PRIOR_COVID_POLICIES_URL, "See last year's policy here") }}){% endif %}
-            {% endif %}
-            </label>
-        </div>
-    </div>
-    {% endif %}
-{% endif %}
-
 {% if c.SPECIAL_MERCH_OPTS|length > 1 %}
 <div class="form-group season-row" style="display:none">
     <label class="col-sm-3 control-label">Button-Down Shirt Size</label>
