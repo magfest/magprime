@@ -66,10 +66,6 @@
               $('#tax_exempt').hide();
             }
 
-            if ($.field('agreed_to_covid_policies') && $.field('pii_consent')) {
-                $.field('agreed_to_covid_policies').parents('.form-group').insertAfter($.field('pii_consent').parents('.form-group'))
-            }
-
             $('#attend_virtually').insertBefore('#bold-field-message');
 
             /*// #tshirt_warning tells people that we don't sell 'slim' sizes at-fest
@@ -218,15 +214,6 @@
 {% endif %}
 
 {% if admin_area %}
-<div class="form-group">
-    <label for="covid_ready" class="col-sm-3 control-label optional-field">Ready to Check In</label>
-    <div class="checkbox col-sm-9">
-        <label class="checkbox-label">
-        {{ macros.checkbox(attendee, 'covid_ready') }}
-        This attendee is cleared to attend {{ c.EVENT_NAME }} under our COVID policies.
-        </label>
-    </div>
-</div>
 {% set read_only = (walk_on_ro or page_ro) or (not c.HAS_STAFFING_ADMIN_ACCESS and not c.HAS_REG_ADMIN_ACCESS) %}
 <div class="form-group staffing staffing-checked">
     <label class="col-sm-3 control-label">Walk-on Volunteer</label>

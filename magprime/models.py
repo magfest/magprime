@@ -19,16 +19,6 @@ class Group:
     has_permit = Column(Boolean, default=False)
     license = Column(UnicodeText)
 
-    @presave_adjustment
-    def unagree_covid_when_approved(self):
-        if self.orig_value_of('status') != c.APPROVED and self.status == c.APPROVED:
-            for attendee in self.attendees:
-                attendee.agreed_to_covid_policies = False
-    
-    @property
-    def has_unagreed_covid_attendees(self):
-        return [attendee for attendee in self.attendees if not attendee.is_unassigned and not attendee.agreed_to_covid_policies]
-
 @Session.model_mixin
 class Attendee:
     special_merch = Column(Choice(c.SPECIAL_MERCH_OPTS), default=c.NO_MERCH)
@@ -91,7 +81,7 @@ class Attendee:
 
     @classproperty
     def searchable_bools(cls):
-        return ['placeholder', 'requested_accessibility_services', 'can_spam', 'covid_ready', 
+        return ['placeholder', 'requested_accessibility_services', 'can_spam',
                 'got_merch', 'got_staff_merch', 'confirmed', 'checked_in', 'staffing', 
                 'agreed_to_volunteer_agreement', 'reviewed_emergency_procedures', 'walk_on_volunteer', 
                 'can_work_setup', 'can_work_teardown', 'hotel_eligible', 'attractions_opt_out', 'donate_badge_cost']
