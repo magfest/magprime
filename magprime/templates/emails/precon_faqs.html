@@ -35,16 +35,13 @@ Please refer to this FAQ for instructions on how to get your badge, and how to v
         <li><i>Paper schedules</i>: Printed schedules will be available in limited quantities at Registration and our Info Desk. Please consider using guidebook instead to save paper.</li>
     </ul>
 </p>
+{% if attendee.is_transferable %}
     <p>
         <b>Do you provide refunds or badge transfers?</b><br />
         We do not provide refunds, but we do allow you to sell or transfer your badge to anyone you wish.
-        {% if attendee.is_transferable %}
-            You can <a href="{{ c.URL_BASE }}/preregistration/transfer_badge?id={{ attendee.id }}" target="_blank">use this link</a> to transfer your badge.
-        {% else %}
-            E-mail <a href="mailto:regsupport@magfest.org">regsupport@magfest.org</a> with any questions about badge transfers.
-            <b>Only questions about ticket transfers, ticket confirmations, or general registration questions should be e-mailed to the registration desk e-mail address. We are unable to answer questions for any other matters sent to this address.</b>
-        {% endif %}
+        You can <a href="{{ c.URL_BASE }}/preregistration/transfer_badge?id={{ attendee.id }}" target="_blank">use this link</a> to transfer your badge.
     </p>
+{% endif %}
 <p><em>Answers to more Frequently Asked Questions can be found on <a href="https://super.magfest.org/faq/" target="_blank">our website</a>.</em></p>
 
 </body>

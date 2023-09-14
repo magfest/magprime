@@ -12,12 +12,6 @@ Payment is expected by: {{ c.DEALER_PAYMENT_DUE|datetime_local }} or your applic
     now then it will take much less time for their owners to pick them up at the festival.
     You may do this by <a href="{{ c.URL_BASE }}/preregistration/group_members?id={{ group.id }}">clicking here</a>.
 {% endif %}
-{% if group.unagreed_covid_attendees %}
-<br/> <br/> The following group members need to agree to the <a href="https://super.magfest.org/covid" target="_blank">Super MAGFest COVID policy</a>:
-<ul>
-    {% for attendee in group.unagreed_covid_attendees %}<li>{{ attendee.full_name }}</li>{% endfor %}
-</ul>
-{% endif %}
 
 <br/> <br/><strong>New Tax Information <span style="color:red">*Please Read*</span></strong>
 <p>All sellers in the Marketplace are required to obtain a Seller's Permit from the State of Maryland.
@@ -36,11 +30,6 @@ Payment is expected by: {{ c.DEALER_PAYMENT_DUE|datetime_local }} or your applic
     no later than December 12th, 2021. Check your email and/or physical mail for your sellers permit that will be 
     sent directly from MD Comptroller. ANY and ALL issues regarding receiving your permit must be directed to the 
     Comptroller's office as we, unfortunately, have no power to help!</p>
-
-<br/><strong>Covid Information <span style="color:red">*Please Read*</span></strong>
-<p>Please read the Covid Rules for MAGFest found here: <a href="https://super.magfest.org/covid" target="_blank">COVID Information — Super Magfest</a></p>
-<p>By paying for your table(s) and assigning your badge(s), you and anyone with badges associated with your table agree to abide by and follow these rules and guidelines. This is non-negotiable, and anyone who does not follow them will have their tables rescinded immediately with no refund and will have to leave. </p>
-
 
 This registration includes:
 <ul>
