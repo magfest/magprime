@@ -68,12 +68,6 @@ AutomatedEmailFixture(
     sender='MAGFest Staff Suite <chefs@magfest.org>')
 
 AutomatedEmailFixture(
-    Attendee, 'MAGFest Staff Suite Volunteering', 'food/food_interest.txt',
-    lambda a: a.requested(c.FOOD_PREP) or a.assigned_to(c.FOOD_PREP),
-    ident='magprime_staff_suite_volunteer_food_interest',
-    sender='MAGFest Staff Suite <chefs@magfest.org>')
-
-AutomatedEmailFixture(
     Attendee, 'Important MAGFest PC Gaming Room Information! *PLEASE READ*', 'lan_room.html',
     lambda a: c.LAN in a.interests_ints,
     ident='magprime_important_lan_room_info',
@@ -103,18 +97,6 @@ AutomatedEmailFixture(
     lambda a: a.staffing and a.has_shifts_in(c.CHIPSPACE) and not a.trusted_in(c.CHIPSPACE),
     ident='magprime_chipspace_untrusted_volunteer',
     sender='MAGFest ChipSpace <chipspace@magfest.org>')
-
-AutomatedEmailFixture(
-    Attendee, 'MAGFest Staff Suite rules', 'food_volunteers.txt',
-    lambda a: a.staffing and a.has_shifts_in(c.FOOD_PREP) and not a.trusted_in(c.FOOD_PREP),
-    ident='magprime_food_untrusted_volunteer',
-    sender='MAGFest Staff Suite <chefs@magfest.org>')
-
-AutomatedEmailFixture(
-    Attendee, 'MAGFest message from Chef', 'food_trusted_staffers.txt',
-    lambda a: a.staffing and a.has_shifts_in(c.FOOD_PREP) and a.trusted_in(c.FOOD_PREP),
-    ident='magprime_food_trusted_volunteer',
-    sender='MAGFest Staff Suite <chefs@magfest.org>')
 
 AutomatedEmailFixture(
     Attendee, 'Want to help run MAGFest poker tournaments?', 'poker.txt',
