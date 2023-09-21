@@ -74,6 +74,7 @@ AutomatedEmailFixture(
     needs_approval=True,
     sender='MAGFest LAN <lan@magfest.org>')
 
+"""
 AutomatedEmailFixture(
     Attendee, 'MAGFest Tech Ops volunteering', 'techops.txt',
     lambda a: a.staffing and a.assigned_to(c.TECH_OPS),
@@ -108,7 +109,7 @@ StopsEmailFixture(
     'MAGFest Staff Support', 'staff_support.txt',
     lambda a: a.assigned_to(c.STAFF_SUPPORT) and not a.trusted_in(c.STAFF_SUPPORT),
     ident='magprime_staff_support_volunteer')
-
+"""
 StopsEmailFixture(
     'MAGFest Dept Checklist Introduction', 'dept_checklist_intro.txt',
     lambda a: a.is_checklist_admin and a.admin_account,
