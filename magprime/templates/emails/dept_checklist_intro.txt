@@ -4,7 +4,7 @@ You are receiving this email because you are listed as a MAGFest Department Head
 
 While you might not be the actual Department Head, you are on the list to receive the Department Head Checklist.
 
-This means that you have access in Rams/Uber to go to:
+This means that you have access in Uber to go to:
 {{ c.URL_BASE }}/dept_checklist/index and complete the items on that Checklist.
 
 These are the steps that are needed for your volunteers to sign up for shifts, for your department to assess its needs regarding PPE, TechOps needs, Office Supplies, Signage, and so much more! Each step plays a part in ensuring STOPS and other Ops departments know what you need to run efficiently during the event.
