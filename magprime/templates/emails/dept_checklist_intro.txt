@@ -1,6 +1,6 @@
 {{ attendee.first_name }},
 
-You are receiving this email because you are listed as a MAGFest Department Head of the {{ attendee.assigned_depts_labels.0 }} department.
+You are receiving this email because you are listed as a MAGFest Department Head of or checklist admin for {{ attendee.get_labels_for_memberships('dept_memberships_where_can_admin_checklist')|readable_join }}.
 
 While you might not be the actual Department Head, you are on the list to receive the Department Head Checklist.
 
