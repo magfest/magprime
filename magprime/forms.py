@@ -95,3 +95,9 @@ class BadgeExtras:
     
     def extra_donation_label(self):
         return Markup("Superstar Donation ({})".format(popup_link("../static_views/givingExtra.html", "Learn more")))
+
+@MagForm.form_mixin
+class AdminBadgeExtras:
+    extra_donation = IntegerField('Superstar Donation', validators=[
+        validators.NumberRange(min=0, message="Superstar donation must be a number that is 0 or higher.")
+        ], widget=NumberInputGroup())

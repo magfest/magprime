@@ -30,7 +30,6 @@ class ExtraConfig:
                 types.append(badge_type)
         return types
 
-
     @property
     def DEALER_REG_OPEN(self):
         return self.AFTER_DEALER_REG_START and self.BEFORE_DEALER_REG_SHUTDOWN and not self.DEALER_REG_SOFT_CLOSED
