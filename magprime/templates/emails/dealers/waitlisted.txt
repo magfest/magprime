@@ -1,0 +1,5 @@
+Hello {{ group.leader.full_name }},
+
+Thank you for your interest in MAGFest Marketplace. Unfortunately, due to the large number of applications this year your application for "{{ group.name }}" is being waitlisted. You will be notified if a table becomes available. If you are able to take a last minute (and we mean very last minute) table, please let us know by emailing us at marketplace@magfest.org. We hope you try applying again in the future. Have a great rest of your day!
+
+~ Marketplace Staff

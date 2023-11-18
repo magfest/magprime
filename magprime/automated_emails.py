@@ -1,5 +1,5 @@
 from uber.models import Attendee, AutomatedEmail
-from uber.automated_emails import StopsEmailFixture, AutomatedEmailFixture
+from uber.automated_emails import StopsEmailFixture, AutomatedEmailFixture, MarketplaceEmailFixture
 from uber.config import c
 from uber.utils import before, days_after, days_before, DeptChecklistConf
 
@@ -71,8 +71,23 @@ AutomatedEmailFixture(
     Attendee, 'Important MAGFest PC Gaming Room Information! *PLEASE READ*', 'lan_room.html',
     lambda a: c.LAN in a.interests_ints,
     ident='magprime_important_lan_room_info',
-    needs_approval=True,
     sender='MAGFest LAN <lan@magfest.org>')
+
+MarketplaceEmailFixture(
+        'Your {} {} has been waitlisted'.format(c.EVENT_NAME, c.DEALER_APP_TERM.capitalize()),
+        'dealers/waitlisted.txt',
+        lambda g: g.status == c.WAITLISTED,
+        # query=Group.status == c.WAITLISTED,
+        needs_approval=True,
+        ident='dealer_reg_waitlisted')
+
+MarketplaceEmailFixture(
+        'Your {} {} has been decline'.format(c.EVENT_NAME, c.DEALER_APP_TERM.capitalize()),
+        'dealers/declined.txt',
+        lambda g: g.status == c.DECLINED,
+        # query=Group.status == c.DECLINED,
+        needs_approval=True,
+        ident='dealer_reg_declined')
 
 """
 AutomatedEmailFixture(

@@ -1,0 +1,5 @@
+Hello {{ group.leader.full_name }},
+
+Thank you for your interest in MAGFest Marketplace. Unfortunately, this year your application for "{{ group.name }}" is being declined. We hope you have a good rest of your day.
+
+~ Marketplace Staff
