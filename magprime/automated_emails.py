@@ -82,7 +82,7 @@ MarketplaceEmailFixture(
         ident='dealer_reg_waitlisted')
 
 MarketplaceEmailFixture(
-        'Your {} {} has been decline'.format(c.EVENT_NAME, c.DEALER_APP_TERM.capitalize()),
+        'Your {} {} has been declined'.format(c.EVENT_NAME, c.DEALER_APP_TERM.capitalize()),
         'dealers/declined.txt',
         lambda g: g.status == c.DECLINED,
         # query=Group.status == c.DECLINED,
