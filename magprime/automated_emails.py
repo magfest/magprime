@@ -1,4 +1,4 @@
-from uber.models import Attendee, AutomatedEmail
+from uber.models import Attendee, AutomatedEmail, GuestGroup
 from uber.automated_emails import StopsEmailFixture, AutomatedEmailFixture, MarketplaceEmailFixture
 from uber.config import c
 from uber.utils import before, days_after, days_before, DeptChecklistConf
@@ -79,6 +79,20 @@ AutomatedEmailFixture(
     ident='magprime_lan_hype',
     needs_approval=True,
     sender='MAGFest LAN <lan@magfest.org>')
+
+AutomatedEmailFixture(
+    GuestGroup, f'Sign up to sell merch at {c.EVENT_NAME} Rock Island', 'guests/rock_island_merch_reminder.txt',
+    lambda g: g.group_type == c.ROCK_ISLAND and not g.merch,
+    ident='magprime_ri_merch_reminder',
+    when=days_before(7, c.ROCK_ISLAND_MERCH_DEADLINE),
+    sender='MAGFest Rock Island <rockisland@magfest.org>')
+
+AutomatedEmailFixture(
+    GuestGroup, f'Last change to fill out your {c.EVENT_NAME} Rock Island Inventory', 'guests/rock_island_inventory_reminder.txt',
+    lambda g: g.group_type == c.ROCK_ISLAND and g.merch and g.merch.selling_merch == c.ROCK_ISLAND,
+    ident='magprime_ri_inventory_reminder',
+    when=days_before(7, c.ROCK_ISLAND_DEADLINE),
+    sender='MAGFest Rock Island <rockisland@magfest.org>')
 
 MarketplaceEmailFixture(
         'Your {} {} has been waitlisted'.format(c.EVENT_NAME, c.DEALER_APP_TERM.capitalize()),
