@@ -73,6 +73,13 @@ AutomatedEmailFixture(
     ident='magprime_important_lan_room_info',
     sender='MAGFest LAN <lan@magfest.org>')
 
+AutomatedEmailFixture(
+    Attendee, 'Get Ready for MAGFest LAN!', 'lan_hype.html',
+    lambda a: c.LAN in a.interests_ints,
+    ident='magprime_lan_hype',
+    needs_approval=True,
+    sender='MAGFest LAN <lan@magfest.org>')
+
 MarketplaceEmailFixture(
         'Your {} {} has been waitlisted'.format(c.EVENT_NAME, c.DEALER_APP_TERM.capitalize()),
         'dealers/waitlisted.txt',
