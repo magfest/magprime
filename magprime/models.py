@@ -3,6 +3,7 @@ from pockets.autolog import log
 from residue import CoerceUTF8 as UnicodeText, UUID
 
 from uber.config import c
+from uber.custom_tags import readable_join
 from uber.decorators import presave_adjustment, render
 from uber.models import Boolean, MagModel, Choice, DefaultColumn as Column, Session
 from uber.tasks.email import send_email
@@ -33,6 +34,31 @@ class Attendee:
     special_merch = Column(Choice(c.SPECIAL_MERCH_OPTS), default=c.NO_MERCH)
     group_name = Column(UnicodeText)
     donate_badge_cost = Column(Boolean, default=False)
+
+    @property
+    def accoutrements(self):
+        # Converts ribbons to the new access system for check-in
+        stuff = []
+
+        if (c.DEALER_RIBBON in self.ribbon_ints or c.MIVS in self.ribbon_ints
+            ) and (self.badge_type not in [c.STAFF_BADGE, c.CONTRACTOR_BADGE]):
+            stuff.append("Expo Hall access")
+
+        if c.BAND in self.ribbon_ints and self.badge_type != c.GUEST_BADGE:
+            stuff.append("Backstage access")
+
+        if c.UNDER_13 in self.ribbon_ints:
+            stuff.append("an under 13 wristband")
+
+        if c.SUPERSTAR_RIBBON in self.ribbon_ints:
+            stuff.append("a Superstar ribbon")
+
+        if c.WRISTBANDS_ENABLED:
+            stuff.append('a {} wristband'.format(c.WRISTBAND_COLORS[self.age_group]))
+
+        stuff = (' with ' if stuff else '') + readable_join(stuff)
+
+        return stuff
 
     @presave_adjustment
     def set_superstar_ribbon(self):

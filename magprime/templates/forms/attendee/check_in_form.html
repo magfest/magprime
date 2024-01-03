@@ -1,0 +1,29 @@
+{% extends 'uber/templates/forms/attendee/check_in_form.html' %}
+
+{% block badge_info %}
+<div class="row g-sm-3">
+    <div class="col">
+        {% set badge_display_extra = '' if not attendee.accoutrements else ' (' ~ attendee.accoutrements ~ ')' %}
+        {{ form_macros.form_input(check_in_form.badge_type, hidden_field_text=attendee.badge_type_label ~ badge_display_extra) }}
+    </div>
+    {% if c.NUMBERED_BADGES and attendee.badge_num %}
+        <div class="col">
+            {{ form_macros.form_input(check_in_form.badge_num, force_hidden=attendee.badge_num, hidden_field_text=attendee.badge_num) }}
+        </div>
+    {% endif %}
+    {% if c.COLLECT_EXACT_BIRTHDATE and attendee.birthdate %}
+        <div class="col">
+            {{ form_macros.form_input(check_in_form.age_group, hidden_field_text=attendee.age_group_conf.desc) }}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block accoutrements %}
+{% if attendee.accoutrements or attendee.staffing %}
+<div class="alert alert-info">
+    {% if attendee.accoutrements %}Please check this attendee in {{ attendee.accoutrements }}.{% endif %}{% if attendee.staffing %}
+    Instruct this attendee to go to STOPS for their schedule{% if c.VOLUNTEER_RIBBON in attendee.ribbon_ints %} and volunteer ribbon{% endif %}.{% endif %}
+</div>
+{% endif %}
+{% endblock %}
