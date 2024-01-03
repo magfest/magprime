@@ -48,7 +48,7 @@ class Attendee:
             stuff.append("Backstage access")
 
         if c.UNDER_13 in self.ribbon_ints:
-            stuff.append("an under 13 wristband")
+            stuff.append("a 12 and under wristband")
 
         if c.SUPERSTAR_RIBBON in self.ribbon_ints:
             stuff.append("a Superstar ribbon")
