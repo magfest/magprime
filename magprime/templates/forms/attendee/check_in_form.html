@@ -20,10 +20,10 @@
 {% endblock %}
 
 {% block accoutrements %}
-{% if attendee.accoutrements or attendee.staffing %}
+{% if attendee.accoutrements or c.VOLUNTEER_RIBBON in attendee.ribbon_ints %}
 <div class="alert alert-info">
-    {% if attendee.accoutrements %}Please check this attendee in {{ attendee.accoutrements }}.{% endif %}{% if attendee.staffing %}
-    Instruct this attendee to go to STOPS for their schedule{% if c.VOLUNTEER_RIBBON in attendee.ribbon_ints %} and volunteer ribbon{% endif %}.{% endif %}
+    {% if attendee.accoutrements %}Please check this attendee in {{ attendee.accoutrements }}.{% endif %}{% if c.VOLUNTEER_RIBBON in attendee.ribbon_ints %}
+    Instruct this attendee to go to STOPS for their volunteer ribbon.{% endif %}
 </div>
 {% endif %}
 {% endblock %}
