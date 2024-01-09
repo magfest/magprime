@@ -1,0 +1,11 @@
+{% extends 'uber/templates/preregistration/at_door_confirmation.html' %}
+
+{% block next_steps %}
+<p>
+    Please join the line for at-door payments when you're ready to pay for and pick up your badge.
+    {% if qr_code_id %}You can show the check-in barcode below to the volunteer at the registration desk to quickly look up your pending 
+    registration{{ completed_registrations|length|pluralize }}. In addition to this barcode,
+    <strong>p{% else %}<strong>P{% endif %}lease have your photo ID{{ completed_registrations|length|pluralize }} and payment ready when you get to the front
+    of the line!</strong> This is a huge help for making badge pick-up faster for everyone. Thanks again!
+</p>
+{% endblock %}

@@ -39,14 +39,6 @@ class SessionMixin:
 
 mount_site_sections(config['module_root'])
 
-if c.AT_THE_CON:
-    from uber.site_sections.preregistration import Root
-
-    @cherrypy.expose
-    def form(self, *args, **kwargs):
-        raise HTTPRedirect('../registration/register')
-    Root.form = form
-
 # override badge CSV exports for magfest prime specific settings.
 # magfest prime no longer uses one-day badges, so remove it.
 from uber.site_sections.badge_exports import Root as _badge_exports
