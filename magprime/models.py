@@ -130,25 +130,13 @@ class Attendee:
             return 5
 
     @property
-    def age_discount(self):
-        # We dynamically calculate the age discount to be half the
-        # current badge price. If for some reason the default discount
-        # (if it exists) is greater than half off, we use that instead.
-        import math
-        if self.age_now_or_at_con and self.age_now_or_at_con < 13:
-            half_off = math.ceil(c.BADGE_PRICE / 2)
-            if not self.age_group_conf['discount'] or self.age_group_conf['discount'] < half_off:
-                return -half_off
-        return -self.age_group_conf['discount']
-
-    @property
     def volunteer_event_shirt_eligible(self):
         return bool(c.VOLUNTEER_RIBBON in self.ribbon_ints and c.HOURS_FOR_SHIRT and not self.walk_on_volunteer)
             
     @property
     def staff_merch_items(self):
         """Used by the merch and staff_merch properties for staff swag."""
-        merch = ["Volunteer lanyard", "Volunteer button"] if self.staffing else []
+        merch = ["Volunteer lanyard"] if self.staffing else []
         if self.walk_on_volunteer and self.worked_hours >= 6:
             merch.append("Walk-on volunteer coffee mug")
         if not self.walk_on_volunteer and self.worked_hours >= c.HOURS_FOR_REFUND:
@@ -168,6 +156,9 @@ class Attendee:
 
         if self.staffing:
             merch.append('Staffer Info Packet')
+
+        if self.badge_type == c.STAFF_BADGE:
+            merch.append('Staff Merch Item')
 
         return merch
 
