@@ -88,26 +88,6 @@ class Attendee:
             except Exception:
                 log.error('unable to send invalid email', exc_info=True)
 
-    @presave_adjustment
-    def child_badge(self):
-        if self.age_now_or_at_con and self.age_now_or_at_con < 18 and self.badge_type == c.ATTENDEE_BADGE:
-            self.badge_type = c.CHILD_BADGE
-            if self.age_now_or_at_con < 13:
-                self.ribbon = add_opt(self.ribbon_ints, c.UNDER_13)
-
-    @presave_adjustment
-    def child_ribbon_or_not(self):
-        if self.age_now_or_at_con and self.age_now_or_at_con < 13:
-            self.ribbon = add_opt(self.ribbon_ints, c.UNDER_13)
-        elif c.UNDER_13 in self.ribbon_ints and self.age_now_or_at_con and self.age_now_or_at_con >= 13:
-            self.ribbon = remove_opt(self.ribbon_ints, c.UNDER_13)
-
-    @presave_adjustment
-    def child_to_attendee(self):
-        if self.badge_type == c.CHILD_BADGE and self.age_now_or_at_con and self.age_now_or_at_con >= 18:
-            self.badge_type = c.ATTENDEE_BADGE
-            self.ribbon = remove_opt(self.ribbon_ints, c.UNDER_13)
-
     @classproperty
     def searchable_fields(cls):
         # List of fields for the attendee search to check search terms against
