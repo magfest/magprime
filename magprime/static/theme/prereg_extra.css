@@ -1,7 +1,7 @@
 .masthead {
+    background-image: url("../theme/banner.jpg");
     padding-top: 30.86%; /* The height is 30.86% of the width (500px / 1620px) */
 }
-
 
 /*@media
 only screen and (-webkit-min-device-pixel-ratio:2),
