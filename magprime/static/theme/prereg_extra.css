@@ -50,7 +50,7 @@ only screen and (min-resolution:2dppx) {
 
 body {
     background-color: #060404;
-    background-image: url("../theme/static-background.png");
+    background-image: url("../theme/static-background.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
