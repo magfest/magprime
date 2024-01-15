@@ -178,8 +178,3 @@ AutomatedEmailFixture(
     sender='MAGFest Merch Team <merch@magfest.org>',
     ident='magprime_shirt_size_confirmation')
 
-AutomatedEmailFixture(
-    Attendee, 'MAGFest Dealer waitlist has been exhausted', 'dealer_waitlist_exhausted.txt',
-    lambda a: 'automatically converted to unpaid discounted badge from a dealer application' in a.admin_notes,
-    sender=c.MARKETPLACE_EMAIL,
-    ident='magprime_marketplace_waitlist_exhausted')
