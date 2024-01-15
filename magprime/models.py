@@ -1,6 +1,7 @@
 from pockets import classproperty
 from pockets.autolog import log
 from residue import CoerceUTF8 as UnicodeText, UUID
+from markupsafe import Markup
 
 from uber.config import c
 from uber.custom_tags import readable_join
@@ -59,6 +60,20 @@ class Attendee:
         stuff = (' with ' if stuff else '') + readable_join(stuff)
 
         return stuff
+    
+    @property
+    def check_in_notes(self):
+        notes = []
+        if self.age_group_conf['consent_form']:
+            notes.append("Before checking this attendee in, please collect a signed parental consent form, which must be notarized if the guardian is not there. If the guardian is there, and they have not already completed one, have them sign one in front of you.")
+
+        if self.accoutrements:
+            notes.append(f"Please check this attendee in {self.accoutrements}.")
+
+        if c.VOLUNTEER_RIBBON in self.ribbon_ints:
+            notes.append("Instruct this attendee to go to STOPS for their volunteer ribbon.")
+
+        return Markup("<br/><br/>".join(notes))
 
     @presave_adjustment
     def set_superstar_ribbon(self):
