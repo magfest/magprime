@@ -1,7 +1,7 @@
 .masthead {
+    background-image: url("../theme/banner.jpg");
     padding-top: 30.86%; /* The height is 30.86% of the width (500px / 1620px) */
 }
-
 
 /*@media
 only screen and (-webkit-min-device-pixel-ratio:2),
@@ -50,7 +50,7 @@ only screen and (min-resolution:2dppx) {
 
 body {
     background-color: #060404;
-    background-image: url("../theme/static-background.png");
+    background-image: url("../theme/static-background.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
