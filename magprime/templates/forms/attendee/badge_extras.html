@@ -2,7 +2,7 @@
 
 {% block donation %}
 <div class="row g-sm-3">
-    {% if not admin_area %}
+    {% if not admin_area and c.BEFORE_SUPERSTAR_DEADLINE %}
     <div class="col-12">
         <a href="https://super.magfest.org/superstars" target="_blank">
             <img src="../static/theme/superstar.png" width="100%" alt="Become a Superstar" />
@@ -14,17 +14,24 @@
         <div class="col-12 col-sm-2">
             <div class="form-text">&nbsp;</div>{{ macros.upgrade_button('extra-donation', extra_classes="") }}</div>
     {% endif %}
+    {% if not admin_area %}
     <div class="col-12 mt-0">
-        <p>Donate to MAGFest and <a href="https://super.magfest.org/superstars" target="_blank">become a Superstar</a>!
-            With a donation of $30 or more, you’ll be listed as a Superstar donor on our website, have your name and 
+        {% if c.BEFORE_SUPERSTAR_DEADLINE %}
+          <p>Donate to MAGFest and <a href="https://super.magfest.org/superstars" target="_blank">become a Superstar</a>!
+            With a donation of $30 or more, you'll be listed as a Superstar donor on our website, have your name and 
             pet appear on the at-event Jumbotron, gain an exclusive Superstar role on our Discord server, and more.</p>
           
           <p>Feeling even more generous or want additional info? Check out our expanded tiers and benefits
           (including sponsoring your own Graffiti Banner) on our Superstar page above.</p>
+        {% else %}
+          <p>The deadline for <a href="https://super.magfest.org/superstars" target="_blank">becoming a Superstar</a>
+            has passed, but we always appreciate any extra donations!</p>
+        {% endif %}
 
           <p><strong>Donations are not merch packages and do not come with merchandise.</strong>
           MAGFest, Inc. is a 501(c)(3) charitable organization, so your donation is tax-deductible. 
           For more information, please contact {{ "accounting@magfest.org"|email_to_link }}.</p>
     </div>
+    {% endif %}
 </div>
 {% endblock %}
