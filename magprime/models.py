@@ -36,6 +36,12 @@ class Attendee:
     group_name = Column(UnicodeText)
     donate_badge_cost = Column(Boolean, default=False)
 
+    @presave_adjustment
+    def indie_ribbon(self):
+        if (self.group and self.group.guest and self.group.guest.group_type == c.MIVS
+            ) or (self.group and "Indie Arcade -" in self.group.name) and c.MIVS not in self.ribbon_ints:
+            self.ribbon = add_opt(self.ribbon_ints, c.MIVS)
+
     @property
     def accoutrements(self):
         # Converts ribbons to the new access system for check-in

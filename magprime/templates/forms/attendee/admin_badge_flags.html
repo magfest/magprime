@@ -1,0 +1,11 @@
+{% extends 'uber/templates/forms/attendee/admin_badge_flags.html' %}
+
+{% block attendee_info %}
+{{ super() }}
+<div class="row g-sm-3">
+    <div class="col">
+        <div class="form-text">Accoutrements</div>
+        <div class="mb-4">{{ attendee.accoutrements }}</div>
+    </div>
+</div>
+{% endblock %}
