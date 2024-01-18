@@ -4,8 +4,8 @@
 {{ super() }}
 <div class="row g-sm-3">
     <div class="col">
-        <div class="form-text">Accoutrements</div>
-        <div class="mb-4">{{ attendee.accoutrements }}</div>
+        <div class="form-text">Sticker/Wristband</div>
+        <div class="mb-4">{{ attendee.accoutrements[6:]|replace("a ","") }}</div>
     </div>
 </div>
 {% endblock %}
