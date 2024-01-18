@@ -174,8 +174,14 @@ class Attendee:
                 return "MUST TALK TO SECURITY before picking up badge{}".format(regdesk_info_append)
             return self.regdesk_info or "Badge status is {}".format(self.badge_status_label)
 
-        if self.badge_status not in [c.COMPLETED_STATUS, c.NEW_STATUS]:
+        if self.badge_status not in [c.COMPLETED_STATUS, c.NEW_STATUS, c.AT_DOOR_PENDING_STATUS]:
             return "Badge status is {}".format(self.badge_status_label)
+
+        if self.group and self.paid == c.PAID_BY_GROUP and self.group.is_dealer and self.group.status != c.APPROVED:
+            return "Unapproved dealer"
+        
+        if self.group and self.paid == c.PAID_BY_GROUP and self.group.amount_unpaid:
+            return "Unpaid group"
         
         if self.placeholder:
             return "Placeholder badge"
@@ -186,12 +192,9 @@ class Attendee:
         if self.is_presold_oneday:
             if self.badge_type_label != localized_now().strftime('%A'):
                 return "Wrong day"
-
+            
         if self.donate_badge_cost:
             return "Asked badge + merch to be shipped to them"
-
-        if self.group and self.group.is_dealer and self.group != c.APPROVED:
-            return "Unapproved dealer"
 
         message = check(self)
         return message
