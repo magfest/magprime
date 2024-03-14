@@ -1,4 +1,4 @@
-ARG BRANCH=main
+ARG BRANCH=super2024
 FROM ghcr.io/magfest/ubersystem:${BRANCH}
 
 # install plugins
