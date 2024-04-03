@@ -1,4 +1,4 @@
-{% extends "registration/index_base.html" %}
+{% extends "uber/templates/registration/index_base.html" %}
 {% block badge_counts %}
 {{ super() }}
 {% if c.CHILD_BADGE_STOCK %}<button class="badge_count btn" data-warning-threshold="100" data-danger-threshold="50">{{ c.CHILD_BADGE_STOCK - c.CHILD_BADGE_COUNT }} Child badges left</button>{% endif %}

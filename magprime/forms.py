@@ -72,7 +72,7 @@ class TableInfo:
     ], description="Please enter the license number for your Maryland Traders or Sellers Permit.")
 
     def get_optional_fields(self, group, is_admin=False):
-        optional_fields = self.super_get_optional_fields(group)
+        optional_fields = self.super_get_optional_fields(group, is_admin)
 
         if not self.has_prior_name.data:
             optional_fields.append("prior_name")
@@ -85,7 +85,13 @@ class TableInfo:
     def website_desc(self):
         return Markup("The link to your main portfolio. Please include additional links to social media accounts or \
                       additional places to view your items in the <em>What do you sell?</em> box below.")
-    
+
+
+@MagForm.form_mixin
+class PersonalInfo:
+    def onsite_contact_label(self):
+        return "MAGBuddy"
+
 
 @MagForm.form_mixin
 class BadgeExtras:

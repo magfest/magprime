@@ -1,7 +1,7 @@
 """Initial migration
 
 Revision ID: e68ef1dc43fc
-Revises: 1ed43776064f
+Revises: 691be8fa880d
 Create Date: 2017-04-24 09:24:20.038755
 
 """
@@ -9,7 +9,7 @@ Create Date: 2017-04-24 09:24:20.038755
 
 # revision identifiers, used by Alembic.
 revision = 'e68ef1dc43fc'
-down_revision = '1ed43776064f'
+down_revision = '691be8fa880d'
 branch_labels = ('magprime',)
 depends_on = None
 
