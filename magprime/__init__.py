@@ -43,7 +43,7 @@ mount_site_sections(config['module_root'])
 # magfest prime no longer uses one-day badges, so remove it.
 from uber.site_sections.badge_exports import Root as _badge_exports
 _badge_exports.badge_zipfile_contents = \
-    [fn for fn in _badge_exports.badge_zipfile_contents if fn.__name__ is not 'printed_badges_one_day']
+    [fn for fn in _badge_exports.badge_zipfile_contents if fn.__name__ != 'printed_badges_one_day']
 
 static_overrides(join(config['module_root'], 'static'))
 template_overrides(join(config['module_root'], 'templates'))
