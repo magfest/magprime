@@ -1,4 +1,4 @@
-from sideboard.lib import parse_config, request_cached_property
+from uber.lib import parse_config
 from collections import defaultdict
 from datetime import timedelta
 
