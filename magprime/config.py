@@ -1,12 +1,12 @@
-from uber.lib import parse_config
 from collections import defaultdict
 from datetime import timedelta
+from pathlib import Path
 
-from uber.config import c, Config, dynamic
+from uber.config import c, Config, dynamic, parse_config
 from uber.menu import MenuItem
 from uber.utils import localized_now
 
-config = parse_config(__file__)
+config = parse_config("magprime", Path(__file__).parents[0])
 c.include_plugin_config(config)
 
 @Config.mixin
