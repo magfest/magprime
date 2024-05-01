@@ -61,6 +61,12 @@ class NumberInputWithChoices(NumberInputGroup):
 
 
 @MagForm.form_mixin
+class GroupInfo:
+    def tables_desc(self):
+        return "Amount of 6ft x 30in tables requested. MAGFest DOES NOT sell booth spaces, only tables."
+
+
+@MagForm.form_mixin
 class TableInfo:
     has_prior_name = BooleanField("I have run a table under a different name at one of the past two in-person Super MAGFest events.")
     prior_name = StringField("Prior Table Name", validators=[
@@ -83,8 +89,16 @@ class TableInfo:
         return optional_fields
     
     def website_desc(self):
-        return Markup("The link to your main portfolio. Please include additional links to social media accounts or \
-                      additional places to view your items in the <em>What do you sell?</em> box below.")
+        return Markup("The link to your main portfolio. Please include additional links to social media accounts or "
+                      "additional places to view your items in the <em>What do you sell?</em> box below.")
+
+    def wares_desc(self):
+        return "You must include links to what you sell or a portfolio otherwise you will be automatically declined."
+    
+    def special_needs_desc(self):
+        return Markup("Location Requests, People you'd like to be near/away from, etc. No guarantees that we can "
+                      "accommodate any requests. Please direct accessibility requests to "
+                      "<a href='mailto:accessibility@magfest.org' target='_blank'>accessibility@magfest.org</a>.")
 
 
 @MagForm.form_mixin
