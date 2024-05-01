@@ -5,4 +5,4 @@ ENV uber_plugins=["magprime"]
 # install plugins
 COPY . plugins/magprime/
 
-RUN /app/env/bin/paver install_deps
+RUN uv pip install --system -r plugins/magprime/requirements.txt
