@@ -133,7 +133,7 @@ class Attendee:
     @property
     def volunteer_event_shirt_eligible(self):
         return bool(c.VOLUNTEER_RIBBON in self.ribbon_ints and c.HOURS_FOR_SHIRT and not self.walk_on_volunteer)
-            
+
     @property
     def staff_merch_items(self):
         """Used by the merch and staff_merch properties for staff swag."""
@@ -162,11 +162,6 @@ class Attendee:
             merch.append('Staff Merch Item')
 
         return merch
-
-    @property
-    def gets_staff_shirt(self):
-        return bool(self.badge_type == c.STAFF_BADGE)
-
     @property
     def is_not_ready_to_checkin(self):
         """
