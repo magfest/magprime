@@ -32,3 +32,18 @@ def address(attendee):
             return 'Please enter a state, province, or region.'
         if not attendee.country:
             return 'Please enter a country.'
+
+
+@validation.GuestTravelPlans
+def has_modes(guest_travel_plans):
+    return
+
+
+@validation.GuestTravelPlans
+def has_modes_text(guest_travel_plans):
+    return
+
+
+@validation.GuestTravelPlans
+def has_details(guest_travel_plans):
+    return
