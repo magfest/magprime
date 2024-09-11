@@ -71,7 +71,7 @@ class Attendee:
     def check_in_notes(self):
         notes = []
         if self.age_group_conf['consent_form']:
-            notes.append("Before checking this attendee in, please collect a signed parental consent form, which must be notarized if the guardian is not there. If the guardian is there, and they have not already completed one, have them sign one in front of you.")
+            notes.append("Before checking this attendee in, please collect a signed parental consent form. If the guardian is there, and they have not already completed one, have them sign one in front of you.")
 
         if self.accoutrements:
             notes.append(f"Please check this attendee in {self.accoutrements}.")
