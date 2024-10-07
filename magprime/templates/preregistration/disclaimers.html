@@ -31,10 +31,8 @@
   {% if c.CONSENT_FORM_URL %}
     <li>
       Attendees under 18 MUST bring a
-      <a href="{{ c.CONSENT_FORM_URL }}" target="_blank">signed parental consent form</a>,
-      which MUST be notarized if the parent is not with the minor when the
-      badge is picked up. Also, all children 12 and under will need to be
-      accompanied by an adult with a paid badge.
+      <a href="{{ c.CONSENT_FORM_URL }}" target="_blank">signed parental consent form</a>.
+      All children 12 and under will need to be accompanied by an adult with a paid badge.
     </li>
   {% endif %}
   {% if c.DEALER_REG_START and attendee and attendee.is_dealer or show_dealer_disclaimers %}

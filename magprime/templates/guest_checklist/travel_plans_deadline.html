@@ -1,0 +1,41 @@
+{% if snippet %}
+  <tr>
+    <td width="25">{{ macros.checklist_image(guest.travel_plans_status) }}</td>
+    <td><b><a href="travel_plans?guest_id={{ guest.id }}">
+      {% block deadline_headline %}Travel Plans{% endblock %}</a></b></td>
+    <td><i>Deadline:</i> {{ guest.deadline_from_model('travel_plans')|datetime_local }}</td>
+  </tr>
+  <tr>
+    <td colspan="3">
+      {% block deadline_text %}
+        Please fill out a form so we are aware of your travel plans and can accommodate accordingly.
+      {% endblock %}
+      <br/></br>
+    </td>
+  </tr>
+{% else %}
+
+  <h2>{% block form_title %}Travel Plans for {{ guest.group.name }}{% endblock %}</h2>
+
+  {% block form_desc %}
+    {% if guest.travel_plans_status %}
+        You've already indicated that you have completed <a href="https://forms.gle/CKXFXw8NypCcrdKd6" target="_blank">our travel plans form</a>.
+        If you need to update something, please contact us at {% if guest.group_type == c.BAND %}{{ c.BAND_EMAIL|email_only|email_to_link }}{% else %}{{ c.GUEST_EMAIL|email_only|email_to_link }}{% endif %}.
+    {% else %}
+        Please fill out <a href="https://forms.gle/CKXFXw8NypCcrdKd6" target="_blank">this form</a> so we know when/how to expect you!
+    {% endif %}
+  {% endblock %}
+  <br/> <br/>
+
+  {% if guest.travel_plans_status %}
+  <a href="index?id={{ guest.id }}" class="btn btn-default">Back to Checklist</a>
+  {% else %}
+  <form method="post" action="travel_plans" class="form-horizontal" role="form">
+    <input type="hidden" name="guest_id" value="{{ guest.id }}" />
+    <input type="hidden" name="id" value="{{ guest_travel_plans.db_id }}" />
+    {{ csrf_token() }}
+    {% block form_extra %}{% endblock %}
+    <button type="submit" name="completed" class="btn btn-primary" value="1">I Have Filled Out the Form Above</button>
+  </form>
+  {% endif %}
+{% endif %}

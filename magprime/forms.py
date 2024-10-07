@@ -114,7 +114,7 @@ class BadgeExtras:
         ], widget=NumberInputWithChoices(choices=c.SUPERSTAR_DONATION_OPTS))
     
     def extra_donation_label(self):
-        return Markup("Superstar Donation ({})".format(popup_link("../static_views/givingExtra.html", "Learn more")))
+        return Markup("Superstar Donation ({})".format(popup_link("https://super.magfest.org/superstars", "Learn more")))
 
 @MagForm.form_mixin
 class AdminBadgeExtras:
