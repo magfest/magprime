@@ -1,4 +1,4 @@
-ARG BRANCH=super2025
+ARG BRANCH=main
 FROM ghcr.io/magfest/ubersystem:${BRANCH}
 ENV uber_plugins=["magprime"]
 
