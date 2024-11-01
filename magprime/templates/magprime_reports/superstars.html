@@ -1,0 +1,67 @@
+{% extends "uber/templates/base.html" %}{% set admin_area=True %}
+{% set title = "Super MAGFest Superstars Report" %}
+{% block content %}
+<h2 class="center">Super MAGFest Superstars Report</h2>
+
+<div class="card">
+    <div class="card-header">Superstar Counts</div>
+    <div class="card-body">
+        <p><strong>{{ total_count }}</strong> Superstars total</p>
+        <p>Superstar level counts:
+            <ul>
+                {% for label, count in counts.items() %}
+                <li><strong>{{ label }}</strong>: {{ count }}</li>
+                {% endfor %}
+            </ul>
+            The counts above include all donations up to but not including the next donation level.
+        </p>
+    </div>
+</div>
+<br/>
+<div class="card">
+    <div class="card-header">Superstar Attendees</div>
+    <div class="card-body">
+        <p><a href="superstars_csv"><i class="fa fa-download"></i> Download CSV</a></p>
+        <table class="table table-striped datatable">
+            <thead>
+                <th>Group</th>
+                <th>Name</th>
+                <th>Name on Photo ID</th>
+                <th>Badge Name</th>
+                <th>Badge Type</th>
+                <th>Ribbons</th>
+                <th>Pre-ordered Merch</th>
+                <th>Email Address</th>
+                <th>Zip Code</th>
+                <th>Paid?</th>
+                <th>Checked In?</th>
+            </thead>
+            <tbody>
+                {% for attendee in attendees %}
+                <tr>
+                    <td data-sort="{{ attendee.group.name if attendee.group else '' }}">
+                        {{ attendee.group|form_link if attendee.group else "N/A" }}
+                    </td>
+                    <td data-sort="{{ attendee.last_first }}">{{ attendee|form_link }}</td>
+                    <td>{{ attendee.legal_name }}</td>
+                    <td>{{ attendee.badge_printed_name }}</td>
+                    <td>{{ attendee.badge_type_label }}</td>
+                    <td>{{ attendee.ribbon_labels|join(", ") }}</td>
+                    <td>{{ attendee.amount_extra_label }}</td>
+                    <td>{{ attendee.email_address }}</td>
+                    <td>{{ attendee.zip_code }}</td>
+                    <td data-sort="{{ owe_money[attendee.id] if attendee.id in owe_money else '0' }}">
+                        {% if owe_money[attendee.id] %}No (owes {{ owe_money[attendee.id]|format_currency }})
+                        {% else %}Yes{% endif %}
+                    </td>
+                    <td data-sort="{{ attendee.checked_in|full_datetime_local }}">
+                        {{ hour_day_local(attendee.checked_in) }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

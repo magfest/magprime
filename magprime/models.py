@@ -83,9 +83,10 @@ class Attendee:
 
     @presave_adjustment
     def set_superstar_ribbon(self):
-        if self.extra_donation >= 30 and c.SUPERSTAR_RIBBON not in self.ribbon_ints:
+        if self.extra_donation >= c.SUPERSTAR_MINIMUM and c.SUPERSTAR_RIBBON not in self.ribbon_ints:
             self.ribbon = add_opt(self.ribbon_ints, c.SUPERSTAR_RIBBON)
-        elif self.extra_donation < 30 and self.orig_value_of('extra_donation') >= 30 and c.SUPERSTAR_RIBBON in self.ribbon_ints:
+        elif self.extra_donation < c.SUPERSTAR_MINIMUM and \
+                self.orig_value_of('extra_donation') >= c.SUPERSTAR_MINIMUM and c.SUPERSTAR_RIBBON in self.ribbon_ints:
             self.ribbon = remove_opt(self.ribbon_ints, c.SUPERSTAR_RIBBON)
 
     @presave_adjustment

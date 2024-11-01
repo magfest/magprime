@@ -48,7 +48,7 @@ Badges are not mailed out before the event, so your badge will be available for 
     Thank you so much for your support! Your employer may match your contributions to charitable organizations, 
     so be sure to ask them. Donations over $250 will receive a donation receipt later this year. If you require a 
     receipt, but donated less than $250, please email {{ "accounting@magfest.org"|email_to_link }} to request one.
-    {% if attendee.extra_donation > 30 %}Even cooler, you are now a proud MAGFest Superstar! Check out our <a href="http://magfest.org/superstars">Superstars page</a> for more details on your perks.{% endif %}
+    {% if attendee.extra_donation > c.SUPERSTAR_MINIMUM %}Even cooler, you are now a proud MAGFest Superstar! Check out our <a href="http://magfest.org/superstars">Superstars page</a> for more details on your perks.{% endif %}
 {% endif %}
 
 {% if attendee.addons %}

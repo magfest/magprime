@@ -19,6 +19,10 @@ class ExtraConfig:
     @property
     def SEASON_EVENTS(self):
         return config['season_events']
+    
+    @property
+    def SUPERSTAR_MINIMUM(self):
+        return list(c.SUPERSTAR_DONATIONS.keys())[1]
 
     @property
     def PREREG_BADGE_TYPES(self):
