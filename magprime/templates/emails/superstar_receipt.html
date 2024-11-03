@@ -1,0 +1,22 @@
+<html>
+<head></head>
+<body>
+<p>
+    Dear {{ attendee.full_name }},
+    <br/>Thank you for donating to {{ c.EVENT_NAME_AND_YEAR }}!
+</p>
+<p>
+    Please accept this email as an official receipt for tax purposes:
+    <br/>Amount: {{ (donation.amount / 100)|format_currency }}
+    <br/>Date: {{ donation.closed|full_datetime_local }}
+    <br/>Total Donated: {{ attendee.extra_donation|format_currency }}<em class="text-muted">*</em>
+    <br/><span class="text-muted form-text">*The total donations associated with your {{ c.EVENT_NAME_AND_YEAR }} registration. Does not include donations to {{ c.ORGANIZATION_NAME }} from other sources or at other events.</span>
+</p>
+<p>
+    Sincerely,
+    <br/><br/>Christina Ralls
+    <br/>Director of Business and Development
+    <br/>MAGFest, Inc.
+</p>
+</body>
+</html>

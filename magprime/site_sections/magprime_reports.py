@@ -82,8 +82,8 @@ class Root:
                 count_query = count_query.filter(Attendee.extra_donation < next_amt)
             counts[label] = count_query.count()
 
-        for attendee in [a for a in superstars if a.amount_unpaid]:
-            owe_money[attendee.id] = attendee.amount_unpaid
+        for attendee in [a for a in superstars if a.amount_unpaid or not a.active_receipt]:
+            owe_money[attendee.id] = attendee.amount_unpaid if attendee.active_receipt else attendee.default_cost
         
         return {
             'attendees': superstars,

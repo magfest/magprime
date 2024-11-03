@@ -42,6 +42,15 @@ AutomatedEmailFixture(
     sender='MAGFest <contact@magfest.org>')
 
 AutomatedEmailFixture(
+    Attendee, 'Thank you for your Super MAGFest Superstars Donation!',
+    'superstar_intro.html',
+    filter=lambda a: a.extra_donation >= c.SUPERSTAR_MINIMUM and a.active_receipt and not a.amount_unpaid,
+    ident='superstar_intro',
+    when=before(c.SUPERSTAR_DEADLINE),
+    sender='MAGFest Superstar Program <superstars@magfest.org>'
+)
+
+AutomatedEmailFixture(
     Attendee, 'MAGFest food for guests', 'guest_food_restrictions.txt',
     lambda a: a.badge_type == c.GUEST_BADGE,
     sender='MAGFest Staff Suite <chefs@magfest.org>',
