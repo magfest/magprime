@@ -114,7 +114,7 @@ class Attendee:
     def searchable_fields(cls):
         # List of fields for the attendee search to check search terms against
         return ['first_name', 'last_name', 'legal_name', 'badge_printed_name', 'group_name',
-                'email', 'comments', 'admin_notes', 'for_review', 'promo_code_group_name']
+                'email', 'comments', 'admin_notes', 'for_review']
 
     @classproperty
     def searchable_bools(cls):
