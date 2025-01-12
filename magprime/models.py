@@ -48,7 +48,9 @@ class Attendee:
         stuff = []
 
         if (c.DEALER_RIBBON in self.ribbon_ints or c.MIVS in self.ribbon_ints
-            ) and (self.badge_type not in [c.STAFF_BADGE, c.CONTRACTOR_BADGE]):
+                ) and (self.badge_type not in [c.STAFF_BADGE, c.CONTRACTOR_BADGE]):
+            stuff.append("Expo Hall access")
+        elif self.unweighted_hours > 0 and self.badge_type not in [c.STAFF_BADGE, c.CONTRACTOR_BADGE]:
             stuff.append("Expo Hall access")
 
         if c.BAND in self.ribbon_ints and self.badge_type != c.GUEST_BADGE:
@@ -114,7 +116,7 @@ class Attendee:
     def searchable_fields(cls):
         # List of fields for the attendee search to check search terms against
         return ['first_name', 'last_name', 'legal_name', 'badge_printed_name', 'group_name',
-                'email', 'comments', 'admin_notes', 'for_review']
+                'email', 'comments', 'admin_notes', 'for_review', 'transfer_code']
 
     @classproperty
     def searchable_bools(cls):
