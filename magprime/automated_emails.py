@@ -33,10 +33,7 @@ if _send_season_supporter_emails:
 
 AutomatedEmailFixture(
     Attendee, 'MAGFest schedule, maps, and other FAQs', 'precon_faqs.html',
-    filter=lambda a: (
-        a.badge_status not in [c.INVALID_STATUS, c.DEFERRED_STATUS]
-        and a.paid != c.NOT_PAID
-        and (a.paid != c.PAID_BY_GROUP or a.group and not a.group.amount_unpaid)),
+    filter=lambda a: not a.cannot_check_in_reason,
     ident='magprime_precon_faqs',
     when=days_before(7, c.EPOCH),
     sender='MAGFest <contact@magfest.org>')
