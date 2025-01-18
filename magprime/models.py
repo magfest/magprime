@@ -111,6 +111,11 @@ class Attendee:
                     model=self.to_dict('id'))
             except Exception:
                 log.error('unable to send invalid email', exc_info=True)
+    
+    @property
+    def watchlist_warning(self):
+        regdesk_info_append = " [{}]".format(self.regdesk_info) if self.regdesk_info else ""
+        return "MUST TALK TO SECURITY before picking up badge{}".format(regdesk_info_append)
 
     @classproperty
     def searchable_fields(cls):
