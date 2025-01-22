@@ -145,7 +145,7 @@ class Attendee:
     @property
     def staff_merch_items(self):
         """Used by the merch and staff_merch properties for staff swag."""
-        merch = ["Volunteer lanyard"] if self.staffing else []
+        merch = ["Volunteer lanyard"] if self.staffing and self.badge_type != c.CONTRACTOR_BADGE else []
         if self.walk_on_volunteer and self.worked_hours >= 6:
             merch.append("Walk-on volunteer coffee mug")
         if not self.walk_on_volunteer and self.worked_hours >= c.HOURS_FOR_REFUND:
