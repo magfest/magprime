@@ -146,10 +146,6 @@ class Attendee:
     def staff_merch_items(self):
         """Used by the merch and staff_merch properties for staff swag."""
         merch = ["Volunteer lanyard"] if self.staffing and self.badge_type != c.CONTRACTOR_BADGE else []
-        if self.walk_on_volunteer and self.worked_hours >= 6:
-            merch.append("Walk-on volunteer coffee mug")
-        if not self.walk_on_volunteer and self.worked_hours >= c.HOURS_FOR_REFUND:
-            merch.append("Staff Swadge")
         num_staff_shirts_owed = self.num_staff_shirts_owed
         if num_staff_shirts_owed > 0:
             staff_shirts = '{} Staff Shirt{}'.format(num_staff_shirts_owed, 's' if num_staff_shirts_owed > 1 else '')
