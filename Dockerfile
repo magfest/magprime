@@ -4,4 +4,4 @@ ENV uber_plugins=["magprime"]
 # install plugins
 COPY . plugins/magprime/
 
-RUN uv-installer.sh pip install --system -r requirements.txt;
+RUN $HOME/.local/bin/uv pip install --system -r requirements.txt;
