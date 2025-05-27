@@ -96,9 +96,9 @@ class TableInfo:
         return "You must include links to what you sell or a portfolio otherwise you will be automatically declined."
     
     def special_needs_desc(self):
-        return Markup("Location Requests, People you'd like to be near/away from, etc. No guarantees that we can "
-                      "accommodate any requests. Please direct accessibility requests to "
-                      "<a href='mailto:accessibility@magfest.org' target='_blank'>accessibility@magfest.org</a>.")
+        return Markup("Location requests, people you'd like to be near/away from, or any other needs we should "
+                      "be aware of. While we take requests into account when placing tables, there are no "
+                      "guarantees we can accommodate any requests.")
 
 
 @MagForm.form_mixin
