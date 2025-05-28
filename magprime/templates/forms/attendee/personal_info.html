@@ -1,5 +1,14 @@
 {% extends 'uber/templates/forms/attendee/personal_info.html' %}
 
+{% block name %}
+{{ super() }}
+{% if not admin_area and not attendee.has_personalized_badge %}
+<div class="row g-sm-3">
+  <div class="col-12">{{ form_macros.form_input(personal_info.badge_printed_name, label_text="Display Name", help_text="A name for us to use on display boards, e.g., leaderboards. Leave blank to use your first and last name.") }}</div>
+</div>
+{% endif %}
+{% endblock %}
+
 {% block age %}
 <div class="row g-sm-3">
   <div class="col-12 col-sm-6">
