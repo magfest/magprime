@@ -69,25 +69,11 @@ class GroupInfo:
 @MagForm.form_mixin
 class TableInfo:
     has_prior_name = BooleanField("I have run a table under a different name at one of the past two in-person Super MAGFest events.")
-    prior_name = StringField("Prior Table Name", validators=[
-        validators.InputRequired("Please provide your prior table name.")
-    ])
+    prior_name = StringField("Prior Table Name")
     has_permit = BooleanField(Markup("I already have a <strong>permanent</strong> Maryland Traders or Sellers Permit."))
-    license = StringField("License Number", validators=[
-        validators.InputRequired("Please provide your license number.")
-    ], description="Please enter the license number for your Maryland Traders or Sellers Permit.")
+    license = StringField("License Number",
+                          description="Please enter the license number for your Maryland Traders or Sellers Permit.")
 
-    def get_optional_fields(self, group, is_admin=False):
-        optional_fields = self.super_get_optional_fields(group, is_admin)
-
-        if not self.has_prior_name.data:
-            optional_fields.append("prior_name")
-
-        if not group.has_permit:
-            optional_fields.append("license")
-        
-        return optional_fields
-    
     def website_desc(self):
         return Markup("The link to your main portfolio. Please include additional links to social media accounts or "
                       "additional places to view your items in the <em>What do you sell?</em> box below.")
@@ -109,15 +95,17 @@ class PersonalInfo:
 
 @MagForm.form_mixin
 class BadgeExtras:
-    extra_donation = IntegerField('Superstar Donation', validators=[
-        validators.NumberRange(min=0, message="Superstar donation must be a number that is 0 or higher.")
-        ], widget=NumberInputWithChoices(choices=c.SUPERSTAR_DONATION_OPTS))
+    extra_donation = IntegerField('Superstar Donation', widget=NumberInputWithChoices(choices=c.SUPERSTAR_DONATION_OPTS))
     
     def extra_donation_label(self):
         return Markup("Superstar Donation ({})".format(popup_link("https://super.magfest.org/superstars", "Learn more")))
 
 @MagForm.form_mixin
 class AdminBadgeExtras:
-    extra_donation = IntegerField('Superstar Donation', validators=[
-        validators.NumberRange(min=0, message="Superstar donation must be a number that is 0 or higher.")
-        ], widget=NumberInputGroup())
+    extra_donation = IntegerField('Superstar Donation', widget=NumberInputGroup())
+
+
+@MagForm.form_mixin
+class PanelInfo:
+    magscouts_opt_in = SelectField("Do you want your content to be highlighted by the MAGScouts program?", coerce=int,
+                                   choices=c.PANEL_MAGSCOUTS_OPTS)
