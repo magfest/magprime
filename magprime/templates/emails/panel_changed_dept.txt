@@ -1,0 +1,3 @@
+The panel {{ app.name }} has just been moved from the {{ old_dept.name }} department to the {{ new_dept.name }} department.
+
+You can view the panel application here: {{ c.URL_BASE }}/panels_admin/app?id={{ app.id }}

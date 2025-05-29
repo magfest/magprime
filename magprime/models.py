@@ -24,6 +24,29 @@ class AutomatedEmail:
 class PanelApplication:
     magscouts_opt_in = Column(Choice(c.PANEL_MAGSCOUTS_OPTS), default=c.NO_CHOICE)
 
+    @presave_adjustment
+    def email_when_dept_changes(self):
+        from .models import Session
+
+        if not self.is_new and self.department != self.orig_value_of('department'):
+            try:
+                with Session() as session:
+                    new_dept = session.department(self.department) if self.department != str(c.PANELS) else {
+                        'name': "Panels"}
+                    old_dept = session.department(self.orig_value_of('department')) if \
+                        self.orig_value_of('department') != str(c.PANELS) else {'name': "Panels"}
+
+                    send_email.delay(
+                        "panels-heads@magfest.org",
+                        "panels-heads@magfest.org",
+                        'Panel Department Changed',
+                        render('emails/panel_changed_dept.txt', {'app': self,
+                                                                'old_dept': old_dept,
+                                                                'new_dept': new_dept}, encoding=None),
+                        model=self.to_dict('id'))
+            except Exception:
+                log.error('unable to send panel dept changed email', exc_info=True)
+
 @Session.model_mixin
 class Group:
     prior_name = Column(UnicodeText)
@@ -168,6 +191,7 @@ class Attendee:
             merch.append('Staff Merch Item')
 
         return merch
+
     @property
     def is_not_ready_to_checkin(self):
         """
