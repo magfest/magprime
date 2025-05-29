@@ -31,18 +31,11 @@ class PanelApplication:
         if not self.is_new and self.department != self.orig_value_of('department'):
             try:
                 with Session() as session:
-                    new_dept = session.department(self.department) if self.department != str(c.PANELS) else {
-                        'name': "Panels"}
-                    old_dept = session.department(self.orig_value_of('department')) if \
-                        self.orig_value_of('department') != str(c.PANELS) else {'name': "Panels"}
-
                     send_email.delay(
                         "panels-heads@magfest.org",
                         "panels-heads@magfest.org",
                         'Panel Department Changed',
-                        render('emails/panel_changed_dept.txt', {'app': self,
-                                                                'old_dept': old_dept,
-                                                                'new_dept': new_dept}, encoding=None),
+                        render('emails/panel_changed_dept.txt', {'app': self}, encoding=None),
                         model=self.to_dict('id'))
             except Exception:
                 log.error('unable to send panel dept changed email', exc_info=True)
