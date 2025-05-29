@@ -17,4 +17,4 @@ The following deadlines are part of your Department Head Checklist.
 
 You will receive a follow-up email for each item on the list 7 days prior to the deadline if the item hasn't already been completed.
 
-{{ c.STOPS_EMAIL_SIGNATURE }}
+{{ email_signature }}

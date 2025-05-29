@@ -8,4 +8,4 @@ Limited crash space is available before and after for people from out of town.  
 
 Let us know if you have any questions!
 
-{{ c.STOPS_EMAIL_SIGNATURE }}
+{{ email_signature }}
