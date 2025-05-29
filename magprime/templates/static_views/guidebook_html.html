@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+  <title>HTML Guide</title>
+  <style type="text/css">
+    html, html * { font-family: Arial, Helvetica, sans-serif; }
+    code {
+      background-color: #eee;
+      border-radius: 3px;
+      font-family: courier, monospace;
+      padding: 0 3px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>HTML in Guidebook Descriptions</h1>
+
+<p>
+  Guidebook supports the following HTML tags in panel and other event descriptions: 
+  <code>&lt;a href=""&gt;</code>, <code>&lt;br&gt;</code>, <code>&lt;hr&gt;</code>,<code>&lt;ul&gt;</code>, <code>&lt;li&gt;</code>, <code>&lt;h1&gt;</code> through <code>&lt;h4&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;span&gt;</code>, <code>&lt;strong&gt;</code>,<code>&lt;u&gt;</code>, and <code>&lt;em&gt;</code>.
+</p>
+
+<ul>
+<li><code>&lt;a href=""&gt;</code> is used to create links, e.g., <code>&lt;a href="www.google.com"&gt;Link to Google&lt;/a&gt;</code>.</li>
+<li><code>&lt;br/&gt;</code> creates a line break in your description. <em>Note: line breaks in the description are automatically converted to &lt;br/&gt; tags.</em></em></li>
+<li><span><code>&lt;hr&gt;</code> creates a horizontal line in your description.</span></li>
+<li><code>&lt;ul&gt;</code> is used to make an unordered (bulleted) list. You'll use it with <code>&lt;li&gt;</code>.</li>
+<li><code>&lt;li&gt;</code> creates a list item when nested within <code>&lt;ul&gt;</code> tags.</li>
+<li><code>&lt;h1&gt;</code> through <code>&lt;h4&gt;</code> are different header sizes.</li>
+<li><code>&lt;p&gt;</code> creates a paragraph.</li>
+<li><code>&lt;span&gt;</code> is used to contain other elements, like styling elements.</li>
+<li><code>&lt;strong&gt;</code> is used to bold text.</li>
+<li><code>&lt;u&gt;</code> is used to underline text.</li>
+<li><code>&lt;em&gt;</code> is used to italicize text.</li>
+</ul>
+
+<p>When using any of these HTML tags, you also need to close the tag when you want the styling to end, except in the case of <code>&lt;br&gt;</code> and <code>&lt;hr&gt;</code>. For example, to close a <code>&lt;strong&gt;</code> tag you'll use <code>&lt;/strong&gt;</code> adding the “/”, so the line may look something like this:
+<code>&lt;strong&gt;Bold Text&lt;/strong&gt;</code> (produces: <strong>Bold Text</strong>).</p>
+
+<p>Please use HTML tags sparingly and, when adding links, only link to websites you trust. Excessive styling tags and unsafe links may be removed from the event description in Guidebook.</p>
+
+</body>
+</html>

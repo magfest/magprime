@@ -109,3 +109,6 @@ class AdminBadgeExtras:
 class PanelInfo:
     magscouts_opt_in = SelectField("Do you want your content to be highlighted by the MAGScouts program?", coerce=int,
                                    choices=c.PANEL_MAGSCOUTS_OPTS)
+    
+    def public_description_label(self):
+        return Markup('Guidebook Description <span class="popup"><a href="../static_views/guidebook_html.html" target="_blank"><i class="fa fa-question-circle" aria-hidden="true"></i> HTML Guide</a></span>')
