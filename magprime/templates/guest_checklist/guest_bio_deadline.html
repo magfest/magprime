@@ -1,19 +1,6 @@
-{% extends "uber/templates/guest_checklist/bio_deadline.html" %}
-
-{% block deadline_text %}
-{% if guest.bio_status %}
-    You have already provided us with your information, but you can use the link above to update it.
-    {% if not guest.bio_pic %}
-    We encourage you to upload a picture (which you have NOT yet done) so that we can
-    include it on our website.
-    {% endif %}
-{% else %}
-    Use the link above to provide us with the information needed to promote your presence at Super MAGFest via Social Media.
-{% endif %}
-{% endblock %}
+{% extends "uber/templates/guest_checklist/guest_bio_deadline.html" %}
 
 {% block form_extra %}
-{{ super() }}
 <div class="form-group">
   <label class="col-sm-3 control-label">Guidebook Header</label>
   <div class="col-sm-6">
