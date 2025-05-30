@@ -1,10 +1,17 @@
 {% extends 'uber/templates/forms/group/table_info.html' %}
 
+{% block x_data %}
+{{ super() }}
+has_prior_name: {{ (group.prior_name != '')|jsonize }},
+has_permit: {{ (group.license != '')|jsonize }},
+get priorName() { return this.has_prior_name == true },
+get permit() { return this.has_permit == true },
+{% endblock %}
+
 {% block website %}
-<div class="row g-sm-3">
-    <div class="col-12 col-sm-6">{{ form_macros.form_input(table_info.website) }}</div>
+    <div class="col-sm">{{ form_macros.input(table_info.website) }}</div>
     {% if not admin_area %}
-    <div class="col-12 col-sm-6">
+    <div class="col-sm">
         <div class="alert alert-warning" role="alert">
             <em>
                 <strong>Your website link CANNOT be an X/Twitter or Instagram link 
@@ -14,29 +21,23 @@
           </div>
     </div>
     {% endif %}
-</div>
 {% endblock %}
 
 {% block textareas %}
 {{ super() }}
-
-<div class="row g-sm-3">
-    <div class="col-12">
-        {{ form_macros.form_input(table_info.has_prior_name, checked=group.prior_name != '') }}
-    
-        {{ form_macros.form_input(table_info.prior_name) }}
-        {{ form_macros.toggle_fields_js(table_info.has_prior_name, [table_info.prior_name],
-            toggle_required=True, closest_hide_selector='.form-floating') }}
+</div>
+<div class="row g-sm-3 mb-3">
+    <div class="col">
+        {% call form_macros.input(table_info.has_prior_name, alpine_model="has_prior_name") %}
+        <div x-show="priorName">{{ form_macros.input(table_info.prior_name, required_if="priorName") }}</div>
+        {% endcall %}
     </div>
 </div>
 
-<div class="row g-sm-3">
-    <div class="col-12">
-        {{ form_macros.form_input(table_info.has_permit, checked=group.license != '') }}
-    
-        {{ form_macros.form_input(table_info.license) }}
-        {{ form_macros.toggle_fields_js(table_info.has_permit, [table_info.license],
-            toggle_required=True, closest_hide_selector='.form-floating') }}
+<div class="row g-sm-3 mb-3">
+    <div class="col">
+        {% call form_macros.input(table_info.has_permit, alpine_model="has_permit") %}
+        <div x-show="permit">{{ form_macros.input(table_info.license) }}</div>
+        {% endcall %}
     </div>
-</div>
 {% endblock %}
