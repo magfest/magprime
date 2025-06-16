@@ -100,6 +100,7 @@ class BadgeExtras:
     def extra_donation_label(self):
         return Markup("Superstar Donation ({})".format(popup_link("https://super.magfest.org/superstars", "Learn more")))
 
+
 @MagForm.form_mixin
 class AdminBadgeExtras:
     extra_donation = IntegerField('Superstar Donation', widget=NumberInputGroup())
@@ -107,6 +108,10 @@ class AdminBadgeExtras:
 
 @MagForm.form_mixin
 class PanelInfo:
+    broadcast_title = StringField("Broadcast Title",
+                                  description="The short version of this panel's title that will appear on screens and digital signage. Max 40 characters.")
+    broadcast_subtitle = StringField("Broadcast Subtitle",
+                                     description="A one-line summary that appears below your panel's title on digital displays. Max 100 characters.")
     magscouts_opt_in = SelectField("Do you want your content to be highlighted by the MAGScouts program?", coerce=int,
                                    choices=c.PANEL_MAGSCOUTS_OPTS)
     

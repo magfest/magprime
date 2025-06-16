@@ -23,6 +23,8 @@ class AutomatedEmail:
 @Session.model_mixin
 class PanelApplication:
     magscouts_opt_in = Column(Choice(c.PANEL_MAGSCOUTS_OPTS), default=c.NO_CHOICE)
+    broadcast_title = Column(UnicodeText)
+    broadcast_subtitle = Column(UnicodeText)
 
     @presave_adjustment
     def email_when_dept_changes(self):
