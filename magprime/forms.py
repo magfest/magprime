@@ -11,7 +11,7 @@ from uber.forms import AddressForm, NumberInputGroup, MagForm, IntSelect, Switch
 from uber.custom_tags import popup_link, format_currency, pluralize, table_prices, email_to_link
 
 
-class NumberInputWithChoices(NumberInputGroup):
+class NumberInputGroupChoices(NumberInputGroup):
     def __init__(self, choices=None, **kwargs):
         self.choices = choices
         super().__init__(**kwargs)
@@ -95,7 +95,7 @@ class PersonalInfo:
 
 @MagForm.form_mixin
 class BadgeExtras:
-    extra_donation = IntegerField('Superstar Donation', widget=NumberInputWithChoices(choices=c.SUPERSTAR_DONATION_OPTS))
+    extra_donation = IntegerField('Superstar Donation', widget=NumberInputGroupChoices(choices=c.SUPERSTAR_DONATION_OPTS))
     
     def extra_donation_label(self):
         return Markup("Superstar Donation ({})".format(popup_link("https://super.magfest.org/superstars", "Learn more")))

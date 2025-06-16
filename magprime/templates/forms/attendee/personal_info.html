@@ -1,27 +1,25 @@
 {% extends 'uber/templates/forms/attendee/personal_info.html' %}
 
 {% block name %}
-{{ super() }}
-{% if not admin_area and not attendee.has_personalized_badge %}
-<div class="row g-sm-3">
-  <div class="col-12">{{ form_macros.form_input(personal_info.badge_printed_name, label_text="Display Name", help_text="A name for us to use on display boards during the event, e.g., leaderboards. Leave blank to use your first and last name.") }}</div>
-</div>
-{% endif %}
+  {{ super() }}
+  {% if not admin_area and not attendee.has_personalized_badge %}
+  </div>
+  <div class="row g-sm-3 mb-3">
+    <div class="col-sm">{{ form_macros.input(personal_info.badge_printed_name, label_text="Display Name", help_text="A name for us to use on display boards during the event, e.g., leaderboards. Leave blank to use your first and last name.") }}</div>
+  {% endif %}
 {% endblock %}
 
 {% block age %}
-<div class="row g-sm-3">
-  <div class="col-12 col-sm-6">
-{% if c.COLLECT_EXACT_BIRTHDATE %}
-  {{ form_macros.form_input(personal_info.birthdate, admin_text=attendee.age_group_conf.desc) }}
-{% else %}
-  TBD
-{% endif %}
+  <div class="col-sm">
+    {% if c.COLLECT_EXACT_BIRTHDATE %}
+      {{ form_macros.input(personal_info.birthdate, admin_text=attendee.age_group_conf.desc, required_if="!badge_placeholder") }}
+    {% else %}
+      {{ form_macros.input(personal_info.age_group, required_if="!badge_placeholder") }}
+    {% endif %}
   </div>
-
-  <div class="col-12 col-sm-6">
+  <div class="col-sm">
     {% if c.CONSENT_FORM_URL and not admin_area %}
-    <div class="alert alert-warning" role="alert">
+    <div class="alert alert-warning mb-0" role="alert">
       <em>
         Attendees under 18 <b>MUST</b> bring a signed 
         <a class="link-dark" target="_blank" href="{{ c.CONSENT_FORM_URL }}">parental consent form</a>.
@@ -29,5 +27,4 @@
     </div>
     {% endif %}
   </div>
-</div>
 {% endblock %}

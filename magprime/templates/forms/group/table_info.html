@@ -2,14 +2,12 @@
 
 {% block x_data %}
 {{ super() }}
-has_prior_name: {{ (group.prior_name != '')|jsonize }},
-has_permit: {{ (group.license != '')|jsonize }},
-get priorName() { return this.has_prior_name == true },
-get permit() { return this.has_permit == true },
+has_prior_name: {{ table_info.has_prior_name.data|tojson }},
+has_permit: {{ table_info.has_permit.data|tojson }},
 {% endblock %}
 
 {% block website %}
-    <div class="col-sm">{{ form_macros.input(table_info.website) }}</div>
+    <div class="col-sm">{{ form_macros.input(table_info.website, required_if="is_dealer") }}</div>
     {% if not admin_area %}
     <div class="col-sm">
         <div class="alert alert-warning" role="alert">
@@ -27,17 +25,16 @@ get permit() { return this.has_permit == true },
 {{ super() }}
 </div>
 <div class="row g-sm-3 mb-3">
-    <div class="col">
+    <div class="col-12">
         {% call form_macros.input(table_info.has_prior_name, alpine_model="has_prior_name") %}
-        <div x-show="priorName">{{ form_macros.input(table_info.prior_name, required_if="priorName") }}</div>
+        <div x-show="has_prior_name">{{ form_macros.input(table_info.prior_name, required_if="has_prior_name") }}</div>
         {% endcall %}
     </div>
 </div>
-
 <div class="row g-sm-3 mb-3">
-    <div class="col">
+    <div class="col-12">
         {% call form_macros.input(table_info.has_permit, alpine_model="has_permit") %}
-        <div x-show="permit">{{ form_macros.input(table_info.license) }}</div>
+        <div x-show="has_permit">{{ form_macros.input(table_info.license, required_if="has_permit") }}</div>
         {% endcall %}
     </div>
 {% endblock %}
