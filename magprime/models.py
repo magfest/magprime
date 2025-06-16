@@ -4,11 +4,11 @@ from residue import CoerceUTF8 as UnicodeText, UUID
 from markupsafe import Markup
 
 from uber.config import c
-from uber.custom_tags import readable_join
+from uber.custom_tags import readable_join, format_image_size
 from uber.decorators import presave_adjustment, render
-from uber.models import Boolean, MagModel, Choice, DefaultColumn as Column, Session
+from uber.models import Boolean, MagModel, Choice, DefaultColumn as Column, Session, GuestImage
 from uber.tasks.email import send_email
-from uber.utils import add_opt, check, localized_now, remove_opt
+from uber.utils import add_opt, check, localized_now, remove_opt, GuidebookUtils
 
 
 @Session.model_mixin
@@ -23,6 +23,78 @@ class AutomatedEmail:
 @Session.model_mixin
 class PanelApplication:
     magscouts_opt_in = Column(Choice(c.PANEL_MAGSCOUTS_OPTS), default=c.NO_CHOICE)
+    broadcast_title = Column(UnicodeText)
+    broadcast_subtitle = Column(UnicodeText)
+
+    @presave_adjustment
+    def email_when_dept_changes(self):
+        from .models import Session
+
+        if not self.is_new and self.department != self.orig_value_of('department'):
+            try:
+                with Session() as session:
+                    send_email.delay(
+                        "panels-heads@magfest.org",
+                        "panels-heads@magfest.org",
+                        'Panel Department Changed',
+                        render('emails/panel_changed_dept.txt', {'app': self}, encoding=None),
+                        model=self.to_dict('id'))
+            except Exception:
+                log.error('unable to send panel dept changed email', exc_info=True)
+
+
+@Session.model_mixin
+class GuestGroup:
+    def handle_images_from_params(self, session, **params):
+        header_image = params.get('header_image')
+        thumbnail_image = params.get('thumbnail_image')
+        bio_image = params.get('bio_image')
+        header_pic, thumbnail_pic, bio_pic = None, None, None
+        message = ''
+
+        if bio_image and bio_image.filename:
+            bio_pic = GuestImage.upload_image(bio_image, guest_id=self.id)
+            if bio_pic.extension not in c.ALLOWED_BIO_PIC_EXTENSIONS:
+                message = 'Bio pic must be one of ' + ', '.join(c.ALLOWED_BIO_PIC_EXTENSIONS)
+
+        if not message:
+            if header_image and header_image.filename:
+                message = GuidebookUtils.check_guidebook_image_filetype(header_image)
+                if not message:
+                    header_pic = GuestImage.upload_image(header_image, guest_id=self.id,
+                                                            is_header=True)
+                    if not header_pic.check_image_size():
+                        message = f"Your header image must be {format_image_size(c.GUIDEBOOK_HEADER_SIZE)}."
+            elif not self.guidebook_header:
+                message = f"You must upload a {format_image_size(c.GUIDEBOOK_HEADER_SIZE)} header image."
+        
+        if not message:
+            if thumbnail_image and thumbnail_image.filename:
+                message = GuidebookUtils.check_guidebook_image_filetype(thumbnail_image)
+                if not message:
+                    thumbnail_pic = GuestImage.upload_image(thumbnail_image, guest_id=self.id,
+                                                            is_thumbnail=True)
+                    if not thumbnail_pic.check_image_size():
+                        message = f"Your thumbnail image must be {format_image_size(c.GUIDEBOOK_THUMBNAIL_SIZE)}."
+            elif not self.guidebook_thumbnail:
+                message = f"You must upload a {format_image_size(c.GUIDEBOOK_THUMBNAIL_SIZE)} thumbnail image."
+        
+        if not message:
+            if bio_pic:
+                if self.bio_pic:
+                    session.delete(self.bio_pic)
+                session.add(bio_pic)
+            if header_pic:
+                if self.guidebook_header:
+                    session.delete(self.guidebook_header)
+                session.add(header_pic)
+            if thumbnail_pic:
+                if self.guidebook_thumbnail:
+                    session.delete(self.guidebook_thumbnail)
+                session.add(thumbnail_pic)
+
+        return message
+
 
 @Session.model_mixin
 class Group:
@@ -168,6 +240,7 @@ class Attendee:
             merch.append('Staff Merch Item')
 
         return merch
+
     @property
     def is_not_ready_to_checkin(self):
         """

@@ -71,7 +71,8 @@ class TableInfo:
     has_prior_name = BooleanField("I have run a table under a different name at one of the past two in-person Super MAGFest events.")
     prior_name = StringField("Prior Table Name")
     has_permit = BooleanField(Markup("I already have a <strong>permanent</strong> Maryland Traders or Sellers Permit."))
-    license = StringField("License Number", description="Please enter the license number for your Maryland Traders or Sellers Permit.")
+    license = StringField("License Number",
+                          description="Please enter the license number for your Maryland Traders or Sellers Permit.")
 
     def website_desc(self):
         return Markup("The link to your main portfolio. Please include additional links to social media accounts or "
@@ -94,15 +95,25 @@ class PersonalInfo:
 
 @MagForm.form_mixin
 class BadgeExtras:
-    extra_donation = IntegerField('Superstar Donation', validators=[
-        validators.NumberRange(min=0, message="Superstar donation must be a number that is 0 or higher.")
-        ], widget=NumberInputGroupChoices(choices=c.SUPERSTAR_DONATION_OPTS))
+    extra_donation = IntegerField('Superstar Donation', widget=NumberInputGroupChoices(choices=c.SUPERSTAR_DONATION_OPTS))
     
     def extra_donation_label(self):
         return Markup("Superstar Donation ({})".format(popup_link("https://super.magfest.org/superstars", "Learn more")))
 
+
 @MagForm.form_mixin
 class AdminBadgeExtras:
-    extra_donation = IntegerField('Superstar Donation', validators=[
-        validators.NumberRange(min=0, message="Superstar donation must be a number that is 0 or higher.")
-        ], widget=NumberInputGroup())
+    extra_donation = IntegerField('Superstar Donation', widget=NumberInputGroup())
+
+
+@MagForm.form_mixin
+class PanelInfo:
+    broadcast_title = StringField("Broadcast Title",
+                                  description="The short version of this panel's title that will appear on screens and digital signage. Max 40 characters.")
+    broadcast_subtitle = StringField("Broadcast Subtitle",
+                                     description="A one-line summary that appears below your panel's title on digital displays. Max 100 characters.")
+    magscouts_opt_in = SelectField("Do you want your content to be highlighted by the MAGScouts program?", coerce=int,
+                                   choices=c.PANEL_MAGSCOUTS_OPTS)
+    
+    def public_description_label(self):
+        return Markup('Guidebook Description <span class="popup"><a href="../static_views/guidebook_html.html" target="_blank"><i class="fa fa-question-circle" aria-hidden="true"></i> HTML Guide</a></span>')

@@ -33,7 +33,7 @@ has_permit: {{ table_info.has_permit.data|tojson }},
 </div>
 <div class="row g-sm-3 mb-3">
     <div class="col-12">
-        {% call form_macros.input(table_info.has_permit, checked=group.license != '', alpine_model="has_permit") %}
+        {% call form_macros.input(table_info.has_permit, alpine_model="has_permit") %}
         <div x-show="has_permit">{{ form_macros.input(table_info.license, required_if="has_permit") }}</div>
         {% endcall %}
     </div>

@@ -10,4 +10,4 @@ Staffers who confirm their badges will be emailed when the Volunteer Checklist l
 
 Please let us know if you have any questions.
 
-{{ c.STOPS_EMAIL_SIGNATURE }}
+{{ email_signature }}

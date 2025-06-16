@@ -6,4 +6,4 @@ Since you're qualified for the position, we'd appreciate it if you signed up for
 
 Let us know if you have any questions.
 
-{{ c.STOPS_EMAIL_SIGNATURE }}
+{{ email_signature }}

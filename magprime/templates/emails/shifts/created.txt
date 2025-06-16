@@ -8,4 +8,4 @@ Shifts are not available yet, but we will email you when they are open. After {{
 
 Please let us know if you have any questions.
 
-{{ c.STOPS_EMAIL_SIGNATURE }}
+{{ email_signature }}

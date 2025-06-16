@@ -8,4 +8,4 @@ Sign up for as many as you’d like, but please be aware of what shifts you’re
 
 If you have any questions at all, please email Staff Operations, our parent department, at stops@magfest.org 
 
-{{ c.STOPS_EMAIL_SIGNATURE }}
+{{ email_signature }}
