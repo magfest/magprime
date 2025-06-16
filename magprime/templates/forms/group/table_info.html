@@ -1,10 +1,15 @@
 {% extends 'uber/templates/forms/group/table_info.html' %}
 
+{% block x_data %}
+{{ super() }}
+has_prior_name: {{ table_info.has_prior_name.data|tojson }},
+has_permit: {{ table_info.has_permit.data|tojson }},
+{% endblock %}
+
 {% block website %}
-<div class="row g-sm-3">
-    <div class="col-12 col-sm-6">{{ form_macros.form_input(table_info.website) }}</div>
+    <div class="col-sm">{{ form_macros.input(table_info.website, required_if="is_dealer") }}</div>
     {% if not admin_area %}
-    <div class="col-12 col-sm-6">
+    <div class="col-sm">
         <div class="alert alert-warning" role="alert">
             <em>
                 <strong>Your website link CANNOT be an X/Twitter or Instagram link 
@@ -14,29 +19,22 @@
           </div>
     </div>
     {% endif %}
-</div>
 {% endblock %}
 
 {% block textareas %}
 {{ super() }}
-
-<div class="row g-sm-3">
+</div>
+<div class="row g-sm-3 mb-3">
     <div class="col-12">
-        {{ form_macros.form_input(table_info.has_prior_name, checked=group.prior_name != '') }}
-    
-        {{ form_macros.form_input(table_info.prior_name) }}
-        {{ form_macros.toggle_fields_js(table_info.has_prior_name, [table_info.prior_name],
-            toggle_required=True, closest_hide_selector='.form-floating') }}
+        {% call form_macros.input(table_info.has_prior_name, alpine_model="has_prior_name") %}
+        <div x-show="has_prior_name">{{ form_macros.input(table_info.prior_name, required_if="has_prior_name") }}</div>
+        {% endcall %}
     </div>
 </div>
-
-<div class="row g-sm-3">
+<div class="row g-sm-3 mb-3">
     <div class="col-12">
-        {{ form_macros.form_input(table_info.has_permit, checked=group.license != '') }}
-    
-        {{ form_macros.form_input(table_info.license) }}
-        {{ form_macros.toggle_fields_js(table_info.has_permit, [table_info.license],
-            toggle_required=True, closest_hide_selector='.form-floating') }}
+        {% call form_macros.input(table_info.has_permit, checked=group.license != '', alpine_model="has_permit") %}
+        <div x-show="has_permit">{{ form_macros.input(table_info.license, required_if="has_permit") }}</div>
+        {% endcall %}
     </div>
-</div>
 {% endblock %}

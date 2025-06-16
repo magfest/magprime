@@ -4,20 +4,19 @@
 {% set show_full_desc = not admin_area and (not receipt or upgrade_modal) %}
 
 {% if show_full_desc and c.BEFORE_SUPERSTAR_DEADLINE %}
-  <div class="row g-sm-3">
-  <div class="col-12">
+  <div class="col-sm">
       <a href="https://super.magfest.org/superstars" target="_blank">
           <img src="../static/images/superstar.png" width="100%" alt="Become a Superstar" />
       </a>
   </div>
   </div>
+  <div class="row g-sm-3 mb-3">
 {% endif %}
   {% if show_full_desc %}
-  <div class="row g-sm-3">
-    <div class="col-12">{{ form_macros.form_input(badge_extras.extra_donation, id=id_upgrade_prepend ~ "extra_donation") }}</div>
+    <div class="col-sm">{{ form_macros.input(badge_extras.extra_donation, id=id_upgrade_prepend ~ "extra_donation") }}</div>
   </div>
-  <div class="row g-sm-3">
-    <div class="col-12">
+  <div class="row g-sm-3 mb-3">
+    <div class="col-sm">
       {% if c.BEFORE_SUPERSTAR_DEADLINE %}
         <p>Donate to MAGFest and <a href="https://super.magfest.org/superstars" target="_blank">become a Superstar</a>!
           With a donation of $30 or more, you'll be listed as a Superstar donor on our website, have your name and 
@@ -34,13 +33,10 @@
         MAGFest, Inc. is a 501(c)(3) charitable organization, so your donation is tax-deductible. 
         For more information, please contact {{ "accounting@magfest.org"|email_to_link }}.</p>
     </div>
-  </div>
   {% else %}
-  <div class="row g-sm-3">
-    <div class="col-12 col-sm-6 mb-3">
+    <div class="col-sm">
       <div class="form-text">{{ badge_extras.extra_donation.label.text }}</div>
       <div class="form-control-plaintext h5">{{ attendee.extra_donation|format_currency }} {{ macros.upgrade_button('extra-donation') }}</div>
     </div>
-  </div>
   {% endif %}
 {% endblock %}
