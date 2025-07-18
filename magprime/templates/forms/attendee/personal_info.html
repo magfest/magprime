@@ -12,9 +12,9 @@
 {% block age %}
   <div class="col-sm">
     {% if c.COLLECT_EXACT_BIRTHDATE %}
-      {{ form_macros.input(personal_info.birthdate, admin_text=attendee.age_group_conf.desc, required_if="!badge_placeholder") }}
+      {{ form_macros.input(personal_info.birthdate, admin_text=attendee.age_group_conf.desc, required_if="!unassignedOrPlaceholder") }}
     {% else %}
-      {{ form_macros.input(personal_info.age_group, required_if="!badge_placeholder") }}
+      {{ form_macros.input(personal_info.age_group, required_if="!unassignedOrPlaceholder") }}
     {% endif %}
   </div>
   <div class="col-sm">

@@ -107,6 +107,12 @@ class AdminBadgeExtras:
 
 
 @MagForm.form_mixin
+class PanelistInfo:
+    def display_name_desc(self):
+        return "The personal or group name to show on the schedule to let people know who is hosting the panel. Leave this field blank if you do not want a name displayed on the schedule or on digital displays at the event."
+
+
+@MagForm.form_mixin
 class PanelInfo:
     broadcast_title = StringField("Broadcast Title",
                                   description="The short version of this panel's title that will appear on screens and digital signage. Max 40 characters.")
