@@ -123,3 +123,12 @@ class PanelInfo:
     
     def public_description_label(self):
         return Markup('Guidebook Description <span class="popup"><a href="../static_views/guidebook_html.html" target="_blank"><i class="fa fa-question-circle" aria-hidden="true"></i> HTML Guide</a></span>')
+
+
+@MagForm.form_mixin
+class RoomLottery:
+    def earliest_checkin_date_label(self):
+        return "Check-In Date"
+    
+    def latest_checkout_date_label(self):
+        return "Check-Out Date"

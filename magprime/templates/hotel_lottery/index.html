@@ -1,0 +1,41 @@
+{% extends 'uber/templates/hotel_lottery/index.html' %}
+
+{% block lottery_info %}
+<p>
+    Welcome {% if application.status == c.COMPLETE %}back {% endif %} to the {{ c.EVENT_NAME }} hotel lottery!
+    {% if not app_locked %}
+    The hotel lottery form will close at <strong>{{ application.current_lottery_deadline|datetime_local }}</strong>.
+    {% endif %}
+</p>
+
+<p>
+    You currently {{ application.current_status_str }}.
+    {% if not application.parent_application and not application.group_members and not application.is_staff_entry and c.HOTEL_LOTTERY_DOUBLE in application.room_type_preference_ints %}
+    Individual hotel lottery entries will <strong>ONLY</strong> qualify for a King room. If you would like a Double room,
+    {% if not application.room_group_name %}you must create a roommate group and add at least one person{% else %}please make sure to add at least one person to your roommate group{% endif %}
+    before the lottery ends.
+    {% endif %}
+</p>
+
+{% if application.is_staff_entry and not c.STAFF_HOTEL_LOTTERY_OPEN %}
+    <p>
+        <strong><span class="text-danger">Staff pre-lottery room selection is now closed.</span></strong>
+        You can view your entry details below.
+    </p>
+    <p>
+        {% if app_or_parent.entry_type == c.ROOM_ENTRY or not app_or_parent.room_opt_out %}
+        You will receive a booking link with <strong>exactly the room you requested</strong>.
+        {% endif %}
+        {% if app_or_parent.entry_type == c.SUITE_ENTRY %}
+        Suite selection occurs during the attendee hotel lottery.
+        If you win a suite, your room booking will be cancelled and you will receive instructions on how to book your suite.
+        {% endif %}
+    </p>
+{% endif %}
+{% if not c.HOTEL_LOTTERY_OPEN %}
+<p>
+    <strong><span class="text-danger">The hotel lottery is now closed.</span></strong>
+    You can view your entry details below. Your entry is already being processed; any changes you make will NOT affect your potential room award.
+</p>
+{% endif %}
+{% endblock %}
