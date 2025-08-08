@@ -1,0 +1,26 @@
+{% extends 'signup_base.html' %}
+{% block title %}Hotel Type Selection{% endblock %}
+
+{% block content %}
+<h2> Staff Pre-Lottery </h2>
+All staff are eligible for EITHER:
+<ul>
+    <li>
+        <strong>Staff Crash Space</strong>: A spot in a room inside the Gaylord, paid for by MAGFest. You will be roomed with up to 3 other staff.
+        <a href="{{ c.STAFF_ROOM_FAQ_URL }}" target="_blank">Crash Space FAQ <i class="fa fa-external-link"></i></a>
+    </li>
+    <li>
+        <strong>Staff Pre-Lottery</strong>: A room of your choosing with no pre-selected roommates. This room is SELF-PAID with reimbursement options for Department Heads.
+        <a href="https://magfest.notion.site/Staffer-Pre-Lottery-Room-Requests-ec3e6cbd1b174cfea8cc0aa3e47138cf" target="_blank">Pre-Lottery FAQ <i class="fa fa-external-link"></i></a>
+    </li>
+</ul>
+<p>
+Below you can choose which option you're planning on using. You can do this up until <strong>{{ c.HOTEL_LOTTERY_STAFF_DEADLINE|datetime_local }}</strong>.
+<strong><em>If you choose to participate in the staff pre-lottery, you will NOT qualify for staff crash space.</em></strong>
+</p>
+<form method="post" action="prelottery">
+<input type="hidden" name="attendee_id" value="{{ attendee.id }}" />
+<button type="submit" name="prelottery" value="1" class="btn btn-outline-primary">Opt Into Staff Pre-Lottery</button>
+<button type="submit" name="crash_space" value="1" class="btn btn-outline-primary">Opt Into Staff Crash Space</button>
+</form>
+{% endblock %}

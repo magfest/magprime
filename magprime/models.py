@@ -4,11 +4,31 @@ from residue import CoerceUTF8 as UnicodeText, UUID
 from markupsafe import Markup
 
 from uber.config import c
-from uber.custom_tags import readable_join, format_image_size
+from uber.custom_tags import readable_join, format_image_size, email_only, email_to_link
 from uber.decorators import presave_adjustment, render
 from uber.models import Boolean, MagModel, Choice, DefaultColumn as Column, Session, GuestImage
 from uber.tasks.email import send_email
 from uber.utils import add_opt, check, localized_now, remove_opt, GuidebookUtils
+
+
+@Session.model_mixin
+class LotteryApplication:
+    @property
+    def staff_award_status_str(self):
+        if not self.is_staff_entry:
+            return ''
+        app_or_parent = self.parent_application or self
+        if not c.HOTEL_ROOM_INVENTORY or not app_or_parent.finalized:
+            return ''
+        if self.parent_application:
+            you_str = f"Your {c.HOTEL_LOTTERY_GROUP_TERM.lower()}'s hotel room"
+        else:
+            you_str = "Your hotel room"
+        
+        if app_or_parent.assigned_hotel:
+            return f"{you_str} has been successfully assigned."
+        else:
+            return f"Something went wrong with {you_str.lower()}. Please contact STOPS at {email_to_link(email_only(c.STAFF_EMAIL))}."
 
 
 @Session.model_mixin
