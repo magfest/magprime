@@ -2,7 +2,7 @@
 
 {% block x_data %}
 {{ super() }}
-panel_name: '{{ panel_info.name.data }}',
+panel_name: `{{ panel_info.name.data|tojson }}`,
 rating: {{ panel_info.granular_rating.data|jsonize }},
 get longName() { return this.panel_name.length > 40 },
 get showMagScouts() { return this.rating == '{{ c.NONE }}'},
