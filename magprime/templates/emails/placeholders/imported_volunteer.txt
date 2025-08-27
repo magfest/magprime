@@ -2,12 +2,17 @@
 
 {% endif %}Hey all! We’re so excited to see you at Super {{ c.EVENT_YEAR }}! You're eligible for a complimentary badge for the next {{ c.EVENT_NAME }}, which will be {{ event_dates() }} {{ c.EVENT_YEAR }}. You can accept your badge by visiting {{ c.URL_BASE }}/preregistration/confirm?id={{ attendee.id }}.
 
-At this stage, you can choose whether or not you'd like to continue volunteering. By default, the checkbox labeled "Yes, I want to staff MAGFest" is toggled ON, which means you're already enrolled and will receive emails about signups, checklists, etc... If you are not interested in volunteering, you can email STOPS at {{ c.STAFF_EMAIL|email_only }} to ask that your badge be converted to a comped attendee badge. Please note you may only do this once, as staff status must be used at the event for which it is earned. If you choose to convert your badge type, you will need to purchase a badge in subsequent years and start over again as a volunteer.
+At this stage, you can choose whether or not you'd like to continue volunteering. By default, the checkbox labeled "Yes, I want to staff MAGFest" is toggled ON, which means you're already enrolled and will receive emails about signups, checklists, etc... If you are not interested in volunteering, you can email STOPS at {{ c.STAFF_EMAIL|email_only }} to ask that your badge be converted to a comped attendee badge. Please note you may only do this once, as you will drop from staff if you do not complete at least 24 weighed hours or defer your status to the following year. If you do choose to convert your badge type, you will need to purchase a badge in subsequent years and start over again as a volunteer in order to return to staff (pending event staff capacity).
 
 If you are unable to attend this year for any reason, or would like to take a gap year and purchase an attendee badge, you can contact STOPS to request a one-year deferral.
 
-Staffers who confirm their badges will be emailed when the Volunteer Checklist launches. The Checklist will need to be completed before the event starts, and will have a link to our volunteering guidelines and agreement. As a returning volunteer, you'll also be eligible for crash space in one of our staffer hotel rooms. This is included in our Volunteer Checklist, but you'll be emailed closer to the event with details about how to sign up.
+Staffers who confirm their badges will be eligible for one of two housing options: Crash Space (4 staffers assigned to a MAG-paid room matched according to preference) or a Pre-Lottery room reservation (guaranteed self-paid room for personal use, for returning staffers only). Eligible staffers can request crash space as a part of their volunteer checklist. These perks are offered to all eligible Super MAGFest staffers, giving multiple options for staff housing. Please note, staffers are only eligible for one of these options, and must choose between the MAG-paid and self-paid options (or utilizing neither). The deadline for the pre-lottery option is September 14th, at which point staffers will only be able to request Crash Space.
 
-Please let us know if you have any questions.
+Additionally, you will receive an email when the Volunteer Checklist launches. The Checklist will need to be completed before the event starts, and will have a link to our volunteering guidelines and agreement. 
+
+Pre-Lottery policy, process, and dates for Super 2026: https://www.notion.so/magfest/Staffer-Pre-Lottery-Room-Requests-ec3e6cbd1b174cfea8cc0aa3e47138cf
+Staff Crash Space FAQ: https://www.notion.so/magfest/Staff-Room-FAQ-656edde68e324dae97891c2002439465#6208e38682be40fe8a1083b9377770a0
+
+Please let us know if you have any questions by replying to this email or emailing us at {{ c.STAFF_EMAIL|email_only }}.
 
 {{ email_signature }}
