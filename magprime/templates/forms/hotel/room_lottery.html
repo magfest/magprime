@@ -1,0 +1,33 @@
+{% extends 'uber/templates/forms/hotel/room_lottery.html' %}
+
+{% block check_in_out_dates_desc %}
+<p>
+    Rooms are available from {{ c.HOTEL_LOTTERY_CHECKIN_START|full_date_local }} to {{ c.HOTEL_LOTTERY_CHECKOUT_END|full_date_local }}. {{ room_requirements }}
+</p>
+{% if app_or_parent.latest_checkin_date or app_or_parent.earliest_checkout_date or not read_only %}
+    {% if read_only %}Below are your{% else %}Enter your{% endif %}
+        preferred dates for check-in and check-out{% if not read_only %} below{% endif %}.
+    </p>
+{% endif %}
+<p>As a reminder, {{ c.EVENT_NAME_AND_YEAR }} runs from {{ c.EPOCH.date().strftime('%A %m/%d/%Y') }} to {{ c.ESCHATON.date().strftime('%A %m/%d/%Y') }}.</p>
+{% endblock %}
+
+{% block check_in_out_dates_form %}
+<div class="row g-sm-3 mb-3">
+    <div class="col-sm">{{ form_macros.input(room_or_suite_lottery.earliest_checkin_date, readonly=read_only) }}</div>
+    <div class="col-sm">{{ form_macros.input(room_or_suite_lottery.latest_checkout_date, readonly=read_only) }}</div>
+</div>
+
+{% if not read_only and application.current_step <= steps.counter %}
+<div class="row justify-content-end">
+    <div class="col col-auto">
+        <button type="submit" id="step-{{ steps.counter }}-submit" class="btn btn-primary" name="current_step" value="{{ steps.counter }}">Save and Continue</button>
+    </div>
+</div>
+{% endif %}
+{% if not read_only and application.status != c.COMPLETE %}
+<div class="collapse text-end" id="step-{{ steps.counter }}-save-reminder">
+    <em>Scroll down to your current step and click "Save and Continue" to save changes.</em>
+</div>
+{% endif %}
+{% endblock %}
