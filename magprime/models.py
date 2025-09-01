@@ -125,7 +125,6 @@ class Group:
 @Session.model_mixin
 class Attendee:
     special_merch = Column(Choice(c.SPECIAL_MERCH_OPTS), default=c.NO_MERCH)
-    group_name = Column(UnicodeText)
     donate_badge_cost = Column(Boolean, default=False)
 
     @presave_adjustment
