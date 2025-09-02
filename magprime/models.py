@@ -228,6 +228,14 @@ class Attendee:
             return 10
         elif self.amount_extra >= c.SHIRT_LEVEL:
             return 5
+        
+    @property
+    def selected_hotel_type(self):
+        if not self.hotel_eligible:
+            return 'enter the staff prelottery'
+        elif self.lottery_application and self.lottery_application.status == c.DISQUALIFIED:
+            return 'utilize staff crash space'
+        return ''
 
     @property
     def volunteer_event_shirt_eligible(self):

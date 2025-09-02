@@ -1,6 +1,21 @@
 {% extends 'signup_base.html' %}
 {% block title %}Hotel Type Selection{% endblock %}
 
+{% set prelottery_class = "btn-outline-primary" %}
+{% set prelottery_text = "Opt Into" %}
+{% set crash_space_class = "btn-outline-primary" %}
+{% set crash_space_text = "Opt Into" %}
+
+{% if 'prelottery' in attendee.selected_hotel_type %}
+{% set prelottery_class = "btn-primary" %}
+{% set prelottery_text = "Stay In" %}
+{% endif %}
+
+{% if 'crash space' in attendee.selected_hotel_type %}
+{% set crash_space_class = "btn-primary" %}
+{% set crash_space_text = "Keep" %}
+{% endif %}
+
 {% block content %}
 <h2> Staff Pre-Lottery </h2>
 All staff are eligible for EITHER:
@@ -14,13 +29,33 @@ All staff are eligible for EITHER:
         <a href="https://magfest.notion.site/Staffer-Pre-Lottery-Room-Requests-ec3e6cbd1b174cfea8cc0aa3e47138cf" target="_blank">Pre-Lottery FAQ <i class="fa fa-external-link"></i></a>
     </li>
 </ul>
+{% if c.AFTER_HOTEL_LOTTERY_STAFF_DEADLINE %}
+<p>The deadline for choosing between the staff pre-lottery and staff crash space has passed.</p>
+<a href="../staffing/index" class="btn btn-outline-secondary">Back to Checklist</a>
+{% elif attendee.selected_hotel_type and c.STAFF_HOTEL_LOTTERY_OPEN and attendee.lottery_application and attendee.lottery_application.status not in [c.DISQUALIFIED, c.WITHDRAWN] %}
+<p>
+    Since you have an active pre-lottery entry, you can't opt into staff crash space.
+    Please <a href="../hotel_lottery/index?attendee_id={{ attendee.id }}" target="_blank">withdraw your entry from the pre-lottery</a> first, then refresh the page.
+</p>
+
+<a href="../staffing/index" class="btn btn-outline-secondary">Back to Checklist</a>
+{% else %}
 <p>
 Below you can choose which option you're planning on using. You can do this up until <strong>{{ c.HOTEL_LOTTERY_STAFF_DEADLINE|datetime_local }}</strong>.
-<strong><em>If you choose to participate in the staff pre-lottery, you will NOT qualify for staff crash space.</em></strong>
 </p>
+
+<p>
+    <strong><em>If you choose to participate in the staff pre-lottery, you will NOT qualify for staff crash space.</em></strong>
+    {% if attendee.lottery_application and attendee.lottery_application.status not in [c.DISQUALIFIED, c.WITHDRAWN] %}
+    Also, please note that opting into staff crash space will delete your current lottery entry.
+    {% endif %}
+</p>
+
 <form method="post" action="prelottery">
 <input type="hidden" name="attendee_id" value="{{ attendee.id }}" />
-<button type="submit" name="prelottery" value="1" class="btn btn-outline-primary">Opt Into Staff Pre-Lottery</button>
-<button type="submit" name="crash_space" value="1" class="btn btn-outline-primary">Opt Into Staff Crash Space</button>
+
+<button type="submit" name="prelottery" value="1" class="btn {{ prelottery_class }}">{{ prelottery_text }} Staff Pre-Lottery</button>
+<button type="submit" name="crash_space" value="1" class="btn {{ crash_space_class }}">{{ crash_space_text }} Staff Crash Space</button>
 </form>
+{% endif %}
 {% endblock %}

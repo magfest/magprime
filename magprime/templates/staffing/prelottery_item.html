@@ -1,23 +1,33 @@
 {% import 'macros.html' as macros %}
 {% if c.HOTELS_ENABLED and c.PRE_CON and c.HOTEL_LOTTERY_STAFF_START %}
-{% set selected_hotel_type = not attendee.hotel_eligible or attendee.lottery_application and attendee.lottery_application.status == c.DISQUALIFIED %}
+
 <li>
-    {{ macros.checklist_image(selected_hotel_type) }}
+    {{ macros.checklist_image(attendee.selected_hotel_type) }}
     {% if c.BEFORE_HOTEL_LOTTERY_STAFF_DEADLINE %}
-        {% if not selected_hotel_type %}
-        <a href="prelottery">Tell us</a> by <strong>{{ c.HOTEL_LOTTERY_STAFF_DEADLINE|datetime_local }}</strong> whether you would like to utilize staff crash space or buy a self-paid room in the staff pre-lottery.
+        {% if not attendee.selected_hotel_type %}
+            <a href="prelottery">Tell us</a> by <strong>{{ c.HOTEL_LOTTERY_STAFF_DEADLINE|datetime_local }}</strong> whether you would like to utilize staff crash space or buy a self-paid room in the staff pre-lottery.
         {% else %}
-        You've already let us know that you will {% if not attendee.hotel_eligible %}{% if c.STAFF_HOTEL_LOTTERY_OPEN %}<a href="../hotel_lottery/index?attendee_id={{ attendee.id }}" target="_blank">enter the staff pre-lottery</a>{% else %}enter the staff pre-lottery{% endif %}{% else %}utilize staff crash-space{% endif %},
-        but you can <a href="prelottery">change your selection</a> until <strong>{{ c.HOTEL_LOTTERY_STAFF_DEADLINE|datetime_local }}</strong>.
+            {% if c.STAFF_HOTEL_LOTTERY_OPEN and attendee.lottery_application and attendee.lottery_application.status not in [c.DISQUALIFIED, c.WITHDRAWN] %}
+            Since you have an active pre-lottery entry, you can't opt into staff crash space.
+            You can <a href="../hotel_lottery/index?attendee_id={{ attendee.id }}" target="_blank">withdraw your entry from the pre-lottery</a> to be eligible for staff crash space again.
+            {% else %}
+            You've already let us know that you will {% if c.STAFF_HOTEL_LOTTERY_OPEN and 'prelottery' in attendee.selected_hotel_type %}<a href="../hotel_lottery/index?attendee_id={{ attendee.id }}" target="_blank">{{ attendee.selected_hotel_type }}</a>{% else %}{{ attendee.selected_hotel_type }}{% endif %},
+            but you can <a href="prelottery">change your selection</a> until <strong>{{ c.HOTEL_LOTTERY_STAFF_DEADLINE|datetime_local }}</strong>.
+            {% endif %}
         {% endif %}
     {% else %}
-        {% if attendee.lottery_application and attendee.lottery_application.status != c.DISQUALIFIED %}
-            Since you've entered the staff pre-lottery, you will not be eligible for staff crash space. Check your email for information about your pre-lottery booking.
+        {% if attendee.lottery_application and (attendee.lottery_application.status == c.COMPLETE or attendee.lottery_application.status in c.HOTEL_LOTTERY_AWARD_STATUSES) %}
+            Since you've entered the staff pre-lottery, you will not be eligible for staff crash space.
+            {% if attendee.lottery_application.status == c.AWARDED %}
+            If you changed your mind, you can still <a href="../hotel_lottery/index?attendee_id={{ attendee.id }}" target="_blank">cancel your awarded room</a> to be eligible for staff crash space again.
+            {% elif attendee.lottery_application.status != c.SECURED %}
+            Check your email for information about your pre-lottery booking.
+            {% endif %}
         {% else %}
             The deadline for the staff pre-lottery has passed.
-            {% if not attendee.hotel_eligible %}
+            {% if 'prelottery' in attendee.selected_hotel_type %}
             You are NOT eligible for staff crash space; please contact us at {{ c.STAFF_EMAIL|email_only|email_to_link }} if you have any questions.
-            {% elif selected_hotel_type %}
+            {% elif attendee.selected_hotel_type %}
             You opted into staff crash space -- you have until {{ c.ROOM_DEADLINE|datetime_local }} to fill out your request.
             {% else %}
             You still qualify for staff crash space -- you have until {{ c.ROOM_DEADLINE|datetime_local }} to fill out your request.
