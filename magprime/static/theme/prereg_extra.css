@@ -1,6 +1,6 @@
 .masthead {
     background-image: url("../theme/banner.png");
-    padding-top: 23.54%; /* The height is 23.54% of the width (452px / 1920px) */
+    padding-top: 30.86%; /* The height is 30.86% of the width (500px / 1620px) */
 }
 
 @media
@@ -50,9 +50,6 @@ only screen and (min-resolution:2dppx) {
 
 body {
     background-color: #00529a;
-    /*background-image: url("../theme/static-background.jpg");*/
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: fixed;
-    background-size: 100%;
+    background-image: url("../theme/static-background.png");
+
     }
