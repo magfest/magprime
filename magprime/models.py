@@ -208,19 +208,6 @@ class Attendee:
         regdesk_info_append = " [{}]".format(self.regdesk_info) if self.regdesk_info else ""
         return "MUST TALK TO SECURITY before picking up badge{}".format(regdesk_info_append)
 
-    @classproperty
-    def searchable_fields(cls):
-        # List of fields for the attendee search to check search terms against
-        return ['first_name', 'last_name', 'legal_name', 'badge_printed_name', 'group_name',
-                'email', 'comments', 'admin_notes', 'for_review', 'transfer_code']
-
-    @classproperty
-    def searchable_bools(cls):
-        return ['placeholder', 'requested_accessibility_services', 'can_spam',
-                'got_merch', 'got_staff_merch', 'confirmed', 'checked_in', 'staffing', 
-                'agreed_to_volunteer_agreement', 'reviewed_emergency_procedures', 'walk_on_volunteer', 
-                'can_work_setup', 'can_work_teardown', 'hotel_eligible', 'attractions_opt_out', 'donate_badge_cost']
-    
     def calculate_shipping_fee_cost(self):
         if self.amount_extra >= c.SEASON_LEVEL:
                 return 15
