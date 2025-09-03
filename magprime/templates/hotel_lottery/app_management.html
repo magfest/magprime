@@ -32,7 +32,7 @@
         {% endif %}
     </p>
 {% endif %}
-{% if not c.HOTEL_LOTTERY_OPEN %}
+{% if not application.is_staff_entry and application.current_lottery_closed %}
 <p>
     <strong><span class="text-danger">The hotel lottery is now closed.</span></strong>
     You can view your entry details below. Your entry is already being processed; any changes you make will NOT affect your potential room award.
