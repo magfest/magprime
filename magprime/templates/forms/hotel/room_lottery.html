@@ -14,8 +14,8 @@
 
 {% block check_in_out_dates_form %}
 <div class="row g-sm-3 mb-3">
-    <div class="col-sm">{{ form_macros.input(room_or_suite_lottery.earliest_checkin_date, readonly=read_only) }}</div>
-    <div class="col-sm">{{ form_macros.input(room_or_suite_lottery.latest_checkout_date, readonly=read_only) }}</div>
+    <div class="col-sm">{{ form_macros.input(room_or_suite_lottery.earliest_checkin_date) }}</div>
+    <div class="col-sm">{{ form_macros.input(room_or_suite_lottery.latest_checkout_date) }}</div>
 </div>
 
 {% if not read_only and application.current_step <= steps.counter %}
