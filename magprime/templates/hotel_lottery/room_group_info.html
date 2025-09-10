@@ -1,0 +1,45 @@
+<p>
+    In an effort to efficiently allocate rooms, anyone planning to room together may form a group of up to four people total.
+    Each individual entry in a {{ c.HOTEL_LOTTERY_GROUP_TERM|lower }} is weighted as though that person entered individually, plus groups of a certain size will qualify for certain room types.
+    This will hopefully reduce cancellation churn.
+</p>
+
+<h3>Creating {{ c.HOTEL_LOTTERY_GROUP_TERM }}s</h3>
+<p>
+    To form a {{ c.HOTEL_LOTTERY_GROUP_TERM|lower }}:
+    <ol>
+        <li>Choose one person to be the "group leader." They will be the main responsible party, able to update the group's room and/or suite entry, and remove people from the group.</li>
+        <li>Have the group leader follow the link in their registration confirmation email to complete a lottery entry for a room and/or suite.</li>
+        <li>After completing a lottery entry, the group leader will receive a confirmation email with a link to create the group and their confirmation number.</li>
+        <li>After using the link to create a group, the group leader should send the other group members their confirmation number and email address.</li>
+        <li>The other group members (up to three) can then follow the link in their registration confirmation email to enter the lottery, then use the "Join {{ c.HOTEL_LOTTERY_GROUP_TERM }}" button on their lottery options page. Afterwards, they can enter the group leader's confirmation number and email address to join the group.</li>
+    </ol>
+</p>
+
+<p>
+    When you join a {{ c.HOTEL_LOTTERY_GROUP_TERM|lower }}, your existing entry is automatically withdrawn from the lottery.
+    For example, if you currently have a suite lottery entry, but join a group that only has a room lottery entry, you will <em>only</em> be entered into the room lottery.
+</p>
+
+<h3>Occupancy Limits</h3>
+    {{ c.EVENT_NAME }} policy has set the following occupancy parameters based on hotel policies:
+    <ul>
+        <li>A single person in the lottery will not be assigned a double-double room. Double-doubles will be held for roommate groups of 2, 3 or 4 people.</li>
+        <li>A roommate group of 4 people will not be assigned a king room, as king rooms cannot comfortably accommodate 4 people.</li>
+    </ul>
+
+<h3>Additional Notes on {{ c.HOTEL_LOTTERY_GROUP_TERM }}s</h3>
+<p>
+    <ul>
+        <li>{{ c.HOTEL_LOTTERY_GROUP_TERM|capitalize }}s awarded a room are not guaranteed rollaway beds.</li>
+        <li>For privacy and security reasons, {{ c.EVENT_NAME }} is unable to answer questions related to group members or status.</li>
+        <li>
+            By their very nature, hotel bookings include the legal names of all guests.
+            Lottery award notifications and hotel booking confirmations both contain the names of all guests.
+            <strong>We strongly encourage people rooming together to know each other well.</strong>
+            Should you be uncomfortable with your roommate knowing your identity,
+            or if one of your roommates is uncomfortable with sharing theirs,
+            we gently suggest rooming with others may not be in your best interest.
+        </li>
+    </ul>
+</p>

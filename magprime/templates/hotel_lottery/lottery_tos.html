@@ -1,0 +1,26 @@
+<p>
+    The {{ c.EVENT_NAME }} room lottery is used to allocate all available room types in the {{ c.EVENT_NAME }} room blocks in all National Harbor hotels.
+    This includes all available standard rooms, ADA rooms, and suites. These rooms are only available through the lottery, and any
+    unclaimed or cancelled rooms will be returned to the lottery pool of available rooms until {{ c.HOTEL_LOTTERY_FORM_DEADLINE|datetime_local("%B %-d, %Y at %-I:%M%p %Z") }}.
+    {{ c.ORGANIZATION_NAME }} cannot assist with rooms booked outside our official process – even at hotels we may have a block of rooms with. Beware of scams!
+</p>
+<p>
+    <ul>
+        <li>
+            The first round of the lottery is only open to {{ c.EVENT_NAME_AND_YEAR }} attendees who registered and submitted their hotel lottery preferences before {{ c.HOTEL_LOTTERY_FORM_WAITLIST|datetime_local("%B %-d, %Y at %-I:%M%p %Z") }}.
+            Attendees who register afterwards can enter their lottery information for later lottery runs to fill cancelled rooms.
+        </li>
+        <li>The lottery is only open to registered attendees and dealers.</li>
+        <li>Only one room entry and one suite entry is allowed per attendee. Entries may be modified or withdrawn while the lottery is open.</li>
+        {% if c.SHOW_HOTEL_LOTTERY_GROUPS %}
+        <li>Attendees wishing to enter as a group should designate a "group leader" to complete a single room and/or suite entry. The group leader can then invite others to join their group as group members.</li>
+        {% endif %}
+        <li>The lottery form will ask for your check-in and check-out dates. You then rank your hotel choice and type of room in order of preference.</li>
+        <li>If you receive a room award, you must provide valid credit card information for the one-night deposit to be charged. If the reservation is cancelled in accordance with the cancellation policy the deposit will be refunded.</li>
+    </ul>
+</p>
+<p>
+    Detailed instructions are provided at each step explaining what information is needed.
+    Additional information is available on the <a href="https://super.magfest.org/hotel-info" target="_blank">{{ c.EVENT_NAME }} Hotel Information</a> page,
+    or you may reach out to our <a href="mailto:{{ c.HOTEL_LOTTERY_EMAIL|email_only }}?subject=Hotel Lottery Question" target="_blank">Hotel Team</a>.
+</p>

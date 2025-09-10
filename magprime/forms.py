@@ -127,6 +127,11 @@ class PanelInfo:
 
 @MagForm.form_mixin
 class RoomLottery:
+    def wants_ada_desc(self):
+        return """Checking this box does not guarantee you a room. It lets MAGFest know that the room you may receive should meet your needs
+               as noted below. If you do not receive a room in the initial lottery, rooms will continue to be assigned as room cancellations
+               come in. Your information below remains throughout the lottery assignment process."""
+
     def earliest_checkin_date_label(self):
         return "Check-In Date"
     

@@ -1,0 +1,18 @@
+<p>
+    Your information from <a href="../preregistration/confirm?id={{ attendee.id }}" target="_blank">your registration</a> will be used in the hotel lottery in the following ways:
+    <ul>
+        <li>Your current email address (<strong>{{ attendee.email }}</strong>) will be used for all hotel lottery notifications.</li>
+        {% if c.SHOW_HOTEL_LOTTERY_GROUPS %}
+        <li>If you are a {{ c.HOTEL_LOTTERY_GROUP_TERM|lower }} leader, your group members will be required to enter your email address along with your lottery entry's confirmation number to join your group, so you will need to share this information with them.</li>
+        {% endif %}
+        <li>
+            When reservation requests are turned over to the respective hotels, your registration contact information will be used, including legal name, phone number, email, and ZIP code.
+            You will need to complete all the required fields in the hotel's Passkey system to confirm your reservation.
+            <ul>
+            <li>Hotels require your legal first and last name to match the photo ID you use during check-in.</li>
+            <li>Transferring your hotel room is not permitted. If you do not need your hotel room anymore, cancel it within Passkey, it will go back into the pool to be assigned to another {{ c.EVENT_NAME }} attendee.</li>
+            <li>For more information, please review our <a href="{{ c.PRIVACY_POLICY_URL }}" target="_blank">privacy policy</a>.</li>
+            </ul>
+        </li>
+    </ul>
+</p>

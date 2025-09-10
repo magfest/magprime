@@ -1,15 +1,13 @@
 {% extends 'uber/templates/forms/hotel/room_lottery.html' %}
 
 {% block check_in_out_dates_desc %}
-<p>
-    Rooms are available from {{ c.HOTEL_LOTTERY_CHECKIN_START|full_date_local }} to {{ c.HOTEL_LOTTERY_CHECKOUT_END|full_date_local }}. {{ room_requirements }}
-</p>
 {% if app_or_parent.latest_checkin_date or app_or_parent.earliest_checkout_date or not read_only %}
     {% if read_only %}Below are your{% else %}Enter your{% endif %}
         preferred dates for check-in and check-out{% if not read_only %} below{% endif %}.
     </p>
 {% endif %}
-<p>As a reminder, {{ c.EVENT_NAME_AND_YEAR }} runs from {{ c.EPOCH.date().strftime('%A %m/%d/%Y') }} to {{ c.ESCHATON.date().strftime('%A %m/%d/%Y') }}.</p>
+<p>If there are any issues reserving the nights that you request at your assigned hotel, the MAGFest Hotel Team will reach out to you. Ask for the nights you want – it can be more difficult to add nights later than cancel extra days later.</p>
+<p>Note: All reservations MUST be for a minimum of 3 nights and must include {{ c.EPOCH.date().strftime('%A %b %-d') }} – {{ c.ESCHATON.date().strftime('%A %b %-d') }} (the days of {{ c.EVENT_NAME_AND_YEAR }}).</p>
 {% endblock %}
 
 {% block check_in_out_dates_form %}
@@ -30,4 +28,26 @@
     <em>Scroll down to your current step and click "Save and Continue" to save changes.</em>
 </div>
 {% endif %}
+{% endblock %}
+
+{% block ada_info_desc %}
+<p>
+    All hotels have ADA-compliant rooms which can accommodate those with mobility, hearing, or visual impairments.
+    {{ c.EVENT_NAME }} will likely receive more ADA requests than available rooms; once ADA rooms are exhausted, standard rooms are awarded.
+</p>
+{% endblock %}
+
+{% block ada_requests_desc %}
+When making your request, be as specific about your needs (wheelchair accessible, strobe light on fire alarm, room placed near elevator,
+low floor etc.) as possible. You do not need to disclose your diagnoses.
+</div>
+</div><div class="row g-3 mb-3"><div>Further questions may be directed to accessibility@magfest.org.
+{% endblock %}
+
+{% block hotel_and_room_type_ranking_desc %}
+<p class="hotel_and_room_type_ranking">
+    Rank your choice of hotel and room type below by clicking and dragging options from "Available" to "Selected" in order of preference.
+    At least one selection is required. Not all hotels/room types need be selected. Accordingly, <em>please do not select hotels or room types you do not wish to stay at</em>.
+    Pricing for our hotel rooms, suites, basic information and links to their websites can be found on <a href="{{ c.HOTEL_LOTTERY_URL }}" target="_blank">our website</a>.
+</p>
 {% endblock %}
