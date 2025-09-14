@@ -231,7 +231,8 @@ class Attendee:
     @property
     def staff_merch_items(self):
         """Used by the merch and staff_merch properties for staff swag."""
-        merch = ["Volunteer lanyard"] if self.staffing and self.badge_type != c.CONTRACTOR_BADGE else []
+        merch = ["Volunteer lanyard"] if self.staffing and self.weighted_hours >= 1 and \
+            self.badge_type != c.CONTRACTOR_BADGE else []
         num_staff_shirts_owed = self.num_staff_shirts_owed
         if num_staff_shirts_owed > 0:
             staff_shirts = '{} Staff Shirt{}'.format(num_staff_shirts_owed, 's' if num_staff_shirts_owed > 1 else '')
