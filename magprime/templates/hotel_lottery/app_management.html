@@ -3,7 +3,7 @@
 {% block lottery_info %}
 <p>
     Welcome {% if application.status == c.COMPLETE %}back {% endif %} to the {{ c.EVENT_NAME }} hotel lottery!
-    {% if c.HOTEL_LOTTERY_FORM_WAITLIST and not (c.STAFF_HOTEL_LOTTERY_OPEN and app_or_parent.qualifies_for_staff_lottery) %}
+    {% if c.HOTEL_LOTTERY_FORM_WAITLIST and not app_or_parent.is_staff_entry and not (c.STAFF_HOTEL_LOTTERY_OPEN and app_or_parent.qualifies_for_staff_lottery) %}
         The initial deadline for the first round of the lottery {% if c.AFTER_HOTEL_LOTTERY_FORM_WAITLIST %}was {{ c.HOTEL_LOTTERY_FORM_WAITLIST|datetime_local("%B %-d, %Y at %-I:%M%p %Z") }}{% else %}is <strong>{{ c.HOTEL_LOTTERY_FORM_WAITLIST|datetime_local("%B %-d, %Y at %-I:%M%p %Z") }}</strong>{% endif %}.
         {% if c.AFTER_HOTEL_LOTTERY_FORM_WAITLIST %}Your lottery entry will still be considered when allocating cancelled rooms.{% endif %}
     </p><p>
@@ -40,7 +40,7 @@
 {% if not application.is_staff_entry and application.current_lottery_closed %}
 <p>
     <strong><span class="text-danger">The hotel lottery is now closed.</span></strong>
-    You can view your entry details below. Your entry is already being processed; any changes you make will NOT affect your potential room award.
+    You can view your entry details below.
 </p>
 {% endif %}
 {% endblock %}
