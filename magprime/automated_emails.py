@@ -1,10 +1,29 @@
 from uber.models import Attendee, AutomatedEmail, GuestGroup
-from uber.automated_emails import StopsEmailFixture, AutomatedEmailFixture, MarketplaceEmailFixture
+from uber.automated_emails import StopsEmailFixture, AutomatedEmailFixture, MarketplaceEmailFixture, HotelLotteryEmailFixture
 from uber.config import c
 from uber.utils import before, days_after, days_before, DeptChecklistConf
 
 from magprime.models import SeasonPassTicket
 from magprime.utils import SeasonEvent
+
+
+if c.HOTEL_LOTTERY_STAFF_START:
+    HotelLotteryEmailFixture(
+        f'{c.EVENT_NAME_AND_YEAR} Staff Pre-Lottery Award Notification',
+        'hotel/award_notification.html',
+        lambda a: a.status == c.AWARDED and a.is_staff_entry and (
+            a.booking_url or a.parent_application and a.parent_application.booking_url),
+        ident='hotel_lottery_awarded_staff'
+    )
+
+if c.HOTEL_LOTTERY_FORM_START:
+    HotelLotteryEmailFixture(
+        f'{c.EVENT_NAME_AND_YEAR} Hotel Lottery Notification',
+        'hotel/award_notification.html',
+        lambda a: a.status == c.AWARDED and not a.is_staff_entry and (
+            a.booking_url or a.parent_application and a.parent_application.booking_url),
+        ident='hotel_lottery_awarded'
+    )
 
 
 # leave this off for now, this code is now old and needs updating

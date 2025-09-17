@@ -18,7 +18,7 @@ class LotteryApplication:
         if not self.is_staff_entry:
             return ''
         app_or_parent = self.parent_application or self
-        if not c.HOTEL_ROOM_INVENTORY or not app_or_parent.finalized:
+        if not c.HOTEL_LOTTERY_ROOM_INVENTORY or not app_or_parent.finalized:
             return ''
         if self.parent_application:
             you_str = f"Your {c.HOTEL_LOTTERY_GROUP_TERM.lower()}'s hotel room"
