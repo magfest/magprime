@@ -10,6 +10,13 @@ from magprime.utils import SeasonEvent
 if c.HOTEL_LOTTERY_STAFF_START:
     HotelLotteryEmailFixture(
         f'{c.EVENT_NAME_AND_YEAR} Staff Pre-Lottery Award Notification',
+        'hotel/prelim_notification.html',
+        lambda a: a.status == c.AWARDED and a.is_staff_entry,
+        ident='hotel_lottery_awarded_staff'
+    )
+
+    HotelLotteryEmailFixture(
+        f'{c.EVENT_NAME_AND_YEAR} Staff Pre-Lottery Booking Link',
         'hotel/award_notification.html',
         lambda a: a.status == c.AWARDED and a.is_staff_entry and (
             a.booking_url or a.parent_application and a.parent_application.booking_url),

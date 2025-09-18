@@ -1,0 +1,34 @@
+{% set room_type = 'suite' if app.assigned_suite_type else 'room' %}
+{% set app_or_parent = app.parent_application if app.entry_type == c.GROUP_ENTRY else app %}
+<html>
+<head></head>
+<body>
+<p>
+    {{ app.attendee.full_name }},<br/>
+    <strong><span class="text-success">{{ app.award_status_str }}</span></strong>
+    You can view your awarded {{ room_type }} details below.
+</p>
+<p>
+    This is a preliminary notification only. You will receive an individualized booking link in the next few days where you can confirm your reservation by putting down a credit card.
+</p>
+<p>
+    The email will be titled "{{ c.EVENT_NAME_AND_YEAR }} Staff Pre-Lottery Booking Link" -- please keep an eye out for it so you can lock in your reservation!
+    You will have until {{ app_or_parent.guarantee_deadline|datetime_local }} to do so.
+</p>
+{% if app.is_staff_entry and c.HOURS_FOR_HOTEL_SPACE %}
+<p>
+    If you confirm this room award, you will need to work {{ c.HOURS_FOR_HOTEL_SPACE }} hours of weighted shifts for {{ c.EVENT_NAME_AND_YEAR }} to maintain this perk. If you utilize this perk and do not work the required number of hours, you will lose access to this perk in the future, and may lose the ability to staff in future years.
+</p>
+{% endif %}
+<ul>
+    <li><strong>Hotel</strong>: {{ app_or_parent.assigned_hotel_label['name'] }}</li>
+    <li><strong>Room Type</strong>: {{ app_or_parent.assigned_suite_type_label['name'] if app_or_parent.assigned_suite_type else app_or_parent.assigned_room_type_label['name'] }}</li>
+    <li><strong>Check-In/Out</strong>: {{ app_or_parent.assigned_check_in_date.strftime("%B %-d") }} to {{ app_or_parent.assigned_check_out_date.strftime("%B %-d") }}</li>
+    {% if not app.parent_application and app.wants_ada %}<li><strong>Requested Accommodations</strong>: {{ app.ada_requests }}</li>{% endif %}
+    {% if not app.parent_application %}
+        <li><em>Primary Guest</em>: {{ app.legal_first_name }} {{ app.legal_last_name }}</li>
+        {% if app.group_members %}<li><em>Other Guests</em>: {{ app.group_member_names|readable_join }}</li>{% endif %}
+    {% endif %}
+</ul>
+</body>
+</html>
