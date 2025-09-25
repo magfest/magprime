@@ -1,6 +1,7 @@
 {% extends 'uber/templates/forms/hotel/suite_lottery.html' %}
 
-{% block terms_desc %}
+{% block suite_ranking_desc %}
+{{ super() }}
 <p>
     {% if c.STAFF_HOTEL_LOTTERY_OPEN and application.qualifies_for_staff_lottery %}
     Suite entries are processed during the attendee lottery.
@@ -9,15 +10,5 @@
     {% else %}
     Suite entries are processed first and prioritized above standard room entries in the lottery.
     {% endif %}
-    Suites are in extremely high demand, and necessitate special policies:
-    <ul>
-        <li>A one night, non-refundable deposit is required and will be invoiced on confirmation of the suite.</li>
-        <li>Cancellations must be received on or prior to {{ c.HOTEL_LOTTERY_SUITE_CUTOFF|datetime_local }}, otherwise all guests in that suite will be ineligible for future year suite lotteries in addition to forfeiting the deposit.</li>
-        <li>All suites are directly managed by {{ c.EVENT_NAME }}. Suite confirmations are issued by the convention, not the hotel.</li>
-        <li>Additional policies apply to suites. It is essential all attendees requesting a suite read and understand these policies, as you are required to comply as a condition of retaining the suite during the event, and for eligibility in future years.</li>
-    </ul>
 </p>
-<p>If awarded a suite, you will receive additional information via email regarding your suite.</p>
-
-<p>Suite policies, floor plans and other details pertaining to suites may be found on the Suite FAQ.</p>
 {% endblock %}
