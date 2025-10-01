@@ -1,6 +1,5 @@
 {% import 'macros.html' as macros %}
-{% if c.HOTELS_ENABLED and c.PRE_CON and c.HOTEL_LOTTERY_STAFF_START %}
-
+{% if c.HOTELS_ENABLED and c.PRE_CON and c.HOTEL_LOTTERY_STAFF_START and False %}
 <li>
     {{ macros.checklist_image(attendee.selected_hotel_type) }}
     {% if c.BEFORE_HOTEL_LOTTERY_STAFF_DEADLINE %}
@@ -17,11 +16,16 @@
         {% endif %}
     {% else %}
         {% if attendee.lottery_application and (attendee.lottery_application.status == c.COMPLETE or attendee.lottery_application.status in c.HOTEL_LOTTERY_AWARD_STATUSES) %}
-            Since you've entered the staff pre-lottery, you will not be eligible for staff crash space.
-            {% if attendee.lottery_application.status == c.AWARDED %}
-            If you changed your mind, you can still <a href="../hotel_lottery/index?attendee_id={{ attendee.id }}" target="_blank">cancel your awarded room</a> to be eligible for staff crash space again.
-            {% elif attendee.lottery_application.status != c.SECURED %}
-            Check your email for information about your pre-lottery booking.
+            {% if attendee.hotel_eligible %}
+                You have a <a href="../hotel_lottery/index?attendee_id={{ attendee.id }}" target="_blank">pre-lottery room</a> and have been given the ability to request staff crash space.
+                When requesting crash space, <strong>you may only request nights not covered by your pre-lottery room</strong>.
+            {% else %}
+                Since you've entered the staff pre-lottery, you will not be eligible for staff crash space.
+                {% if attendee.lottery_application.status == c.AWARDED %}
+                If you changed your mind, you can still <a href="../hotel_lottery/decline?id={{ attendee.lottery_application.id }}" target="_blank">cancel your awarded room</a> to be eligible for staff crash space again.
+                {% elif attendee.lottery_application.status != c.SECURED %}
+                Check your email for information about your pre-lottery booking.
+                {% endif %}
             {% endif %}
         {% else %}
             The deadline for the staff pre-lottery has passed.
