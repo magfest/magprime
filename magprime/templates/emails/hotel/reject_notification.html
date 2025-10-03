@@ -3,14 +3,18 @@
 {% block reject_info %}
     {% if not app_or_parent.finalized and c.HOTEL_LOTTERY_OPEN and c.HOTEL_LOTTERY_FORM_WAITLIST and c.AFTER_HOTEL_LOTTERY_FORM_WAITLIST %}
     <p>
+        
         As rooms across all National Harbor hotels become available due to other attendees cancelling, we will continue to assign rooms based on your{% if app.parent_application %} {{ c.HOTEL_LOTTERY_GROUP_TERM|lower }}'s{% endif %} lottery entry.
     
     If you{% if app.parent_application %}r {{ c.HOTEL_LOTTERY_GROUP_TERM|lower }} receives{% else %} receive{% endif %} a room assignment, you will receive an email and
     you{% if app.parent_application %}r {{ c.HOTEL_LOTTERY_GROUP_TERM|lower }} leader{% endif %} will be given the chance to confirm or decline the reservation.
+    The next round of the lottery will be run October 12, and periodically after then. This will be announced on <a href="https://super.magfest.org/hotel-info" target="_blank">our website</a> and on social media.
     </p>
     {% endif %}
     <p>
         We have negotiated discount room blocks at various hotels outside of National Harbor, and <a href="https://docs.google.com/spreadsheets/d/1Z6zd2YDVnbmCogqktnBGjUkJ_a60QO4u-7DFjzD1kRk/edit?gid=0#gid=0" target="_blank">they can be found here</a>.
-        This list is exclusively available to MAGFest attendees until October 31.
+        This list is exclusively available to MAGFest attendees until October 15.
+        For the first time ever, MAGFest will be running free shuttles to these hotels at this event.
+        That information is available and will be updated on <a href="https://super.magfest.org/hotel-info" target="_blank">our website</a>.
     </p>
 {% endblock %}
