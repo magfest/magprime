@@ -14,18 +14,18 @@
 </p>
 
 {% if app_editable %}
-<p class="h4 text-{% if app_or_parent.status in [c.COMPLETE, c.PROCESSED] %}success{% else %}danger{% endif %}">
+<p class="h4 text-{% if app_or_parent.status in [c.COMPLETE, c.PROCESSED] or app_or_parent.finalized %}success{% else %}danger{% endif %}">
     You are currently {{ application.application_status_str }}.
 </p>
 <p>
     {% if not application.parent_application %}
-        {% if app_or_parent.status not in [c.COMPLETE, c.PROCESSED] %}
+        {% if app_or_parent.status not in [c.COMPLETE, c.PROCESSED] and not app_or_parent.finalized %}
             Use the button below to complete your {{ application.entry_type_label|lower }} lottery application.
-        {% else %}You can view your entry details below.{% endif %}
+        {% else %}You can view and update your entry details below.{% endif %}
     {% else %}
-        {% if app_or_parent.status not in [c.COMPLETE, c.PROCESSED] %}
+        {% if app_or_parent.status not in [c.COMPLETE, c.PROCESSED] and not app_or_parent.finalized %}
         Your {{ c.HOTEL_LOTTERY_GROUP_TERM|lower }} leader must review and complete their lottery entry for your group to be entered in the lottery.
-        {% else %}You can view your {{ c.HOTEL_LOTTERY_GROUP_TERM|lower }}'s entry below.
+        {% else %}You can view your {{ c.HOTEL_LOTTERY_GROUP_TERM|lower }}'s entry and update your contact information below.
         {% endif %}
     {% endif %}
     {% if c.SHOW_HOTEL_LOTTERY_GROUPS and not application.parent_application and not application.group_members and c.HOTEL_LOTTERY_DOUBLE in application.room_type_preference_ints %}
