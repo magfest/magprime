@@ -31,6 +31,13 @@ if c.HOTEL_LOTTERY_FORM_START:
             a.booking_url or a.parent_application and a.parent_application.booking_url),
         ident='hotel_lottery_awarded'
     )
+    
+    HotelLotteryEmailFixture(
+        f'{c.EVENT_NAME_AND_YEAR} Hotel Lottery Notification',
+        'hotel/lottery_delay.html',
+        lambda a: a.status == c.AWARDED and not a.is_staff_entry,
+        ident='hotel_lottery_awarded_late'
+    )
 
 
 # leave this off for now, this code is now old and needs updating

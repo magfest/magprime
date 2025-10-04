@@ -1,0 +1,39 @@
+{% set room_type = 'suite' if app.assigned_suite_type else 'room' %}
+{% set app_or_parent = app.parent_application if app.entry_type == c.GROUP_ENTRY else app %}
+<html>
+<head></head>
+<body>
+<p>
+    {{ app.attendee.full_name }},<br/>
+    <strong><span class="text-success">{{ app.award_status_str }}</span></strong>
+    You can view your awarded {{ room_type }} details below.
+</p>
+<p>
+    Due to a technical difficulty, we do not yet have reservation links for attendees to confirm their room awards by putting down their credit cards. 
+    The room award in this email is complete, and we will send out another email once we have reservation links to allow you to confirm or decline the 
+    award. <b>This email will go out no earlier than Monday, October 6 and you will still have a week from the sending of that email to put down a credit 
+    card to confirm your award.</b> We’re sorry for the inconvenience, but we wanted to get out the lottery award notifications themselves as soon as 
+    possible.
+</p>
+<ul>
+    <li><strong>Hotel</strong>: {{ app_or_parent.assigned_hotel_label['name'] }}</li>
+    <li><strong>Room Type</strong>: {{ app_or_parent.assigned_suite_type_label['name'] if app_or_parent.assigned_suite_type else app_or_parent.assigned_room_type_label['name'] }}</li>
+    <li><strong>Check-In/Out</strong>: {{ app_or_parent.assigned_check_in_date.strftime("%B %-d") }} to {{ app_or_parent.assigned_check_out_date.strftime("%B %-d") }}</li>
+    {% if not app.parent_application and app.wants_ada %}<li><strong>Requested Accommodations</strong>: {{ app.ada_requests }}</li>{% endif %}
+    {% if not app.parent_application %}
+        <li><em>Primary Guest</em>: {{ app.legal_first_name }} {{ app.legal_last_name }}</li>
+        {% if app.group_members %}<li><em>Other Guests</em>: {{ app.group_member_names|readable_join }}</li>{% endif %}
+    {% endif %}
+</ul>
+<p>
+    If you were awarded a room in the Gaylord National Harbor, please refer to the guide below for understanding the room you were awarded:
+    <ul>
+        <li>Deluxe Queen room = room with 2 queen beds</li>
+        <li>Deluxe King Room = room with 1 king bed</li>
+    </ul>
+</p>
+<p>
+    Please be on the lookout for another email containing your reservation link sometime on or after Monday, October 6.
+</p>
+</body>
+</html>
