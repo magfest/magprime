@@ -55,5 +55,17 @@ You will receive an email when your {{ c.HOTEL_LOTTERY_GROUP_TERM|lower }}'s res
         {% if app.valid_group_members %}<li><em>Other Guests</em>: {{ app.group_member_names|readable_join }}</li>{% endif %}
     {% endif %}
 </ul>
+{% if app_or_parent.assigned_hotel not in [c.HOTEL_LOTTERY_GAYLORD, c.HOTEL_LOTTERY_AC_HOTEL] and not app.parent_application %}
+<p>
+<strong>
+    If you requested room nights outside of {{ c.EPOCH.date().strftime('%A %b %-d') }} – {{ c.ESCHATON.date().strftime('%A %b %-d') }},
+    these may not be visible on your reservation in Passkey yet.
+</strong>
+</p>
+<p>
+    Once we confirm with our hotel partners that these nights are available, we will modify your reservation accordingly and you will receive an email from Passkey confirming the modification.
+    You do not need to take any action, either now or when you receive the modification notification.
+</p>
+{% endif %}
 </body>
 </html>
