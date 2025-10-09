@@ -2,7 +2,7 @@ from wtforms import validators
 from wtforms.validators import ValidationError, StopValidation
 
 from .config import c
-from uber.validations import TableInfo, BadgeExtras, PanelInfo, RoomLottery
+from uber.validations import TableInfo, BadgeExtras, PanelInfo, RoomLottery, DietaryRestrictions
 
 
 TableInfo.field_validation.required_fields['prior_name'] = ("Please provide your prior table name.", 'has_prior_name')
@@ -26,3 +26,13 @@ def atrium_gaylord_only(form, field):
     if (c.HOTEL_LOTTERY_KING_ATRIUM in field.data or c.HOTEL_LOTTERY_DOUBLE_ATRIUM in field.data
             ) and c.HOTEL_LOTTERY_GAYLORD not in form.hotel_preference.data:
         raise ValidationError("Atrium rooms are only available at the Gaylord National Harbor.")
+
+
+DietaryRestrictions.field_validation.required_fields = {
+    'has_allergies': ("Please let us know if you have any allergies or dietary restrictions.",
+                      'has_allergies', lambda x: x.raw_data == []),
+    'standard': ("Please select one or more dietary restrictions, or 'Other'.",
+                 'has_allergies'),
+    'freeform': ("Please list each of your other allergies, separated by commas.",
+                 'standard', lambda x: c.OTHER in x.data),
+}

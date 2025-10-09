@@ -1,4 +1,6 @@
 {% extends "uber/templates/base.html" %}{% set admin_area=True %}
+{% import 'forms/macros.html' as form_macros with context %}
+{% set dietary_restrictions = dietary_restrictions or forms['dietary_restrictions'] %}
 {% block title %}Dietary Restrictions{% endblock %}
 {% block backlink %}{% endblock %}
 {% block content %}
@@ -9,37 +11,52 @@
 <p>We feed our guests three meals per day during {{ c.EVENT_NAME }}, and we have an easier time planning meals
 when we know what kind of food restrictions everyone has.</p>
 {% else %}
-<p>Thank you for volunteering! We're glad you're here. The form below helps us better understand the dietary 
-restrictions and allergies of our volunteers and staff.</p>
-<p>Volunteers and staff who commit to 12 or more weighted hours are eligible to eat from Staff Suite, where we serve breakfast, lunch, and dinner.</p>
+<p>
+    Thank you for volunteering! We're glad you're here. The form below helps us better understand the dietary restrictions and allergies of our volunteers and staff.
+    Volunteers and staff who commit to 12 or more weighted hours are eligible to eat from Staff Suite, where we serve breakfast, lunch, and dinner.
+</p>
 {% endif %}
 
-<p>Breakfast starts on Thursday, January 23 and meal service ends with lunch on Sunday, January 26. Staff Suite hours are from 8:00 to 12AM.</p>
-<p>We have buffet style service, and will have grab and go items in between meals for Super 2025.</p>
+<p>
+    Breakfast starts on Thursday, January 8 and meal service ends with lunch on Sunday, January 11.
+    We have buffet style service, and will have grab and go items in between meals for Super 2026.
+    All ingredients for breakfast and lunch will be available on our Notion page: <a href="bit.ly/StaffSuite2026" target="_blank">bit.ly/StaffSuite2026</a>.
+</p>
 
-<p>All ingredients for breakfast and lunch will be available on our notion page: 
-<a href="https://bit.ly/StaffSuite2025" target="_blank">bit.ly/StaffSuite2025</a>. Dinners are catered 
-by outside restaurants, so we can only provide details on the Big Nine food allergens: <strong>Milk, eggs, fish, 
-shellfish, tree nuts, peanuts, wheat, soy, and sesame</strong>. If you have dietary restrictions outside of the Big Nine, 
-we recommend you consider alternate options for dinners. <strong>We have open containers of peanut butter in Staff Suite.</strong></p>
+<p>
+    Dinners are catered by outside restaurants, so we can only provide details on the Big Nine food allergens:
+    Milk, eggs, fish, shellfish, tree nuts, peanuts, wheat, soy, and sesame.
+    If you have dietary restrictions outside of the Big Nine, we recommend you consider alternate options for dinners.
+</p>
 
-<form method="post" action="food_restrictions">
+<p>
+    PLEASE NOTE: We have open containers of peanut butter in Staff Suite.
+</p>
+
+{{ form_macros.form_validation('dietary-restrictions', 'validate_food_restrictions') }}
+
+<form novalidate method="post" action="food_restrictions" id="dietary-restrictions" x-data="{
+    has_allergies: '{{ dietary_restrictions.standard.data|yesno }}',
+    allergies: {{ dietary_restrictions.standard.data|map('string')|list }},
+    get otherRestrictions() { return this.allergies.includes('{{ c.OTHER }}'); },
+}">
     {{ csrf_token() }}
-    <input type="hidden" name="id" value="{{ fr.db_id }}" />
+    <input type="hidden" name="id" value="{{ restrictions.db_id }}" />
 
-    Please select any options that apply:<br/>
-    <div id="restrictions">{{ macros.checkgroup(fr, 'standard') }}</div>
+    <div class="mb-3">{{ form_macros.input(dietary_restrictions.has_allergies, alpine_model='has_allergies') }}</div>
+    <div class="col-sm-6 mb-3" x-show="has_allergies == 'yes'">{{ form_macros.input(dietary_restrictions.standard, alpine_model='allergies') }}</div>
 
-    <br/>
-    Let us know if you have any other allergies or restrictions. Please use commas to separate each allergy and food restriction.
-    Please note we are unable to accommodate every constraint, and the form below is not designed for preferences due to taste.
-    Menus and ingredients will be posted before Super MAGFest 2025 on our Notion page:
-     <a href="https://bit.ly/StaffSuite2025" target="_blank">bit.ly/StaffSuite2025</a>
-    <br/><br/>
-    <textarea name="freeform" rows="3" cols="80">{{ fr.freeform }}</textarea>
+    <div x-show="otherRestrictions" class="mb-3">
+        Let us know if you have any <strong>other</strong> allergies or restrictions below.
+        Please use commas to separate each allergy and food restriction.
+        You only need to list the items; we do not need severity or private medical information.
+        Please note we are unable to accommodate every constraint, and the form is not intended for preferences due to taste.
+        Menus and ingredients will be posted before Super MAGFest 2026 on our Notion page: <a href="bit.ly/StaffSuite2026" target="_blank">bit.ly/StaffSuite2026</a>.
+        <br/>{{ form_macros.input(dietary_restrictions.freeform) }}
+    </div>
 
-    <br/> <br/> <input type="submit" value="Save" /><br/>
-    By clicking Save I agree that I have read the above information and indicated any restrictions requested.
+    <button type="submit" class="btn btn-primary">Save</button><br/>
+    <div class="form-text">By clicking Save I agree that I have read the above information and indicated any restrictions requested.</div>
 </form>
 
 {% endblock %}
