@@ -47,6 +47,11 @@ class PanelApplication:
     broadcast_subtitle = Column(UnicodeText)
 
     @presave_adjustment
+    def no_magscouts_mature_panel(self):
+        if self.magscouts_opt_in != c.NO_CHOICE and self.granular_rating_ints != [c.NONE]:
+            self.magscouts_opt_in = c.NO_CHOICE
+
+    @presave_adjustment
     def email_when_dept_changes(self):
         from .models import Session
 
