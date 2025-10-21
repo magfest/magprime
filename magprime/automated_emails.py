@@ -176,8 +176,7 @@ StopsEmailFixture(
     '{EVENT_NAME} ({EVENT_DATE}) shifts are live tomorrow!',
     'shifts/shifts_created.txt',
     lambda a: (
-        c.AFTER_SHIFTS_CREATED
-        and a.badge_type != c.CONTRACTOR_BADGE
+        a.badge_type != c.CONTRACTOR_BADGE
         and a.takes_shifts
         and a.registered_local <= c.SHIFTS_CREATED),
     when=before(c.PREREG_TAKEDOWN),
