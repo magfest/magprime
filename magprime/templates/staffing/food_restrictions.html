@@ -1,8 +1,7 @@
-{% extends "uber/templates/base.html" %}{% set admin_area=True %}
+{% extends 'signup_base.html' %}
 {% import 'forms/macros.html' as form_macros with context %}
 {% set dietary_restrictions = dietary_restrictions or forms['dietary_restrictions'] %}
 {% block title %}Dietary Restrictions{% endblock %}
-{% block backlink %}{% endblock %}
 {% block content %}
 
 <h2> Dietary Restrictions </h2>
@@ -38,7 +37,7 @@ when we know what kind of food restrictions everyone has.</p>
 <form novalidate method="post" action="food_restrictions" id="dietary-restrictions" x-data="{
     has_allergies: '{{ dietary_restrictions.standard.data|yesno }}',
     allergies: {{ dietary_restrictions.standard.data|map('string')|list }},
-    get otherRestrictions() { return this.allergies.includes('{{ c.OTHER }}'); },
+    get otherRestrictions() { return this.has_allergies == 'yes' && this.allergies.includes('{{ c.OTHER }}'); },
 }">
     {{ csrf_token() }}
     <input type="hidden" name="id" value="{{ restrictions.db_id }}" />

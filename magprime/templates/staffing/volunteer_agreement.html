@@ -1,9 +1,8 @@
-{% extends "uber/templates/base.html" %}{% set admin_area=True %}
+{% extends 'signup_base.html' %}
 {% block title %}Volunteer Agreement{% endblock %}
-{% block backlink %}{% endblock %}
 {% block content %}
 
-<h1>Volunteer Agreement</h1>
+<h2>Volunteer Agreement</h2>
 
 <p>
 MAGFest depends on committed volunteers to make our events happen. We could not do this without you, 
@@ -43,7 +42,7 @@ scheduled, they will notify their department supervisor.</li>
 </ul>
 </p>
 
-<h1>Performance Problems and Disciplinary Actions</h1>
+<h3>Performance Problems and Disciplinary Actions</h3>
 <p>
     In general, volunteers can receive verbal or written warnings of unacceptable behavior or performance and are allowed time and support to improve. <a href="https://www.notion.so/magfest/Staffer-Misconduct-and-Sanctions-245d8188d7ec80608998f0caf90064e7">Information on the disciplinary process, as well as sanctions for specific infractions can be found here.</a>
 </p>
@@ -79,8 +78,8 @@ termination.</p>
 {% if not attendee.agreed_to_volunteer_agreement %}
     <form method="post" action="volunteer_agreement">
         {{ csrf_token() }}
-        <label for="agreed_to_terms">
-          I agree to the terms of the volunteer agreement: <input type="checkbox" id="agreed_to_terms" name="agreed_to_terms" />
+        <label for="agreed_to_terms" class="checkbox-label">
+          I agree to the terms of the volunteer agreement: <input type="checkbox" id="agreed_to_terms" name="agreed_to_terms" class="checkbox" />
         </label>
         <br><br>
         <input class="btn btn-primary" type="submit" value="Save" />

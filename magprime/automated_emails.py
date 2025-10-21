@@ -171,6 +171,18 @@ StopsEmailFixture(
     lambda a: a.assigned_to(c.STAFF_SUPPORT) and not a.trusted_in(c.STAFF_SUPPORT),
     ident='magprime_staff_support_volunteer')
 """
+
+StopsEmailFixture(
+    '{EVENT_NAME} ({EVENT_DATE}) shifts are live tomorrow!',
+    'shifts/shifts_created.txt',
+    lambda a: (
+        c.AFTER_SHIFTS_CREATED
+        and a.badge_type != c.CONTRACTOR_BADGE
+        and a.takes_shifts
+        and a.registered_local <= c.SHIFTS_CREATED),
+    when=before(c.PREREG_TAKEDOWN),
+    ident='volunteer_shift_signup_notification')
+
 StopsEmailFixture(
     'MAGFest Dept Checklist Introduction', 'dept_checklist_intro.txt',
     lambda a: a.is_checklist_admin and a.admin_account,
