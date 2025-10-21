@@ -1,60 +1,36 @@
 {% extends 'uber/templates/hotel_lottery/app_management.html' %}
 
-{% block lottery_info %}
+{% block additional_lottery_info %}
+{% if c.SHOW_HOTEL_LOTTERY_GROUPS and application.status == c.COMPLETE and not application.parent_application and not application.valid_group_members and c.HOTEL_LOTTERY_DOUBLE in application.room_type_preference_ints %}
 <p>
-    Welcome {% if application.status == c.COMPLETE %}back {% endif %} to the {{ c.EVENT_NAME }} hotel lottery!
-    {% if c.HOTEL_LOTTERY_FORM_WAITLIST and not app_or_parent.is_staff_entry and not (c.STAFF_HOTEL_LOTTERY_OPEN and app_or_parent.qualifies_for_staff_lottery) %}
-        The initial deadline for the first round of the lottery {% if c.AFTER_HOTEL_LOTTERY_FORM_WAITLIST %}was {{ c.HOTEL_LOTTERY_FORM_WAITLIST|datetime_local("%B %-d, %Y at %-I:%M%p %Z") }}{% else %}is <strong>{{ c.HOTEL_LOTTERY_FORM_WAITLIST|datetime_local("%B %-d, %Y at %-I:%M%p %Z") }}</strong>{% endif %}.
-        {% if c.AFTER_HOTEL_LOTTERY_FORM_WAITLIST %}Your lottery entry will still be considered when allocating cancelled rooms.{% endif %}
-    </p><p>
-    {% endif %}
-    {% if app_editable and application.current_lottery_deadline %}
-    The hotel lottery form will close at <strong>{{ application.current_lottery_deadline|datetime_local }}</strong>.
-    {% endif %}
-</p>
-
-{% if app_editable %}
-<p class="h4 text-{% if app_or_parent.status in [c.COMPLETE, c.PROCESSED] or app_or_parent.finalized %}success{% else %}danger{% endif %}">
-    You are currently {{ application.application_status_str }}.
-</p>
-<p>
-    {% if not application.parent_application %}
-        {% if app_or_parent.status not in [c.COMPLETE, c.PROCESSED] and not app_or_parent.finalized %}
-            Use the button below to complete your {{ application.entry_type_label|lower }} lottery application.
-        {% else %}You can view and update your entry details below.{% endif %}
-    {% else %}
-        {% if app_or_parent.status not in [c.COMPLETE, c.PROCESSED] and not app_or_parent.finalized %}
-        Your {{ c.HOTEL_LOTTERY_GROUP_TERM|lower }} leader must review and complete their lottery entry for your group to be entered in the lottery.
-        {% else %}You can view your {{ c.HOTEL_LOTTERY_GROUP_TERM|lower }}'s entry and update your contact information below.
-        {% endif %}
-    {% endif %}
-    {% if c.SHOW_HOTEL_LOTTERY_GROUPS and not application.parent_application and not application.valid_group_members and c.HOTEL_LOTTERY_DOUBLE in application.room_type_preference_ints %}
     Individual hotel lottery entries will <strong>ONLY</strong> qualify for a King room. If you would like a Double room,
     {% if not application.room_group_name %}you must create a roommate group and add at least one person{% else %}please make sure to add at least one person to your roommate group{% endif %}
-    before the lottery ends.
-    {% endif %}
+    before the deadline.
 </p>
 {% endif %}
+{% endblock %}
 
-{% if application.is_staff_entry and not c.STAFF_HOTEL_LOTTERY_OPEN %}
+{% block lottery_closed_info %}
+    {% if application.is_staff_entry %}
+        <p>
+            <strong><span class="text-danger">Staff pre-lottery room selection is now closed.</span></strong>
+            You can view your entry details below.
+        </p>
+        <p>
+            {% if app_or_parent.entry_type == c.ROOM_ENTRY or not app_or_parent.room_opt_out %}
+            You will receive a booking link with <strong>exactly the room you requested</strong>.
+            {% endif %}
+            {% if app_or_parent.entry_type == c.SUITE_ENTRY %}
+            Suite selection occurs during the attendee hotel lottery.
+            If you win a suite, your room booking will be cancelled and you will receive instructions on how to book your suite.
+            {% endif %}
+        </p>
+    {% else %}
     <p>
-        <strong><span class="text-danger">Staff pre-lottery room selection is now closed.</span></strong>
+        <strong><span class="text-danger">The hotel lottery is now closed.</span></strong>
+        {% if application.complete_or_processed %}
         You can view your entry details below.
-    </p>
-    <p>
-        {% if app_or_parent.entry_type == c.ROOM_ENTRY or not app_or_parent.room_opt_out %}
-        You will receive a booking link with <strong>exactly the room you requested</strong>.
-        {% endif %}
-        {% if app_or_parent.entry_type == c.SUITE_ENTRY %}
-        Suite selection occurs during the attendee hotel lottery.
-        If you win a suite, your room booking will be cancelled and you will receive instructions on how to book your suite.
         {% endif %}
     </p>
-{% endif %}
-{% if not application.is_staff_entry and application.current_lottery_closed %}
-<p>
-    <strong><span class="text-danger">The hotel lottery is now closed.</span></strong>
-    You can view your entry details below.
-</p>
-{% endif %}
+    {% endif %}
 {% endblock %}

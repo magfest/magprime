@@ -17,7 +17,7 @@ class LotteryApplication:
     def staff_award_status_str(self):
         if not self.is_staff_entry:
             return ''
-        app_or_parent = self.parent_application or self
+        app_or_parent = self.parent_application if self.entry_type == c.GROUP_ENTRY else self
         if not c.HOTEL_LOTTERY_ROOM_INVENTORY or not app_or_parent.finalized:
             return ''
         if self.parent_application:
