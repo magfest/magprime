@@ -12,7 +12,11 @@
 {% elif attendee.badge_type == c.STAFF_BADGE and not attendee.hotel_eligible %}
 <li>
     {% if attendee.lottery_application and (attendee.lottery_application.status == c.COMPLETE or attendee.lottery_application.status in c.HOTEL_LOTTERY_AWARD_STATUSES) %}
-    You are not eligible to request staff crash space because you have booked a room in the pre-lottery.
+        {% if attendee.lottery_application.is_staff_entry %}
+        You are not eligible to request staff crash space because you have booked a room in the pre-lottery.
+        {% else %}
+        You are currently in the attendee lottery. You must <a href="../hotel_lottery/index?attendee_id={{ attendee.id }}" target="_blank">withdraw your lottery entry</a> to be eligible for staff crash space.
+        {% endif %}
     {% else %}
     You are not eligible to request staff crash space.
     {% endif %}
