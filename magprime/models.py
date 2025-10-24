@@ -73,7 +73,7 @@ class GuestGroup:
     def handle_images_from_params(self, session, **params):
         header_image = params.get('header_image')
         thumbnail_image = params.get('thumbnail_image')
-        bio_image = params.get('bio_image')
+        bio_image = params.get('bio_pic')
         header_pic, thumbnail_pic, bio_pic = None, None, None
         message = ''
 

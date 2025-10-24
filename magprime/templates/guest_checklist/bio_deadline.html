@@ -1,4 +1,4 @@
-{% extends "uber/templates/guest_checklist/guest_bio_deadline.html" %}
+{% extends "uber/templates/guest_checklist/bio_deadline.html" %}
 
 {% block form_extra %}
 <div class="form-group">
@@ -6,7 +6,7 @@
   <div class="col-sm-6">
     <div class="form-control-static">
       {% if guest.guidebook_header -%}
-        <a href="{{ guest.guidebook_header.url }}">View your current header</a> or upload a new one:
+        <a href="{{ guest.guidebook_header.url }}" target="_blank">View your current header</a> or upload a new one:
       {%- else -%}Choose a {{ c.GUIDEBOOK_HEADER_SIZE|format_image_size }} file to upload as your header on Guidebook:
       {%- endif -%}
       <input type="file" name="header_image" />
@@ -18,7 +18,7 @@
   <div class="col-sm-6">
     <div class="form-control-static">
       {% if guest.guidebook_thumbnail -%}
-        <a href="{{ guest.guidebook_thumbnail.url }}">View your current thumbnail</a> or upload a new one:
+        <a href="{{ guest.guidebook_thumbnail.url }}" target="_blank">View your current thumbnail</a> or upload a new one:
       {%- else -%}Choose a {{ c.GUIDEBOOK_THUMBNAIL_SIZE|format_image_size }} thumbnail image for Guidebook:
       {%- endif -%}
       <input type="file" name="thumbnail_image" />

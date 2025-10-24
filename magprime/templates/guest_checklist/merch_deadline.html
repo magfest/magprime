@@ -41,14 +41,14 @@
   </div>
 
   <script>
-    var showOrRIFaq = function() {
+    var showOrHideRIFaq = function() {
       setVisible('#confirm-ri-faq', $.val('selling_merch') === {{ c.ROCK_ISLAND }});
       $('#save-merch-button').prop('disabled', $.val('selling_merch') === {{ c.ROCK_ISLAND }} && !$('#toggle_visibility_agreed_ri_faq').prop('checked'));
     };
     $(function () {
       $("[name='selling_merch'] option[value='{{ c.OWN_TABLE }}']").remove();
-      showOrRIFaq();
-      $.field('selling_merch').on('change', showOrRIFaq);
+      showOrHideRIFaq();
+      $.field('selling_merch').on('change', showOrHideRIFaq);
     });
   </script>
 {% endblock %}
