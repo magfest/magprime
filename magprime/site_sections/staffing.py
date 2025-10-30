@@ -10,7 +10,7 @@ from uber.models import LotteryApplication
 class Root:
     @check_shutdown
     def prelottery(self, session, message='', **params):
-        if c.AFTER_HOTEL_LOTTERY_STAFF_DEADLINE and not c.HAS_HOTEL_ADMIN_ACCESS:
+        if c.AFTER_HOTEL_LOTTERY_STAFF_DEADLINE and not c.HAS_HOTEL_LOTTERY_ADMIN_ACCESS:
             raise HTTPRedirect('../staffing/index?message={}', 'The prelottery selection deadline has passed')
         attendee = session.logged_in_volunteer()
 
