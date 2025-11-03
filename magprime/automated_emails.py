@@ -26,6 +26,14 @@ if c.HOTEL_LOTTERY_STAFF_START:
 if c.HOTEL_LOTTERY_FORM_START:
     HotelLotteryEmailFixture(
         f'{c.EVENT_NAME_AND_YEAR} Hotel Lottery Notification',
+        'hotel/award_notification.html',
+        lambda a: a.status == c.AWARDED and not a.final_status_hidden and \
+            a.booking_url_ready and not a.is_staff_entry,
+        ident='hotel_lottery_awarded'
+    )
+
+    HotelLotteryEmailFixture(
+        f'{c.EVENT_NAME_AND_YEAR} Hotel Lottery Notification',
         'hotel/lottery_delay.html',
         lambda a: a.status == c.AWARDED and not a.is_staff_entry,
         ident='hotel_lottery_awarded_late'
