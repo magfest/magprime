@@ -4,15 +4,17 @@
 <p>
     Dear {{ attendee.full_name }},
     <br/>On behalf of our Board of Directors, employees, and volunteer staff, thank you for becoming a MAGFest Superstar! Your contribution helps support our mission to make the world a better place through video games.
+    Please fill out the form on this page by <strong>Wednesday, December 3rd, 2025</strong>, so we have the information needed in time to fulfill your donor perks: <a href="" target="_blank">https://www.magfest.org /superstars-form</a>
+    <strong><em>Please note: we cannot guarantee perks for form completion or donations made after December 3rd!</em></strong>
 </p>
 <p>
-    MAGFest, Inc. has been achieving this mission through numerous events, such as Super MAGFest, MAGWest, MAGStock, and Bit Gen Gamer Fest, and by building and empowering a huge community of volunteers, partners, and participants. MAGFest supports this community by highlighting VGM musicians, indie developers, and creatives, as well as uniting those who are eager to relive nostalgia with those who mutually appreciate videogames. In recent years, we have also launched the MAGScouts initiative, which highlights family-friendly content throughout the event, and have increased our educational offerings in Makerspace, Jam Clinic, Panels and more.
+    MAGFest, Inc. has been achieving this mission through numerous events, such as Super MAGFest, MAGWest, MAGStock, MAGLabs, and Bit Gen Gamer Fest, and by building and empowering a huge community of volunteers, partners, and participants. MAGFest supports this community by highlighting VGM musicians, indie developers, and creatives, as well as uniting those who are eager to relive nostalgia with those who mutually appreciate videogames. In the past year, we have relaunched MAGLabs as a free maker festival, partnered with schools and other organizations to increase our educational offerings, launched an Experimentation Fund to support new and innovative projects by our volunteer staff, and so much more.
 </p>
 <p>
-    With your donation, you are helping us to grow these events, create new content, educate more people about video game music, art, and history, and you are also supporting the continued preservation of video game culture and history. If you are interested in learning more about how you can continue supporting our mission, please reach out to us at {{ 'superstars@magfest.org'|email_to_link }}, and look out for another email in the coming weeks about fulfilling your Superstars perks for MAGFest {{ c.EVENT_YEAR }}!
+    With your donation, you are helping us to grow these events, create new content, educate more people about video game music, art, and history, and you are also supporting the continued preservation of video game culture and history. If you are interested in learning more about how you can continue supporting our mission, please reach out to us at {{ 'superstars@magfest.org'|email_to_link }}!
 </p>
 <p>
-    You should receive an email as an official receipt for tax purposes, titled "MAGFest {{ c.EVENT_YEAR }} Superstar Donation Receipt."
+    You should receive or have received an email as an official receipt for tax purposes, titled "MAGFest {{ c.EVENT_YEAR }} Superstar Donation Receipt."
     If you donated multiple times (e.g., you upgraded an existing donation), you'll receive one email for each time you donated.
 </p>
 <p>Thank you again for your thoughtful and generous contribution.</p>
@@ -21,6 +23,10 @@
     <br/><br/>Christina Ralls
     <br/>Director of Business and Development
     <br/>MAGFest, Inc.
+    <br/>{{ 'superstars@magfest.org'|email_to_link }}
 </p>
+<p class="fs-6"><em>
+    MAGFest, Inc. is a nonprofit, 501(c)(3), charitable organization. For your tax purposes, this letter will serve as our official acknowledgement of your contribution. In accordance with section 170(f)(8) of the Internal Revenue Code, MAGFest, Inc. (EIN 46-1086258) did not provide any goods or services in whole or partial consideration for this contribution. Documents related to our non-profit operations may be viewed at <a href="https://super.magfest.org/what-is-magfest" target="_blank">https://super.magfest.org/what-is-magfest</a>.
+</em></p>
 </body>
 </html>
