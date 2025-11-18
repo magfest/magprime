@@ -95,10 +95,10 @@ class Root:
     @csv_file
     def superstars_csv(self, out, session):
         out.writerow(["Group Name", "Full Name", "Name on ID", "Badge Name", "Badge Type", "Ribbons", "Pre-ordered Merch",
-                      "Email", "ZIP/Postal Code", "Checked In"])
+                      "Donation", "Email", "ZIP/Postal Code", "Checked In"])
         for a in session.valid_attendees().filter(Attendee.extra_donation >= c.SUPERSTAR_MINIMUM):
             out.writerow([a.group_name, a.full_name, a.legal_name, a.badge_printed_name, a.badge_type_label,
-                          ' / '.join(a.ribbon_labels), a.amount_extra_label, a.email, a.zip_code,
+                          ' / '.join(a.ribbon_labels), a.amount_extra_label, a.extra_donation, a.email, a.zip_code,
                           datetime_local_filter(a.checked_in)])
     
     @csv_file
