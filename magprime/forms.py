@@ -126,6 +126,18 @@ class PanelInfo:
 
 
 @MagForm.form_mixin
+class EventLocationInfo:
+    def tracks_label(self):
+        return Markup('Track(s) <span class="popup"><a href="../static_views/guidebook_tracks.html" target="_blank"><i class="fa fa-question-circle" aria-hidden="true"></i> Tracks List</a></span>')
+
+
+@MagForm.form_mixin
+class EventInfo:
+    def tracks_label(self):
+        return Markup('Track(s) <span class="popup"><a href="../static_views/guidebook_tracks.html" target="_blank"><i class="fa fa-question-circle" aria-hidden="true"></i> Tracks List</a></span>')
+
+
+@MagForm.form_mixin
 class RoomLottery:
     def wants_ada_desc(self):
         return """Checking this box does not guarantee you a room. It lets MAGFest know that the room you may receive should meet your needs
