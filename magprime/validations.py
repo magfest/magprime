@@ -2,7 +2,7 @@ from wtforms import validators
 from wtforms.validators import ValidationError, StopValidation
 
 from .config import c
-from uber.validations import TableInfo, BadgeExtras, PanelInfo, RoomLottery, DietaryRestrictions
+from uber.validations import TableInfo, BadgeExtras, PanelInfo, RoomLottery, DietaryRestrictions, JobInfo, JobTemplateInfo
 
 
 TableInfo.field_validation.required_fields['prior_name'] = ("Please provide your prior table name.", 'has_prior_name')
@@ -36,3 +36,7 @@ DietaryRestrictions.field_validation.required_fields = {
     'freeform': ("Please list each of your other allergies, separated by commas.",
                  'standard', lambda x: c.OTHER in x.data),
 }
+
+
+JobInfo.field_validation.required_fields['slots'] = "The minimum number of job slots is 1."
+JobTemplateInfo.field_validation.required_fields['min_slots'] = "Please set a minimum of at least 1 job slot."

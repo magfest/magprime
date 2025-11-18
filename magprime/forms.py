@@ -107,6 +107,27 @@ class AdminBadgeExtras:
 
 
 @MagForm.form_mixin
+class BaseJobInfo:
+    no_slots = HiddenField('')
+
+
+@MagForm.form_mixin
+class JobInfo:
+    slots = IntegerField('Slots', default=1)
+
+
+@MagForm.form_mixin
+class JobTemplateInfo:
+    min_slots = IntegerField('Minimum # Slots', default=1)
+
+    def no_slots_label(self):
+        return ''
+    
+    def no_slots_desc(self):
+        return ""
+
+
+@MagForm.form_mixin
 class PanelistInfo:
     def display_name_desc(self):
         return "The personal or group name to show on the schedule to let people know who is hosting the panel. Leave this field blank if you do not want a name displayed on the schedule or on digital displays at the event."
