@@ -156,7 +156,12 @@ class EventLocationInfo:
 class EventInfo:
     def tracks_label(self):
         return Markup('Track(s) <span class="popup"><a href="../static_views/guidebook_tracks.html" target="_blank"><i class="fa fa-question-circle" aria-hidden="true"></i> Tracks List</a></span>')
+    
+    def public_description_label(self):
+        return Markup('Guidebook Description <span class="popup"><a href="https://docs.google.com/document/d/1IEFY_Y8xfvdxCz8kY7sb7l9PMUxkm6fqXmNbjrm2F5M/edit?tab=t.0#heading=h.2npqvsseph32" target="_blank"><i class="fa fa-question-circle" aria-hidden="true"></i> Description Formatting Guide</a></span>')
 
+    def public_description_desc(self):
+        return "The description shown on public signage and Guidebook. If left blank, Description is used instead."
 
 @MagForm.form_mixin
 class RoomLottery:
