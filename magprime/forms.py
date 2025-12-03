@@ -163,6 +163,14 @@ class EventInfo:
     def public_description_desc(self):
         return "The description shown on public signage and Guidebook. If left blank, Description is used instead."
 
+
+@MagForm.form_mixin
+class BaseAttractionInfo:
+    def populate_schedule_desc(self):
+        return "Events on the schedule will be exported to Guidebook, even if this attraction is not public yet. \
+            Unchecking this box will delete the existing schedule event, if there is one."
+
+
 @MagForm.form_mixin
 class RoomLottery:
     def wants_ada_desc(self):
