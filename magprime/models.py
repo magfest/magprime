@@ -152,8 +152,8 @@ class Attendee:
         if c.BAND in self.ribbon_ints and self.badge_type != c.GUEST_BADGE:
             stuff.append("Backstage access")
 
-        if c.UNDER_13 in self.ribbon_ints:
-            stuff.append("a 12 and under wristband")
+        #if c.UNDER_13 in self.ribbon_ints:
+        #    stuff.append("a 12 and under wristband")
 
         if c.SUPERSTAR_RIBBON in self.ribbon_ints:
             stuff.append("a Superstar ribbon")
