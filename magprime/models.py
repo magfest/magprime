@@ -236,8 +236,16 @@ class Attendee:
     @property
     def staff_merch_items(self):
         """Used by the merch and staff_merch properties for staff swag."""
-        merch = ["Volunteer lanyard"] if self.staffing and self.weighted_hours >= 1 and \
-            self.badge_type != c.CONTRACTOR_BADGE else []
+        if self.badge_type == c.CONTRACTOR_BADGE or not self.staffing:
+            return []
+        
+        merch = ["Staffer Info Packet (optional)"]
+
+        if self.weighted_hours >= 1:
+            merch.append("Lanyard")
+            if self.badge_type != c.STAFF_BADGE:
+                merch.append("Volunteer Ribbon")
+
         num_staff_shirts_owed = self.num_staff_shirts_owed
         if num_staff_shirts_owed > 0:
             staff_shirts = '{} Staff Shirt{}'.format(num_staff_shirts_owed, 's' if num_staff_shirts_owed > 1 else '')
@@ -252,9 +260,6 @@ class Attendee:
             merch.append(staff_shirts)
         elif self.could_get_staff_shirt and self.shirt_opt_out in [c.STAFF_OPT_OUT, c.ALL_OPT_OUT]:
             merch.append("NO Staff Shirt")
-
-        if self.staffing:
-            merch.append('Staffer Info Packet')
 
         if self.badge_type == c.STAFF_BADGE:
             merch.append('Staff Merch Item')
