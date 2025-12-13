@@ -1,5 +1,5 @@
 Hello {{ group.leader.full_name }},
 
-Thank you for your interest in MAGFest Marketplace. Unfortunately, this year your application for "{{ group.name }}" is being declined. If you still wish to attend without vending, you must purchase an attendee badge once registration opens on September 16th; your application badges will not convert. We hope you have a good rest of your day.
+Thank you for your interest in MAGFest Marketplace. Unfortunately, this year your application for "{{ group.name }}" is being removed from the waitlist as we are getting close to the event. If you still wish to attend without vending, any assigned, filled out badges will convert to attendee badges you can purchase at the original attendee rate. We hope you have a good rest of your day
 
 ~ Marketplace Staff
