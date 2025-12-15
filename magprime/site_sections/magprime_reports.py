@@ -7,7 +7,7 @@ from sqlalchemy.orm import subqueryload
 from uber.config import c
 from uber.custom_tags import datetime_local_filter
 from uber.decorators import all_renderable, csv_file, department_id_adapter
-from uber.models import Attendee, Shift, RoomAssignment
+from uber.models import Attendee, Shift, RoomAssignment, ReceiptItem, ModelReceipt
 
 
 @all_renderable()
@@ -100,6 +100,20 @@ class Root:
             out.writerow([a.group_name, a.full_name, a.legal_name, a.badge_printed_name, a.badge_type_label,
                           ' / '.join(a.ribbon_labels), a.amount_extra_label, a.extra_donation, a.email, a.zip_code,
                           datetime_local_filter(a.checked_in)])
+        
+    @csv_file
+    def superstar_donations_by_date_csv(self, out, session):
+        out.writerow(["URL", "Full Name", "Email", "Donation Amount", "Donation Date", "Current Total Donation"])
+        extra_donations = session.query(ReceiptItem, Attendee.id, Attendee.first_name,
+                                        Attendee.last_name, Attendee.email, Attendee.extra_donation,
+                                        ).join(ModelReceipt).join(Attendee, Attendee.id == ModelReceipt.owner_id).filter(
+            ModelReceipt.owner_model == "Attendee", ReceiptItem.desc.contains("Extra Donation"),
+            ReceiptItem.closed != None, ReceiptItem.amount > 0).order_by(ReceiptItem.closed)
+        for donation, id, first_name, last_name, email, total_donation in extra_donations:
+            url = "{}/registration/form?id={}".format(c.URL_BASE, id)
+            out.writerow([url, f"{first_name} {last_name}", email, (donation.total_amount / 100),
+                          datetime_local_filter(donation.closed), total_donation])
+
     
     @csv_file
     def donated_badge_attendees(self, out, session):
