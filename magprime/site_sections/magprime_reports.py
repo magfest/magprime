@@ -105,7 +105,8 @@ class Root:
     @csv_file
     def superstar_donations_by_date_csv(self, out, session):
         out.writerow(["URL", "Full Name", "Email", "Donation Amount", "Donation Date", "Current Total Donation"])
-        extra_donations = session.query(ReceiptItem
+        extra_donations = session.query(ReceiptItem, Attendee.id, Attendee.first_name,
+                                        Attendee.last_name, Attendee.email, Attendee.extra_donation
                                         ).join(ModelReceipt).join(Attendee, Attendee.id == ModelReceipt.owner_id).filter(
             ModelReceipt.owner_model == "Attendee", ReceiptItem.desc.contains("Extra Donation"),
             or_(ReceiptItem.closed != None, ReceiptItem.amount < 0)).order_by(ReceiptItem.closed, ReceiptItem.added)
