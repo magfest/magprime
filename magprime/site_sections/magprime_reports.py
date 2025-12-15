@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 
 import cherrypy
 from collections import defaultdict
+from sqlalchemy import or_
 from sqlalchemy.orm import subqueryload
 
 from uber.config import c
@@ -108,7 +109,7 @@ class Root:
                                         Attendee.last_name, Attendee.email, Attendee.extra_donation,
                                         ).join(ModelReceipt).join(Attendee, Attendee.id == ModelReceipt.owner_id).filter(
             ModelReceipt.owner_model == "Attendee", ReceiptItem.desc.contains("Extra Donation"),
-            ReceiptItem.closed != None, ReceiptItem.amount > 0).order_by(ReceiptItem.closed)
+            or_(ReceiptItem.closed != None, ReceiptItem.amount < 0), ReceiptItem.amount > 0).order_by(ReceiptItem.closed)
         for donation, id, first_name, last_name, email, total_donation in extra_donations:
             url = "{}/registration/form?id={}".format(c.URL_BASE, id)
             out.writerow([url, f"{first_name} {last_name}", email, (donation.total_amount / 100),
