@@ -37,13 +37,14 @@ when we know what kind of food restrictions everyone has.</p>
 <form novalidate method="post" action="food_restrictions" id="dietary-restrictions" x-data="{
     has_allergies: '{{ dietary_restrictions.standard.data|yesno }}',
     allergies: {{ dietary_restrictions.standard.data|map('string')|list }},
+    other_allergies: '{{ dietary_restrictions.freeform.data }}',
     get otherRestrictions() { return this.has_allergies == 'yes' && this.allergies.includes('{{ c.OTHER }}'); },
 }">
     {{ csrf_token() }}
     <input type="hidden" name="id" value="{{ restrictions.db_id }}" />
 
-    <div class="mb-3">{{ form_macros.input(dietary_restrictions.has_allergies, alpine_model='has_allergies') }}</div>
-    <div class="col-sm-6 mb-3" x-show="has_allergies == 'yes'">{{ form_macros.input(dietary_restrictions.standard, alpine_model='allergies') }}</div>
+    <div class="mb-3">{{ form_macros.input(dietary_restrictions.has_allergies, alpine_model='has_allergies', **{'x-on:change': 'if(has_allergies == "no") { allergies = []; other_allergies = ""; }'}) }}</div>
+    <div class="col-sm-6 mb-3" x-show="has_allergies == 'yes'">{{ form_macros.input(dietary_restrictions.standard, alpine_model='allergies', **{'x-on:change': 'if(!allergies.includes("' ~ c.OTHER ~ '")) { other_allergies = ""; }'}) }}</div>
 
     <div x-show="otherRestrictions" class="mb-3">
         Let us know if you have any <strong>other</strong> allergies or restrictions below.
@@ -51,7 +52,7 @@ when we know what kind of food restrictions everyone has.</p>
         You only need to list the items; we do not need severity or private medical information.
         Please note we are unable to accommodate every constraint, and the form is not intended for preferences due to taste.
         Menus and ingredients will be posted before Super MAGFest 2026 on our Notion page: <a href="https://bit.ly/StaffSuite2026" target="_blank">bit.ly/StaffSuite2026</a>.
-        <br/>{{ form_macros.input(dietary_restrictions.freeform) }}
+        <br/>{{ form_macros.input(dietary_restrictions.freeform, alpine_model='other_allergies') }}
     </div>
 
     <button type="submit" class="btn btn-primary">Save</button><br/>

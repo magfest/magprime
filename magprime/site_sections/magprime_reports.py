@@ -23,34 +23,6 @@ class Root:
                                .order_by(Attendee.full_name).all()
         }
 
-    @department_id_adapter
-    def volunteer_food(self, session, message='', department_id=None, start=None, end=None):
-        staffers = set()
-        if cherrypy.request.method == 'POST':
-            start = c.EVENT_TIMEZONE.localize(datetime.strptime(start, c.TIMESTAMP_FORMAT))
-            end = c.EVENT_TIMEZONE.localize(datetime.strptime(end, c.TIMESTAMP_FORMAT))
-            if end < start:
-                message = 'Start must come before end {} {}'.format(start, end)
-            else:
-                hours = set()
-                hour = start
-                while hour < end:
-                    hours.add(hour)
-                    hour += timedelta(hours=1)
-                for job in session.jobs().filter_by(department_id=department_id):
-                    if hours.intersection(job.hours):
-                        for shift in job.shifts:
-                            if shift.attendee.badge_type == c.STAFF_BADGE or shift.attendee.weighted_hours > 12:
-                                staffers.add(shift.attendee)
-
-        return {
-            'message': message,
-            'end': end,
-            'start': start,
-            'department_id': department_id,
-            'staffers': sorted(staffers, key=lambda a: a.full_name)
-        }
-
     def special_merch_counts(self, session):
         counts = defaultdict(int)
         labels = ['Unknown'] + [label for val, label in c.SPECIAL_MERCH_OPTS if val != c.NO_MERCH]
