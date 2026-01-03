@@ -1,11 +1,11 @@
 {% if not c.REFUND_CUTOFF %}
 {{ c.EVENT_NAME }} has a no-refund policy for all registrations. We may make exceptions in limited circumstances at our discretion.
-{% elif c.REFUND_CUTOFF < c.ESCHATON %}
+{% elif c.REFUND_CUTOFF < c.ESCHATON and c.BEFORE_REFUND_CUTOFF %}
 {{ c.EVENT_NAME }} has a limited refund policy for registrations.
 {% endif %}
-For more information regarding this, and for answers to other common questions, please visit our <a href="https://super.magfest.org/faq/#badge-refunds" target="_blank">FAQ</a>.
+For more information regarding this, and for answers to common questions, please visit our <a href="https://super.magfest.org/faq/#badge-refunds" target="_blank">FAQ</a>.
 {% if attendee.is_transferable %}
-If for any reason you can't make it, we allow and encourage you to resell your
+If for any reason you can't attend, we allow and encourage you to resell your
 registration up to the exact price you paid for it. To transfer your
 registration to another person, send 
 them <a href="{{ c.URL_BASE }}/preregistration/transfer_badge?id={{ attendee.id }}">this personalized link</a>.

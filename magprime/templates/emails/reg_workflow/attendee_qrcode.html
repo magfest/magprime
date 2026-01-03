@@ -1,0 +1,33 @@
+<html>
+<head></head>
+<body>
+{{ attendee.first_name }},
+
+<p>{{ c.EVENT_NAME }} is coming up on {{ c.EVENT_MONTH }} {{ c.EVENT_START_DAY }}!</p>
+
+<p>
+    As a reminder, {{ c.EVENT_NAME_AND_YEAR }} is closed-profile, which means that
+    <strong>only preregistered attendees with valid badges will be permitted to enter the Gaylord during the event</strong>.
+    Please retain this email, as it will serve as your proof of registration before you pick up your badge onsite. 
+    The full details are available on our website at 
+    <a href="https://super.magfest.org/attend/closed-profile/" target="_blank">https://super.magfest.org/attend/closed-profile/</a>.
+</p>
+
+<p>
+    To help speed up badge pickup, please show the barcode below when you visit Registration. You can print it out or display it on your phone.
+</p>
+
+<p>This code is <strong>not</strong> a replacement for
+your photo ID. You must still present your government-issued photo ID{{ c.EXTRA_CHECKIN_DOCS }} when
+picking up your badge.</p>
+
+<p>You may not pick up badges on behalf of other attendees, even if you have a
+copy of their barcode and ID.</p>
+
+<p><img src="{{ c.URL_BASE }}/registration/qrcode_generator?data={{ attendee.public_id }}" /></p>
+<br>
+{% include "emails/reg_workflow/reg_notes.html" %}
+<br/><br/>
+{% include "emails/reg_workflow/refund_policy.html" %}
+</body>
+</html>

@@ -65,7 +65,7 @@ if _send_season_supporter_emails:
 
 
 AutomatedEmailFixture(
-    Attendee, 'MAGFest schedule, maps, and other FAQs', 'precon_faqs.html',
+    Attendee, 'MAGFest schedule, map, and other FAQs', 'precon_faqs.html',
     filter=lambda a: not a.cannot_check_in_reason,
     ident='magprime_precon_faqs',
     when=days_before(7, c.EPOCH),
