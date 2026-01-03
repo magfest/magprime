@@ -32,15 +32,6 @@ class LotteryApplication:
 
 
 @Session.model_mixin
-class AutomatedEmail:
-    @presave_adjustment
-    def set_auto_approval(self):
-        if self.ident in [
-            'qrcode_for_checkin', 'badge_confirmation_reminder_last_chance', 'under_18_parental_consent_reminder'
-        ]:
-            self.needs_approval = False
-
-@Session.model_mixin
 class PanelApplication:
     magscouts_opt_in = Column(Choice(c.PANEL_MAGSCOUTS_OPTS), default=c.NO_CHOICE)
     broadcast_title = Column(UnicodeText)
