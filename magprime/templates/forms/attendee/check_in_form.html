@@ -3,16 +3,25 @@
 {% block badge_info %}
     <div class="col-sm">
         {% set badge_display_extra = '' if not attendee.accoutrements else ' (' ~ attendee.accoutrements[6:]|replace("a ","") ~ ')' %}
-        {{ form_macros.input(check_in_form.badge_type, hidden_field_text=attendee.badge_type_label ~ badge_display_extra) }}
+        {% call form_macros.input(check_in_form.badge_type) %}
+        {{ attendee.badge_type_label ~ badge_display_extra }}
+        {% endcall %}
     </div>
     {% if c.NUMBERED_BADGES and attendee.badge_num %}
         <div class="col-sm">
-            {{ form_macros.input(check_in_form.badge_num, force_hidden=attendee.badge_num, hidden_field_text=attendee.badge_num) }}
+            {% if attendee.badge_num %}
+            <div class="form-text">{{ check_in_form.badge_num.label.text }}</div>
+            {{ check_in_form.badge_num.data }}
+            {% else %}
+            {{ form_macros.input(check_in_form.badge_num) }}
+            {% endif %}
         </div>
     {% endif %}
     {% if c.COLLECT_EXACT_BIRTHDATE and attendee.birthdate %}
         <div class="col-sm">
-            {{ form_macros.input(check_in_form.age_group, hidden_field_text=attendee.age_group_conf.desc) }}
+            {% call form_macros.input(check_in_form.age_group) %}
+            {{ attendee.age_group_conf.desc }}
+            {% endcall %}
         </div>
     {% endif %}
 {% endblock %}
