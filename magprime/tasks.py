@@ -1,20 +1,10 @@
-from collections.abc import Mapping
-from datetime import timedelta, datetime
-import pytz
-from time import sleep, time
-import traceback
-
 from celery.schedules import crontab
-from pockets import groupify, listify
-from pockets.autolog import log
-from sqlalchemy.orm import joinedload
+import logging
+log = logging.getLogger(__name__)
 
-from uber import utils
-from uber.amazon_ses import email_sender
-from uber.automated_emails import AutomatedEmailFixture
 from uber.config import c
 from uber.decorators import render
-from uber.models import AutomatedEmail, Email, MagModel, Attendee, Session, ReceiptItem, ModelReceipt
+from uber.models import Email, Attendee, Session, ReceiptItem, ModelReceipt
 from uber.tasks import celery
 from uber.tasks.email import send_email
 

@@ -16,7 +16,6 @@ depends_on = None
 from alembic import op
 import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql
-import residue
 
 
 try:
@@ -53,12 +52,12 @@ sqlite_reflect_kwargs = {
 
 
 def upgrade():
-    op.add_column('prev_season_supporter', sa.Column('created', residue.UTCDateTime(), server_default=sa.text("timezone('utc', current_timestamp)"), nullable=False))
-    op.add_column('prev_season_supporter', sa.Column('last_updated', residue.UTCDateTime(), server_default=sa.text("timezone('utc', current_timestamp)"), nullable=False))
+    op.add_column('prev_season_supporter', sa.Column('created', sa.DateTime(timezone=True)(), server_default=sa.text("timezone('utc', current_timestamp)"), nullable=False))
+    op.add_column('prev_season_supporter', sa.Column('last_updated', sa.DateTime(timezone=True)(), server_default=sa.text("timezone('utc', current_timestamp)"), nullable=False))
     op.add_column('prev_season_supporter', sa.Column('external_id', postgresql.JSONB(astext_type=sa.Text()), server_default='{}', nullable=False))
     op.add_column('prev_season_supporter', sa.Column('last_synced', postgresql.JSONB(astext_type=sa.Text()), server_default='{}', nullable=False))
-    op.add_column('season_pass_ticket', sa.Column('created', residue.UTCDateTime(), server_default=sa.text("timezone('utc', current_timestamp)"), nullable=False))
-    op.add_column('season_pass_ticket', sa.Column('last_updated', residue.UTCDateTime(), server_default=sa.text("timezone('utc', current_timestamp)"), nullable=False))
+    op.add_column('season_pass_ticket', sa.Column('created', sa.DateTime(timezone=True)(), server_default=sa.text("timezone('utc', current_timestamp)"), nullable=False))
+    op.add_column('season_pass_ticket', sa.Column('last_updated', sa.DateTime(timezone=True)(), server_default=sa.text("timezone('utc', current_timestamp)"), nullable=False))
     op.add_column('season_pass_ticket', sa.Column('external_id', postgresql.JSONB(astext_type=sa.Text()), server_default='{}', nullable=False))
     op.add_column('season_pass_ticket', sa.Column('last_synced', postgresql.JSONB(astext_type=sa.Text()), server_default='{}', nullable=False))
 

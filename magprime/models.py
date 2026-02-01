@@ -1,7 +1,7 @@
-from pockets import classproperty
-from pockets.autolog import log
-from residue import CoerceUTF8 as UnicodeText, UUID
+from sqlalchemy.types import String, Uuid
 from markupsafe import Markup
+import logging
+log = logging.getLogger(__name__)
 
 from uber.config import c
 from uber.custom_tags import readable_join, format_image_size, email_only, email_to_link
@@ -34,8 +34,8 @@ class LotteryApplication:
 @Session.model_mixin
 class PanelApplication:
     magscouts_opt_in = Column(Choice(c.PANEL_MAGSCOUTS_OPTS), default=c.NO_CHOICE)
-    broadcast_title = Column(UnicodeText)
-    broadcast_subtitle = Column(UnicodeText)
+    broadcast_title = Column(String)
+    broadcast_subtitle = Column(String)
 
     @presave_adjustment
     def no_magscouts_mature_panel(self):
@@ -114,9 +114,9 @@ class GuestGroup:
 
 @Session.model_mixin
 class Group:
-    prior_name = Column(UnicodeText)
+    prior_name = Column(String)
     has_permit = Column(Boolean, default=False)
-    license = Column(UnicodeText)
+    license = Column(String)
 
 @Session.model_mixin
 class Attendee:
@@ -297,8 +297,8 @@ class Attendee:
 
 
 class SeasonPassTicket(MagModel):
-    fk_id = Column(UUID)
-    slug = Column(UnicodeText)
+    fk_id = Column(Uuid(as_uuid=False))
+    slug = Column(String)
 
     @property
     def fk(self):
@@ -306,9 +306,9 @@ class SeasonPassTicket(MagModel):
 
 
 class PrevSeasonSupporter(MagModel):
-    first_name = Column(UnicodeText)
-    last_name = Column(UnicodeText)
-    email = Column(UnicodeText)
+    first_name = Column(String)
+    last_name = Column(String)
+    email = Column(String)
 
     email_model_name = 'attendee'  # used by AutomatedEmailFixture code
 
