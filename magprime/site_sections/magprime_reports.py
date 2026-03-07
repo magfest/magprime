@@ -7,7 +7,7 @@ from sqlalchemy.orm import subqueryload
 
 from uber.config import c
 from uber.custom_tags import datetime_local_filter
-from uber.decorators import all_renderable, csv_file, department_id_adapter
+from uber.decorators import all_renderable, csv_file
 from uber.models import Attendee, Shift, RoomAssignment, ReceiptItem, ModelReceipt
 
 
