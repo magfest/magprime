@@ -57,7 +57,7 @@ if _send_season_supporter_emails:
                 subject='Claim your {} badges with your MAGFest Season Pass'.format(event.name),
                 ident='magprime_season_supporter_{}_invite'.format(event.slug),
                 template='season_supporter_event_invite.txt',
-                when=before(event.deadline),
+                when=[before(event.deadline)],
                 extra_data={'event': event})
 
     for _event in SeasonEvent.instances.values():
@@ -68,7 +68,7 @@ AutomatedEmailFixture(
     Attendee, 'MAGFest schedule, map, and other FAQs', 'precon_faqs.html',
     filter=lambda a: not a.cannot_check_in_reason,
     ident='magprime_precon_faqs',
-    when=days_before(7, c.EPOCH),
+    when=[days_before(7, c.EPOCH)],
     sender='MAGFest <contact@magfest.org>')
 
 AutomatedEmailFixture(
@@ -76,7 +76,7 @@ AutomatedEmailFixture(
     'superstar_intro.html',
     filter=lambda a: a.extra_donation >= c.SUPERSTAR_MINIMUM and a.active_receipt and not a.amount_unpaid,
     ident='superstar_intro',
-    when=before(c.SUPERSTAR_DEADLINE),
+    when=[before(c.SUPERSTAR_DEADLINE)],
     sender='MAGFest Superstar Program <superstars@magfest.org>'
 )
 
@@ -96,14 +96,14 @@ AutomatedEmailFixture(
     Attendee, 'Department Heads', 'food/department_heads.txt',
     lambda a: a.is_dept_head,
     ident='magprime_department_water_and_food_info',
-   # when=days_before(7, c.UBER_TAKEDOWN),
+   # when=[days_before(7, c.UBER_TAKEDOWN)],
     sender='MAGFest Staff Suite <chefs@magfest.org>')
 
 AutomatedEmailFixture(
     Attendee, 'MAGFest Volunteer Food', 'volunteer_food_info.txt',
     lambda a: a.staffing,
     ident='magprime_volunteer_food_info',
-    when=days_before(7, c.UBER_TAKEDOWN),
+    when=[days_before(7, c.UBER_TAKEDOWN)],
     sender='MAGFest Staff Suite <chefs@magfest.org>')
 
 AutomatedEmailFixture(
@@ -179,7 +179,7 @@ StopsEmailFixture(
         a.badge_type != c.CONTRACTOR_BADGE
         and a.takes_shifts
         and a.registered_local <= c.SHIFTS_CREATED),
-    when=before(c.PREREG_TAKEDOWN),
+    when=[before(c.PREREG_TAKEDOWN)],
     ident='volunteer_shift_signup_notification')
 
 StopsEmailFixture(
@@ -192,7 +192,7 @@ if c.STAFF_EVENT_SHIRT_OPTS:
     StopsEmailFixture(
         'Last Chance to enter your MAGFest staff shirt preferences', 'second_shirt.html',
         lambda a: a.gets_staff_shirt and not a.shirt_info_marked,
-        when=days_before(21, c.SHIRT_DEADLINE),
+        when=[days_before(21, c.SHIRT_DEADLINE)],
         ident='magprime_second_shirt')
 
 AutomatedEmailFixture(
@@ -210,7 +210,7 @@ AutomatedEmailFixture(
 AutomatedEmailFixture(
     Attendee, 'MAGFest ' + c.EVENT_YEAR + ' t-shirt size confirmation', 'confirm_shirt_size.html',
     lambda a: days_after(3, a.registered)() and a.gets_any_kind_of_shirt,
-    when=before(c.SHIRT_DEADLINE),
+    when=[before(c.SHIRT_DEADLINE)],
     sender='MAGFest Merch Team <merch@magfest.org>',
     ident='magprime_shirt_size_confirmation')
 
