@@ -25,7 +25,7 @@ from .models import PrevSeasonSupporter  # noqa: E402
 @Session.model_mixin
 class SessionMixin:
     def season_pass(self, id):
-        pss = self.query(PrevSeasonSupporter).filter_by(id=id).all()
+        pss = self.get(PrevSeasonSupporter, id).all()
         if pss:
             return pss[0]
         else:

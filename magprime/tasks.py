@@ -1,12 +1,11 @@
 from collections.abc import Mapping
 from datetime import timedelta, datetime
 import pytz
+import logging
 from time import sleep, time
 import traceback
 
 from celery.schedules import crontab
-from pockets import groupify, listify
-from pockets.autolog import log
 from sqlalchemy.orm import joinedload
 
 from uber import utils
@@ -18,15 +17,18 @@ from uber.models import AutomatedEmail, Email, MagModel, Attendee, Session, Rece
 from uber.tasks import celery
 from uber.tasks.email import send_email
 
+log = logging.getLogger(__name__)
+
 
 @celery.schedule(crontab(minute=0, hour=0))
 def superstar_receipts():
+    # TODO: This needs to be a one-time action, not a recurring task
     with Session() as session:
         extra_donations = session.query(ReceiptItem).join(ModelReceipt).filter(
             ReceiptItem.desc.contains("Extra Donation"), ReceiptItem.closed != None, ReceiptItem.amount > 0,
             ModelReceipt.owner_model == "Attendee")
         for donation in extra_donations:
-            attendee = session.query(Attendee).filter(Attendee.id == donation.receipt.owner_id).first()
+            attendee = session.get(Attendee, donation.receipt.owner_id)
             if not attendee.amount_unpaid:
                 closed_local = donation.closed.astimezone(c.EVENT_TIMEZONE).strftime('%x_%X')
                 ident = f'superstar_receipt_{int(donation.amount / 100)}_{closed_local}'

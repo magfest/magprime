@@ -1,14 +1,19 @@
-from pockets import classproperty
-from pockets.autolog import log
-from residue import CoerceUTF8 as UnicodeText, UUID
+import logging
+
+from sqlalchemy import String, Uuid
 from markupsafe import Markup
+from typing import ClassVar
 
 from uber.config import c
 from uber.custom_tags import readable_join, format_image_size, email_only, email_to_link
 from uber.decorators import presave_adjustment, render
-from uber.models import Boolean, MagModel, Choice, DefaultColumn as Column, Session, GuestImage
+from uber.models import Boolean, MagModel, Choice, DefaultColumn as Column, Session
 from uber.tasks.email import send_email
+from uber.models.types import DefaultField as Field
 from uber.utils import add_opt, check, localized_now, remove_opt, GuidebookUtils
+
+
+log = logging.getLogger(__name__)
 
 
 @Session.model_mixin
@@ -33,9 +38,9 @@ class LotteryApplication:
 
 @Session.model_mixin
 class PanelApplication:
-    magscouts_opt_in = Column(Choice(c.PANEL_MAGSCOUTS_OPTS), default=c.NO_CHOICE)
-    broadcast_title = Column(UnicodeText)
-    broadcast_subtitle = Column(UnicodeText)
+    magscouts_opt_in: int = Field(sa_column=Column(Choice(c.PANEL_MAGSCOUTS_OPTS), default=c.NO_CHOICE))
+    broadcast_title: str = Field(sa_type=String, default='')
+    broadcast_subtitle: str = Field(sa_type=String, default='')
 
     @presave_adjustment
     def no_magscouts_mature_panel(self):
@@ -60,68 +65,22 @@ class PanelApplication:
 
 
 @Session.model_mixin
-class GuestGroup:
-    def handle_images_from_params(self, session, **params):
-        header_image = params.get('header_image')
-        thumbnail_image = params.get('thumbnail_image')
-        bio_image = params.get('bio_pic')
-        header_pic, thumbnail_pic, bio_pic = None, None, None
-        message = ''
-
-        if bio_image and bio_image.filename:
-            bio_pic = GuestImage.upload_image(bio_image, guest_id=self.id)
-            if bio_pic.extension not in c.ALLOWED_BIO_PIC_EXTENSIONS:
-                message = 'Bio pic must be one of ' + ', '.join(c.ALLOWED_BIO_PIC_EXTENSIONS)
-
-        if not message:
-            if header_image and header_image.filename:
-                message = GuidebookUtils.check_guidebook_image_filetype(header_image)
-                if not message:
-                    header_pic = GuestImage.upload_image(header_image, guest_id=self.id,
-                                                            is_header=True)
-                    if not header_pic.check_image_size():
-                        message = f"Your header image must be {format_image_size(c.GUIDEBOOK_HEADER_SIZE)}."
-            elif not self.guidebook_header:
-                message = f"You must upload a {format_image_size(c.GUIDEBOOK_HEADER_SIZE)} header image."
-        
-        if not message:
-            if thumbnail_image and thumbnail_image.filename:
-                message = GuidebookUtils.check_guidebook_image_filetype(thumbnail_image)
-                if not message:
-                    thumbnail_pic = GuestImage.upload_image(thumbnail_image, guest_id=self.id,
-                                                            is_thumbnail=True)
-                    if not thumbnail_pic.check_image_size():
-                        message = f"Your thumbnail image must be {format_image_size(c.GUIDEBOOK_THUMBNAIL_SIZE)}."
-            elif not self.guidebook_thumbnail:
-                message = f"You must upload a {format_image_size(c.GUIDEBOOK_THUMBNAIL_SIZE)} thumbnail image."
-        
-        if not message:
-            if bio_pic:
-                if self.bio_pic:
-                    session.delete(self.bio_pic)
-                session.add(bio_pic)
-            if header_pic:
-                if self.guidebook_header:
-                    session.delete(self.guidebook_header)
-                session.add(header_pic)
-            if thumbnail_pic:
-                if self.guidebook_thumbnail:
-                    session.delete(self.guidebook_thumbnail)
-                session.add(thumbnail_pic)
-
-        return message
-
-
-@Session.model_mixin
 class Group:
-    prior_name = Column(UnicodeText)
-    has_permit = Column(Boolean, default=False)
-    license = Column(UnicodeText)
+    prior_name: str = Field(sa_type=String, default='')
+    has_permit: bool = Field(sa_type=Boolean, default=False)
+    license: str = Field(sa_type=String, default='')
 
 @Session.model_mixin
 class Attendee:
-    special_merch = Column(Choice(c.SPECIAL_MERCH_OPTS), default=c.NO_MERCH)
-    donate_badge_cost = Column(Boolean, default=False)
+    special_merch: int = Field(sa_column=Column(Choice(c.SPECIAL_MERCH_OPTS)), default=c.NO_MERCH)
+    donate_badge_cost: bool = Field(sa_type=Boolean, default=False)
+
+    @presave_adjustment
+    def defaults(self):
+        if not self.special_merch:
+            self.special_merch = c.NO_MERCH
+        if not self.donate_badge_cost:
+            self.donate_badge_cost = False
 
     @presave_adjustment
     def indie_ribbon(self):
@@ -296,20 +255,20 @@ class Attendee:
         return message
 
 
-class SeasonPassTicket(MagModel):
-    fk_id = Column(UUID)
-    slug = Column(UnicodeText)
+class SeasonPassTicket(MagModel, table=True):
+    fk_id: str = Field(sa_type=Uuid(as_uuid=False))
+    slug: str = Field(sa_type=String, default='')
 
     @property
     def fk(self):
         return self.session.season_pass(self.fk_id)
 
 
-class PrevSeasonSupporter(MagModel):
-    first_name = Column(UnicodeText)
-    last_name = Column(UnicodeText)
-    email = Column(UnicodeText)
+class PrevSeasonSupporter(MagModel, table=True):
+    first_name: str = Field(sa_type=String, default='')
+    last_name: str = Field(sa_type=String, default='')
+    email: str = Field(sa_type=String, default='')
 
-    email_model_name = 'attendee'  # used by AutomatedEmailFixture code
+    email_model_name: ClassVar = 'attendee'  # used by AutomatedEmailFixture code
 
     _repr_attr_names = ['first_name', 'last_name', 'email']

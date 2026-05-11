@@ -42,6 +42,7 @@ when we know what kind of food restrictions everyone has.</p>
 }">
     {{ csrf_token() }}
     <input type="hidden" name="id" value="{{ restrictions.db_id }}" />
+    <input type="hidden" name="attendee_id" value="{{ attendee.id }}" />
 
     <div class="mb-3">{{ form_macros.input(dietary_restrictions.has_allergies, alpine_model='has_allergies', **{'x-on:change': 'if(has_allergies == "no") { allergies = []; other_allergies = ""; }'}) }}</div>
     <div class="col-sm-6 mb-3" x-show="has_allergies == 'yes'">{{ form_macros.input(dietary_restrictions.standard, alpine_model='allergies', **{'x-on:change': 'if(!allergies.includes("' ~ c.OTHER ~ '")) { other_allergies = ""; }'}) }}</div>

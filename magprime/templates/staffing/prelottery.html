@@ -31,14 +31,14 @@ All staff are eligible for EITHER:
 </ul>
 {% if c.AFTER_HOTEL_LOTTERY_STAFF_DEADLINE %}
 <p>The deadline for choosing between the staff pre-lottery and staff crash space has passed.</p>
-<a href="../staffing/index" class="btn btn-outline-secondary">Back to Checklist</a>
+<a href="../staffing/checklist?id={{ attendee.id }}" class="btn btn-outline-secondary">Back to Checklist</a>
 {% elif attendee.selected_hotel_type and c.STAFF_HOTEL_LOTTERY_OPEN and attendee.lottery_application and attendee.lottery_application.status not in [c.DISQUALIFIED, c.WITHDRAWN] %}
 <p>
     Since you have an active pre-lottery entry, you can't opt into staff crash space.
     Please <a href="../hotel_lottery/index?attendee_id={{ attendee.id }}" target="_blank">withdraw your entry from the pre-lottery</a> first, then refresh the page.
 </p>
 
-<a href="../staffing/index" class="btn btn-outline-secondary">Back to Checklist</a>
+<a href="../staffing/checklist?id={{ attendee.id }}" class="btn btn-outline-secondary">Back to Checklist</a>
 {% else %}
 <p>
 Below you can choose which option you're planning on using. You can do this up until <strong>{{ c.HOTEL_LOTTERY_STAFF_DEADLINE|datetime_local }}</strong>.
@@ -52,7 +52,7 @@ Below you can choose which option you're planning on using. You can do this up u
 </p>
 
 <form method="post" action="prelottery">
-<input type="hidden" name="attendee_id" value="{{ attendee.id }}" />
+<input type="hidden" name="id" value="{{ attendee.id }}" />
 
 <button type="submit" name="prelottery" value="1" class="btn {{ prelottery_class }}">{{ prelottery_text }} Staff Pre-Lottery</button>
 <button type="submit" name="crash_space" value="1" class="btn {{ crash_space_class }}">{{ crash_space_text }} Staff Crash Space</button>

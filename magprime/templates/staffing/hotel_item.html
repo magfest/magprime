@@ -7,7 +7,7 @@
     {% else %}
     {{ macros.checklist_image(attendee.hotel_requests) }}
     {% endif %}
-    Please let us know whether you want to enter the staff pre-lottery or utilize staff crash space.
+    Please <a href="prelottery?id={{ attendee.id }}">let us know</a> whether you want to enter the staff pre-lottery or utilize staff crash space.
 </li>
 {% elif attendee.badge_type == c.STAFF_BADGE and not attendee.hotel_eligible %}
 <li>
@@ -36,9 +36,9 @@
             {{ macros.checklist_image(attendee.hotel_requests) }}
             The deadline for editing hotel requests has passed, but as a STOPS admin, you can still
             {% if attendee.hotel_requests %}
-                <a href="hotel">edit</a>
+                <a href="hotel?id={{ attendee.id }}">edit</a>
             {% else %}
-                <a href="hotel">fill out</a>
+                <a href="hotel?id={{ attendee.id }}">fill out</a>
             {% endif %}
         {% endif %}
         this staffer's hotel room space requests.
@@ -52,7 +52,7 @@
                     <a href="{{ c.HOTEL_REQUESTS_URL }}/hotels/request?id={{ attendee.id }}&event={{ c.EVENT_NAME }}{{ c.EVENT_YEAR }}" target="_blank">Tell us</a>
                 {% else %}
                     {{ macros.checklist_image(attendee.hotel_requests) }}
-                    <a href="hotel">Tell us</a>
+                    <a href="hotel?id={{ attendee.id }}">Tell us</a>
                 {% endif %}
             {% else %}
             {{ macros.checklist_image(attendee.hotel_requests) }}
@@ -63,7 +63,7 @@
                 {% if c.HOTEL_REQUESTS_URL %}
                     (you may <a href="{{ c.HOTEL_REQUESTS_URL }}/hotels/request?id={{ attendee.id }}&event={{ c.EVENT_NAME }}{{ c.EVENT_YEAR }}">edit your request</a> until then).
                 {% else %}
-                    (you may <a href="hotel">edit your request</a> until then).
+                    (you may <a href="hotel?id={{ attendee.id }}">edit your request</a> until then).
                 {% endif %}
             {% endif %}
             {% if attendee.lottery_application and (attendee.lottery_application.status == c.COMPLETE or attendee.lottery_application.status in c.HOTEL_LOTTERY_AWARD_STATUSES) %}

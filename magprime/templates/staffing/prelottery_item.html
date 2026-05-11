@@ -4,14 +4,14 @@
     {{ macros.checklist_image(attendee.selected_hotel_type) }}
     {% if c.BEFORE_HOTEL_LOTTERY_STAFF_DEADLINE %}
         {% if not attendee.selected_hotel_type %}
-            <a href="prelottery">Tell us</a> by <strong>{{ c.HOTEL_LOTTERY_STAFF_DEADLINE|datetime_local }}</strong> whether you would like to utilize staff crash space or buy a self-paid room in the staff pre-lottery.
+            <a href="prelottery?id={{ attendee.id }}">Tell us</a> by <strong>{{ c.HOTEL_LOTTERY_STAFF_DEADLINE|datetime_local }}</strong> whether you would like to utilize staff crash space or buy a self-paid room in the staff pre-lottery.
         {% else %}
             {% if c.STAFF_HOTEL_LOTTERY_OPEN and attendee.lottery_application and attendee.lottery_application.status not in [c.DISQUALIFIED, c.WITHDRAWN] %}
             Since you have an active pre-lottery entry, you can't opt into staff crash space.
             You can <a href="../hotel_lottery/index?attendee_id={{ attendee.id }}" target="_blank">withdraw your entry from the pre-lottery</a> to be eligible for staff crash space again.
             {% else %}
             You've already let us know that you will {% if c.STAFF_HOTEL_LOTTERY_OPEN and 'prelottery' in attendee.selected_hotel_type %}<a href="../hotel_lottery/index?attendee_id={{ attendee.id }}" target="_blank">{{ attendee.selected_hotel_type }}</a>{% else %}{{ attendee.selected_hotel_type }}{% endif %},
-            but you can <a href="prelottery">change your selection</a> until <strong>{{ c.HOTEL_LOTTERY_STAFF_DEADLINE|datetime_local }}</strong>.
+            but you can <a href="prelottery?id={{ attendee.id }}">change your selection</a> until <strong>{{ c.HOTEL_LOTTERY_STAFF_DEADLINE|datetime_local }}</strong>.
             {% endif %}
         {% endif %}
     {% else %}

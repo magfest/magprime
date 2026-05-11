@@ -1,14 +1,18 @@
+import logging 
+
 from markupsafe import Markup
 from wtforms import (BooleanField, DecimalField, EmailField, Form, FormField,
                      HiddenField, SelectField, SelectMultipleField, IntegerField,
                      StringField, TelField, validators, TextAreaField)
 from wtforms.validators import ValidationError, StopValidation
 from wtforms.widgets import html_params
-from pockets.autolog import log
 
 from uber.config import c
 from uber.forms import AddressForm, NumberInputGroup, MagForm, IntSelect, SwitchInput, HiddenIntField
 from uber.custom_tags import popup_link, format_currency, pluralize, table_prices, email_to_link
+
+
+log = logging.getLogger(__name__)
 
 
 class NumberInputGroupChoices(NumberInputGroup):
