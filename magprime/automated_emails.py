@@ -81,6 +81,15 @@ AutomatedEmailFixture(
 )
 
 AutomatedEmailFixture(
+    Attendee,
+    f'MAGFest {c.EVENT_YEAR} Superstar Donation Receipt',
+    'superstar_receipt.html', None,
+    ident='superstar_receipt',
+    send_filter=lambda a: not a.amount_unpaid,
+    sender='MAGFest Superstar Program <superstars@magfest.org>'
+)
+
+AutomatedEmailFixture(
     Attendee, 'MAGFest food for guests', 'guest_food_restrictions.txt',
     lambda a: a.badge_type == c.GUEST_BADGE,
     sender='MAGFest Staff Suite <chefs@magfest.org>',
@@ -116,11 +125,10 @@ AutomatedEmailFixture(
     Attendee, 'Get Ready for MAGFest LAN!', 'lan_hype.html',
     lambda a: c.LAN in a.interests_ints,
     ident='magprime_lan_hype',
-    needs_approval=True,
     sender='MAGFest LAN <lan@magfest.org>')
 
 StopsEmailFixture(
-    f'{c.EVENT_NAME} ({c.EPOCH.strftime('%b %Y')}) shifts are live tomorrow!',
+    f'{c.EVENT_NAME} ({c.EVENT_DATE}) shifts are live tomorrow!',
     'shifts/shifts_created.txt',
     lambda a: (
         a.badge_type != c.CONTRACTOR_BADGE
@@ -160,3 +168,18 @@ AutomatedEmailFixture(
     when=[before(c.SHIRT_DEADLINE)],
     sender='MAGFest Merch Team <merch@magfest.org>',
     ident='magprime_shirt_size_confirmation')
+
+
+AutomatedEmailFixture(
+    None, 'Panel Department Changed',
+    'panel_changed_dept.txt', None,
+    ident='panel_dept_changed_admin',
+    sender="panels-heads@magfest.org"
+)
+
+AutomatedEmailFixture(
+    None, 'Volunteer Invalidated',
+    'invalidated_volunteer.txt', None,
+    ident='invalidated_volunteer_admin',
+    sender=c.STAFF_EMAIL
+)

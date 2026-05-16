@@ -4,11 +4,11 @@ from sqlalchemy import String, Uuid
 from markupsafe import Markup
 from typing import ClassVar
 
+from uber.email import EmailService
 from uber.config import c
 from uber.custom_tags import readable_join, format_image_size, email_only, email_to_link
 from uber.decorators import presave_adjustment, render
 from uber.models import Boolean, MagModel, Choice, DefaultColumn as Column, Session
-from uber.tasks.email import send_email
 from uber.models.types import DefaultField as Field
 from uber.utils import add_opt, check, localized_now, remove_opt, GuidebookUtils
 
@@ -52,16 +52,9 @@ class PanelApplication:
         from .models import Session
 
         if not self.is_new and self.department != self.orig_value_of('department'):
-            try:
-                with Session() as session:
-                    send_email.delay(
-                        "panels-heads@magfest.org",
-                        "panels-heads@magfest.org",
-                        'Panel Department Changed',
-                        render('emails/panel_changed_dept.txt', {'app': self}, encoding=None),
-                        model=self.to_dict('id'))
-            except Exception:
-                log.error('unable to send panel dept changed email', exc_info=True)
+            with Session() as session:
+                EmailService.queue_email(session, 'panel_dept_changed_admin', to="panels-heads@magfest.org",
+                                         data={'app': self})
 
 
 @Session.model_mixin
@@ -146,18 +139,10 @@ class Attendee:
 
     @presave_adjustment
     def invalid_notification(self):
-        if self.staffing and self.badge_status == c.INVALID_STATUS \
-                and self.badge_status != self.orig_value_of('badge_status'):
-            try:
-                send_email.delay(
-                    c.STAFF_EMAIL,
-                    c.STAFF_EMAIL,
-                    'Volunteer invalidated',
-                    render('emails/invalidated_volunteer.txt', {'attendee': self}, encoding=None),
-                    model=self.to_dict('id'))
-            except Exception:
-                log.error('unable to send invalid email', exc_info=True)
-    
+        if self.staffing and self.badge_status == c.INVALID_STATUS and self.badge_status != self.orig_value_of('badge_status'):
+            EmailService.queue_email(self.session, 'invalidated_volunteer_admin', to=c.STAFF_EMAIL,
+                                     data={'attendee': self})
+
     @property
     def watchlist_warning(self):
         regdesk_info_append = " [{}]".format(self.regdesk_info) if self.regdesk_info else ""
