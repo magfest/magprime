@@ -11,15 +11,14 @@ if c.HOTEL_LOTTERY_STAFF_START:
     HotelLotteryEmailFixture(
         f'{c.EVENT_NAME_AND_YEAR} Staff Pre-Lottery Award Notification',
         'hotel/prelim_notification.html',
-        lambda a: a.status == c.AWARDED and a.is_staff_entry,
+        "lambda a: a.status == c.AWARDED and a.is_staff_entry",
         ident='hotel_lottery_prelim_staff'
     )
 
     HotelLotteryEmailFixture(
         f'{c.EVENT_NAME_AND_YEAR} Staff Pre-Lottery Booking Link',
         'hotel/award_notification.html',
-        lambda a: a.status == c.AWARDED and a.is_staff_entry and (
-            a.booking_url or a.parent_application and a.parent_application.booking_url),
+        "lambda a: a.status == c.AWARDED and a.is_staff_entry and (a.booking_url or a.parent_application and a.parent_application.booking_url)",
         ident='hotel_lottery_awarded_staff'
     )
 
@@ -27,15 +26,15 @@ if c.HOTEL_LOTTERY_FORM_START:
     HotelLotteryEmailFixture(
         f'{c.EVENT_NAME_AND_YEAR} Hotel Lottery Notification',
         'hotel/award_notification.html',
-        lambda a: a.status == c.AWARDED and not a.final_status_hidden and \
-            a.booking_url_ready and not a.is_staff_entry,
+        "lambda a: a.status == c.AWARDED and not a.final_status_hidden and \
+            a.booking_url_ready and not a.is_staff_entry",
         ident='hotel_lottery_awarded'
     )
 
     HotelLotteryEmailFixture(
         f'{c.EVENT_NAME_AND_YEAR} Hotel Lottery Notification',
         'hotel/lottery_delay.html',
-        lambda a: a.status == c.AWARDED and not a.is_staff_entry,
+        "lambda a: a.status == c.AWARDED and not a.is_staff_entry",
         ident='hotel_lottery_awarded_late'
     )
 
@@ -66,16 +65,16 @@ if _send_season_supporter_emails:
 
 AutomatedEmailFixture(
     Attendee, 'MAGFest schedule, map, and other FAQs', 'precon_faqs.html',
-    filter=lambda a: not a.cannot_check_in_reason,
-    ident='magprime_precon_faqs',
+    "lambda a: not a.cannot_check_in_reason",
+    'magprime_precon_faqs',
     when=[days_before(7, c.EPOCH)],
     sender='MAGFest <contact@magfest.org>')
 
 AutomatedEmailFixture(
     Attendee, 'Thank you for your Super MAGFest Superstars Donation!',
     'superstar_intro.html',
-    filter=lambda a: a.extra_donation >= c.SUPERSTAR_MINIMUM and a.active_receipt and not a.amount_unpaid,
-    ident='superstar_intro',
+    "lambda a: a.extra_donation >= c.SUPERSTAR_MINIMUM and a.active_receipt and not a.amount_unpaid",
+    'superstar_intro',
     when=[before(c.SUPERSTAR_DEADLINE)],
     sender='MAGFest Superstar Program <superstars@magfest.org>'
 )
@@ -84,102 +83,97 @@ AutomatedEmailFixture(
     Attendee,
     f'MAGFest {c.EVENT_YEAR} Superstar Donation Receipt',
     'superstar_receipt.html', None,
-    ident='superstar_receipt',
-    send_filter=lambda a: not a.amount_unpaid,
+    'superstar_receipt',
+    send_filter="lambda a: not a.amount_unpaid",
     sender='MAGFest Superstar Program <superstars@magfest.org>'
 )
 
 AutomatedEmailFixture(
     Attendee, 'MAGFest food for guests', 'guest_food_restrictions.txt',
-    lambda a: a.badge_type == c.GUEST_BADGE,
+    "lambda a: a.badge_type == c.GUEST_BADGE",
     sender='MAGFest Staff Suite <chefs@magfest.org>',
     ident='magprime_guest_food_restrictions')
 
 AutomatedEmailFixture(
     Attendee, 'MAGFest hospitality suite information', 'food/guest_food_info.txt',
-    lambda a: a.badge_type == c.GUEST_BADGE,
+    "lambda a: a.badge_type == c.GUEST_BADGE",
     sender='MAGFest Staff Suite <chefs@magfest.org>',
     ident='magprime_hospitality_suite_guest_food_info')
 
 AutomatedEmailFixture(
     Attendee, 'Department Heads', 'food/department_heads.txt',
-    lambda a: a.is_dept_head,
-    ident='magprime_department_water_and_food_info',
+    "lambda a: a.is_dept_head",
+    'magprime_department_water_and_food_info',
     #when=[days_before(7, c.UBER_TAKEDOWN)],
     sender='MAGFest Staff Suite <chefs@magfest.org>')
 
 AutomatedEmailFixture(
     Attendee, 'MAGFest Volunteer Food', 'volunteer_food_info.txt',
-    lambda a: a.staffing,
-    ident='magprime_volunteer_food_info',
+    "lambda a: a.staffing",
+    'magprime_volunteer_food_info',
     when=[days_before(7, c.UBER_TAKEDOWN)],
     sender='MAGFest Staff Suite <chefs@magfest.org>')
 
 AutomatedEmailFixture(
     Attendee, 'Important MAGFest PC Gaming Room Information! *PLEASE READ*', 'lan_room.html',
-    lambda a: c.LAN in a.interests_ints,
-    ident='magprime_important_lan_room_info',
+    "lambda a: c.LAN in a.interests_ints",
+    'magprime_important_lan_room_info',
     sender='MAGFest LAN <lan@magfest.org>')
 
 AutomatedEmailFixture(
     Attendee, 'Get Ready for MAGFest LAN!', 'lan_hype.html',
-    lambda a: c.LAN in a.interests_ints,
-    ident='magprime_lan_hype',
+    "lambda a: c.LAN in a.interests_ints",
+    'magprime_lan_hype',
     sender='MAGFest LAN <lan@magfest.org>')
 
 StopsEmailFixture(
     f'{c.EVENT_NAME} ({c.EVENT_DATE}) shifts are live tomorrow!',
     'shifts/shifts_created.txt',
-    lambda a: (
-        a.badge_type != c.CONTRACTOR_BADGE
-        and a.takes_shifts
-        and a.registered_local <= c.SHIFTS_CREATED),
-    when=[before(c.PREREG_TAKEDOWN)],
-    ident='volunteer_shift_signup_notification')
+    "lambda a: a.badge_type != c.CONTRACTOR_BADGE and a.takes_shifts and a.registered_local <= c.SHIFTS_CREATED",
+    'volunteer_shift_signup_notification',
+    when=[before(c.PREREG_TAKEDOWN)])
 
 StopsEmailFixture(
     'MAGFest Dept Checklist Introduction', 'dept_checklist_intro.txt',
-    lambda a: a.is_checklist_admin and a.admin_account,
-    extra_data={'checklist_items': DeptChecklistConf.instances.values()},
-    ident='magprime_dept_checklist_intro')
+    "lambda a: a.is_checklist_admin and a.admin_account",
+    'magprime_dept_checklist_intro',
+    extra_data={'checklist_items': DeptChecklistConf.instances.values()})
 
 if c.STAFF_EVENT_SHIRT_OPTS:
     StopsEmailFixture(
         'Last Chance to enter your MAGFest staff shirt preferences', 'second_shirt.html',
-        lambda a: a.gets_staff_shirt and not a.shirt_info_marked,
-        when=[days_before(21, c.SHIRT_DEADLINE)],
-        ident='magprime_second_shirt')
+        "lambda a: a.gets_staff_shirt and not a.shirt_info_marked",
+        'magprime_second_shirt',
+        when=[days_before(21, c.SHIRT_DEADLINE)])
 
 AutomatedEmailFixture(
     Attendee, f'Last Chance for MAGFest {c.EVENT_YEAR} bonus swag!', 'attendee_swag_promo.html',
-    lambda a: (
-        a.can_spam
-        and (a.paid == c.HAS_PAID or a.paid == c.NEED_NOT_PAY or (a.group and a.group.amount_paid))
-        and days_after(3, a.registered)()),
-    sender='MAGFest Merch Team <merch@magfest.org>',
-    ident='magprime_bonus_swag_reminder_last_chance')
+    "lambda a: a.can_spam and (a.paid == c.HAS_PAID or a.paid == c.NEED_NOT_PAY or \
+        (a.group and a.group.amount_paid)) and days_after(3, a.registered)()",
+    'magprime_bonus_swag_reminder_last_chance',
+    sender='MAGFest Merch Team <merch@magfest.org>')
 
 # Send to any attendee who will be receiving a t-shirt (staff, volunteers, anyone
 # who kicked in at the shirt level or above). Should not be sent after the t-shirt
 # size deadline.
 AutomatedEmailFixture(
     Attendee, f'MAGFest {c.EVENT_YEAR} t-shirt size confirmation', 'confirm_shirt_size.html',
-    lambda a: days_after(3, a.registered)() and a.gets_any_kind_of_shirt,
+    "lambda a: days_after(3, a.registered)() and a.gets_any_kind_of_shirt",
+    'magprime_shirt_size_confirmation',
     when=[before(c.SHIRT_DEADLINE)],
-    sender='MAGFest Merch Team <merch@magfest.org>',
-    ident='magprime_shirt_size_confirmation')
+    sender='MAGFest Merch Team <merch@magfest.org>')
 
 
 AutomatedEmailFixture(
     None, 'Panel Department Changed',
     'panel_changed_dept.txt', None,
-    ident='panel_dept_changed_admin',
+    'panel_dept_changed_admin',
     sender="panels-heads@magfest.org"
 )
 
 AutomatedEmailFixture(
     None, 'Volunteer Invalidated',
     'invalidated_volunteer.txt', None,
-    ident='invalidated_volunteer_admin',
+    'invalidated_volunteer_admin',
     sender=c.STAFF_EMAIL
 )

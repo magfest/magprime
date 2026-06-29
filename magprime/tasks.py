@@ -21,7 +21,6 @@ log = logging.getLogger(__name__)
 
 @celery.schedule(crontab(minute=0, hour=0))
 def superstar_receipts():
-    # TODO: This needs to be a one-time action, not a recurring task
     with Session() as session:
         extra_donations = session.query(ReceiptItem).join(ModelReceipt).filter(
             ReceiptItem.desc.contains("Extra Donation"), ReceiptItem.closed != None, ReceiptItem.amount > 0,
