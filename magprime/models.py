@@ -41,6 +41,8 @@ class PanelApplication:
     magscouts_opt_in: int = Field(sa_column=Column(Choice(c.PANEL_MAGSCOUTS_OPTS), default=c.NO_CHOICE))
     broadcast_title: str = Field(sa_type=String, default='')
     broadcast_subtitle: str = Field(sa_type=String, default='')
+    recording_details: str = Field(sa_type=String, default='')
+    accessibility_info: str = Field(sa_type=String, default='')
 
     @presave_adjustment
     def no_magscouts_mature_panel(self):

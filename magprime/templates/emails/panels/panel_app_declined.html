@@ -1,0 +1,15 @@
+<html>
+<head></head>
+<body>
+{{ app.submitter.first_name }},
+
+<br/><br/>This is a notice that your panel "{{ app.name }}" has not been scheduled for {{ c.EVENT_NAME_AND_YEAR }}.
+
+<br/><br/>If you submitted a lecture panel and you're able to distill it to its best five to ten minutes, we encourage you to check out Soapbox, where you can deliver a presentation experience for whoever you can encourage to witness!
+
+<br/><br/>Beyond that, there's room to participate in a meetup or otherwise bring your idea to life via other means.  This decision is not a judgment on the merits of your application, so much as a notice that we will not offer a dedicated space and time for it.
+
+<br/><br/>If you have any questions or concerns, please contact {{ dept_email|email_only }}.
+
+<br/><br/>{{ email_signature }}
+</body></html>

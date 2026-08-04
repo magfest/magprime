@@ -4,8 +4,12 @@
 {{ super() }}
 panel_name: `{{ panel_info.name.data }}`,
 rating: {{ panel_info.granular_rating.data|map('string')|list }},
+record_ok: '{{ panel_info.record.data|jsonize if c.LIVESTREAM_OPTS|length <= 2 else c.OPT_OUT }}',
+livestream_ok: '{{ panel_info.livestream.data|jsonize if c.CAN_LIVESTREAM or c.LIVESTREAM_OPTS|length > 2 else c.OPT_OUT }}',
+need_recording_details: {{ panel_info.recording_details.data|boolean|jsonize }},
 get longName() { return this.panel_name.length > 40 },
 get showMagScouts() { return this.rating == '{{ c.NONE }}' },
+get showRecordDetails() { return !(['{{ c.OPT_OUT }}', '0'].includes(this.record_ok) && ['{{ c.OPT_OUT }}', '0'].includes(this.livestream_ok)) },
 {% endblock %}
 
 
@@ -46,4 +50,20 @@ get showMagScouts() { return this.rating == '{{ c.NONE }}' },
 <div class="row g-sm-3 mb-3" x-show="showMagScouts">
 <div class="col-sm">{{ form_macros.input(panel_info.magscouts_opt_in, required_if="showMagScouts") }}</div>
 {% endif %}
+{% endblock %}
+
+
+{% block record_livestream %}
+    <div class="col-sm">{{ form_macros.input(panel_info.noise_level) }}</div>
+    {% if c.LIVESTREAM_OPTS|length <= 2 %}
+    <div class="col-sm">{{ form_macros.input(panel_info.record, alpine_model="record_ok") }}</div>
+    {% endif %}
+    {% if c.CAN_LIVESTREAM or c.LIVESTREAM_OPTS|length > 2 %}
+    <div class="col-sm">{{ form_macros.input(panel_info.livestream, alpine_model="livestream_ok") }}</div>
+    {% endif %}
+</div>
+<div class="row g-sm-3 mb-3" x-show="showRecordDetails">
+    <div class="col-sm">{{ form_macros.input(panel_info.need_recording_details, **{'x-model.boolean': "need_recording_details"}) }}</div>
+</div><div class="row g-sm-3 mb-3" x-show="need_recording_details">
+    <div class="col-sm">{{ form_macros.input(panel_info.recording_details, required_if="showRecordDetails") }}</div>
 {% endblock %}

@@ -145,9 +145,20 @@ class PanelInfo:
                                      description="A one-line summary that appears below your panel's title on digital displays. Max 100 characters.")
     magscouts_opt_in = SelectField("Do you want your content to be highlighted by the MAGScouts program?", coerce=int,
                                    choices=c.PANEL_MAGSCOUTS_OPTS)
-    
+    need_recording_details = BooleanField("Is there anything about your panel that would require the camera to record more than the stage and the projected screen?")
+    recording_details = TextAreaField("Describe your recording needs")
+    accessibility_info = TextAreaField("Does anyone in your panel require accessibility accommodations?")
+
     def public_description_label(self):
         return Markup('Guidebook Description <span class="popup"><a href="../static_views/guidebook_html.html" target="_blank"><i class="fa fa-question-circle" aria-hidden="true"></i> HTML Guide</a></span>')
+    
+    def accessibility_info_label(self):
+        return Markup("""Does anyone in your panel require accessibility accommodations?
+                      If so, please include the name(s) and email(s) of panelists that Accessibility Services should reach out to
+                      (no other information). They may also reach out themselves to <a href="mailto:accessibility@magfest.org" target="_blank">accessibility@magfest.org</a>
+                      at any time before or during the event. Please keep in mind that there are some accommodations that require
+                      significantly advanced notice, so the earlier they know, the better!
+                      <br/><br/>Do not include anyone here who does not need accommodations personally.""")
 
 
 @MagForm.form_mixin

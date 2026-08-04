@@ -1,0 +1,59 @@
+<html>
+<head></head>
+<body>
+{{ app.submitter.first_name }},
+
+<br/><br/>Congratulations and welcome to Super MAGFest {{ c.EVENT_YEAR }}!  The {{ dept_name }} department has accepted one of your applications!
+<br/><strong>Please read the following e-mail in its entirety, as it contains all of the basic information you need to prepare for your presentation. There are instructions for you to follow at the end.</strong>
+
+<br/><br/><strong>Your panel has been assigned a point of contact within the {{ dept_name }} Department. They should contact you shortly after you receive this message.</strong>
+Please contact them with any questions, concerns, or requests not covered in this message.
+
+<br/><br/><strong>The submission we accepted is "{{ app.name }}".</strong> If you submitted multiple applications, they will be addressed in separate messages as the panel judgment process continues.
+
+<br/><br/>
+{% if app.event.timespan() %}<strong>Your panel is currently scheduled for {{ app.event.timespan() }}.</strong> This time and location is not necessarily final, but we are unlikely to change it unless you request to be rescheduled. If you would like to be rescheduled, please let us know as soon as you can.
+{% else %}Your panel has not yet been scheduled. <strong>A member of the {{ dept_name }} department will contact you when your panel has been scheduled.</strong>{% endif %}
+
+<br/><br/><strong>It is too late to add co-panelists to your panel</strong>, unless an existing co-panelist is removed.
+
+<br/><br/><strong>At the event, stop by Panels HQ before your panel begins</strong> to receive the ribbon that tells our staff to let you into the panel room ahead of your presentation.
+
+<br/><br/><strong>You will be able to begin setting up your panel 30 minutes before its scheduled start time.</strong> If you are unfamiliar with the tech involved or have a complex setup, please ask your point of contact about whether there is a panelist preparation room.
+
+<br/><br/><strong>You are expected to start and end your panel at the times specified.</strong> If you start early, attendees who show up on time will complain. If you end late, you will cut into the prep time for the next panelist.
+
+<br/><br/><strong>Each panel room will have the following A/V equipment:</strong> Microphones on the table on stage, speakers connected to the microphone, a projector with HDMI, a laptop with PowerPoint installed, and a camera for recording the panel. <strong>Please make sure your computer has HDMI output!</strong> If you need anything else and you didn't mention it in your panel application, tell your point of contact as soon as possible.
+
+<br/><br/><strong>You are encouraged to have offline backups of everything related to your presentation.</strong> While as a panelist you will have a priority Wi-Fi connection, you may still not be able to connect to the Internet. If you can download content from the Internet onto your computer, please do so. Additionally, make sure you have multiple means of accessing your presentation, preparing for the case where your computer stops working.
+
+<br/><br/>—
+
+<br/><br/>This is how your panel will look in our public-facing materials, such as Guidebook. <strong>If you would like any changes to these, please work with your point of contact.</strong>
+
+<br/><br/><strong>Panel Information</strong>
+<ul>
+    <li><strong>Name</strong>: {{ app.name }}</li>
+    {% if app.broadcast_title %}<li><strong>Broadcast Title</strong>: {{ app.broadcast_title }}</li>{% endif %}
+    <li><strong>Broadcast Subtitle</strong>: {{ app.broadcast_subtitle }}</li>
+    <li><strong>Schedule Description</strong>: {{ app.public_description }}</li>
+</ul>
+
+<br/><br/>—
+
+<br/><br/>These are the steps you need to take now by responding to this message, contacting {{ dept_email|email_only }}, or responding to your point of contact:
+
+<br/><br/><strong>Please confirm that you are still able to attend the event and can run this panel within 10 days.</strong>
+
+<br/><br/><strong>Please confirm whether each person associated with the panel has already purchased a badge.</strong> We already have a good idea of whether each person does or does not have a badge, but sometimes things like duplicate names crop up, so we would like to double-check.
+
+<br/><br/>If you have already purchased a badge, we will not reimburse its cost until after the event. Please contact us if you have any questions or concerns about this.
+
+<br/><br/>If you have allowed MAGFest to record your panel, <strong>you may (optionally) provide a thumbnail for the YouTube recording.</strong>
+
+<br/><br/>—
+
+<br/><br/>That's all for now!  Don't forget to confirm your attendance, and we hope to see you at the event!
+
+<br/><br/>{{ email_signature }}
+</body></html>

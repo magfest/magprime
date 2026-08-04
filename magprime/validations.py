@@ -16,6 +16,8 @@ BadgeExtras.field_validation.validations['extra_donation']['minimum'] = validato
 PanelInfo.field_validation.required_fields['broadcast_title'] = ("Please provide a short title for digital displays.",
                                                                  'name', lambda x: len(x) > 40)
 PanelInfo.field_validation.required_fields['broadcast_subtitle'] = "Please provide a one-line summary for digital displays."
+PanelInfo.field_validation.required_fields['recording_details'] = ("Please provide details for how your panel should be recorded.",
+                                                                   'need_recording_details')
 
 
 @RoomLottery.field_validation('room_type_preference')

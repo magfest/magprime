@@ -19,21 +19,31 @@
 <body>
 {{ app.submitter.first_name }},
 
-<br/><br/>Thanks for your interest in contributing a panel to {{ c.EVENT_NAME }} this coming {{ event_dates() }}! Your application for the panel "{{ app.name }}" has been received and is now being reviewed.
+<br/><br/>Thanks for your interest in presenting at Super MAGFest {{ c.EVENT_YEAR }}!  Your application for the panel "{{ app.name }}" has been received and will be reviewed shortly.  We will continue accepting applications until {{ c.PANELS_DEADLINE|datetime_local }}, and we hope to have decisions made by {{ c.EXPECTED_RESPONSE }}.
 
-<br/><br/>We will continue accepting applications until {{ c.PANELS_DEADLINE|datetime_local }}. Decision notifications will be sent out {{ c.EXPECTED_RESPONSE }}.
+<br/><br/>A readout of the information in your application is at the bottom of this message. <strong>If you want to make any changes to your application, or have any questions or concerns, contact us at {{ c.PANELS_EMAIL|email_only }}.</strong>
 
-<br/><br/>Meanwhile, if you want to make any changes to this application, or if you have any questions or concerns, please don't hesitate to reach out to us at {{ c.PANELS_EMAIL|email_only }}.
+<br/><br/>In particular, please pay attention to these frequent pain points:
+<ul>
+    <li><strong>No one who does not have a badge will be allowed to enter the venue for your panel.</strong></li>
+    <li><strong>One week after the application deadline (at {{ c.PANELS_DEADLINE|timedelta(days=7)|datetime_local }}), requests to add co-panelists will no longer be granted.</strong></li>
+    <li>If for whichever reason the title or broadcast description did not populate properly, that will not affect how your panel is judged. You may still contact us to change it, though.</li>
+    <li>Your application may be forwarded to a different department than the one you originally submitted under.</li>
+    <li>If your application is accepted, it will be scheduled based on the unavailability you specified in your application.  Please make sure that you’re comfortable with being scheduled in any way that conforms to the constraints you gave us!</li>
+    <li>We wish you the best during application season!</li>
+</ul>
 
-<br/><br/>Note that if accepted, your day and time will be manually scheduled <strong>based on the availability you specified on your submission</strong>, which you can review below. If this availability has changed, please let us know as soon as possible, as we will not be reaching out again for availability before scheduling.
+<br/><br/>—
 
 <br/><br/><strong>Panel Information</strong>
 <ul>
     <li><strong>Name</strong>: {{ app.name }}</li>
     {% if c.PANELS_DEPT_OPTS|length > 1 %}<li><strong>Department</strong>: {{ app.department_name }}</li>{% endif %}
     <li><strong>Type</strong>: {{ app.presentation_label }}{% if app.presentation == c.OTHER %} ({{ app.other_presentation }}){% endif %}</li>
+    {% if app.broadcast_title %}<li><strong>Broadcast Title</strong>: {{ app.broadcast_title }}</li>{% endif %}
+    <li><strong>Broadcast Subtitle</strong>: {{ app.broadcast_subtitle }}</li>
     <li><strong>Description</strong>: {{ app.description }}</li>
-    {% if app.public_description %}<li><strong>Schedule Description</strong>: {{ app.public_description }}</li>{% endif %}
+    {% if app.public_description %}<li><strong>Guidebook Description</strong>: {{ app.public_description }}</li>{% endif %}
     {% if c.PANEL_RATING_OPTS|length > 1 %}<li><strong>Rating</strong>: {{ app.rating_label }}</li>{% endif %}
     {% if c.PANEL_CONTENT_OPTS|length > 1 %}
     <li><strong>Mature Content</strong>: {{ app.granular_rating_labels|join(', ') }}</li>
@@ -48,6 +58,7 @@
     <li><strong>Recording:</strong> {{ app.record_label }}</li>
     {% if c.CAN_LIVESTREAM %}<li><strong>Livestreaming:</strong> {{ app.livestream_label }}</li>{% endif %}
     {% endif %}
+    {% if app.recording_details %}<li><strong>Recording Details:</strong> {{ app.recording_details }}</li>{% endif %}
     {% if app.tables_desc %}<li><strong>Special Table Set-up</strong>: {{ app.tables_desc }}</li>{% endif %}
     {% if app.cost_desc %}<li><strong>Upfront Cost and Materials</strong>: {{ app.cost_desc }}</li>{% endif %}
     {% if app.available %}<li><strong>Availability</strong>: {{ app.available|linebreaksbr }}</li>{% endif %}
