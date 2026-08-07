@@ -43,6 +43,9 @@ class PanelApplication:
     broadcast_subtitle: str = Field(sa_type=String, default='')
     recording_details: str = Field(sa_type=String, default='')
     accessibility_info: str = Field(sa_type=String, default='')
+    after_9pm: bool = Field(sa_type=Boolean, default=False)
+    extreme_times: bool = Field(sa_type=Boolean, default=False)
+    no_transfer: bool = Field(sa_type=Boolean, default=False)
 
     @presave_adjustment
     def no_magscouts_mature_panel(self):

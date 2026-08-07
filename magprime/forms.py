@@ -162,6 +162,18 @@ class PanelInfo:
 
 
 @MagForm.form_mixin
+class PanelOtherInfo:
+    after_9pm = BooleanField("I would PREFER to present after 9 PM.")
+    extreme_times = BooleanField("I would PREFER to present at an extreme time (either before 11 AM or after 11 PM).")
+
+@MagForm.form_mixin
+class PanelConsents:
+    no_transfer = BooleanField("I acknowledge that any badge created or refunded as a result of having a panel application accepted cannot be transferred.")
+
+    def no_transfer_label(self):
+        return Markup("<strong>I acknowledge that any badge created or refunded as a result of having a panel application accepted cannot be transferred.</strong>")
+
+@MagForm.form_mixin
 class EventLocationInfo:
     def tracks_label(self):
         return Markup('Track(s) <span class="popup"><a href="../static_views/guidebook_tracks.html" target="_blank"><i class="fa fa-question-circle" aria-hidden="true"></i> Tracks List</a></span>')

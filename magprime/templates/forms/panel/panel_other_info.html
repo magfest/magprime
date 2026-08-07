@@ -1,0 +1,8 @@
+{% extends 'uber/templates/forms/panel/panel_other_info.html' %}
+
+{% block unavailable_extra_info %}
+{{ super() }}
+</div><div class="row g-3 mb-3">
+    <div class="col-sm">{{ form_macros.input(panel_other_info.after_9pm) }}</div>
+    <div class="col-sm">{{ form_macros.input(panel_other_info.extreme_times) }}</div>
+{% endblock %}

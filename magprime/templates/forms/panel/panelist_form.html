@@ -1,11 +1,11 @@
 {% extends 'uber/templates/forms/panel/panelist_form.html' %}
 
 {% block pronouns %}
-<div class="col-sm">{{ form_macros.input(panelist_info.display_name) }}</div>
+<div class="col-sm">{{ form_macros.input(panelist_info.display_name, readonly=ro_fields['display_name'] == True) }}</div>
 <div class="col-sm">
-    {% call form_macros.input(panelist_info.pronouns) %}
+    {% call form_macros.input(panelist_info.pronouns, readonly=ro_fields['pronouns'] == True) %}
     <div class="row mt-2"><div class="col d-flex gap-1">
-    <div class="col-form-label">Other: </div><div>{{ form_macros.input(panelist_info.other_pronouns, show_label=False) }}</div>
+    <div class="col-form-label">Other: </div><div>{{ form_macros.input(panelist_info.other_pronouns, show_label=False, readonly=ro_fields['other_pronouns'] == True) }}</div>
     </div></div>
     {% endcall %}
 </div>

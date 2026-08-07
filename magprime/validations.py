@@ -2,7 +2,7 @@ from wtforms import validators
 from wtforms.validators import ValidationError, StopValidation
 
 from .config import c
-from uber.validations import TableInfo, BadgeExtras, PanelInfo, RoomLottery, DietaryRestrictions, JobInfo, JobTemplateInfo
+from uber.validations import TableInfo, BadgeExtras, PanelInfo, PanelConsents, RoomLottery, DietaryRestrictions, JobInfo, JobTemplateInfo
 
 
 TableInfo.field_validation.required_fields['prior_name'] = ("Please provide your prior table name.", 'has_prior_name')
@@ -18,6 +18,9 @@ PanelInfo.field_validation.required_fields['broadcast_title'] = ("Please provide
 PanelInfo.field_validation.required_fields['broadcast_subtitle'] = "Please provide a one-line summary for digital displays."
 PanelInfo.field_validation.required_fields['recording_details'] = ("Please provide details for how your panel should be recorded.",
                                                                    'need_recording_details')
+
+
+PanelConsents.field_validation.required_fields['no_transfer'] = "Please acknowledge that your panelist badge cannot be transferred."
 
 
 @RoomLottery.field_validation('room_type_preference')

@@ -1,0 +1,8 @@
+{% extends 'uber/templates/forms/panel/panel_consents.html' %}
+
+{% block checkboxes %}
+{{ super() }}
+</div>
+<div class="row g-3 mb-3">
+    <div class="col-sm">{{ form_macros.input(panel_consents.no_transfer) }}</div>
+{% endblock %}
