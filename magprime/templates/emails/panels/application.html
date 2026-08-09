@@ -26,7 +26,7 @@
 <br/><br/>In particular, please pay attention to these frequent pain points:
 <ul>
     <li><strong>No one who does not have a badge will be allowed to enter the venue for your panel.</strong></li>
-    <li><strong>One week after the application deadline (at {{ c.PANELS_DEADLINE|timedelta(days=7)|datetime_local }}), requests to add co-panelists will no longer be granted.</strong></li>
+    {% if dept_email == c.PANELS_EMAIL|email_only %}<li><strong>One week after the application deadline (at {{ c.PANELS_DEADLINE|timedelta(days=7)|datetime_local }}), requests to add co-panelists will no longer be granted.</strong></li>{% endif %}
     <li>If for whichever reason the title or broadcast description did not populate properly, that will not affect how your panel is judged. You may still contact us to change it, though.</li>
     <li>Your application may be forwarded to a different department than the one you originally submitted under.</li>
     <li>If your application is accepted, it will be scheduled based on the unavailability you specified in your application.  Please make sure that you’re comfortable with being scheduled in any way that conforms to the constraints you gave us!</li>
@@ -63,6 +63,9 @@ We wish you the best during application season!
     {% if app.cost_desc %}<li><strong>Upfront Cost and Materials</strong>: {{ app.cost_desc }}</li>{% endif %}
     {% if app.available %}<li><strong>Availability</strong>: {{ app.available|linebreaksbr }}</li>{% endif %}
     {% if app.unavailable %}<li><strong>Unavailability</strong>: {{ app.unavailable|linebreaksbr }}</li>{% endif %}
+    {% if app.after_9pm or app.extreme_times %}
+    <li><strong>Preferred Times</strong>: {% if app.after_9pm %}After 9 PM{% if app.extreme_times %} AND b{% else %}B{% endif %}{% endif %}{% if app.extreme_times %}efore 11 AM or after 11 PM{% endif %}</li>
+    {% endif %}
     {% if app.tech_needs or app.other_tech_needs %}<li><strong>Technical Needs</strong>: {{ app.tech_needs_labels|join(', ') }}{% if app.other_tech_needs %} (Other: {{ app.other_tech_needs }}){% endif %}</li>{% endif %}
     {% if app.presentation == c.MUSIC %}<li><strong>Loud Environment Requested</strong>: {{ app.is_loud|yesno }}</li>{% endif %}
     {% if app.extra_info %}<li><strong>Extra Info for Internal Use</strong>: {{ app.extra_info }}</li>{% endif %}

@@ -10,6 +10,7 @@ need_recording_details: {{ panel_info.recording_details.data|boolean|jsonize }},
 get longName() { return this.panel_name.length > 40 },
 get showMagScouts() { return this.rating == '{{ c.NONE }}' },
 get showRecordDetails() { return !(['{{ c.OPT_OUT }}', '0'].includes(this.record_ok) && ['{{ c.OPT_OUT }}', '0'].includes(this.livestream_ok)) },
+get showMeetupNote() { return this.presentation == '{{ c.MAGPIE }}' },
 {% endblock %}
 
 
@@ -32,6 +33,34 @@ get showRecordDetails() { return !(['{{ c.OPT_OUT }}', '0'].includes(this.record
 <div class="row g-sm-3 mb-3">
     <div class="col-sm">{{ form_macros.input(panel_info.broadcast_title, required_if="longName") }}</div>
     <div class="col-sm">{{ form_macros.input(panel_info.broadcast_subtitle) }}</div>
+{% endblock %}
+
+
+{% block type_length %}
+  <div class="col-sm">
+    {% call form_macros.input(panel_info.presentation, alpine_model='presentation') %}
+    <div x-show="otherPresentation" class="row g-3 mb-3">
+        <div class="col-sm-6">
+        {{ form_macros.input(panel_info.other_presentation, required_if="otherPresentation") }}
+        </div>
+    </div>
+    <div class="form-text" x-show="showMeetupNote">The MAGPIE Nest will not issue badges for meetup hosts.</div>
+    <div x-show="showIsLoud">{{ form_macros.input(panel_info.is_loud) }}</div>
+    <div class="form-text" x-show="showModNote">
+        Please include who will moderate the panel in the description. If you will not be moderating the panel, please add
+        the moderator as a panelist at the bottom of this application.
+    </div>
+    {% endcall %}
+  </div>
+  <div class="col-sm">
+    {{ form_macros.input(panel_info.length, value="" if app.is_new else app.length, alpine_model='panel_length') }}
+  </div>
+  <div class="col-sm" x-show="otherLength || lengthReason">
+    <div x-show="otherLength">
+        {{ form_macros.input(panel_info.length_text, required_if="otherLength") }}
+    </div>
+    <div x-show="lengthReason">{{ form_macros.input(panel_info.length_reason, required_if="lengthReason") }}</div>
+  </div>
 {% endblock %}
 
 
