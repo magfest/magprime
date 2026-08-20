@@ -59,7 +59,7 @@ class PanelApplication:
         if not self.is_new and self.department != self.orig_value_of('department'):
             with Session() as session:
                 EmailService.queue_email(session, 'panel_dept_changed_admin', to="panels-heads@magfest.org",
-                                         data={'app': self})
+                                         data={'app': self, 'old_dept_name': self.orig_value_of('department_name')})
 
 
 @Session.model_mixin
