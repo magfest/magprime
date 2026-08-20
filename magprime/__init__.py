@@ -17,6 +17,7 @@ from .automated_emails import *  # noqa: F401,E402,F403
 from .model_checks import *  # noqa: F401,E402,F403
 from .tasks import *  # noqa: F401,E402,F403
 from .validations import *  # noqa: F401,E402,F403
+from . import receipt_items  # noqa: F401
 
 # Silence pyflakes
 from .models import PrevSeasonSupporter  # noqa: E402

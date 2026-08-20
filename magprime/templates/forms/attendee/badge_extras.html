@@ -1,5 +1,30 @@
 {% extends 'uber/templates/forms/attendee/badge_extras.html' %}
 
+{% block x_data %}
+{{ super() }}
+swadge_addon: {{ badge_extras.swadge_addon.data|tojson }},
+{% endblock %}
+
+
+{% block add_ons %}
+{{ super() }}
+</div>
+<div class="row g-3 mb-3">
+  <div class="col-sm" x-show="amount_extra == {{ c.SUPPORTER_LEVEL }}">
+    {% if not receipt or upgrade_modal %}
+      {% if attendee.swadge_addon %}
+      <input type="hidden" name="swadge_addon" x-bind:value="amount_extra == {{ c.SUPPORTER_LEVEL }} ? swadge_addon : false" />
+      {% endif %}
+      {{ form_macros.input(badge_extras.swadge_addon, id=id_upgrade_prepend ~ "swadge_addon", disabled=upgrade_modal and attendee.swadge_addon, **{'x-bind:checked': 'amount_extra == ' ~ c.SUPPORTER_LEVEL ~ '? swadge_addon : ""' }) }}
+    {% else %}
+        <div class="form-text">{{ badge_extras.swadge_addon.label.text }}</div>
+        <div class="form-control-plaintext h5">{{ attendee.swadge_addon|yesno("Swadge Purchased,No Swadge Purchased") }}{% if not attendee.swadge_addon and c.ONLINE_PAYMENT_AVAILABLE %}{{ macros.upgrade_button('amount-extra', text="Purchase Merch" if attendee.amount_extra == 0 else "Upgrade") }}{% endif %}</div>
+    {% endif %}
+    
+  </div>
+{% endblock %}
+
+
 {% block donation %}
 {% set show_full_desc = not admin_area and (not receipt or upgrade_modal) %}
 
@@ -39,4 +64,22 @@
       <div class="form-control-plaintext h5">{{ attendee.extra_donation|format_currency }} {{ macros.upgrade_button('extra-donation') }}</div>
     </div>
   {% endif %}
+{% endblock %}
+
+{% block upgrade_modal_js %}
+{{ super() }}
+{% if upgrade_modal %}
+<script type="text/javascript">
+  $("#upgrade_swadge_addon").on('change', function() {
+      updateReceiptPreview('swadge_addon', this.checked);
+  })
+  $("#upgrade_amount_extra").on('change', function() {
+    if (this.value != {{ c.SUPPORTER_LEVEL }}) {
+      updateReceiptPreview('swadge_addon', 0);
+    } else {
+      updateReceiptPreview('swadge_addon', {{ badge_extras.swadge_addon.data|tojson }});
+    }
+  })
+</script>
+{% endif %}
 {% endblock %}

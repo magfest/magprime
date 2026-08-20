@@ -72,6 +72,7 @@ class Group:
 class Attendee:
     special_merch: int = Field(sa_column=Column(Choice(c.SPECIAL_MERCH_OPTS)), default=c.NO_MERCH)
     donate_badge_cost: bool = Field(sa_type=Boolean, default=False)
+    swadge_addon: bool = Field(sa_type=Boolean, default=False)
 
     @presave_adjustment
     def defaults(self):
@@ -81,10 +82,37 @@ class Attendee:
             self.donate_badge_cost = False
 
     @presave_adjustment
+    def swadge_addon_only_supporter(self):
+        if self.amount_extra != c.SUPPORTER_LEVEL:
+            self.swadge_addon = False
+
+    @presave_adjustment
     def indie_ribbon(self):
         if (self.group and self.group.guest and self.group.guest.group_type == c.MIVS
             ) or (self.group and "Indie Arcade -" in self.group.name) and c.MIVS not in self.ribbon_ints:
             self.ribbon = add_opt(self.ribbon_ints, c.MIVS)
+
+    @property
+    def donation_swag(self):
+        donation_items = []
+        highest_tier_listed = False
+
+        for amount, desc in sorted(c.DONATION_TIERS.items(), reverse=True):
+            if amount and self.amount_extra >= amount:
+                if not highest_tier_listed:
+                    donation_items.append(f"${amount} {desc}")
+                    highest_tier_listed = True
+                else:
+                    donation_items.append(f"{desc} (Included)")
+
+        if self.extra_donation >= c.SUPERSTAR_MINIMUM:
+            donation_items.append(f"MAGFest Superstar donation of ${self.extra_donation}")
+        elif self.extra_donation:
+            donation_items.append(f'Extra donation of ${self.extra_donation}')
+
+        if self.swadge_addon and self.amount_extra == c.SUPPORTER_LEVEL:
+            donation_items.append(f"${c.SWADGE_PRICE} Swadge add-on")
+        return donation_items
 
     @property
     def accoutrements(self):
@@ -172,6 +200,39 @@ class Attendee:
     @property
     def volunteer_event_shirt_eligible(self):
         return bool(c.VOLUNTEER_RIBBON in self.ribbon_ints and c.HOURS_FOR_SHIRT and not self.walk_on_volunteer)
+    
+    @property
+    def merch_items(self):
+        merch = []
+        for amount, desc in sorted(c.DONATION_TIERS.items()):
+            if amount and (self.amount_extra or 0) >= amount:
+                merch.append(desc)
+                items = c.DONATION_TIER_ITEMS.get(amount, [])
+                if len(items) == 1:
+                    merch[-1] = items[0]
+                elif len(items) > 1:
+                    merch.append(items)
+
+        if self.num_event_shirts_owed == 1 and not self.paid_for_a_shirt:
+            merch.append('A T-shirt')
+        elif self.num_event_shirts_owed > 1:
+            merch.append('A 2nd T-Shirt')
+
+        if merch and self.volunteer_event_shirt_eligible and not self.volunteer_event_shirt_earned:
+            merch[-1] += (
+                ' (this volunteer must work at least {} hours or they will be reported for picking up their shirt)'
+                .format(c.HOURS_FOR_SHIRT))
+
+        if not c.SEPARATE_STAFF_MERCH:
+            merch.extend(self.staff_merch_items)
+        
+        if self.swadge_addon and self.amount_extra == c.SUPPORTER_LEVEL:
+            merch.append('A Swadge')
+
+        if self.extra_merch:
+            merch.append(self.extra_merch)
+
+        return merch
 
     @property
     def staff_merch_items(self):

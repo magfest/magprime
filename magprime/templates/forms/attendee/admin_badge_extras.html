@@ -1,0 +1,11 @@
+{% extends 'uber/templates/forms/attendee/admin_badge_extras.html' %}
+
+{% block add_ons %}
+<div class="col-sm" x-show="showShirtOptOut">{{ form_macros.input(badge_extras.shirt_opt_out, **{'x-model.number': "shirt_opt_out"}) }}</div>
+    <div class="col-sm" x-show="showStaffEventShirtOpts">{{ form_macros.input(badge_extras.num_event_shirts, **{'x-model.number': "num_event_shirts"}) }}</div>
+    <div class="col-sm">
+        {% call form_macros.input(badge_extras.amount_extra, alpine_model="amount_extra") %}
+        <div x-show="amount_extra == {{ c.SUPPORTER_LEVEL }}">{{ form_macros.input(badge_extras.swadge_addon) }}</div>
+        {% endcall %}
+    </div>
+{% endblock %}

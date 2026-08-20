@@ -100,7 +100,10 @@ class PersonalInfo:
 @MagForm.form_mixin
 class BadgeExtras:
     extra_donation = IntegerField('Superstar Donation', widget=NumberInputGroupChoices(choices=c.SUPERSTAR_DONATION_OPTS))
-    
+    swadge_addon = BooleanField(
+        f'Add a Swadge for ${c.SWADGE_PRICE}?',
+        description=f"This is a special add-on only available when you purchase the {c.DONATION_TIERS[c.SUPPORTER_LEVEL]} merch package.")
+
     def extra_donation_label(self):
         return Markup("Superstar Donation ({})".format(popup_link("https://super.magfest.org/superstars", "Learn more")))
 
