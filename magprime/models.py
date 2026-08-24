@@ -73,6 +73,7 @@ class Attendee:
     special_merch: int = Field(sa_column=Column(Choice(c.SPECIAL_MERCH_OPTS)), default=c.NO_MERCH)
     donate_badge_cost: bool = Field(sa_type=Boolean, default=False)
     swadge_addon: bool = Field(sa_type=Boolean, default=False)
+    gets_emergency_texts: bool = Field(sa_type=Boolean, default=False)
 
     @presave_adjustment
     def defaults(self):

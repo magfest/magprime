@@ -93,8 +93,14 @@ class TableInfo:
 
 @MagForm.form_mixin
 class PersonalInfo:
-    def onsite_contact_label(self):
-        return "MAGBuddy"
+    gets_emergency_texts = BooleanField(
+        f"Opt in to emergency text alerts for {c.EVENT_NAME_AND_YEAR}, sent by MAGFest, Inc.",
+        description="These messages (typically zero messages per event) are for at-event emergencies like evacuations or active threats. Checking this box confirms that this number is yours.")
+    
+    def gets_emergency_texts_desc(self):
+        return Markup("These messages (typically zero messages per event) are for at-event emergencies like evacuations or active threats. " \
+        "Checking this box confirms that this number is yours. Msg & data rates may apply. Reply STOP to opt out. {}".format(
+            popup_link("../static_views/privacy.html", "SMS Terms")))
 
 
 @MagForm.form_mixin

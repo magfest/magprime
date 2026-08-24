@@ -9,6 +9,14 @@
   {% endif %}
 {% endblock %}
 
+{% block contact_info %}
+{{ super() }}
+<div class="col-sm" x-show="!no_cellphone">
+  <div class="form-text">Emergency Text Alerts</div>
+  {{ form_macros.input(personal_info.gets_emergency_texts) }}
+</div>
+{% endblock %}
+
 {% block age %}
   <div class="col-sm">
     {% if c.COLLECT_EXACT_BIRTHDATE %}

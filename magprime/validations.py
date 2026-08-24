@@ -2,11 +2,22 @@ from wtforms import validators
 from wtforms.validators import ValidationError, StopValidation
 
 from .config import c
-from uber.validations import TableInfo, BadgeExtras, PanelInfo, PanelConsents, RoomLottery, DietaryRestrictions, JobInfo, JobTemplateInfo
+from uber.validations import PersonalInfo, TableInfo, BadgeExtras, PanelInfo, PanelConsents, RoomLottery, \
+    DietaryRestrictions, JobInfo, JobTemplateInfo, ignore_unassigned_and_placeholders
 
 
 TableInfo.field_validation.required_fields['prior_name'] = ("Please provide your prior table name.", 'has_prior_name')
 TableInfo.field_validation.required_fields['license'] = ("Please provide your license number.", 'has_permit')
+
+
+@PersonalInfo.field_validation('cellphone')
+@ignore_unassigned_and_placeholders
+def cellphone_required(form, field):
+    if not field.data and (not hasattr(form, 'copy_phone') or not form.copy_phone.data):
+        if not form.no_cellphone.data and (form.model.is_dealer or form.model.staffing_or_will_be):
+            raise ValidationError("Please provide a phone number.")
+        if form.gets_emergency_texts.data:
+            raise ValidationError("You must provide a phone number to sign up for the emergency text alert system.")
 
 
 BadgeExtras.field_validation.validations['extra_donation']['minimum'] = validators.NumberRange(
