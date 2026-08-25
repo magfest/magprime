@@ -27,8 +27,8 @@ presumably because they clicked the "I'm not coming" button.
                 {%- endif %}
             </td>
             <td>
-                {% for room in attendee.rooms -%}
-                    {{ room.nights_labels|join(" / ") }}
+                {% for ra in attendee.room_assignments -%}
+                    {{ ra.inventory.display_name if ra.inventory else 'Room' }} ({{ ra.status_label }})
                 {% else -%}
                     no
                 {%- endfor %}

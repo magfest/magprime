@@ -16,7 +16,7 @@ class Root:
     def index(self, session):
         return {
             'invalids': session.query(Attendee)
-                               .options(subqueryload(Attendee.room_assignments).joinedload(RoomAssignment.room),
+                               .options(subqueryload(Attendee.room_assignments).joinedload(RoomAssignment.inventory),
                                         subqueryload(Attendee.shifts).joinedload(Shift.job))
                                .filter_by(staffing=True,
                                           badge_status=c.INVALID_STATUS)

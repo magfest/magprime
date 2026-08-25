@@ -1,7 +1,7 @@
 {% extends 'uber/templates/hotel_lottery/app_management.html' %}
 
 {% block additional_lottery_info %}
-{% if c.SHOW_HOTEL_LOTTERY_GROUPS and application.status == c.COMPLETE and not application.parent_application and not application.valid_group_members and c.HOTEL_LOTTERY_DOUBLE in application.room_type_preference_ints %}
+{% if c.SHOW_HOTEL_LOTTERY_GROUPS and application.status == c.COMPLETE and not application.parent_application and not application.valid_group_members and 'double' in application.room_type_preference_labels|join(',')|lower %}
 <p>
     Individual hotel lottery entries will <strong>ONLY</strong> qualify for a King room. If you would like a Double room,
     {% if not application.room_group_name %}you must create a roommate group and add at least one person{% else %}please make sure to add at least one person to your roommate group{% endif %}
