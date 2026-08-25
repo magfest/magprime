@@ -23,14 +23,15 @@ class LotteryApplication:
         if not self.is_staff_entry:
             return ''
         app_or_parent = self.parent_application if self.entry_type == c.GROUP_ENTRY else self
-        if not c.HOTEL_LOTTERY_ROOM_INVENTORY or not app_or_parent.finalized:
+        if not app_or_parent.finalized:
             return ''
         if self.parent_application:
             you_str = f"Your {c.HOTEL_LOTTERY_GROUP_TERM.lower()}'s hotel room"
         else:
             you_str = "Your hotel room"
-        
-        if app_or_parent.assigned_hotel:
+
+        attendee = app_or_parent.attendee
+        if any(ra.is_live for ra in (attendee.room_assignments if attendee else [])):
             return f"{you_str} has been successfully assigned."
         else:
             return f"Something went wrong with {you_str.lower()}. Please contact STOPS at {email_to_link(email_only(c.STAFF_EMAIL))}."

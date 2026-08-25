@@ -38,9 +38,17 @@ PanelConsents.field_validation.required_fields['no_transfer'] = "Please acknowle
 def atrium_gaylord_only(form, field):
     if not field.data or not form.hotel_preference or not form.hotel_preference.data:
         return
-    
-    if (c.HOTEL_LOTTERY_KING_ATRIUM in field.data or c.HOTEL_LOTTERY_DOUBLE_ATRIUM in field.data
-            ) and c.HOTEL_LOTTERY_GAYLORD not in form.hotel_preference.data:
+
+    # Hotels and room types are database rows now, so match them by name.
+    # If either set is empty for this event's data, the rule is a no-op.
+    def ids_named(choices, term):
+        return {val for val, label in (choices or [])
+                if term in (label.get('name', '') if isinstance(label, dict) else str(label)).lower()}
+
+    atrium_types = ids_named(field.choices, 'atrium')
+    gaylord_hotels = ids_named(form.hotel_preference.choices, 'gaylord')
+    if (atrium_types.intersection(field.data)
+            and gaylord_hotels and not gaylord_hotels.intersection(form.hotel_preference.data)):
         raise ValidationError("Atrium rooms are only available at the Gaylord National Harbor.")
 
 
