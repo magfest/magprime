@@ -6,7 +6,10 @@
         preferred dates for check-in and check-out{% if not read_only %} below{% endif %}.
     </p>
 {% endif %}
-<p>If there are any issues reserving the nights that you request at your assigned hotel, the MAGFest Hotel Team will reach out to you. Ask for the nights you want – it can be more difficult to add nights later than cancel extra days later.</p>
+<p>
+    If there are any issues reserving the nights that you request at your assigned hotel, the MAGFest Hotel Team will reach out to you.
+    We expect to be able to reserve rooms from {{ (c.EPOCH.date()|timedelta(days=-1)).strftime('%A %b %-d') }} to {{ (c.ESCHATON.date()|timedelta(days=1)).strftime('%A %b %-d') }}.
+    Ask for the nights you want – it can be more difficult to add nights later than cancel extra days later.</p>
 <p>Note: All reservations MUST be for a minimum of 3 nights and must include {{ c.EPOCH.date().strftime('%A %b %-d') }} – {{ c.ESCHATON.date().strftime('%A %b %-d') }} (the days of {{ c.EVENT_NAME_AND_YEAR }}).</p>
 {% endblock %}
 
