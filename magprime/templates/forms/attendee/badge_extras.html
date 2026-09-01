@@ -35,7 +35,7 @@ All merch in pre-order packages is EXCLUSIVE and not available for purchase at S
       {% endif %}
       <div class="card card-body bg-primary" style="color: #ffe400;">
         {{ form_macros.input(badge_extras.swadge_addon, id=id_upgrade_prepend ~ "swadge_addon", class="form-check-input mt-2", disabled=(upgrade_modal|boolean and attendee.swadge_addon), label_kwargs={'class': "mt-0 fs-4 fw-bold"}, **{'x-bind:checked': 'amount_extra == ' ~ c.SUPPORTER_LEVEL ~ '? swadge_addon : ""' }) }}
-        <div class="text-white ms-4">This is a Special add-on only available when you purchase the {{ c.DONATION_TIERS[c.SUPPORTER_LEVEL] }} merch package.
+        <div class="text-white ms-4">This is a Special add-on only available when you purchase the {{ c.DONATION_TIERS[c.SUPPORTER_LEVEL] }} merch package. (The Swadge is already included in the Hero of Rhyme tier.)
           <br/>The Swadge will cost $49 or higher at Super MAGFest. (${{ c.SWADGE_PRICE }} is at-cost)</div>
       </div>
       <div class="form-text">{{ merch_desc }}</div>
