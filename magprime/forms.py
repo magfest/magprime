@@ -106,9 +106,8 @@ class PersonalInfo:
 @MagForm.form_mixin
 class BadgeExtras:
     extra_donation = IntegerField('Superstar Donation', widget=NumberInputGroupChoices(choices=c.SUPERSTAR_DONATION_OPTS))
-    swadge_addon = BooleanField(
-        f'Add a Swadge for ${c.SWADGE_PRICE}?',
-        description=f"This is a special add-on only available when you purchase the {c.DONATION_TIERS[c.SUPPORTER_LEVEL]} merch package.")
+    swadge_addon = BooleanField(f'Add a Swadge for \
+                                ${(c.SWADGE_PRICE + c.get_amount_extra_tax(c.SWADGE_PRICE)) if c.INCLUDE_MERCH_TAX else c.SWADGE_PRICE}?')
 
     def extra_donation_label(self):
         return Markup("Superstar Donation ({})".format(popup_link("https://super.magfest.org/superstars", "Learn more")))
@@ -117,6 +116,13 @@ class BadgeExtras:
 @MagForm.form_mixin
 class AdminBadgeExtras:
     extra_donation = IntegerField('Superstar Donation', widget=NumberInputGroup())
+
+
+@MagForm.form_mixin
+class Consents:
+    def can_spam_desc(self):
+        return Markup(f"We only send a few newsletters a year, and they're not spammy! We promise!\
+                      <br/>{popup_link("../static_views/privacy.html", "Read our Email &amp; Text Communications policy")}")
 
 
 @MagForm.form_mixin

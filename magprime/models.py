@@ -39,7 +39,7 @@ class LotteryApplication:
 
 @Session.model_mixin
 class PanelApplication:
-    magscouts_opt_in: int = Field(sa_column=Column(Choice(c.PANEL_MAGSCOUTS_OPTS), default=c.NO_CHOICE))
+    magscouts_opt_in: int = Field(sa_column=Column(Choice(c.PANEL_MAGSCOUTS_OPTS)), default=c.NO_CHOICE)
     broadcast_title: str = Field(sa_type=String, default='')
     broadcast_subtitle: str = Field(sa_type=String, default='')
     recording_details: str = Field(sa_type=String, default='')
@@ -94,15 +94,27 @@ class Attendee:
             ) or (self.group and "Indie Arcade -" in self.group.name) and c.MIVS not in self.ribbon_ints:
             self.ribbon = add_opt(self.ribbon_ints, c.MIVS)
 
+    def auto_update_receipt(self, params):
+        if params.get('amount_extra') and int(params['amount_extra']) != c.SUPPORTER_LEVEL:
+            params['swadge_addon'] = False
+        return params
+
     @property
     def donation_swag(self):
+        from uber.custom_tags import format_currency
+
         donation_items = []
         highest_tier_listed = False
 
         for amount, desc in sorted(c.DONATION_TIERS.items(), reverse=True):
             if amount and self.amount_extra >= amount:
                 if not highest_tier_listed:
-                    donation_items.append(f"${amount} {desc}")
+                    if c.MERCH_TAX:
+                        tax = c.get_amount_extra_tax(self.amount_extra)
+                        donation_items.append(f'{format_currency(self.amount_extra + tax)} {c.DONATION_TIERS[self.amount_extra]} \
+                                              (Includes {format_currency(self.amount_extra)} base price + {format_currency(tax)} Sales Tax)')
+                    else:
+                        donation_items.append(f"${amount} {desc}")
                     highest_tier_listed = True
                 else:
                     donation_items.append(f"{desc} (Included)")

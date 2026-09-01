@@ -7,7 +7,25 @@ swadge_addon: {{ badge_extras.swadge_addon.data|tojson }},
 
 
 {% block add_ons %}
+{% if not receipt %}
+<script type="text/javascript">
+  $().ready(function() {
+    if ($('#amount_extra-select legend').length) {
+      $('#amount_extra-select legend').removeClass('form-text').addClass('h3 fw-bold').text("Add Pre-Order Merch!");
+    }
+  })
+</script>
+{% endif %}
 {{ super() }}
+{% set merch_desc %}
+Physical products include a 6% Maryland Sales and Usage tax and must be picked up during the event.
+Tax is not included in the prices above.
+In limited cases products may be received through other methods or locations; additional fees or taxes may apply.
+All merch in pre-order packages is EXCLUSIVE and not available for purchase at Super MAGFest.
+{% endset %}
+{% if not receipt or upgrade_modal %}
+<div class="form-text" x-show="amount_extra != {{ c.SUPPORTER_LEVEL }}">{{ merch_desc }}</div>
+{% endif %}
 </div>
 <div class="row g-3 mb-3">
   <div class="col-sm" x-show="amount_extra == {{ c.SUPPORTER_LEVEL }}">
@@ -15,7 +33,12 @@ swadge_addon: {{ badge_extras.swadge_addon.data|tojson }},
       {% if attendee.swadge_addon %}
       <input type="hidden" name="swadge_addon" x-bind:value="amount_extra == {{ c.SUPPORTER_LEVEL }} ? swadge_addon : false" />
       {% endif %}
-      {{ form_macros.input(badge_extras.swadge_addon, id=id_upgrade_prepend ~ "swadge_addon", disabled=upgrade_modal and attendee.swadge_addon, **{'x-bind:checked': 'amount_extra == ' ~ c.SUPPORTER_LEVEL ~ '? swadge_addon : ""' }) }}
+      <div class="card card-body bg-primary" style="color: #ffe400;">
+        {{ form_macros.input(badge_extras.swadge_addon, id=id_upgrade_prepend ~ "swadge_addon", class="form-check-input mt-2", disabled=(upgrade_modal|boolean and attendee.swadge_addon), label_kwargs={'class': "mt-0 fs-4 fw-bold"}, **{'x-bind:checked': 'amount_extra == ' ~ c.SUPPORTER_LEVEL ~ '? swadge_addon : ""' }) }}
+        <div class="text-white ms-4">This is a Special add-on only available when you purchase the {{ c.DONATION_TIERS[c.SUPPORTER_LEVEL] }} merch package.
+          <br/>The Swadge will cost $49 or higher at Super MAGFest. (${{ c.SWADGE_PRICE }} is at-cost)</div>
+      </div>
+      <div class="form-text">{{ merch_desc }}</div>
     {% else %}
         <div class="form-text">{{ badge_extras.swadge_addon.label.text }}</div>
         <div class="form-control-plaintext h5">{{ attendee.swadge_addon|yesno("Swadge Purchased,No Swadge Purchased") }}{% if not attendee.swadge_addon and c.ONLINE_PAYMENT_AVAILABLE %}{{ macros.upgrade_button('amount-extra', text="Purchase Merch" if attendee.amount_extra == 0 else "Upgrade") }}{% endif %}</div>
