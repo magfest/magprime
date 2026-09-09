@@ -15,11 +15,18 @@ badge
         {% set attendee = account.valid_attendees[0] %}
         {% if attendee.group and attendee.id == attendee.group.leader_id %}
             <p>
-                You have been invited to manage the {% if attendee.group.guest_group %}{{ attendee.group.guest_group.group_type }} {% endif %}
+                You have been invited to manage the {% if attendee.group.guest %}{{ attendee.group.guest.group_type_label }} {% endif %}
                 group "{{ attendee.group.name }}" for {{ c.EVENT_NAME_AND_YEAR }}.
+                You can claim your {{ badge_description(attendee) }} using the button below.
             </p>
-            {% if attendee.group.attendees|length > 1 %}
-            <p>Once you claim your badge, you will be able to manage your group members' badges{% if attendee.group.guest_group %} and complete your group's checklist{% endif %}.</p>
+            {% if attendee.group.guest %}
+            <p>
+                Once you claim your badge, you will be able to complete your group's
+                <a href="{{ c.URL_BASE }}/guests/index?id={{ attendee.group.guest.id }}" target="_blank">{{ attendee.group.guest.group_type_label|title }} Checklist</a>.
+                This checklist will walk you through all the info we need to gather for your upcoming appearance at {{ c.EVENT_NAME }}.
+            </p>
+            {% elif attendee.group.attendees|length > 1 %}
+            <p>Once you claim your badge, you will be able to manage your group members' badges.</p>
             {% endif %}
         {% else %}
             {% if attendee.imported_staff %}
@@ -27,6 +34,7 @@ badge
             {% else %}
             <p>
                 You have been invited to claim a {{ badge_description(attendee) }} for {{ c.EVENT_NAME_AND_YEAR }}.
+                You can claim your badge using the button below.
             </p>
             {% endif %}
         {% endif %}
@@ -40,9 +48,10 @@ badge
         You have been invited to manage the following badges for {{ c.EVENT_NAME_AND_YEAR }}:
         <ul>
             {% for attendee in account.attendees %}
-            <li>A {{ badge_description(attendee) }} for {{ attendee.full_name }}{% if attendee.admin_account %}, which includes admin access to our system{% endif %}{% if attendee.group %}, {% if attendee.id == attendee.group.leader_id %}for{% else %}in{% endif %} the {% if attendee.group.guest_group %}{{ attendee.group.guest_group.group_type }} {% endif %}group "{{ attendee.group.name }}"{% endif %}</li>
+            <li>A {{ badge_description(attendee) }} for {{ attendee.full_name }}{% if attendee.admin_account %}, which includes admin access to our system{% endif %}{% if attendee.group %}, {% if attendee.id == attendee.group.leader_id %}for{% else %}in{% endif %} the {% if attendee.group.guest %}{{ attendee.group.guest.group_type }} {% endif %}group "{{ attendee.group.name }}"{% endif %}</li>
             {% endfor %}
         </ul>
+        You can claim your badges using the button below.
     {% endif %}
     <p>
         Claiming {% if account.valid_attendees|length > 1 %}these badges{% else %}this badge{% endif %}
@@ -51,8 +60,10 @@ badge
     </p>
 
     <p>
-        <a href="{{ c.URL_BASE }}/preregistration/claim_account?&sso_claim_token={{ token }}" target="_blank">{{ c.URL_BASE }}/preregistration/claim_account?&sso_claim_token={{ token }}</a>
-        <br/>If you don't see your information after logging into your {{ c.OIDC_ACCOUNT_NAME }} account, try clicking the link above a second time. For your security, this claim link expires in {{ c.PASSWORD_RESET_HOURS }} hours -- if you get a message about the token being expired, just wait for a new copy of this email with a new claim link, which the system will send automatically.
+        <a class="btn btn-primary text-uppercase" href="{{ c.URL_BASE }}/preregistration/claim_account?&sso_claim_token={{ token }}" target="_blank">Click here to claim your badge{% if account.valid_attendees|length != 1 %}s{% endif %}</a>
+    </p>
+    <p>
+        If you don't see your information after logging into your {{ c.OIDC_ACCOUNT_NAME }} account, try clicking the button above a second time. For your security, the claim link expires in {{ c.PASSWORD_RESET_HOURS }} hours -- if you get a message about the token being expired, wait for a new copy of this email, which the system will send automatically.
     </p>
 
 </body>
