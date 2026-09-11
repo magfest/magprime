@@ -33,15 +33,22 @@ All merch in pre-order packages is EXCLUSIVE and not available for purchase at S
       {% if attendee.swadge_addon %}
       <input type="hidden" name="swadge_addon" x-bind:value="amount_extra == {{ c.SUPPORTER_LEVEL }} ? swadge_addon : false" />
       {% endif %}
+      {% if attendee.swadge_addon or c.SWADGE_ADDON_AVAILABLE %}
       <div class="card card-body bg-primary" style="color: #ffe400;">
         {{ form_macros.input(badge_extras.swadge_addon, id=id_upgrade_prepend ~ "swadge_addon", class="form-check-input mt-2", disabled=(upgrade_modal|boolean and attendee.swadge_addon), label_kwargs={'class': "mt-0 fs-4 fw-bold"}, **{'x-bind:checked': 'amount_extra == ' ~ c.SUPPORTER_LEVEL ~ '? swadge_addon : ""' }) }}
-        <div class="text-white ms-4">This is a Special add-on only available when you purchase the {{ c.DONATION_TIERS[c.SUPPORTER_LEVEL] }} merch package. (The Swadge is already included in the Hero of Rhyme tier.)
+        <div class="text-white ms-4">This is a Special add-on only available when you purchase the {{ c.DONATION_TIERS[c.SUPPORTER_LEVEL] }} merch package. (The Swadge is already included in the {{ c.DONATION_TIERS[c.SEASON_LEVEL] }}.)
           <br/>The Swadge will cost $49 or higher at Super MAGFest. (${{ c.SWADGE_PRICE }} is at-cost)</div>
       </div>
+      {% else %}
+      <div class="card card-body bg-primary text-white">
+        <span class="mt-0 fs-4 fw-bold" style="color: #ffe400;">The ${{ c.SWADGE_PRICE }} Swadge add-on is sold out!</span>
+        {% if c.SEASON_LEVEL_AVAILABLE %}The Swadge is still available as part of the {{ c.DONATION_TIERS[c.SEASON_LEVEL] }} merch package.{% endif %}
+      </div>
+      {% endif %}
       <div class="form-text">{{ merch_desc }}</div>
     {% else %}
         <div class="form-text">{{ badge_extras.swadge_addon.label.text }}</div>
-        <div class="form-control-plaintext h5">{{ attendee.swadge_addon|yesno("Swadge Purchased,No Swadge Purchased") }}{% if not attendee.swadge_addon and c.ONLINE_PAYMENT_AVAILABLE %}{{ macros.upgrade_button('amount-extra', text="Purchase Merch" if attendee.amount_extra == 0 else "Upgrade") }}{% endif %}</div>
+        <div class="form-control-plaintext h5">{{ attendee.swadge_addon|yesno("Swadge Add-On Purchased,No Swadge Purchased") }}{% if not attendee.swadge_addon and c.SWADGE_ADDON_AVAILABLE and c.ONLINE_PAYMENT_AVAILABLE %}{{ macros.upgrade_button('amount-extra', text="Purchase Merch" if attendee.amount_extra == 0 else "Upgrade") }}{% endif %}</div>
     {% endif %}
     
   </div>

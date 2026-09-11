@@ -23,6 +23,24 @@ class ExtraConfig:
     @property
     def SUPERSTAR_MINIMUM(self):
         return list(c.SUPERSTAR_DONATIONS.keys())[1]
+    
+    @property
+    def EXTRA_ADDON_STATS(self):
+        return [
+            (f"Number of ${self.SWADGE_PRICE} swadge add-ons purchased", self.SWADGE_ADDON_COUNT)
+        ]
+    
+    @property
+    def SWADGE_ADDON_COUNT(self):
+        from uber.models import Session, Attendee
+
+        with Session() as session:
+            count = session.query(Attendee).filter(
+                Attendee.swadge_addon == True, Attendee.amount_extra == c.SUPPORTER_LEVEL,
+                ~Attendee.badge_status.in_([c.INVALID_GROUP_STATUS, c.INVALID_STATUS,
+                                            c.IMPORTED_STATUS, c.REFUNDED_STATUS])
+                ).count()
+        return count
 
     @property
     def PREREG_BADGE_TYPES(self):

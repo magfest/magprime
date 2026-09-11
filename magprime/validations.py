@@ -24,6 +24,15 @@ BadgeExtras.field_validation.validations['extra_donation']['minimum'] = validato
     min=0, message="Superstar donation must be a number that is 0 or higher.")
 
 
+@BadgeExtras.new_or_changed('swadge_addon')
+def upgrade_sold_out(form, field):
+    if form.is_admin:
+        return
+
+    if field.data and not c.SWADGE_ADDON_AVAILABLE:
+        raise ValidationError(f"The ${c.SWADGE_PRICE} swadge add-on is sold out.")
+
+
 PanelInfo.field_validation.required_fields['broadcast_title'] = ("Please provide a short title for digital displays.",
                                                                  'name', lambda x: len(x) > 40)
 PanelInfo.field_validation.required_fields['broadcast_subtitle'] = "Please provide a one-line summary for digital displays."
