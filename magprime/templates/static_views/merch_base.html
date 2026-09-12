@@ -12,49 +12,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}{% endblock %}</title>
   {{ "deps/bootstrap5/bootstrap.min.css"|serve_static_content }}
-  <style type="text/css">
-    body { background-color: #DDF6D8; }
-
-    .merch-page {
-      max-width: 46rem;
-      margin: 1.5rem auto 3rem;
-      padding: 1.75rem 1.5rem 2rem;
-      background-color: #fff;
-      border: 1px solid #A9CEA2;
-      border-radius: .5rem;
-    }
-
-    .merch-page h1 {
-      text-align: center;
-      font-size: 1.9rem;
-      color: #2F5233;
-      margin-bottom: 1.5rem;
-    }
-
-    .merch-page p { line-height: 1.65; }
-    .merch-page ul { line-height: 1.8; margin-bottom: 1rem; }
-
-    .merch-page .fine-print {
-      font-size: .875rem;
-      color: #5C645A;
-    }
-
-    .merch-page img {
-      max-width: 100%;
-      border-radius: .375rem;
-      margin-top: 1.25rem;
-    }
-
-    /* Full bleed on phones; the card border wastes horizontal space at this width. */
-    @media (max-width: 480px) {
-      .merch-page {
-        margin: 0;
-        border-radius: 0;
-        border-left: 0;
-        border-right: 0;
-      }
-    }
-  </style>
+  {{ "theme/merch.css"|serve_static_content }}
 </head>
 <body>
   <div class="merch-page">
