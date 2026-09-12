@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
 <head>
+  <meta charset="utf-8">
   <title>Deejay Tier</title>
   <style type="text/css">
     html, html * { font-family: Arial, Helvetica, sans-serif; }
@@ -13,22 +14,54 @@
 <h1>Deejay Tier</h1>
 
 <p>
-  The Deejay Tier includes:
-  <ul>
-    <li>All T-Shirt Tier Items</li>
-    <li>Lan Lan Milk Bottle</li>
-    <li>Drawstring Stoopee Pouch</li>
-    <li>Golden Trihard Keychain</li>
-    <li>Heart Container Bandages</li>
-    <li>The Master Quest Pen</li>
-    <li>The Tome of Time Notebook</li>
-    <li>The Legendary Hand Towel</li>
-    <li>MAGFest Power Magazine</li>
-  </ul>
-  <br/>*Items are subject to change
+  Now THIS is where we really kick things off. The Deejay Tier is absolutely jam-packed with
+  high-quality loot to fill your items screen!
 </p>
 
-<!-- <img src="../static/swag/supporter-preview.png"> -->
+<p>
+  Of course, you get everything that’s in the T-Shirt Tier pack. But let’s roll through all of the new
+  items: The LAN LAN Bottle with attachable lanyard, the Golden Trihard Keychain, Heart Container
+  Bandages, Master Quest Pen, the Tome of Time Notebook, the Adventurer’s Kitchen Towel, the 2027
+  MAGFest Power Magazine, and of course the Drawstring Stoopee Pouch to keep everything together.
+</p>
+
+<p>
+  PLEASE NOTE! Thanks to dramatically increased costs beyond our control, the new Swadge is no longer
+  included in the $99 tier of merch. (Truthfully, everything has gotten more expensive to produce, not
+  just the Swadge. Relatable, right?) Instead of increasing the price of the entire package, we’re
+  offering the Swadge as an add-on at the time of pre-ordering specifically the Deejay Tier pack.
+</p>
+
+<!-- Swadge add-ons have limited stock; c.SWADGE_ADDON_AVAILABLE goes false when they sell out. Without
+     this gate the popup keeps advertising an add-on the checkbox behind it no longer offers. -->
+{% if c.SWADGE_ADDON_AVAILABLE %}
+<p>
+  For ${{ c.SWADGE_PRICE }} (our estimated at-cost price), you can add the 2027 Swadge to the Deejay
+  Tier. Be sure to check the box to successfully add your Swadge! Note that the 2027 Swadge IS included
+  in the Hero of Rhyme Tier. (The Swadge price at the Super MAGFest merch booth will be $49 or higher.)
+</p>
+{% else %}
+<p>
+  The ${{ c.SWADGE_PRICE }} Swadge add-on is sold out. Note that the 2027 Swadge IS included in the
+  Hero of Rhyme Tier.
+</p>
+{% endif %}
+
+<p>The Deejay Tier includes:</p>
+<ul>
+  <li>All T-Shirt Tier Items</li>
+  <li>LAN LAN Bottle with Attachable Lanyard</li>
+  <li>Golden Trihard Keychain</li>
+  <li>Heart Container Bandages</li>
+  <li>Master Quest Pen</li>
+  <li>The Tome of Time Notebook</li>
+  <li>The Adventurer’s Kitchen Towel</li>
+  <li>2027 MAGFest Power Magazine</li>
+  <li>Drawstring Stoopee Pouch</li>
+</ul>
+<p>*Items are subject to change</p>
+
+<img src="../static/swag/supporter-preview.png" alt="Deejay Tier bundle preview">
 
 </body>
 </html>
