@@ -1,16 +1,6 @@
-<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Deejay Tier</title>
-  <style type="text/css">
-    html, html * { font-family: Arial, Helvetica, sans-serif; }
-    img { max-width: 100%; }
-    h1 { text-align: center; }
-  </style>
-</head>
-<body>
-
+{% extends "static_views/merch_base.html" %}
+{% block title %}Deejay Tier{% endblock %}
+{% block merch %}
 <h1>Deejay Tier</h1>
 
 <p>
@@ -59,9 +49,7 @@
   <li>2027 MAGFest Power Magazine</li>
   <li>Drawstring Stoopee Pouch</li>
 </ul>
-<p>*Items are subject to change</p>
+<p class="fine-print">*Items are subject to change</p>
 
 <img src="../static/swag/supporter-preview.png" alt="Deejay Tier bundle preview">
-
-</body>
-</html>
+{% endblock %}
