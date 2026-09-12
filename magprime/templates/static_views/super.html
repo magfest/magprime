@@ -1,16 +1,6 @@
-<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Hero of Rhyme Tier</title>
-  <style type="text/css">
-    html, html * { font-family: Arial, Helvetica, sans-serif; }
-    img { max-width: 100%; }
-    h1 { text-align: center; }
-  </style>
-</head>
-<body>
-
+{% extends "static_views/merch_base.html" %}
+{% block title %}Hero of Rhyme Tier{% endblock %}
+{% block merch %}
 <h1>Hero of Rhyme Tier</h1>
 
 <p>
@@ -82,7 +72,7 @@
   <li>Swadge-styled Socks</li>
   <li>Invitation to the SUPER-SECRET crazy tier! Shhhh!</li>
 </ul>
-<p>*Items are subject to change</p>
+<p class="fine-print">*Items are subject to change</p>
 
 <!-- The CRAZY TIER deadline is September 30, 2026. No config gates this block; remove it by hand
      after that date or it advertises an invite nobody can still earn. -->
@@ -97,6 +87,4 @@
 </p>
 
 <img src="../static/swag/super-preview.png" alt="Hero of Rhyme Tier bundle preview">
-
-</body>
-</html>
+{% endblock %}
