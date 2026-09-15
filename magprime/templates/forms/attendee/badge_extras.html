@@ -42,7 +42,8 @@ All merch in pre-order packages is EXCLUSIVE and not available for purchase at S
       {% else %}
       <div class="card card-body bg-primary text-white">
         <span class="mt-0 fs-4 fw-bold" style="color: #ffe400;">The ${{ c.SWADGE_PRICE }} Swadge add-on is sold out!</span>
-        {% if c.SEASON_LEVEL_AVAILABLE %}The Swadge is still available as part of the {{ c.DONATION_TIERS[c.SEASON_LEVEL] }} merch package.{% endif %}
+        {% if c.SEASON_LEVEL_AVAILABLE %}The Swadge is still available as part of the {{ c.DONATION_TIERS[c.SEASON_LEVEL] }} merch package.
+        {% else %}You can purchase the non-exclusive version of the Swadge at-event for $49.{% endif %}
       </div>
       {% endif %}
       <div class="form-text">{{ merch_desc }}</div>

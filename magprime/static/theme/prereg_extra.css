@@ -1,6 +1,6 @@
 .masthead {
     background-image: url("../theme/banner.png");
-    padding-top: 39.19%; /* The height is 39.19% of the width (635 / 1620px) */
+    padding-top: 56.79%; /* The height is 56.79% of the width (920 / 1620px) */
 }
 
 @media
@@ -50,4 +50,5 @@ only screen and (min-resolution:2dppx) {
 
 body {
     background-color: #DDF6D8;
+    background-image: url("../theme/tile-background.png")
     }
