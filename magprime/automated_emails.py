@@ -7,18 +7,17 @@ from magprime.models import SeasonPassTicket
 from magprime.utils import SeasonEvent
 
 
+# Award notification splits on is_staff_entry only. It does not gate on
+# booking_url_ready: attendees now put a card down inside Ubersystem at
+# /hotel_lottery/secure_room, and no external booking link is issued, so a
+# booking_url gate would hold these emails forever. The two-stage
+# prelim-then-booking-link sequence used through the 2026 lottery is gone
+# for the same reason; both stages now carry the same information.
 if c.HOTEL_LOTTERY_STAFF_START:
     HotelLotteryEmailFixture(
-        f'{c.EVENT_NAME_AND_YEAR} Staff Pre-Lottery Award Notification',
-        'hotel/prelim_notification.html',
-        "lambda a: a.status == c.AWARDED and a.is_staff_entry",
-        ident='hotel_lottery_prelim_staff'
-    )
-
-    HotelLotteryEmailFixture(
-        f'{c.EVENT_NAME_AND_YEAR} Staff Pre-Lottery Booking Link',
+        f'{c.EVENT_NAME_AND_YEAR} Staff Hotel Lottery Notification',
         'hotel/award_notification.html',
-        "lambda a: a.status == c.AWARDED and a.is_staff_entry and a.booking_url_ready",
+        "lambda a: a.status == c.AWARDED and a.is_staff_entry",
         ident='hotel_lottery_awarded_staff'
     )
 
@@ -26,15 +25,8 @@ if c.HOTEL_LOTTERY_FORM_START:
     HotelLotteryEmailFixture(
         f'{c.EVENT_NAME_AND_YEAR} Hotel Lottery Notification',
         'hotel/award_notification.html',
-        "lambda a: a.status == c.AWARDED and a.booking_url_ready and not a.is_staff_entry",
-        ident='hotel_lottery_awarded'
-    )
-
-    HotelLotteryEmailFixture(
-        f'{c.EVENT_NAME_AND_YEAR} Hotel Lottery Notification',
-        'hotel/lottery_delay.html',
         "lambda a: a.status == c.AWARDED and not a.is_staff_entry",
-        ident='hotel_lottery_awarded_late'
+        ident='hotel_lottery_awarded'
     )
 
 

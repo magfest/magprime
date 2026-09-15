@@ -4,7 +4,6 @@
                       |selectattr('is_live')|list %}
 {% set _has_suite = _award_rooms|selectattr('inventory.is_suite')|list|length > 0 %}
 {% set room_type = 'suite' if _has_suite else 'room' %}
-{% set app_or_parent = app.parent_application if app.entry_type == c.GROUP_ENTRY else app %}
 <html>
 <head></head>
 <body>
@@ -16,21 +15,15 @@
 <p>
     Your {{ room_type }} is <strong>not</strong> confirmed until you{% if app.parent_application %}r {{ c.HOTEL_LOTTERY_GROUP_TERM|lower }} leader provides {% else %} provide {% endif %}a credit card guarantee.
 {% if not app.parent_application %}
-    <strong><span class="text-danger">Failure to provide a credit card by {{ app_or_parent.guarantee_deadline|datetime_local }} will result in your reservation being cancelled.</span></strong>
+    <strong><span class="text-danger">Each room below carries its own deadline. Miss it and that room is released.</span></strong>
 </p>
 <p>
-    You can <a href="{{ c.URL_BASE }}/hotel_lottery/confirm?id={{ app.id }}" target="_blank">confirm your reservation here</a>
-    and we have <a href="https://super.magfest.org/hotel-confirmation-info" target="_blank">step-by-step instructions with screenshots available here</a>.
+    Add your card using the link on each room listed below. We have
+    <a href="https://super.magfest.org/hotel-confirmation-info" target="_blank">step-by-step instructions with screenshots here</a>.
     The credit card you provide will have a refundable one-night deposit charged to it within a week.
     Alternatively, you can <a href="{{ c.URL_BASE }}/hotel_lottery/decline?id={{ app.id }}" target="_blank">decline the reservation here</a>.
     This will also cancel your{% if app.valid_group_members %} and your {{ c.HOTEL_LOTTERY_GROUP_TERM|lower }} members' lottery entries{% else %} lottery entry{% endif %}.
 </p>
-{% if not c.COLLECT_FULL_ADDRESS %}
-<p>
-    Because we don't collect addresses during badge registration, you must change the billing address on your reservation to be your own address.
-    <strong>If you leave the default address, your room will not be considered confirmed.</strong>
-</p>
-{% endif %}
 <p>
     If you were awarded a room in the Gaylord National Harbor, your room assignment means this:
     <ul>
@@ -64,24 +57,5 @@ You will receive an email when your {{ c.HOTEL_LOTTERY_GROUP_TERM|lower }}'s res
         {% if app.valid_group_members %}<li><em>Other Guests</em>: {{ app.group_member_names|readable_join }}</li>{% endif %}
     {% endif %}
 </ul>
-{# Passkey overflow-hotel note: shown when any awarded room is at a hotel
-   booked through Passkey (i.e. not the Gaylord or the AC Hotel). #}
-{% set _ns = namespace(passkey=false) %}
-{% for ra in _award_rooms %}
-    {% set _hotel_name = (ra.inventory.hotel.name if ra.inventory and ra.inventory.hotel else '')|lower %}
-    {% if _hotel_name and 'gaylord' not in _hotel_name and 'ac hotel' not in _hotel_name %}{% set _ns.passkey = true %}{% endif %}
-{% endfor %}
-{% if _ns.passkey and not app.parent_application %}
-<p>
-<strong>
-    If you requested room nights outside of {{ c.EPOCH.date().strftime('%A %b %-d') }} – {{ c.ESCHATON.date().strftime('%A %b %-d') }},
-    these may not be visible on your reservation in Passkey yet.
-</strong>
-</p>
-<p>
-    Once we confirm with our hotel partners that these nights are available, we will modify your reservation accordingly and you will receive an email from Passkey confirming the modification.
-    You do not need to take any action, either now or when you receive the modification notification.
-</p>
-{% endif %}
 </body>
 </html>
