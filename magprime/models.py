@@ -75,6 +75,9 @@ class Attendee:
     donate_badge_cost: bool = Field(sa_type=Boolean, default=False)
     swadge_addon: bool = Field(sa_type=Boolean, default=False)
     gets_emergency_texts: bool = Field(sa_type=Boolean, default=False)
+    other_requested_dept: str = Field(sa_type=String, default='')
+    request_depts_experience: str = Field(sa_type=String, default='')
+    active_times: int = Field(sa_column=Column(Choice(c.VOLUNTEER_ACTIVE_TIME_OPTS), nullable=True), default=None)
 
     @presave_adjustment
     def defaults(self):
@@ -82,6 +85,8 @@ class Attendee:
             self.special_merch = c.NO_MERCH
         if not self.donate_badge_cost:
             self.donate_badge_cost = False
+        if not self.active_times:
+            self.active_times = None
 
     @presave_adjustment
     def swadge_addon_only_supporter(self):

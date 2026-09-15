@@ -1,0 +1,9 @@
+{% extends 'uber/templates/forms/attendee/staffing_info.html' %}
+
+{% block staffing %}
+{% if attendee.assigned_depts_ids or admin_area %}
+{{ super() }}
+{% else %}
+{% include 'forms/attendee/new_volunteer_info.html' with context %}
+{% endif %}
+{% endblock %}

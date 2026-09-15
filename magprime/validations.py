@@ -2,7 +2,7 @@ from wtforms import validators
 from wtforms.validators import ValidationError, StopValidation
 
 from .config import c
-from uber.validations import PersonalInfo, TableInfo, BadgeExtras, PanelInfo, PanelConsents, RoomLottery, \
+from uber.validations import PersonalInfo, PreregOtherInfo, StaffingInfo, TableInfo, BadgeExtras, PanelInfo, PanelConsents, RoomLottery, \
     DietaryRestrictions, JobInfo, JobTemplateInfo, ignore_unassigned_and_placeholders
 
 
@@ -20,6 +20,22 @@ def cellphone_required(form, field):
             raise ValidationError("You must provide a phone number to sign up for the emergency text alert system.")
 
 
+StaffingInfo.field_validation.required_fields.update({
+    'requested_depts_ids': (
+        'Please select at least one department to volunteer for, or check "Anywhere".',
+        'requested_depts_ids',
+        lambda x: not x.form.is_admin and x.form.model.staffing_or_will_be and len(c.PUBLIC_DEPARTMENT_OPTS_WITH_DESC) > 1 \
+            and not x.form.model.assigned_depts_ids and not x.form.other_requested_dept.data),
+    })
+
+
+StaffingInfo.field_validation.validations['active_times']['optional'] = validators.Optional()
+
+
+StaffingInfo.field_validation.validations['request_depts_experience']['length'] = validators.Length(
+    max=500, message=f"Please describe your prior experience in under 500 characters.")
+
+
 BadgeExtras.field_validation.validations['extra_donation']['minimum'] = validators.NumberRange(
     min=0, message="Superstar donation must be a number that is 0 or higher.")
 
@@ -33,11 +49,11 @@ def upgrade_sold_out(form, field):
         raise ValidationError(f"The ${c.SWADGE_PRICE} swadge add-on is sold out.")
 
 
-PanelInfo.field_validation.required_fields['broadcast_title'] = ("Please provide a short title for digital displays.",
-                                                                 'name', lambda x: len(x) > 40)
-PanelInfo.field_validation.required_fields['broadcast_subtitle'] = "Please provide a one-line summary for digital displays."
-PanelInfo.field_validation.required_fields['recording_details'] = ("Please provide details for how your panel should be recorded.",
-                                                                   'need_recording_details')
+PanelInfo.field_validation.required_fields.update({
+    'broadcast_title': ("Please provide a short title for digital displays.", 'name', lambda x: len(x) > 40),
+    'broadcast_subtitle': "Please provide a one-line summary for digital displays.",
+    'recording_details': ("Please provide details for how your panel should be recorded.", 'need_recording_details'),
+})
 
 
 PanelConsents.field_validation.required_fields['no_transfer'] = "Please acknowledge that your panelist badge cannot be transferred."

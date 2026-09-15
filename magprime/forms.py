@@ -119,6 +119,17 @@ class AdminBadgeExtras:
 
 
 @MagForm.form_mixin
+class StaffingInfo:
+    other_requested_dept = StringField(
+        'Is there a department you are interested that is not listed?',
+        description="Some departments have restricted roles for volunteer with special skills and/or do not have any positions available.")
+    request_depts_experience = TextAreaField(
+        'Please list any experience, skills, training, or certification that might be relevant to the departments you chose above.')
+    active_times = SelectField('When are you naturally active/available to volunteer?', coerce=int,
+                               choices=[(0, 'No Particular Times')] + c.VOLUNTEER_ACTIVE_TIME_OPTS)
+
+
+@MagForm.form_mixin
 class Consents:
     def can_spam_desc(self):
         return Markup(f"We only send a few newsletters a year, and they're not spammy! We promise!\
