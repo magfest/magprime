@@ -2,7 +2,7 @@ from collections import defaultdict
 from datetime import timedelta
 from pathlib import Path
 
-from uber.config import c, Config, dynamic, parse_config
+from uber.config import c, Config, dynamic, parse_config, request_cached_property, dynamic
 from uber.menu import MenuItem
 from uber.utils import localized_now
 
@@ -12,7 +12,6 @@ c.include_plugin_config(config)
 @Config.mixin
 class ExtraConfig:
     @property
-    @dynamic
     def SEASON_BADGE_PRICE(self):
         return self.BADGE_PRICE + self.SEASON_LEVEL
 
@@ -26,11 +25,16 @@ class ExtraConfig:
     
     @property
     def EXTRA_ADDON_STATS(self):
-        return [
-            (f"Number of ${self.SWADGE_PRICE} swadge add-ons purchased", self.SWADGE_ADDON_COUNT)
-        ]
+        swadge_desc = f"Number of ${self.SWADGE_PRICE} swadge add-ons purchased"
+        swadge_count = self.SWADGE_ADDON_COUNT
+        if getattr(self, 'SWADGE_ADDON_STOCK', None) is not None:
+            swadge_desc += " / available / remaining"
+            swadge_count = f"{self.SWADGE_ADDON_COUNT} / {self.SWADGE_ADDON_STOCK} / {int(self.SWADGE_ADDON_STOCK) - self.SWADGE_ADDON_COUNT}"
+
+        return [(swadge_desc, swadge_count)]
     
-    @property
+    @request_cached_property
+    @dynamic
     def SWADGE_ADDON_COUNT(self):
         from uber.models import Session, Attendee
 
