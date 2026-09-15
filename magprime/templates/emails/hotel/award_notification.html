@@ -20,22 +20,9 @@
 <p>
     Add your card using the link on each room listed below. We have
     <a href="https://super.magfest.org/hotel-confirmation-info" target="_blank">step-by-step instructions with screenshots here</a>.
-    The credit card you provide will have a refundable one-night deposit charged to it within a week.
+    The credit card you provide will have a refundable one-night deposit charged to it by your hotel on their schedule.
     Alternatively, you can <a href="{{ c.URL_BASE }}/hotel_lottery/decline?id={{ app.id }}" target="_blank">decline the reservation here</a>.
     This will also cancel your{% if app.valid_group_members %} and your {{ c.HOTEL_LOTTERY_GROUP_TERM|lower }} members' lottery entries{% else %} lottery entry{% endif %}.
-</p>
-<p>
-    If you were awarded a room in the Gaylord National Harbor, your room assignment means this:
-    <ul>
-        <li>Deluxe Queen room = room with 2 queen beds</li>
-        <li>Deluxe King Room = room with 1 king bed</li>
-    </ul>
-</p>
-<p>
-    If you were awarded a room in the Hampton Inn & Suites National Harbor, your room assignment means this:
-    <ul>
-        <li>King Suite Studio = two bed room (king bed and fold-out bed)</li>
-    </ul>
 </p>
 <p>
     <strong>If you experience any issues while confirming your reservation</strong>, please contact us at {{ c.HOTEL_LOTTERY_EMAIL|email_only|email_to_link }} as soon as possible so we can help resolve them before the deadline.
