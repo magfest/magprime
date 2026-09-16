@@ -4,6 +4,7 @@
 {{ super() }}
 birthdate: '{{ personal_info.birthdate.data|default('', true) }}',
 consent_form: {{ (attendee.birthdate and attendee.age_group_conf['consent_form'])|boolean|tojson }},
+gets_emergency_texts: {{ personal_info.gets_emergency_texts.data|boolean|tojson }},
 toggleEmergencyTextOptIn(data) {
   if(data.birthdate.match(/\d{2}\/\d{2}\/\d{4}/)) {
     $.ajax({
@@ -32,10 +33,17 @@ toggleEmergencyTextOptIn(data) {
 {% endblock %}
 
 {% block contact_info %}
+</div>
+<div x-data="{
+  get cellphoneRequired() { return (this.staffing || this.dealer || this.gets_emergency_texts) && !this.no_cellphone && !this.copy_cellphone && !this.unassignedOrPlaceholder },
+  get showNoCellphone() { return (this.cellphoneRequired || this.no_cellphone) && !this.gets_emergency_texts },
+}">
+  <div class="row g-sm-3 mb-3">
 {{ super() }}
 <div class="col-sm" x-show="!no_cellphone && !consent_form">
   <div class="form-text">Emergency Text Alerts</div>
-  {{ form_macros.input(personal_info.gets_emergency_texts) }}
+  {{ form_macros.input(personal_info.gets_emergency_texts, alpine_model="gets_emergency_texts") }}
+</div>
 </div>
 {% endblock %}
 

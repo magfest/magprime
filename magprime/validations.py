@@ -13,6 +13,9 @@ TableInfo.field_validation.required_fields['license'] = ("Please provide your li
 @PersonalInfo.field_validation('cellphone')
 @ignore_unassigned_and_placeholders
 def cellphone_required(form, field):
+    if form.model.birthdate and form.model.age_group_conf['consent_form']:
+        return
+
     if not field.data and (not hasattr(form, 'copy_phone') or not form.copy_phone.data):
         if not form.no_cellphone.data and (form.model.is_dealer or form.model.staffing_or_will_be):
             raise ValidationError("Please provide a phone number.")
