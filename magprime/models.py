@@ -99,6 +99,13 @@ class Attendee:
             ) or (self.group and "Indie Arcade -" in self.group.name) and c.MIVS not in self.ribbon_ints:
             self.ribbon = add_opt(self.ribbon_ints, c.MIVS)
 
+    @presave_adjustment
+    def emergency_text_over_18(self):
+        if self.birthdate:
+            self.age_group = self.age_group_conf['val']
+            if self.age_now_or_at_con < 18:
+                self.gets_emergency_texts = False
+
     def auto_update_receipt(self, params):
         if params.get('amount_extra') and int(params['amount_extra']) != c.SUPPORTER_LEVEL:
             params['swadge_addon'] = False

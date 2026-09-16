@@ -1,5 +1,27 @@
 {% extends 'uber/templates/forms/attendee/personal_info.html' %}
 
+{% block x_data %}
+{{ super() }}
+birthdate: '{{ personal_info.birthdate.data|default('', true) }}',
+consent_form: {{ (attendee.birthdate and attendee.age_group_conf['consent_form'])|boolean|tojson }},
+toggleEmergencyTextOptIn(data) {
+  if(data.birthdate.match(/\d{2}\/\d{2}\/\d{4}/)) {
+    $.ajax({
+      method: 'GET',
+      url: '../preregistration/_check_consent_form',
+      dataType: 'json',
+      data: {
+          birthdate: data.birthdate
+      },
+      success: function (json) {
+        data.consent_form = json.consent_form
+      }
+  });
+  }
+  return false;
+},
+{% endblock %}
+
 {% block name %}
   {{ super() }}
   {% if not admin_area and not attendee.has_personalized_badge %}
@@ -11,16 +33,16 @@
 
 {% block contact_info %}
 {{ super() }}
-<div class="col-sm" x-show="!no_cellphone">
+<div class="col-sm" x-show="!no_cellphone && !consent_form">
   <div class="form-text">Emergency Text Alerts</div>
   {{ form_macros.input(personal_info.gets_emergency_texts) }}
 </div>
 {% endblock %}
 
 {% block age %}
-  <div class="col-sm">
+  <div class="col-sm" x-init="$watch('birthdate', (value) => toggleEmergencyTextOptIn($data))">
     {% if c.COLLECT_EXACT_BIRTHDATE %}
-      {{ form_macros.input(personal_info.birthdate, admin_text=attendee.age_group_conf.desc, required_if="!unassignedOrPlaceholder") }}
+      {{ form_macros.input(personal_info.birthdate, admin_text=attendee.age_group_conf.desc, required_if="!unassignedOrPlaceholder", alpine_model="birthdate") }}
     {% else %}
       {{ form_macros.input(personal_info.age_group, required_if="!unassignedOrPlaceholder") }}
     {% endif %}
