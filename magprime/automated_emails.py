@@ -135,7 +135,7 @@ if c.STAFF_EVENT_SHIRT_OPTS:
         'Last Chance to enter your MAGFest staff shirt preferences', 'second_shirt.html',
         "lambda a: a.gets_staff_shirt and not a.shirt_info_marked",
         'magprime_second_shirt',
-        when=[days_before(21, c.SHIRT_DEADLINE)])
+        when=[days_before(21, c.VOLUNTEER_SHIRT_DEADLINE)])
 
 AutomatedEmailFixture(
     Attendee, f'Last Chance for MAGFest {c.EVENT_YEAR} bonus swag!', 'attendee_swag_promo.html',
