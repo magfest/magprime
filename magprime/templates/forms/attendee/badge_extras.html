@@ -29,10 +29,10 @@ All merch in pre-order packages is EXCLUSIVE and not available for purchase at S
 </div>
 <div class="row g-3 mb-3">
   <div class="col-sm" x-show="amount_extra == {{ c.SUPPORTER_LEVEL }}">
+    {% if attendee.swadge_addon %}
+    <input type="hidden" name="swadge_addon" x-bind:value="amount_extra == {{ c.SUPPORTER_LEVEL }} ? swadge_addon : false" />
+    {% endif %}
     {% if not receipt or upgrade_modal %}
-      {% if attendee.swadge_addon %}
-      <input type="hidden" name="swadge_addon" x-bind:value="amount_extra == {{ c.SUPPORTER_LEVEL }} ? swadge_addon : false" />
-      {% endif %}
       {% if attendee.swadge_addon or c.SWADGE_ADDON_AVAILABLE %}
       <div class="card card-body bg-primary" style="color: #ffe400;">
         {{ form_macros.input(badge_extras.swadge_addon, id=id_upgrade_prepend ~ "swadge_addon", class="form-check-input mt-2", disabled=(upgrade_modal|boolean and attendee.swadge_addon), label_kwargs={'class': "mt-0 fs-4 fw-bold"}, **{'x-bind:checked': 'amount_extra == ' ~ c.SUPPORTER_LEVEL ~ '? swadge_addon : ""' }) }}
