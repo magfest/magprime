@@ -27,7 +27,7 @@ def superstar_receipts():
             ModelReceipt.owner_model == "Attendee")
         for donation in extra_donations:
             attendee = session.get(Attendee, donation.receipt.owner_id)
-            if not attendee.amount_unpaid:
+            if not attendee.amount_unpaid and "Automatic transfer from" not in attendee.admin_notes:
                 closed_local = donation.closed.astimezone(c.EVENT_TIMEZONE).strftime('%x_%X')
                 ident = f'superstar_receipt_{int(donation.amount / 100)}_{closed_local}'
                 already_emailed = session.query(Email.ident).filter(Email.ident == ident,

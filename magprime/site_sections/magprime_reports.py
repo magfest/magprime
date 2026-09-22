@@ -43,7 +43,9 @@ class Root:
     def superstars(self, session):
         counts = {}
         owe_money = {}
-        superstars = session.valid_attendees().filter(Attendee.extra_donation >= c.SUPERSTAR_MINIMUM)
+        superstars = session.query(Attendee).filter(
+            Attendee.extra_donation >= c.SUPERSTAR_MINIMUM,
+            or_(Attendee.is_valid == True, Attendee.admin_notes.contains('Automatic transfer to')))
 
         valid_donations_list = c.SUPERSTAR_DONATION_OPTS[1:-1]
         last_index = len(valid_donations_list) - 1
