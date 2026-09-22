@@ -1,0 +1,9 @@
+{% extends "uber/templates/preregistration/start_badge_transfer.html" %}
+
+{% block badge_details %}
+    {% set merch_tax = 0 %}{% set swadge_tax = 0 %}
+    The original purchaser paid <strong>{{ transfer_badge.badge_cost|format_currency }}</strong> for this badge.
+    {% if transfer_badge.amount_extra %}{% set merch_tax = c.get_amount_extra_tax(transfer_badge.amount_extra) %}
+    This badge also includes a {{ c.DONATION_TIERS[transfer_badge.amount_extra] }} merch package (<strong>{{ transfer_badge.amount_extra|format_currency }}</strong>){% if transfer_badge.amount_extra == c.SUPPORTER_LEVEL and transfer_badge.swadge_addon %}{% set swadge_tax = c.get_amount_extra_tax(c.SWADGE_PRICE) %} and a swadge add-on (<strong>{{ c.SWADGE_PRICE|format_currency }}</strong>){% endif %}.{% endif %}
+    {% if c.MERCH_TAX and (merch_tax or swadge_tax) %} The total sales tax paid for merch was <strong>{{ (merch_tax + swadge_tax)|format_currency }}</strong>.{% endif %}
+{% endblock %}
