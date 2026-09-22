@@ -48,16 +48,18 @@
                     <td>{{ attendee.badge_printed_name }}</td>
                     <td>{{ attendee.badge_type_label }}</td>
                     <td>{{ attendee.ribbon_labels|join(", ") }}</td>
-                    <td>{{ attendee.amount_extra_label }}</td>
+                    <td>{% if not attendee.is_valid %}Transferred Badge{% else %}{{ attendee.amount_extra_label }}{% endif %}</td>
                     <td>{{ attendee.extra_donation|format_currency }}</td>
                     <td>{{ attendee.email }}</td>
                     <td>{{ attendee.zip_code }}</td>
-                    <td data-sort="{{ owe_money[attendee.id] if attendee.id in owe_money else '0' }}">
+                    <td data-sort="{% if not attendee.is_valid %}Transferred Badge{% else %}{{ owe_money[attendee.id] if attendee.id in owe_money else '0' }}{% endif %}">
+                        {% if not attendee.is_valid %}Transferred Badge{% else %}
                         {% if owe_money[attendee.id] %}No (owes {{ owe_money[attendee.id]|format_currency }})
                         {% else %}Yes{% endif %}
+                        {% endif %}
                     </td>
                     <td data-sort="{{ attendee.checked_in|full_datetime_local }}">
-                        {{ hour_day_local(attendee.checked_in) }}
+                        {% if not attendee.is_valid %}Transferred Badge{% else %}{{ hour_day_local(attendee.checked_in) }}{% endif %}
                     </td>
                 </tr>
                 {% endfor %}
