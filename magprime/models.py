@@ -118,18 +118,18 @@ class Attendee:
         donation_items = []
         highest_tier_listed = False
 
-        for amount, desc in sorted(c.DONATION_TIERS.items(), reverse=True):
-            if amount and self.amount_extra >= amount:
-                if not highest_tier_listed:
-                    if c.MERCH_TAX:
-                        tax = c.get_amount_extra_tax(self.amount_extra)
-                        donation_items.append(f'{format_currency(self.amount_extra + tax)} {c.DONATION_TIERS[self.amount_extra]} \
-                                              (Includes {format_currency(self.amount_extra)} base price + {format_currency(tax)} Sales Tax)')
-                    else:
-                        donation_items.append(f"${amount} {desc}")
-                    highest_tier_listed = True
+        for amount in reversed(self.held_donation_tiers):
+            desc = c.DONATION_TIERS[amount]
+            if not highest_tier_listed:
+                if c.MERCH_TAX:
+                    tax = c.get_amount_extra_tax(self.amount_extra)
+                    donation_items.append(f'{format_currency(self.amount_extra + tax)} {c.DONATION_TIERS[self.amount_extra]} \
+                                          (Includes {format_currency(self.amount_extra)} base price + {format_currency(tax)} Sales Tax)')
                 else:
-                    donation_items.append(f"{desc} (Included)")
+                    donation_items.append(f"${amount} {desc}")
+                highest_tier_listed = True
+            else:
+                donation_items.append(f"{desc} (Included)")
 
         if self.extra_donation >= c.SUPERSTAR_MINIMUM:
             donation_items.append(f"MAGFest Superstar donation of ${self.extra_donation}")
@@ -230,14 +230,13 @@ class Attendee:
     @property
     def merch_items(self):
         merch = []
-        for amount, desc in sorted(c.DONATION_TIERS.items()):
-            if amount and (self.amount_extra or 0) >= amount:
-                merch.append(desc)
-                items = c.DONATION_TIER_ITEMS.get(amount, [])
-                if len(items) == 1:
-                    merch[-1] = items[0]
-                elif len(items) > 1:
-                    merch.append(items)
+        for amount in self.held_donation_tiers:
+            merch.append(c.DONATION_TIERS[amount])
+            items = c.DONATION_TIER_ITEMS.get(amount, [])
+            if len(items) == 1:
+                merch[-1] = items[0]
+            elif len(items) > 1:
+                merch.append(items)
 
         if self.num_event_shirts_owed == 1 and not self.paid_for_a_shirt:
             merch.append('A T-shirt')
