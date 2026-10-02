@@ -1,5 +1,19 @@
 {% import 'macros.html' as macros %}
 {% if c.HOTELS_ENABLED and c.PRE_CON %}
+{% set request_crash_space %}
+{% if c.HOTEL_REQUESTS_URL and c.ROOM_DEADLINE and attendee.hotel_eligible and attendee.registered < c.ROOM_DEADLINE %}
+    {% if not attendee.placeholder %}
+    <a href="{{ c.HOTEL_REQUESTS_URL }}/hotels/request?id={{ attendee.id }}&event={{ c.EVENT_NAME }}{{ c.EVENT_YEAR }}" target="_blank">Tell us</a>
+    {% else %}
+    Tell us
+    {% endif %}
+    whether you want {% if attendee.active_room_assignments %}additional staff crash space for edge nights{% else %}hotel room space{% endif %} no later than <b>{{ c.ROOM_DEADLINE|datetime_local }}</b>.{% if c.STAFF_ROOM_FAQ_URL %} Please <a href="{{ c.STAFF_ROOM_FAQ_URL }}" target="_blank">review our FAQ</a> first.{% endif %}
+    {% if not attendee.placeholder %}
+    If you have already submitted a request, you may <a href="{{ c.HOTEL_REQUESTS_URL }}/hotels/request?id={{ attendee.id }}&event={{ c.EVENT_NAME }}{{ c.EVENT_YEAR }}" target="_blank">edit your request</a> until then.
+    {% endif %}
+{% endif %}
+{% endset %}
+
 {% if c.HOTEL_LOTTERY_STAFF_START and c.BEFORE_HOTEL_LOTTERY_STAFF_DEADLINE and not attendee.selected_hotel_type %}
 <li>
     {{ macros.checklist_image(attendee.selected_hotel_type) }}
@@ -22,11 +36,16 @@
 <li>
     {{ macros.checklist_image(True) }}
     {% if attendee.hotel_room_kind == 'shared' %}
-    You have been assigned staff crash space, so you do not need to submit a hotel room request.
-    {% elif attendee.hotel_room_kind == 'lottery' %}
-    You already have a hotel room from the pre-lottery, so you do not need to request staff crash space.
+    You have been assigned staff crash space.
+    {% elif attendee.hotel_room_kind == 'mixed' %}
+    You already have both a hotel room and staff crash space.
     {% else %}
-    You already have a hotel room, so you do not need to request staff crash space.
+        {% if attendee.hotel_room_kind == 'lottery' %}
+        You have a hotel room from the pre-lottery.
+        {% else %}
+        You already have a hotel room.
+        {% endif %}
+        {{ request_crash_space }}
     {% endif %}
     Please contact us at {{ c.STAFF_EMAIL|email_only|email_to_link }} if you have any questions.
 </li>
@@ -41,15 +60,7 @@
     {% if c.BEFORE_ROOM_DEADLINE %}
     <li>
         <img src="{{ c.HOTEL_REQUESTS_URL }}/hotels/request_complete.png?id={{ attendee.id }}&seed={{ range(65536) | random }}&event={{ c.EVENT_NAME }}{{ c.EVENT_YEAR }}" style="vertical-align:top ; margin-right:5px" height="20" width="20" />
-        {% if not attendee.placeholder %}
-        <a href="{{ c.HOTEL_REQUESTS_URL }}/hotels/request?id={{ attendee.id }}&event={{ c.EVENT_NAME }}{{ c.EVENT_YEAR }}" target="_blank">Tell us</a>
-        {% else %}
-        Tell us
-        {% endif %}
-        whether you want hotel room space no later than <b>{{ c.ROOM_DEADLINE|datetime_local }}</b>.{% if c.STAFF_ROOM_FAQ_URL %} Please <a href="{{ c.STAFF_ROOM_FAQ_URL }}" target="_blank">review our FAQ</a> first.{% endif %}
-        {% if not attendee.placeholder %}
-        If you have already submitted a request, you may <a href="{{ c.HOTEL_REQUESTS_URL }}/hotels/request?id={{ attendee.id }}&event={{ c.EVENT_NAME }}{{ c.EVENT_YEAR }}" target="_blank">edit your request</a> until then.
-        {% endif %}
+        {{ request_crash_space }}
     </li>
     {% else %}
     <li>

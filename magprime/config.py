@@ -1,6 +1,7 @@
 from collections import defaultdict
 from datetime import timedelta
 from pathlib import Path
+from markupsafe import Markup
 
 from uber.config import c, Config, dynamic, parse_config, request_cached_property, dynamic
 from uber.menu import MenuItem
@@ -30,6 +31,8 @@ class ExtraConfig:
         if getattr(self, 'SWADGE_ADDON_STOCK', None) is not None:
             swadge_desc += " / available / remaining"
             swadge_count = f"{self.SWADGE_ADDON_COUNT} / {self.SWADGE_ADDON_STOCK} / {int(self.SWADGE_ADDON_STOCK) - self.SWADGE_ADDON_COUNT}"
+        if 'swadge_addon' in c.UNAVAILABLE_ITEMS:
+            swadge_count += Markup(" <em>(Locked)</em>")
 
         return [(swadge_desc, swadge_count)]
     
