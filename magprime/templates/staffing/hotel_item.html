@@ -21,7 +21,27 @@
 </li>
 {% elif attendee.badge_type == c.STAFF_BADGE and not attendee.hotel_eligible %}
 <li>
-    {% if attendee.lottery_application and (attendee.lottery_application.status == c.COMPLETE or attendee.lottery_application.status in c.HOTEL_LOTTERY_AWARD_STATUSES) %}
+    {% if attendee.active_room_assignments %}
+    {% set cannot_enter = ", so you are not eligible to request staff crash space" if not attendee.hotel_eligible else "" %}
+    <li>
+        {{ macros.checklist_image(True) }}
+        {% if attendee.hotel_room_kind == 'shared' %}
+        You have been assigned staff crash space.
+        {% elif attendee.hotel_room_kind == 'mixed' %}
+        You already have both a hotel room and staff crash space.
+        {% else %}
+            {% if attendee.hotel_room_kind == 'lottery' %}
+            You have a hotel room from the pre-lottery{{ cannot_enter }}.
+            {% else %}
+            You already have a hotel room{{ cannot_enter }}.
+            {% endif %}
+            {% if attendee.hotel_eligible %}
+            {{ request_crash_space }}
+            {% endif %}
+        {% endif %}
+        Please contact us at {{ c.STAFF_EMAIL|email_only|email_to_link }} if you have any questions.
+    </li>
+    {% elif attendee.lottery_application and (attendee.lottery_application.status == c.COMPLETE or attendee.lottery_application.status in c.HOTEL_LOTTERY_AWARD_STATUSES) %}
         {% if attendee.lottery_application.is_staff_entry %}
         You are not eligible to request staff crash space because you have booked a room in the pre-lottery.
         {% else %}
@@ -29,23 +49,6 @@
         {% endif %}
     {% else %}
     You are not eligible to request staff crash space.
-    {% endif %}
-    Please contact us at {{ c.STAFF_EMAIL|email_only|email_to_link }} if you have any questions.
-</li>
-{% elif attendee.hotel_eligible and attendee.active_room_assignments %}
-<li>
-    {{ macros.checklist_image(True) }}
-    {% if attendee.hotel_room_kind == 'shared' %}
-    You have been assigned staff crash space.
-    {% elif attendee.hotel_room_kind == 'mixed' %}
-    You already have both a hotel room and staff crash space.
-    {% else %}
-        {% if attendee.hotel_room_kind == 'lottery' %}
-        You have a hotel room from the pre-lottery.
-        {% else %}
-        You already have a hotel room.
-        {% endif %}
-        {{ request_crash_space }}
     {% endif %}
     Please contact us at {{ c.STAFF_EMAIL|email_only|email_to_link }} if you have any questions.
 </li>
