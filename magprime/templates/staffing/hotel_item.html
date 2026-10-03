@@ -22,8 +22,7 @@
 {% elif attendee.badge_type == c.STAFF_BADGE and not attendee.hotel_eligible %}
 <li>
     {% if attendee.active_room_assignments %}
-    {% set cannot_enter = ", so you are not eligible to request staff crash space" if not attendee.hotel_eligible else "" %}
-    <li>
+        {% set cannot_enter = ", so you are not eligible to request staff crash space" if not attendee.hotel_eligible else "" %}
         {{ macros.checklist_image(True) }}
         {% if attendee.hotel_room_kind == 'shared' %}
         You have been assigned staff crash space.
@@ -39,8 +38,6 @@
             {{ request_crash_space }}
             {% endif %}
         {% endif %}
-        Please contact us at {{ c.STAFF_EMAIL|email_only|email_to_link }} if you have any questions.
-    </li>
     {% elif attendee.lottery_application and (attendee.lottery_application.status == c.COMPLETE or attendee.lottery_application.status in c.HOTEL_LOTTERY_AWARD_STATUSES) %}
         {% if attendee.lottery_application.is_staff_entry %}
         You are not eligible to request staff crash space because you have booked a room in the pre-lottery.
