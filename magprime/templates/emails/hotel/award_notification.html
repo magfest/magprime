@@ -16,8 +16,11 @@
     Your {{ room_type }} is <strong>not</strong> confirmed until you{% if app.parent_application %}r {{ c.HOTEL_LOTTERY_GROUP_TERM|lower }} leader provides {% else %} provide {% endif %}a credit card guarantee.
 {% if not app.parent_application %}
     <strong><span class="text-danger">
-        You MUST put down a credit card guarantee by {% if _award_rooms|length > 1 %}each room's deadline{% else %}the deadline{% endif %}{% if _award_rooms|length > 1 %}. If you miss a room's deadline, that room will be released.
+        {% if _award_rooms and _award_rooms|selectattr('needs_card','equalto',True)|list|length > 0 %}
+        {% set ra = _award_rooms[0] %}
+        You MUST put down a credit card guarantee by {% if _award_rooms|length > 1 %}each room's deadline{% else %}the deadline of {{ ra.card_deadline|date("%A, %B %-d") }}{% endif %}{% if _award_rooms|length > 1 %}. If you miss a room's deadline, that room will be released.
         {% else %} or your room will be released.{% endif %}
+        {% endif %}
     </span></strong>
 </p>
 <p>
