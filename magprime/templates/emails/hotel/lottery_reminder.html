@@ -6,7 +6,7 @@
 <p>
     {{ app.attendee.full_name }},<br/>
     You have not finished filling out your room preferences for the {{ c.EVENT_YEAR }} attendee hotel lottery!
-    You have {{ ((app.current_lottery_deadline - now_localized()).total_seconds() // 86400)|int }} days, on {{ app.current_lottery_deadline|datetime_local("%B %-d, %Y at %-I:%M%p %Z") }}, to finish filling out your preferences.
+    You have {{ ((app.current_lottery_deadline - now_localized()).total_seconds() // 86400)|int }} days, until {{ app.current_lottery_deadline|datetime_local("%B %-d, %Y at %-I:%M%p %Z") }}, to finish filling out your preferences.
 </p>
 <p>
     You can complete your preferences or withdraw from the lottery by {% if c.ATTENDEE_ACCOUNTS_ENABLED %}logging in {% if c.OIDC_ACCOUNT_NAME %}with your {{ c.OIDC_ACCOUNT_NAME }} account {% endif %}and {% endif %}visiting your <a href="{{ c.URL_BASE }}/hotel_lottery/index?attendee_id={{ app.attendee.id }}" target="_blank">lottery options page</a>.
