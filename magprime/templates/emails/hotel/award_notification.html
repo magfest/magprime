@@ -15,10 +15,13 @@
 <p>
     Your {{ room_type }} is <strong>not</strong> confirmed until you{% if app.parent_application %}r {{ c.HOTEL_LOTTERY_GROUP_TERM|lower }} leader provides {% else %} provide {% endif %}a credit card guarantee.
 {% if not app.parent_application %}
-    <strong><span class="text-danger">Each room below carries its own deadline. Miss it and that room is released.</span></strong>
+    <strong><span class="text-danger">
+        You MUST put down a credit card guarantee by {% if _award_rooms|length > 1 %}each room's deadline{% else %}the deadline{% endif %}{% if _award_rooms|length > 1 %}. If you miss a room's deadline, that room will be released.
+        {% else %} or your room will be released.{% endif %}
+    </span></strong>
 </p>
 <p>
-    Add your card using the link on each room listed below. We have
+    Add your card using the link {% if _award_rooms|length > 1 %}on each room listed {% endif %}below. We have
     <a href="https://super.magfest.org/hotel-confirmation-info" target="_blank">step-by-step instructions with screenshots here</a>.
     The credit card you provide will have a refundable one-night deposit charged to it by your hotel on their schedule.
     Alternatively, you can <a href="{{ c.URL_BASE }}/hotel_lottery/decline?id={{ app.id }}" target="_blank">decline the reservation here</a>.
