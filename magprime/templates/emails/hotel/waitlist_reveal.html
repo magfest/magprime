@@ -2,11 +2,11 @@
 
 <p>Unfortunately, you did not receive a room allocation in the first round of the {{ c.EVENT_NAME_AND_YEAR }} hotel lottery. Although we weren't able to assign you a room in this lottery, we're giving folks like you first chance to reserve a room in one of our Alexandria, VA overflow hotel blocks, all of which are served by our free shuttles.</p>
 
-<p>Your personal link is below. Bookmark it now. The booking link stays hidden on the page until {% if reveal_time %}{{ reveal_time }}{% else %}the reveal time{% endif %}, but you can sit there with the countdown if you want.</p>
+<p>Your personal link is below. Bookmark it now. The booking link stays hidden on the page until {% if reveal.reveal_at %}{{ reveal.reveal_at|datetime_local("%A, %B %-d %-I:%M %p %Z") }}{% else %}the reveal time{% endif %}, but you can sit there with the countdown if you want.</p>
 
-<p><a href="{{ c.URL_BASE }}/hotel_lottery/waitlist_reveal_page?token={{ link.token }}">{{ c.URL_BASE }}/hotel_lottery/overflow_reveal_page?token={{ link.token }}</a></p>
+<p><a href="{{ c.URL_BASE }}/hotel_lottery/waitlist_reveal_page?token={{ link.token }}">{{ c.URL_BASE }}/hotel_lottery/waitlist_reveal_page?token={{ link.token }}</a></p>
 
-<p>This link only works when you are signed in to the account that holds your badge. Sign in before the reveal time so you are not locked out when booking opens.{% if c.HOTEL_LOTTERY_EMAIL %} If you cannot sign in, contact us at {{ c.HOTEL_LOTTERY_EMAIL|email_only|email_to_link }} before then.{% endif %}</p>
+<p>This link only works when you are signed in to the account that holds your badge. Sign in before the reveal time so you are not locked out when booking opens. If you cannot sign in, <a href="{{ c.CONTACT_URL }}" target="_blank">contact us</a> before then.</p>
 
 <p>The booking link takes you to a page listing our overflow hotels, each with its own reservation link. Rooms are first come, first served, and we can't hold a room for you or control who books once booking opens.</p>
 

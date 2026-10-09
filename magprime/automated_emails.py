@@ -29,6 +29,11 @@ if c.HOTEL_LOTTERY_FORM_START:
         ident='hotel_lottery_awarded'
     )
 
+HotelLotteryEmailFixture(
+    f'{c.EVENT_NAME_AND_YEAR} Alexandria Overflow Information',
+    'hotel/waitlist_reveal.html', None,
+    'hotel_lottery_waitlist_reveal'
+)
 
 # leave this off for now, this code is now old and needs updating
 _send_season_supporter_emails = False
