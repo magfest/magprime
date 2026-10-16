@@ -39,6 +39,9 @@ def superstar_receipts():
 
             attendee = session.get(Attendee, donation.receipt.owner_id)
 
+            if not attendee or not attendee.gets_emails:
+                continue
+
             if not attendee.amount_unpaid and "Automatic transfer from" not in attendee.admin_notes:
                 closed_display = donation.closed.astimezone(c.EVENT_TIMEZONE).strftime('%H:%M on %B %d %Y')
                 EmailService.queue_email(session, 'superstar_receipt', attendee, data={
