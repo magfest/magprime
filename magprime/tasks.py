@@ -1,4 +1,5 @@
 from collections.abc import Mapping
+import json
 from datetime import timedelta, datetime
 import pytz
 import logging
@@ -25,13 +26,21 @@ def superstar_receipts():
         extra_donations = session.query(ReceiptItem).join(ModelReceipt).filter(
             ReceiptItem.desc.contains("Extra Donation"), ReceiptItem.closed != None, ReceiptItem.amount > 0,
             ModelReceipt.owner_model == "Attendee")
+
         for donation in extra_donations:
             attendee = session.get(Attendee, donation.receipt.owner_id)
+
+            if not attendee or not attendee.gets_emails:
+                continue
+
             if not attendee.amount_unpaid and "Automatic transfer from" not in attendee.admin_notes:
                 closed_local = donation.closed.astimezone(c.EVENT_TIMEZONE).strftime('%x_%X')
                 ident = f'superstar_receipt_{int(donation.amount / 100)}_{closed_local}'
-                already_emailed = session.query(Email.ident).filter(Email.ident == ident,
-                                                                    Email.fk_id == attendee.id).first()
+                already_emailed = session.query(Email.ident).filter(Email.ident == ident, Email.fk_id == attendee.id).first()
+
                 if not already_emailed:
-                    EmailService.queue_email(session, 'superstar_receipt', attendee,
-                                             data={'donation': donation})
+                    closed_display = donation.closed.astimezone(c.EVENT_TIMEZONE).strftime('%H:%M on %B %d %Y')
+                    data = {'donation_amount': donation.amount / 100, 'donation_closed': closed_display}
+                    EmailService.queue_email(session, 'superstar_receipt', attendee, data=data, custom_ident=ident)
+
+        session.commit()
