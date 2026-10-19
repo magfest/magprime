@@ -125,7 +125,7 @@ AutomatedEmailFixture(
 StopsEmailFixture(
     f'{c.EVENT_NAME} ({c.EVENT_DATE}) shifts are live tomorrow!',
     'shifts/shifts_created.txt',
-    "lambda a: a.badge_type != c.CONTRACTOR_BADGE and a.takes_shifts and a.shift_signups_available",
+    "lambda a: a.badge_type != c.CONTRACTOR_BADGE and a.takes_shifts and days_before(2, a.shift_signups_start)()",
     'volunteer_shift_signup_notification',
     when=[before(c.PREREG_TAKEDOWN)])
 
