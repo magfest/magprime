@@ -122,10 +122,11 @@ AutomatedEmailFixture(
     'magprime_lan_hype',
     sender='MAGFest LAN <lan@magfest.org>')
 
+# The doubled braces survive the f-string; uber/email.py fills in the attendee's date at send time.
 StopsEmailFixture(
-    f'{c.EVENT_NAME} ({c.EVENT_DATE}) shifts are live tomorrow!',
+    f'{c.EVENT_NAME} ({c.EVENT_DATE}) shift signups open {{attendee.shift_signups_start:%A, %B %-d}}',
     'shifts/shifts_created.txt',
-    "lambda a: a.badge_type != c.CONTRACTOR_BADGE and a.takes_shifts and days_before(1, a.shift_signups_start)()",
+    "lambda a: a.badge_type != c.CONTRACTOR_BADGE and a.takes_shifts and days_before(2, a.shift_signups_start)()",
     'volunteer_shift_signup_notification',
     when=[before(c.PREREG_TAKEDOWN)])
 
