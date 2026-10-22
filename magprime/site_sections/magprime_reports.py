@@ -30,11 +30,12 @@ class Root:
         unassigned_volunteers = session.query(Attendee).filter(
             Attendee.has_badge == True, Attendee.staffing == True,
             Attendee.badge_type != c.CONTRACTOR_BADGE, Attendee.assigned_depts == None).options(
-                joinedload(Attendee.requested_depts))
+                joinedload(Attendee.dept_membership_requests))
 
         for attendee in unassigned_volunteers:
+            requested_depts_labels = [membership.department.name for membership in attendee.dept_membership_requests if membership.department]
             out.writerow([attendee.first_name, attendee.last_name, attendee.legal_name, attendee.email,
-                         ' / '.join(attendee.requested_depts_labels), attendee.other_requested_dept,
+                         ' / '.join(requested_depts_labels), attendee.other_requested_dept,
                          attendee.request_depts_experience,
                          attendee.active_times_label if attendee.active_times else 'No Particular Times'])
 
