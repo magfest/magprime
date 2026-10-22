@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 import cherrypy
 from collections import defaultdict
 from sqlalchemy import or_
-from sqlalchemy.orm import subqueryload
+from sqlalchemy.orm import subqueryload, joinedload
 
 from uber.config import c
 from uber.custom_tags import datetime_local_filter
@@ -29,7 +29,8 @@ class Root:
                       'Other Requested Dept', 'Relevant Experience', 'Active Time'])
         unassigned_volunteers = session.query(Attendee).filter(
             Attendee.has_badge == True, Attendee.staffing == True,
-            Attendee.badge_type != c.CONTRACTOR_BADGE, Attendee.assigned_depts == None)
+            Attendee.badge_type != c.CONTRACTOR_BADGE, Attendee.assigned_depts == None).options(
+                joinedload(Attendee.requested_depts))
 
         for attendee in unassigned_volunteers:
             out.writerow([attendee.first_name, attendee.last_name, attendee.legal_name, attendee.email,
