@@ -23,6 +23,20 @@ class Root:
                                .order_by(Attendee.full_name).all()
         }
 
+    @csv_file
+    def unassigned_volunteer_info(self, out, session):
+        out.writerow(['First Name', 'Last Name', 'Name on Photo ID', 'Email', 'Requested Depts',
+                      'Other Requested Dept', 'Relevant Experience', 'Active Time'])
+        unassigned_volunteers = session.query(Attendee).filter(
+            Attendee.has_badge == True, Attendee.staffing == True,
+            Attendee.badge_type != c.CONTRACTOR_BADGE, Attendee.assigned_depts == None)
+
+        for attendee in unassigned_volunteers:
+            out.writerow([attendee.first_name, attendee.last_name, attendee.legal_name, attendee.email,
+                         ' / '.join(attendee.requested_depts_labels), attendee.other_requested_dept,
+                         attendee.request_depts_experience,
+                         attendee.active_times_label if attendee.active_times else 'No Particular Times'])
+
     def special_merch_counts(self, session):
         counts = defaultdict(int)
         labels = ['Unknown'] + [label for val, label in c.SPECIAL_MERCH_OPTS if val != c.NO_MERCH]
