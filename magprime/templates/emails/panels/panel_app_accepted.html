@@ -16,7 +16,7 @@ Please contact them with any questions, concerns, or requests not covered in thi
 {% if app.event.timespan() %}<strong>Your panel is currently scheduled for {{ app.event.timespan() }}.</strong> This time and location is not necessarily final, but we are unlikely to change it unless you request to be rescheduled. If you would like to be rescheduled, please let us know as soon as you can.
 {% else %}Your panel has not yet been scheduled. <strong>A member of the {{ dept_name }} department will contact you when your panel has been scheduled.</strong>{% endif %}
 
-<br/><br/><strong>It is too late to add co-panelists to your panel</strong>, unless an existing co-panelist is removed.
+<br/><br/><strong>It is too late to add co-panelists to your panel</strong>, unless an existing co-panelist is removed or you specifically informed us of any co-panelists to be added in your application.
 
 <br/><br/><strong>At the event, stop by {% if dept_email == 'makerspace@magfest.org' %}Makerspace Helpdesk in Eastern Shore 2{% else %}Panels HQ{% endif %} before your panel begins</strong> to receive the ribbon that tells our staff to let you into the panel room ahead of your presentation.
 
@@ -49,9 +49,11 @@ Please contact them with any questions, concerns, or requests not covered in thi
 <br/><br/><strong>Please confirm that you are still able to attend the event and can run this panel within 10 days.</strong>
 
 {% if dept_email != 'magpie@magfest.org' %}
-<br/><br/><strong>Please confirm whether each person associated with the panel has already purchased a badge.</strong> We already have a good idea of whether each person does or does not have a badge, but sometimes things like duplicate names crop up, so we would like to double-check.
+<br/><br/><strong>Please confirm whether each person associated with the panel has already purchased a badge.</strong> This is to double-check our own information, because...
 
-<br/><br/>If you have already purchased a badge, we will not reimburse its cost until after the event. Please contact us if you have any questions or concerns about this.
+<br/><br/><strong>WE WILL NOT CREATE A NEW BADGE FOR ANY PANELIST WHO ALREADY HAS A BADGE AT THE TIME THIS MESSAGE IS SENT. IF WE BELIEVE A PANELIST HAS TRANSFERRED THEIR EXISTING BADGE, WE MAY CANCEL THIS PANEL.</strong>
+
+<br/><br/>We will not reimburse the cost of existing badges until after the event. Please contact us if you have any questions or concerns about this.
 {% endif %}
 
 <br/><br/>If you have allowed MAGFest to record your panel, <strong>you may (optionally) provide a thumbnail for the YouTube recording.</strong>
