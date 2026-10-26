@@ -4,7 +4,7 @@
 {{ app.submitter.first_name }},
 
 {% if dept_email in [c.PANELS_EMAIL|email_only, 'makerspace@magfest.org', 'magpie@magfest.org'] %}
-<br/><br/>Congratulations and welcome to Super MAGFest {{ c.EVENT_YEAR }}!  The {{ dept_name }} department has accepted one of your applications!
+<br/><br/>Congratulations and welcome to Super MAGFest {{ c.EVENT_YEAR }}! The {{ dept_name }} department has accepted one of your applications!
 <br/><strong>Please read the following e-mail in its entirety, as it contains all of the basic information you need to prepare for your presentation. There are instructions for you to follow at the end.</strong>
 
 <br/><br/><strong>Your panel has been assigned a point of contact within the {{ dept_name }} Department. They should contact you shortly after you receive this message.</strong>
@@ -13,7 +13,7 @@ Please contact them with any questions, concerns, or requests not covered in thi
 <br/><br/><strong>The submission we accepted is "{{ app.name }}".</strong> If you submitted multiple applications, they will be addressed in separate messages as the panel judgment process continues.
 
 <br/><br/>
-{% if app.event.timespan() %}<strong>Your panel is currently scheduled for {{ app.event.timespan() }}.</strong> This time and location is not necessarily final, but we are unlikely to change it unless you request to be rescheduled. If you would like to be rescheduled, please let us know as soon as you can.
+{% if app.event and app.event.timespan() %}<strong>Your panel is currently scheduled for {{ app.event.timespan() }}.</strong> This time and location is not necessarily final, but we are unlikely to change it unless you request to be rescheduled. If you would like to be rescheduled, please let us know as soon as you can.
 {% else %}Your panel has not yet been scheduled. <strong>A member of the {{ dept_name }} department will contact you when your panel has been scheduled.</strong>{% endif %}
 
 <br/><br/><strong>It is too late to add co-panelists to your panel</strong>, unless an existing co-panelist is removed or you specifically informed us of any co-panelists to be added in your application.
@@ -42,7 +42,7 @@ Please contact them with any questions, concerns, or requests not covered in thi
     <li><strong>Schedule Description</strong>: {{ app.public_description }}</li>
 </ul>
 
-<br/><br/>—
+—
 
 <br/><br/>These are the steps you need to take now by responding to this message, contacting {{ dept_email|email_only }}, or responding to your point of contact:
 
