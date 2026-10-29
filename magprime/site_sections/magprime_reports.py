@@ -24,15 +24,15 @@ class Root:
         }
 
     @csv_file
-    def unassigned_volunteer_info(self, out, session):
+    def new_volunteer_info(self, out, session):
         out.writerow(['First Name', 'Last Name', 'Name on Photo ID', 'Email', 'Requested Depts',
                       'Other Requested Dept', 'Relevant Experience', 'Active Time'])
-        unassigned_volunteers = session.query(Attendee).filter(
+        new_volunteers = session.query(Attendee).filter(
             Attendee.has_badge == True, Attendee.staffing == True,
-            Attendee.badge_type != c.CONTRACTOR_BADGE, Attendee.assigned_depts == None).options(
+            ~Attendee.badge_type.in_([c.STAFF_BADGE, c.CONTRACTOR_BADGE])).options(
                 joinedload(Attendee.dept_membership_requests))
 
-        for attendee in unassigned_volunteers:
+        for attendee in new_volunteers:
             requested_depts_labels = [membership.department.name for membership in attendee.dept_membership_requests if membership.department]
             out.writerow([attendee.first_name, attendee.last_name, attendee.legal_name, attendee.email,
                          ' / '.join(requested_depts_labels), attendee.other_requested_dept,

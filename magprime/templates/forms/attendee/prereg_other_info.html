@@ -1,7 +1,7 @@
 {% extends 'uber/templates/forms/attendee/prereg_other_info.html' %}
 
 {% block staffing %}
-{% if attendee.assigned_depts_ids %}
+{% if attendee.badge_type in [c.STAFF_BADGE, c.CONTRACTOR_BADGE] %}
 {{ super() }}
 {% else %}
 {% include 'forms/attendee/new_volunteer_info.html' with context %}
