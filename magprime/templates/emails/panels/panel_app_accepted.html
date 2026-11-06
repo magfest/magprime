@@ -18,13 +18,13 @@ Please contact them with any questions, concerns, or requests not covered in thi
 
 <br/><br/><strong>It is too late to add co-panelists to your panel</strong>, unless an existing co-panelist is removed or you specifically informed us of any co-panelists to be added in your application.
 
-<br/><br/><strong>At the event, stop by {% if dept_email == 'makerspace@magfest.org' %}Makerspace Helpdesk in Eastern Shore 2{% else %}Panels HQ{% endif %} before your panel begins</strong> to receive the ribbon that tells our staff to let you into the panel room ahead of your presentation.
+<br/><br/><strong>At the event, stop by {% if dept_email == 'makerspace@magfest.org' %}Makerspace Helpdesk in Eastern Shore 2{% elif dept_email == 'magpie@magfest.org' %}National Harbor 8 / MAGPIE Nest{% else %}Panels HQ{% endif %} before your panel begins</strong> to receive the ribbon that tells our staff to let you into the panel room ahead of your presentation.
 
 <br/><br/><strong>You will be able to begin setting up your panel 30 minutes before its scheduled start time.</strong> If you are unfamiliar with the tech involved or have a complex setup, please ask your point of contact about whether there is a panelist preparation room.
 
 <br/><br/><strong>You are expected to start and end your panel at the times specified.</strong> If you start early, attendees who show up on time will complain. If you end late, you will cut into the prep time for the next panelist.
 
-{% if dept_email != 'makerspace@magfest.org' %}
+{% if dept_email not in ['makerspace@magfest.org', 'magpie@magfest.org'] %}
 <br/><br/><strong>Each panel room will have the following A/V equipment:</strong> Microphones on the table on stage, speakers connected to the microphone, a projector with HDMI, a laptop with PowerPoint installed, and a camera for recording the panel. <strong>Please make sure your computer has HDMI output!</strong> If you need anything else and you didn't mention it in your panel application, tell your point of contact as soon as possible.
 {% endif %}
 
