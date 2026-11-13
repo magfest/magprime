@@ -58,7 +58,7 @@
                         {% else %}Yes{% endif %}
                         {% endif %}
                     </td>
-                    <td data-sort="{{ attendee.checked_in|full_datetime_local }}">
+                    <td data-sort="{{ attendee.checked_in }}">
                         {% if not attendee.is_valid %}Transferred Badge{% else %}{{ hour_day_local(attendee.checked_in) }}{% endif %}
                     </td>
                 </tr>
